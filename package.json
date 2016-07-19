@@ -1,0 +1,34 @@
+{
+  "name": "linagora.esn.admin",
+  "version": "1.0.0",
+  "description": "Administration module for the ESN",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "Linagora folks <dev@linagora.com>",
+  "license": "AGPLv3",
+  "dependencies": {
+    "awesome-module": "^1.0.0",
+    "express": "^4.2.0",
+    "glob": "^7.0.3",
+    "glob-all": "^3.0.3"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-eslint": "^18.1.0",
+    "grunt-karma": "^2.0.0",
+    "grunt-mocha-cli": "^2.1.0",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-mocha": "^1.0.1",
+    "karma-ng-jade2module-preprocessor": "git+https://ci.open-paas.org/stash/scm/or/karma-ng-jade2module-preprocessor.git",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.26",
+    "load-grunt-tasks": "^3.5.0",
+    "mocha": "^2.5.3",
+    "phantomjs-prebuilt": "^2.1.7"
+  }
+}
