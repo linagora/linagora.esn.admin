@@ -11,30 +11,30 @@ module.exports = function(grunt) {
   var command = gruntfileUtils.command();
 
   grunt.initConfig({
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        ignores: []
-      },
+    eslint: {
       all: {
-        src: [
-          'Gruntfile.js',
-          'tasks/**/*.js',
-          'test/**/**/*.js',
-          'backend/**/*.js',
-          'frontend/js/**/*.js'
-        ]
+        src: ['Gruntfile.js', 'Gruntfile-tests.js', 'tasks/**/*.js', 'test/**/**/*.js', 'backend/**/*.js', 'frontend/js/**/*.js']
+      },
+      quick: {
+        src: [],
+        options: {
+          quiet: true
+        }
+      },
+      options: {
+        quiet: true
       }
+
     },
     jscs: {
       options: {
         config: '.jscsrc'
       },
       all: {
-        src: ['<%= jshint.all.src %>']
+        src: ['<%= eslint.all.src %>']
       },
       quick: {
-        src: ['<%= jshint.quick.src %>']
+        src: ['<%= eslint.quick.src %>']
       }
     },
     lint_pattern: {
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         ]
       },
       all: {
-        src: ['<%= jshint.all.src %>']
+        src: ['<%= eslint.all.src %>']
       },
       css: {
         options: {
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         ]
       },
       quick: {
-        src: ['<%= jshint.quick.src %>']
+        src: ['<%= eslint.quick.src %>']
       }
     },
 
@@ -74,7 +74,6 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-lint-pattern');
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-mocha-cli');
@@ -91,8 +90,8 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('linters', 'Check code for lint', ['jshint:all', 'jscs:all', 'lint_pattern:all']);
-  grunt.registerTask('linters-dev', 'Check changed files for lint', ['prepare-quick-lint', 'jshint:quick', 'jscs:quick', 'lint_pattern:quick']);
+  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'jscs:all', 'lint_pattern:all']);
+  grunt.registerTask('linters-dev', 'Check changed files for lint', ['prepare-quick-lint', 'eslint:quick', 'jscs:quick', 'lint_pattern:quick']);
   grunt.registerTask('spawn-servers', 'spawn servers', ['shell:mongo', 'shell:redis']);
   grunt.registerTask('kill-servers', 'kill servers', ['shell:mongo:kill', 'shell:redis:kill']);
   grunt.registerTask('setup-environment', 'create temp folders and files for tests', gruntfileUtils.setupEnvironment());
