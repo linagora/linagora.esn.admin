@@ -49,6 +49,8 @@
     "mongodb": "2.1.14",
     "mongoose": "4.4.11",
     "phantomjs-prebuilt": "^2.1.7",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
     "supertest": "^1.2.0"
   }
 }
