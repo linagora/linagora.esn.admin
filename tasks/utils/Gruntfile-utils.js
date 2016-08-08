@@ -59,6 +59,15 @@ GruntfileUtils.prototype.command = function command() {
       replset);
   };
 
+  commandObject.elasticsearch = servers.elasticsearch.cmd +
+      ' -Des.http.port=' + servers.elasticsearch.port +
+      ' -Des.transport.tcp.port=' + servers.elasticsearch.communication_port +
+      ' -Des.cluster.name=' + servers.elasticsearch.cluster_name +
+      ' -Des.path.data=' + servers.elasticsearch.data_path +
+      ' -Des.path.work=' + servers.elasticsearch.work_path +
+      ' -Des.path.logs=' + servers.elasticsearch.logs_path +
+      ' -Des.discovery.zen.ping.multicast.enabled=false';
+
   return commandObject;
 };
 
