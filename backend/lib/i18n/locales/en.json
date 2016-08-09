@@ -17,5 +17,16 @@
   "Admin Password": "Admin Password",
   "Search": "Search",
   "Search Base": "Search Base",
-  "Search Filter": "Search Filter"
+  "Search Filter": "Search Filter",
+  "Mail Server": "Mail Server",
+  "Enter noreply mail address": "Enter noreply mail address",
+  "Choose transport type": "Choose transport type",
+  "Enter folder path": "Enter folder path",
+  "Browser": "Browser",
+  "Enter relay host": "Enter relay host",
+  "Secure": "Secure",
+  "Reject Unauthorized": "Reject Unauthorized",
+  "Port": "Port",
+  "Enter username": "Enter username",
+  "Enter password": "Enter password"
 }

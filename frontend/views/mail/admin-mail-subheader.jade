@@ -1,0 +1,7 @@
+extends ../layout/subheader
+
+block left
+  .title #{__('Mail Server')}
+
+block right
+  admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()")

@@ -31,12 +31,16 @@ angular.module('linagora.esn.admin')
       url: '/:domainId',
       template: '<ui-view noanimation="noanimation" />',
       deepStateRedirect: {
-        default: 'admin.domain.dav',
+        default: 'admin.domain.mail',
         params: true,
         fn: function() {
-          return { state: 'admin.domain.dav' };
+          return { state: 'admin.domain.mail' };
         }
       }
+    })
+    .state('admin.domain.mail', {
+      url: '/mail',
+      template: '<admin-mail />'
     })
     .state('admin.domain.dav', {
       url: '/dav',
