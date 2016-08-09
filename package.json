@@ -4,7 +4,8 @@
   "description": "Administration module for the ESN",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "node ./node_modules/bower/bin/bower install --allow-root"
   },
   "author": "Linagora folks <dev@linagora.com>",
   "license": "AGPLv3",
