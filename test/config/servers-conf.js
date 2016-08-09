@@ -4,7 +4,8 @@ var tmp = 'tmp';
 var DEFAULT_PORTS = {
   express: 23455,
   mongo: 23456,
-  redis: 23457
+  redis: 23457,
+  elasticsearch: 23459
 };
 
 var host = process.env.HOSTNAME || process.env.DOCKER_HOST || 'localhost';

@@ -20,12 +20,16 @@ function _args(grunt) {
 }
 
 function _taskSuccessIfMatch(grunt, regex, info) {
+  var taskIsDone = false;
+
   return function(chunk) {
+    if (taskIsDone) { return; }
+
     var done = grunt.task.current.async();
-    var out = '' + chunk;
-    var started = regex;
-    if (started.test(out)) {
-      grunt.log.write(info);
+
+    if (regex.test('' + chunk)) {
+      taskIsDone = true;
+      grunt.log.oklns(info);
       done(true);
     }
   };
