@@ -35,7 +35,8 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     deploy: function(dependencies, callback) {
       var app = require('./backend/webserver/application')(this, dependencies);
 
-      app.use('/', this.api.configuration);
+      app.use('/api/configuration', this.api.configuration);
+      app.use('/api/test', this.api.test);
 
       var webserverWrapper = dependencies('webserver-wrapper');
       var frontendJsFiles = glob.sync([
