@@ -24,3 +24,9 @@ angular.module('esn.async-action', [])
   });
 angular.module('esn.core', [])
   .constant('_', _);
+angular.module('esn.http', [])
+  .factory('httpErrorHandler', function() {
+    return {
+      redirectToLogin: angular.noop
+    };
+  });
