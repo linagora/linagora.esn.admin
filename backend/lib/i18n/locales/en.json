@@ -28,5 +28,8 @@
   "Reject Unauthorized": "Reject Unauthorized",
   "Port": "Port",
   "Enter username": "Enter username",
-  "Enter password": "Enter password"
+  "Enter password": "Enter password",
+  "Add a new LDAP configuration": "Add a new LDAP configuration",
+  "UNDO": "UNDO",
+  "You removed LDAP configuration of ": "You removed LDAP configuration of "
 }
