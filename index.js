@@ -13,6 +13,7 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   dependencies: [
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.wrapper', 'webserver-wrapper'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.domain-config', 'domain-config'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.email', 'email'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.domain', 'domainMiddleware'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.authorization', 'authorizationMW')
   ],
@@ -21,10 +22,12 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     lib: function(dependencies, callback) {
       var libModule = require('./backend/lib')(dependencies);
       var configuration = require('./backend/webserver/api/configuration')(dependencies);
+      var test = require('./backend/webserver/api/test')(dependencies);
 
       var lib = {
         api: {
-          configuration: configuration
+          configuration: configuration,
+          test: test
         },
         lib: libModule
       };
