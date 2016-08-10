@@ -3,7 +3,7 @@
 var expect = require('chai').expect;
 var request = require('supertest');
 
-describe('The configuration API', function() {
+describe.skip('The configuration API', function() {
   var user, domain, feature;
   var password = 'secret';
   var moduleName = 'linagora.esn.admin';
