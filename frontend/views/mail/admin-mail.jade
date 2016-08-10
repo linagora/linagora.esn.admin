@@ -1,0 +1,24 @@
+sub-header
+  admin-mail-subheader(on-save-button-click="$ctrl.save()")
+
+.card
+  .card-body.card-padding
+    form(name="mailConfig")
+      .row
+        .col-xs-6.col-md-6
+          .form-group.fg-line
+            input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="name", placeholder="#{__('Enter noreply mail address')}", autofocus=true)
+
+          .form-group.fg-line
+            .select
+              select.form-control(ng-model="$ctrl.transportType", ng-options="transportType for transportType in $ctrl.transportTypes")
+                option(value="") #{__('Choose transport type')}
+        div(ng-switch="$ctrl.transportType")
+          div.col-xs-6.col-md-6(ng-switch-when="Local")
+            admin-mail-local(transport="$ctrl.config.transport")
+
+          div.col-xs-6.col-md-6(ng-switch-when="SMTP")
+            admin-mail-smtp(transport-config="$ctrl.config.transport.config")
+
+          div.col-xs-6.col-md-6(ng-switch-when="Gmail")
+            admin-mail-gmail(transport-config="$ctrl.config.transport.config")

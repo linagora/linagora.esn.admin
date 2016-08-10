@@ -1,0 +1,12 @@
+.form-group.fg-line
+  input.form-control.floating-label(type="text", ng-model="$ctrl.transport.module", name="module", placeholder="#{__('Enter Module')}", value="nodemailer-browser")
+
+.form-group.fg-line
+  input.form-control.floating-label(type="text", ng-model="$ctrl.transport.config.dir", name="directory", placeholder="#{__('Enter folder path')}")
+
+.form-group
+  .checkbox
+    label
+      input(type="checkbox", ng-model="$ctrl.transport.config.browser", name="browser")
+      i.input-helper
+      | #{__('Browser')}

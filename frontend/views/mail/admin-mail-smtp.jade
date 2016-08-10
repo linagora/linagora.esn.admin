@@ -1,0 +1,30 @@
+.row
+  .col-xs-9
+    .form-group
+      .fg-line
+        input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.host", name="host", placeholder="#{__('Enter relay host')}")
+  .col-xs-3
+    .form-group
+      .fg-line
+        input.form-control(type="text", ng-model="$ctrl.transportConfig.port", name="port", placeholder="#{__('Port')}", value="25")
+.row
+  .col-xs-12
+    .form-group
+      label.checkbox.checkbox-inline
+        input(type="checkbox", ng-model="$ctrl.transportConfig.secure", name="secure")
+        i.input-helper
+        | #{__('Secure')}
+      label.checkbox.checkbox-inline
+        input(type="checkbox", ng-model="$ctrl.transportConfig.tls.rejectUnauthorized", name="rejectUnauthorized")
+        i.input-helper
+        | #{__("Reject Unauthorized")}
+.row
+  .col-xs-6
+    .form-group
+      .fg-line
+        input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", placeholder="#{__('Enter username')}")
+
+  .col-xs-6
+    .form-group
+      .fg-line
+        input.form-control.floating-label(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", placeholder="#{__('Enter password')}")
