@@ -31,5 +31,17 @@
   "Enter password": "Enter password",
   "Add a new LDAP configuration": "Add a new LDAP configuration",
   "UNDO": "UNDO",
-  "You removed LDAP configuration of ": "You removed LDAP configuration of "
+  "You removed LDAP configuration of ": "You removed LDAP configuration of ",
+  "This is a invalid email": "This is a invalid email",
+  "This is required": "This is required",
+  "This is a invalid url": "This is a invalid url",
+  "This is a invalid date": "This is a invalid date",
+  "This is a invalid date time": "This is a invalid date time",
+  "This is a invalid time": "This is a invalid time",
+  "This is a invalid date": "This is a invalid date",
+  "This must be less than or equal to": "This must be less than or equal to",
+  "This must be greater than or equal to": "This must be greater than or equal to",
+  "Length must be less than or equal to": "Length must be less than or equal to",
+  "Length must be greater than or equal to": "Length must be greater than or equal to",
+  "Please match requested format": "Please match requested format"
 }
