@@ -61,5 +61,14 @@
   "Building location": "Building location",
   "Office location": "Office location",
   "Main phone": "Main phone",
-  "Bio": "Bio"
+  "Bio": "Bio",
+  "Resolvers": "Resolvers",
+  "All": "All",
+  "Whatsup": "Whatsup",
+  "Active": "Active",
+  "Options": "Options",
+  "Key": "Key",
+  "Value": "Value",
+  "Add a new options": "Add a new options",
+  "server credentials": "server credentials"
 }

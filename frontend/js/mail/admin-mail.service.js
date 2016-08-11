@@ -26,7 +26,8 @@ angular.module('linagora.esn.admin')
     var config = {
       mail: {
         noreply: mailConfig.mail.noreply
-      }
+      },
+      resolvers: mailConfig.resolvers
     };
     var transportConfig = mailConfig.transport.config;
 
