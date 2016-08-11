@@ -57,8 +57,12 @@ describe('The adminLdapController', function() {
 
     it('should call adminDomainConfigService.set to save configuration', function(done) {
       var controller = initController();
+      var form = {
+        $valid: true
+      };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
+<<<<<<< HEAD
       controller.save().then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -72,6 +76,9 @@ describe('The adminLdapController', function() {
   });
 
   describe('The _qualifyConfigs fn', function() {
+=======
+      controller.save(form);
+>>>>>>> ADM-34 Applying adminFormValidater to validate forms
 
     var configMock;
 

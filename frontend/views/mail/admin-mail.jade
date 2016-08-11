@@ -1,13 +1,14 @@
 sub-header
-  admin-mail-subheader(on-save-button-click="$ctrl.save()")
+  admin-mail-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid")
 
 .card
   .card-body.card-padding
-    form(name="mailConfig")
+    ng-form(name="form")
       .row
         .col-xs-6.col-md-6
-          .form-group.fg-line
-            input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="name", placeholder="#{__('Enter noreply mail address')}", autofocus=true)
+          .form-group
+            .fg-line
+              input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="name", placeholder="#{__('Enter noreply mail address')}", autofocus=true, required, admin-form-validator)
 
           .form-group.fg-line
             .select

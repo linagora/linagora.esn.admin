@@ -60,9 +60,12 @@ describe('The adminDavController', function() {
 
     it('should call adminDomainConfigService.set to save configuration', function() {
       var controller = initController();
+      var form = {
+        $valid: true
+      };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save();
+      controller.save(form);
 
       expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
         name: CONFIG_NAME,

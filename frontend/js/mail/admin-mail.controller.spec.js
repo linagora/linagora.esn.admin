@@ -81,7 +81,7 @@ describe('The adminMailController', function() {
   });
 
   describe('The _qualifyTransportConfig fn', function() {
-    var configMock;
+    var configMock, form;
 
     beforeEach(function() {
       configMock = {
@@ -107,6 +107,10 @@ describe('The adminMailController', function() {
           }
         }
       };
+
+      form = {
+        $valid: true
+      };
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
@@ -117,7 +121,7 @@ describe('The adminMailController', function() {
 
       adminDomainConfigService.set = sinon.stub().returns($q.reject());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[0];
-      controller.save().catch(function() {
+      controller.save(form).catch(function() {
         expect(controller.config).to.deep.equal(configMock);
         done();
       });
@@ -134,7 +138,7 @@ describe('The adminMailController', function() {
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[0];
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(controller.config).to.deep.equal(expectedConfig);
         expect(adminDomainConfigService.set).to.be.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -163,7 +167,7 @@ describe('The adminMailController', function() {
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[1];
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(controller.config).to.deep.equal(expectedConfig);
         expect(adminDomainConfigService.set).to.be.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -186,7 +190,7 @@ describe('The adminMailController', function() {
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[2];
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(controller.config).to.deep.equal(expectedConfig);
         expect(adminDomainConfigService.set).to.be.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -200,7 +204,7 @@ describe('The adminMailController', function() {
   });
 
   describe('The save fn', function() {
-    var configMock;
+    var configMock, form;
 
     beforeEach(function() {
       configMock = {
@@ -227,6 +231,10 @@ describe('The adminMailController', function() {
         }
       };
 
+      form = {
+        $valid: true
+      };
+
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
@@ -236,7 +244,7 @@ describe('The adminMailController', function() {
       var controller = initController();
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
           value: controller.config

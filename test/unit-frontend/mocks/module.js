@@ -21,6 +21,11 @@ angular.module('esn.async-action', [])
     return function(message, action) {
       return action();
     };
+  })
+  .factory('rejectWithErrorNotification', function() {
+    return function() {
+      return $q.reject();
+    };
   });
 angular.module('esn.core', [])
   .constant('_', _);

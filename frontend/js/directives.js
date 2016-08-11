@@ -10,12 +10,10 @@ angular.module('linagora.esn.admin')
   };
 })
 
-.directive('adminFormValidater', function($compile) {
+.directive('adminFormValidator', function($compile) {
   return {
     restrict: 'A',
-    scope: {
-      form: '='
-    },
+    scope: true,
     link: function(scope, element, attrs) {
       var expressionAttrs = ['type', 'min', 'max', 'minlength', 'maxlength'];
       scope.options = {};
