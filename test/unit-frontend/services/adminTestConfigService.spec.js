@@ -2,8 +2,8 @@
 
 describe('The adminTestConfigService service', function() {
 
-   var adminTestConfigService;
-   var $httpBackend;
+  var adminTestConfigService;
+  var $httpBackend;
 
   beforeEach(function() {
     angular.mock.module('linagora.esn.admin');
@@ -35,4 +35,4 @@ describe('The adminTestConfigService service', function() {
     });
   });
 
- });
+});
