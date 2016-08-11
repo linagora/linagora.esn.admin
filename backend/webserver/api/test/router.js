@@ -9,17 +9,11 @@ module.exports = function(dependencies) {
 
   var router = express.Router();
 
-  router.post('/domain/:uuid',
+  router.post('/domain/:uuid/sendEmail',
     authorizationMW.requiresAPILogin,
     domainMiddleware.load,
     authorizationMW.requiresDomainManager,
-    controller.getConfigurations);
-
-  router.put('/domain/:uuid',
-    authorizationMW.requiresAPILogin,
-    domainMiddleware.load,
-    authorizationMW.requiresDomainManager,
-    controller.updateConfigurations);
+    controller.testSendEmail);
 
   return router;
 };

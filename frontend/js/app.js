@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('linagora.esn.admin', [
+  'restangular',
+  'esn.http',
   'esn.router',
   'esn.core',
   'esn.session',
