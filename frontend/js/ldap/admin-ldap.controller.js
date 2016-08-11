@@ -6,6 +6,7 @@ angular.module('linagora.esn.admin')
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'ldap';
+  var oldConfigs;
 
   adminDomainConfigService.get(domainId, CONFIG_NAME)
     .then(function(data) {
@@ -18,15 +19,25 @@ angular.module('linagora.esn.admin')
           self.configs = data;
         }
       }
+
+      oldConfigs = angular.copy(self.configs);
     });
 
   self.save = function(form) {
-    if (angular.equals(oldConfig, self.config)) {
+    var configs = _qualifyConfigs();
+
+    if (angular.equals(oldConfigs, configs)) {
       return rejectWithErrorNotification('Nothing change to update!');
     }
 
     if (form && form.$valid) {
-      return asyncAction('Modification of LDAP Server settings', _saveConfiguration);
+      return asyncAction('Modification of LDAP Server settings', function() {
+        return _saveConfiguration(configs);
+      })
+      .then(function() {
+        self.configs = configs;
+        oldConfigs = angular.copy(configs);
+      });
     }
 
     return rejectWithErrorNotification('Form is invalid!');
@@ -38,6 +49,7 @@ angular.module('linagora.esn.admin')
 
   function _qualifyConfigs() {
     var currentConfigs =  self.configs;
+
     if (currentConfigs && currentConfigs.length) {
       return currentConfigs.filter(function(configObject) {
         if (configObject && configObject.name && !configObject.deleted) {

@@ -48,11 +48,43 @@ describe('The adminLdapController', function() {
     var configMock;
 
     beforeEach(function() {
-      configMock = [{ key: 'value' }];
+      configMock = [{ name: 'name' }];
 
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
+    });
+
+    it('should not call adminDomainConfigService.set to save configuration if nothing changed', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: true
+      };
+
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.configs[0].deleted = false;
+      controller.save(form).catch(function() {
+        expect(adminDomainConfigService.set).to.have.not.been.called;
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: false
+      };
+
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.configs[0].name = 'new name';
+      controller.save(form).catch(function() {
+        expect(adminDomainConfigService.set).to.have.not.been.called;
+        done();
+      });
+
+      $scope.$digest();
     });
 
     it('should call adminDomainConfigService.set to save configuration', function(done) {
@@ -62,8 +94,8 @@ describe('The adminLdapController', function() {
       };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-<<<<<<< HEAD
-      controller.save().then(function() {
+      controller.configs[0].name = 'new name';
+      controller.save(form).then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
           value: controller.configs
@@ -76,14 +108,14 @@ describe('The adminLdapController', function() {
   });
 
   describe('The _qualifyConfigs fn', function() {
-=======
-      controller.save(form);
->>>>>>> ADM-34 Applying adminFormValidater to validate forms
-
-    var configMock;
+    var configMock, form;
 
     beforeEach(function() {
-      configMock = [{}, {name: null}, {name: 'test', deleted: false}];
+      configMock = [{name: 'test'}];
+
+      form = {
+        $valid: true
+      };
 
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
@@ -94,7 +126,10 @@ describe('The adminLdapController', function() {
       var ctrl = initController();
 
       adminDomainConfigService.set = sinon.stub().returns($q.reject());
-      ctrl.save().catch(function() {
+      ctrl.configs[0].name = 'new name';
+      ctrl.configs[0].deleted = false;
+
+      ctrl.save(form).catch(function() {
         expect(adminDomainConfigService.set).to.have.been.calledOnce;
 
         expect(ctrl.configs).to.deep.equal(configMock);
@@ -104,14 +139,15 @@ describe('The adminLdapController', function() {
       $scope.$digest();
     });
 
-    it('should return configs without any empty object and with no "deleted" element', function(done) {
+    it('should return configs without any empty object and with deleted is true', function(done) {
       var ctrl = initController();
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-      ctrl.save().then(function() {
-        expect(adminDomainConfigService.set).to.have.been.calledOnce;
+      ctrl.configs = [{}, { name: 'ldap1', deleted: true }, { name: 'ldap2', deleted: false }];
 
-        expect(ctrl.configs).to.deep.equal([{name: 'test'}]);
+      ctrl.save(form).then(function() {
+        expect(adminDomainConfigService.set).to.have.been.calledOnce;
+        expect(ctrl.configs).to.deep.equal([{name: 'ldap2'}]);
         done();
       });
 

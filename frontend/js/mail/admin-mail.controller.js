@@ -8,6 +8,7 @@ angular.module('linagora.esn.admin')
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'mail';
+  var oldConfig;
 
   self.transportTypes = ADMIN_MAIL_TRANSPORT_TYPES;
 
@@ -17,19 +18,28 @@ angular.module('linagora.esn.admin')
       self.config.transport = data.transport || {};
       self.config.transport.config = self.config.transport.config || {};
       self.transportType = _getTransportType(data);
+
+      oldConfig = angular.copy(_qualifyTransportConfig());
     });
 
   self.save = function(form) {
     if (form && form.$valid) {
       var config = _qualifyTransportConfig();
 
+      if (angular.equals(oldConfig, config)) {
+        return rejectWithErrorNotification('Nothing change to update!');
+      }
+
       return asyncAction('Modification of Mail Server settings', function() {
         return _saveConfiguration(config);
       })
       .then(function() {
         self.config = config;
+        oldConfig = angular.copy(self.config);
       });
     }
+
+    return rejectWithErrorNotification('Form is invalid!');
   };
 
   function _saveConfiguration(config) {
@@ -54,7 +64,6 @@ angular.module('linagora.esn.admin')
   }
 
   function _qualifyTransportConfig() {
-
     var currentConfig = self.config;
     var config = {
       mail: {
