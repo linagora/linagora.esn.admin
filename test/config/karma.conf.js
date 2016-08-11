@@ -17,8 +17,8 @@ module.exports = function(config) {
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
       'frontend/components/sinon-1.15.4/index.js',
       'test/unit-frontend/mocks/**/*.js',
+      'frontend/js/**/*.module.js',
       'frontend/js/**/*.js',
-      'test/unit-frontend/**/*.js',
       'frontend/**/*.jade'
     ],
     frameworks: ['mocha'],
