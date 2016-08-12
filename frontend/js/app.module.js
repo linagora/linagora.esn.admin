@@ -10,5 +10,7 @@ angular.module('linagora.esn.admin', [
   'esn.subheader',
   'esn.sidebar',
   'esn.async-action',
-  'ngMessages'
+  'ngMessages',
+  'esn.infinite-list',
+  'esn.domain'
 ]);
