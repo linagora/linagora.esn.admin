@@ -35,7 +35,7 @@ describe('The adminMailController', function() {
   }
 
   it('should get Mail configuration from server on init', function() {
-    var config = { transport: { key: 'value'} };
+    var config = {  mail: { noreply: 'value' }, transport: { module: 'module' } };
     adminDomainConfigService.get = sinon.stub().returns($q.when(config));
 
     var controller = initController();
@@ -47,15 +47,17 @@ describe('The adminMailController', function() {
   describe('The _getTransportType fn', function() {
 
     it('should return Local transport type if config object has module in transport attribute', function() {
-      var config = { transport: {module: 'module', key: 'value'} };
-      adminDomainConfigService.get = sinon.stub().returns($q.when(config));
+      var config = { mail: { noreply: 'value' }, transport: {module: 'module', key: 'value'} };
+      adminDomainConfigService.get = function() {
+        return $q.when(config);
+      };
       var controller = initController();
 
       expect(controller.transportType).to.equal(ADMIN_MAIL_TRANSPORT_TYPES[0]);
     });
 
     it('should return SMTP transport type if config object has host and port attribute in config attribute', function() {
-      var config = { transport: {key: 'value', config: {host: '', port: 25} } };
+      var config = { mail: { noreply: 'value' }, transport: {key: 'value', config: {host: '', port: 25, tls: {}, auth: { user: '', pass: '' } } } };
       adminDomainConfigService.get = sinon.stub().returns($q.when(config));
       var controller = initController();
 
@@ -63,7 +65,7 @@ describe('The adminMailController', function() {
     });
 
     it('should return Gmail transport type if config has service equal gmail', function() {
-      var config = { transport: {key: 'value', config: {service: 'gmail'} } };
+      var config = { mail: { noreply: 'value' }, transport: {key: 'value', config: {service: 'gmail', auth: { user: '', pass: '' } } } };
       adminDomainConfigService.get = sinon.stub().returns($q.when(config));
       var controller = initController();
 
@@ -71,7 +73,7 @@ describe('The adminMailController', function() {
     });
 
     it('should return Local transport type if config has service but service no equal gmail', function() {
-      var config = { transport: {key: 'value', config: {service: 'nogmail'} } };
+      var config = { mail: { noreply: 'value' }, transport: {key: 'value', config: {service: 'nogmail'} } };
       adminDomainConfigService.get = sinon.stub().returns($q.when(config));
       var controller = initController();
 
@@ -81,7 +83,7 @@ describe('The adminMailController', function() {
   });
 
   describe('The _qualifyTransportConfig fn', function() {
-    var configMock;
+    var configMock, form;
 
     beforeEach(function() {
       configMock = {
@@ -107,6 +109,10 @@ describe('The adminMailController', function() {
           }
         }
       };
+
+      form = {
+        $valid: true
+      };
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
@@ -117,7 +123,7 @@ describe('The adminMailController', function() {
 
       adminDomainConfigService.set = sinon.stub().returns($q.reject());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[0];
-      controller.save().catch(function() {
+      controller.save(form).catch(function() {
         expect(controller.config).to.deep.equal(configMock);
         done();
       });
@@ -128,13 +134,14 @@ describe('The adminMailController', function() {
     it('should return config object for Local transport type if transport type is Local and saving successfully', function(done) {
       var expectedConfig = {
         mail: { noreply: 'value' },
-        transport: { module: 'value', config: { dir: 'value', browser: true } }
+        transport: { module: 'value', config: { dir: 'new value', browser: true } }
       };
       var controller = initController();
+      controller.config.transport.config.dir = 'new value';
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[0];
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(controller.config).to.deep.equal(expectedConfig);
         expect(adminDomainConfigService.set).to.be.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -151,7 +158,7 @@ describe('The adminMailController', function() {
         mail: { noreply: 'value' },
         transport: {
           config: {
-            host: 'value',
+            host: 'new value',
             secure: false,
             tls: { rejectUnauthorized: false },
             port: 25,
@@ -160,10 +167,11 @@ describe('The adminMailController', function() {
         }
       };
       var controller = initController();
+      controller.config.transport.config.host = 'new value';
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[1];
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(controller.config).to.deep.equal(expectedConfig);
         expect(adminDomainConfigService.set).to.be.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -179,14 +187,15 @@ describe('The adminMailController', function() {
       var expectedConfig = {
         mail: { noreply: 'value' },
         transport: {
-          config: { service: 'gmail', auth: { user: '', pass: '' } }
+          config: { service: 'gmail', auth: { user: 'new value', pass: '' } }
         }
       };
       var controller = initController();
+      controller.config.transport.config.auth.user = 'new value';
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.transportType = ADMIN_MAIL_TRANSPORT_TYPES[2];
-      controller.save().then(function() {
+      controller.save(form).then(function() {
         expect(controller.config).to.deep.equal(expectedConfig);
         expect(adminDomainConfigService.set).to.be.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
@@ -200,7 +209,7 @@ describe('The adminMailController', function() {
   });
 
   describe('The save fn', function() {
-    var configMock;
+    var configMock, form;
 
     beforeEach(function() {
       configMock = {
@@ -227,16 +236,47 @@ describe('The adminMailController', function() {
         }
       };
 
+      form = {
+        $valid: true
+      };
+
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
     });
 
-    it('should call adminDomainConfigService.set to save configuration', function(done) {
+    it('should not call adminDomainConfigService.set to save configuration if nothing changed', function(done) {
       var controller = initController();
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save().then(function() {
+      controller.save(form).catch(function() {
+        expect(adminDomainConfigService.set).to.have.not.been.called;
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
+      var controller = initController();
+      form.$valid = false;
+
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.config.key = 'new value';
+      controller.save(form).catch(function() {
+        expect(adminDomainConfigService.set).to.have.not.been.called;
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should call adminDomainConfigService.set to save configuration', function(done) {
+      var controller = initController();
+      controller.config.transport.config.dir = 'new value';
+
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.save(form).then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
           name: CONFIG_NAME,
           value: controller.config

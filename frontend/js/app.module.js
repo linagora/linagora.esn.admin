@@ -9,5 +9,6 @@ angular.module('linagora.esn.admin', [
   'op.dynamicDirective',
   'esn.subheader',
   'esn.sidebar',
-  'esn.async-action'
+  'esn.async-action',
+  'ngMessages'
 ]);

@@ -1,0 +1,7 @@
+{
+    "css": [
+    ],
+    "js": [
+      "../components/angular-messages/angular-messages.min.js"
+    ]
+}

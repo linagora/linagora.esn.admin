@@ -11,6 +11,7 @@ module.exports = function(config) {
       'frontend/components/angular-ui-router/release/angular-ui-router.min.js',
       'frontend/components/angular-mocks/angular-mocks.js',
       'frontend/components/angular-component/dist/angular-component.min.js',
+      'frontend/components/angular-messages/angular-messages.min.js',
       'frontend/components/dynamic-directive/dist/dynamic-directive.min.js',
       'frontend/components/restangular/dist/restangular.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',

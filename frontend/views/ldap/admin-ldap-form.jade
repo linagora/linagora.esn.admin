@@ -1,18 +1,18 @@
-.card-body.card-padding(ng-show="!$ctrl.ldapConfig.deleted")
-  form.form(role="form", aria-hidden="true")
+.card-body.card-padding(ng-if="!$ctrl.ldapConfig.deleted")
+  ng-form.form(role="form", aria-hidden="true", name="form")
     .row
       .col-xs-12.col-md-6
         .form-group
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.name', placeholder="#{__('Name')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.name', placeholder="#{__('Name')}", required, admin-form-validator, name="name")
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url',placeholder="#{__('URL')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url',placeholder="#{__('URL')}", required, admin-form-validator, name="url")
         .form-group
           .field-name #{__('Mapping')}
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.mapping.firstname', placeholder="#{__('First name')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.mapping.firstname', placeholder="#{__('First name')}", required, admin-form-validator, name="firstname")
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.mapping.lastname', placeholder="#{__('Last name')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.mapping.lastname', placeholder="#{__('Last name')}", required, admin-form-validator, name="lastname")
         .form-group
           .fg-line
             .checkbox
@@ -23,15 +23,15 @@
         .form-group
           .field-name #{__('Admin')}
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn',placeholder="#{__('Admin distinguished name')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn',placeholder="#{__('Admin distinguished name')}", required, admin-form-validator, name="adminDn")
           .fg-line
-            input.input.title.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', placeholder="#{__('Admin Password')}", required)
+            input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', placeholder="#{__('Admin Password')}", required, admin-form-validator, name="adminPassword")
         .form-group
           .field-name #{__('Search')}
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', placeholder="#{__('Search Base')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', placeholder="#{__('Search Base')}", required, admin-form-validator, name="searchBase")
           .fg-line
-            input.input.title.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', placeholder="#{__('Search Filter')}", required)
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', placeholder="#{__('Search Filter')}", required, admin-form-validator, name="searchFilter")
       .col-xs-12.flex-end.form-bottom
         button.btn.btn-default(ng-click="$ctrl.delete()", type="button", title="#{__('Delete')}")
           i.mdi.mdi-delete

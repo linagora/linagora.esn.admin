@@ -1,12 +1,15 @@
-.form-group.fg-line
-  input.form-control.floating-label(type="text", ng-model="$ctrl.transport.module", name="module", placeholder="#{__('Enter Module')}", value="nodemailer-browser")
+ng-form(name="form")
+  .form-group
+    .fg-line
+      input.form-control.floating-label(type="text", ng-model="$ctrl.transport.module", name="module", placeholder="#{__('Enter Module')}", value="nodemailer-browser", required, admin-form-validator)
 
-.form-group.fg-line
-  input.form-control.floating-label(type="text", ng-model="$ctrl.transport.config.dir", name="directory", placeholder="#{__('Enter folder path')}")
+  .form-group
+    .fg-line
+      input.form-control.floating-label(type="text", ng-model="$ctrl.transport.config.dir", name="directory", placeholder="#{__('Enter folder path')}", required, admin-form-validator)
 
-.form-group
-  .checkbox
-    label
-      input(type="checkbox", ng-model="$ctrl.transport.config.browser", name="browser")
-      i.input-helper
-      | #{__('Browser')}
+  .form-group
+    .checkbox
+      label
+        input(type="checkbox", ng-model="$ctrl.transport.config.browser", name="browser")
+        i.input-helper
+        | #{__('Browser')}

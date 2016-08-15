@@ -8,6 +8,7 @@ var FRONTEND_JS_PATH = __dirname + '/frontend/js/';
 
 var MODULE_NAME = 'admin';
 var AWESOME_MODULE_NAME = 'linagora.esn.' + MODULE_NAME;
+var resources = require('./config/resources.json');
 
 var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   dependencies: [
@@ -53,6 +54,7 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       var lessFile = path.resolve(__dirname, './frontend/css/styles.less');
 
       webserverWrapper.injectLess(MODULE_NAME, [lessFile], 'esn');
+      webserverWrapper.injectJS(MODULE_NAME, resources.js, 'esn');
       webserverWrapper.addApp(MODULE_NAME, app);
 
       return callback();

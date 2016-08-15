@@ -4,4 +4,4 @@ block left
   .title #{__('DAV server')}
 
 block right
-  admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()")
+  admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")

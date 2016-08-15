@@ -1,15 +1,17 @@
 sub-header
-  admin-dav-subheader(on-save-button-click="$ctrl.save()")
+  admin-dav-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid")
 
 .card
   .card-body.card-padding
-    form
+    ng-form(name="form")
       .row
         .col-md-6
-          .form-group.fg-line
-            .field-name #{__('Backend')}
-            input.form-control(type="url", ng-model="$ctrl.config.backend.url", placeholder="#{__('Enter a URL')}", auto-focus)
+          .form-group
+            .fg-line
+              .field-name #{__('Backend')}
+              input.form-control(type="url", ng-model="$ctrl.config.backend.url", placeholder="#{__('Enter a URL')}", auto-focus, admin-form-validator, name="backend", required)
         .col-md-6
-          .form-group.fg-line
-            .field-name #{__('Frontend')}
-            input.form-control(type="url", ng-model="$ctrl.config.frontend.url", placeholder="#{__('Enter a URL')}")
+          .form-group
+            .fg-line
+              .field-name #{__('Frontend')}
+              input.form-control(type="url", ng-model="$ctrl.config.frontend.url", placeholder="#{__('Enter a URL')}", admin-form-validator, name="frontend", required)
