@@ -43,5 +43,12 @@
   "This must be greater than or equal to": "This must be greater than or equal to",
   "Length must be less than or equal to": "Length must be less than or equal to",
   "Length must be greater than or equal to": "Length must be greater than or equal to",
-  "Please match requested format": "Please match requested format"
+  "Please match requested format": "Please match requested format",
+  "Test": "Test",
+  "Send test email": "Send test email",
+  "Enter mail you want to send": "Enter mail you want to send",
+  "Sending email is proccessing...": "Sending email is proccessing...",
+  "Send successfully ": "Send successfully ",
+  "Send email failed with server error: ": "Send email failed with server error: ",
+  "Please fullfil valid mail configuration above": "Please fullfil valid mail configuration above"
 }
