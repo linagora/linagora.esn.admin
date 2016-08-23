@@ -24,7 +24,7 @@ angular.module('linagora.esn.admin')
     }
 
     self.message = { status: 'invalidEmail' };
-    
+
     return $q.reject();
   };
 
