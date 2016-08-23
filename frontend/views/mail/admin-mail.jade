@@ -12,7 +12,7 @@ sub-header
 
           .form-group.fg-line
             .select
-              select.form-control(ng-model="$ctrl.transportType", ng-options="transportType for transportType in $ctrl.transportTypes")
+              select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for transportType in $ctrl.transportTypes", required, admin-form-validator)
                 option(value="") #{__('Choose transport type')}
         div(ng-switch="$ctrl.transportType")
           div.col-xs-6.col-md-6(ng-switch-when="Local")
@@ -23,3 +23,5 @@ sub-header
 
           div.col-xs-6.col-md-6(ng-switch-when="Gmail")
             admin-mail-gmail(transport-config="$ctrl.config.transport.config")
+
+admin-mail-test(is-mail-config-valid="form.$valid", config="$ctrl.config", transport-type="$ctrl.transportType")
