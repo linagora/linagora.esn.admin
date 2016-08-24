@@ -1,0 +1,6 @@
+sub-header
+  admin-modules-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid")
+
+form(name="form")
+  .card
+    admin-modules-inbox(features="$ctrl.getFeature('linagora.esn.inbox')")

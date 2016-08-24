@@ -1,0 +1,71 @@
+@adminModuleMiniIconSize: 1.2em;
+@adminModuleMiniItemFontSize: 1.2em;
+@adminModuleBorderColor: #CCCCCC;
+@adminModuleMiniFormHeight: 35px;
+
+admin-modules {
+  .card {
+    margin: 0;
+  }
+  .card-padding {
+    border: 1px solid @adminModuleBorderColor;
+  }
+  .collapse-background {
+    background: @app-gray;
+  }
+  .admin-form-header {
+    color: @secondaryTextColor;
+    padding: 15px;
+    margin: 0;
+
+    .mdi {
+      font-size: 2.5em;
+      color: @secondaryTextColor;
+    }
+
+    .module-title {
+
+      font-size: 1.3em;
+
+      .mdi {
+        padding-right: 5px;
+      }
+    }
+    .module-option {
+
+      font-size: @adminModuleMiniItemFontSize;
+      .mdi {
+        font-size: @adminModuleMiniIconSize;
+        color: @secondaryTextColor;
+        padding-left: 5px;
+      }
+
+      .mdi-menu-down, .mdi-menu-up {
+        padding: 0;
+        font-size: @adminModuleMiniIconSize + 0.7;
+      }
+    }
+  }
+
+  .admin-form-body {
+    padding: 15px;
+    border-top: 1px solid @adminModuleBorderColor;
+    background: @app-gray;
+
+    input {
+      background: @app-gray;
+    }
+
+    .right-features-block {
+      border-right: 1px solid @adminModuleBorderColor;
+    }
+
+    .admin-mini-form {
+      .form-group{
+        min-height: @adminModuleMiniFormHeight;
+      }
+      font-size: 1.1em;
+    }
+  }
+
+}
