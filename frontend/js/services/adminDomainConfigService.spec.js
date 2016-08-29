@@ -45,10 +45,14 @@ describe('The adminDomainConfigService service', function() {
 
     it('should return an Error if respose.status is not 200', function(done) {
       var configNames = ['mail'];
+      var moduleName = 'core';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {configNames: configNames}).respond(500, 'Error');
+      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {
+        configNames: configNames,
+        moduleName: moduleName
+      }).respond(500, 'Error');
 
-      adminDomainConfigService.get(domainId, configNames)
+      adminDomainConfigService.get(domainId, configNames, moduleName)
         .catch(function(err) {
           expect(err).to.exist;
           done();
@@ -59,10 +63,14 @@ describe('The adminDomainConfigService service', function() {
 
     it('should return an array of configurations of domain if respose.status is 200', function(done) {
       var configNames = ['mail'];
+      var moduleName = 'core';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {configNames: configNames}).respond(200, configsMock);
+      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {
+        configNames: configNames,
+        moduleName: moduleName
+      }).respond(200, configsMock);
 
-      adminDomainConfigService.get(domainId, configNames)
+      adminDomainConfigService.get(domainId, configNames, moduleName)
         .then(function(configs) {
           expect(configs).to.shallowDeepEqual(configsMock);
           done();
@@ -73,10 +81,14 @@ describe('The adminDomainConfigService service', function() {
 
     it('should return a configuration if configNames is not an array', function(done) {
       var configNames = 'mail';
+      var moduleName = 'core';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {configNames: [configNames]}).respond(200, configsMock);
+      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {
+        configNames: [configNames],
+        moduleName: moduleName
+      }).respond(200, configsMock);
 
-      adminDomainConfigService.get(domainId, configNames)
+      adminDomainConfigService.get(domainId, configNames, moduleName)
         .then(function(config) {
           expect(config).to.deep.equal(configsMock[0].value);
           done();
@@ -89,9 +101,14 @@ describe('The adminDomainConfigService service', function() {
   describe('The set fn', function() {
 
     it('should return an Error if respose.status is not 200', function(done) {
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {configs: configsMock}).respond(500, 'Error');
+      var moduleName = 'core';
 
-      adminDomainConfigService.set(domainId, configsMock)
+      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {
+        configs: configsMock,
+        moduleName: moduleName
+      }).respond(500, 'Error');
+
+      adminDomainConfigService.set(domainId, configsMock, moduleName)
         .catch(function(err) {
           expect(err).to.exist;
           done();
@@ -101,9 +118,14 @@ describe('The adminDomainConfigService service', function() {
     });
 
     it('should return an array of configurations of domain if respose.status is 200', function(done) {
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {configs: configsMock}).respond(200, configsMock);
+      var moduleName = 'core';
 
-      adminDomainConfigService.set(domainId, configsMock)
+      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {
+        configs: configsMock,
+        moduleName: moduleName
+      }).respond(200, configsMock);
+
+      adminDomainConfigService.set(domainId, configsMock, moduleName)
         .then(function(configs) {
           expect(configs).to.deep.equal(configsMock);
           done();
@@ -113,9 +135,14 @@ describe('The adminDomainConfigService service', function() {
     });
 
     it('should still work if configs parameter as an object', function(done) {
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {configs: configsMock}).respond(200, configsMock);
+      var moduleName = 'core';
 
-      adminDomainConfigService.set(domainId, configsMock[0])
+      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {
+        configs: configsMock,
+        moduleName: moduleName
+      }).respond(200, configsMock);
+
+      adminDomainConfigService.set(domainId, configsMock[0], moduleName)
         .then(function(configs) {
           expect(configs).to.deep.equal(configsMock);
           done();

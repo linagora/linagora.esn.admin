@@ -3,7 +3,7 @@
 angular.module('linagora.esn.admin')
 
 .service('adminDomainConfigService', function(adminRestangular, _) {
-  function get(domainId, configNames) {
+  function get(domainId, configNames, moduleName) {
     var isArray = true;
 
     if (!_.isArray(configNames)) {
@@ -11,7 +11,7 @@ angular.module('linagora.esn.admin')
       isArray = false;
     }
 
-    var body = { configNames: configNames };
+    var body = { configNames: configNames, moduleName: moduleName };
 
     return adminRestangular
       .all('configuration')
@@ -30,12 +30,12 @@ angular.module('linagora.esn.admin')
       });
   }
 
-  function set(domainId, configs) {
+  function set(domainId, configs, moduleName) {
     if (!_.isArray(configs)) {
       configs = [configs];
     }
 
-    var body = { configs: configs };
+    var body = { configs: configs, moduleName: moduleName };
 
     return adminRestangular
       .all('configuration')

@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
       midway: {
         options: {
-          common: ['node_modules/linagora-rse/test/midway-backend/all.js'],
+          common: [],
           target: 'mochacli:midway'
         },
         files: {
