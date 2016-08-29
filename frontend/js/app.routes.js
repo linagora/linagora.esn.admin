@@ -29,7 +29,6 @@ angular.module('linagora.esn.admin')
     })
     .state('admin.domain', {
       url: '/:domainId',
-      template: '<ui-view noanimation="noanimation" />',
       deepStateRedirect: {
         default: 'admin.domain.mail',
         params: true,
@@ -40,14 +39,43 @@ angular.module('linagora.esn.admin')
     })
     .state('admin.domain.mail', {
       url: '/mail',
-      template: '<admin-mail />'
+      views: {
+        'root@admin': {
+          template: '<admin-mail />'
+        }
+      }
+    })
+    .state('admin.domain.user', {
+      url: '/user',
+      views: {
+        'root@admin': {
+          template: '<admin-user />'
+        }
+      }
+    })
+    .state('admin.domain.user.create', {
+      url: '/create',
+      views: {
+        'root@admin': {
+          template: '<admin-user-create />'
+        }
+      },
+      params: { user: null }
     })
     .state('admin.domain.dav', {
       url: '/dav',
-      template: '<admin-dav />'
+      views: {
+        'root@admin': {
+          template: '<admin-dav />'
+        }
+      }
     })
     .state('admin.domain.ldap', {
       url: '/ldap',
-      template: '<admin-ldap />'
+      views: {
+        'root@admin': {
+          template: '<admin-ldap />'
+        }
+      }
     });
 });

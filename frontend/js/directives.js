@@ -22,7 +22,7 @@ angular.module('linagora.esn.admin')
       });
       scope.elementForm = scope.form[attrs.name];
 
-      var template = '<admin-form-validate-message ng-show="form.$invalid" options="options" error="elementForm.$error" />';
+      var template = '<admin-form-validate-message ng-show="form.$invalid && !form.$pristine" options="options" error="elementForm.$error" />';
       var validateMessage = $compile(template)(scope);
       element.parent().after(validateMessage);
     }

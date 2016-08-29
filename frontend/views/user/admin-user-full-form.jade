@@ -1,0 +1,47 @@
+ng-form(name="form")
+  .row
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", required, admin-form-validator, name="email")
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", required, admin-form-validator, name="password")
+  .row
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.firstName", placeholder="#{__('First name')}")
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.lastName", placeholder="#{__('Last name')}")
+  .row
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.job_title", placeholder="#{__('Job title')}")
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.service", placeholder="#{__('Service')}")
+  .row
+    .col-md-12
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.bulding_location", placeholder="#{__('Building location')}")
+  .row
+    .col-md-12
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.office_location", placeholder="#{__('Office location')}")
+  .row
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.main_phone", placeholder="#{__('Main phone')}")
+    .col-md-6
+      .form-group
+        .fg-line
+          input.form-control(type="text", ng-model="$ctrl.user.description", placeholder="#{__('Description')}")

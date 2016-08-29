@@ -16,6 +16,7 @@ angular.module('esn.router', ['ui.router'])
 angular.module('esn.session', []);
 angular.module('esn.subheader', []);
 angular.module('esn.sidebar', []);
+angular.module('esn.infinite-list', []);
 angular.module('esn.async-action', [])
   .factory('asyncAction', function() {
     return function(message, action) {
@@ -34,4 +35,8 @@ angular.module('esn.http', [])
     return {
       redirectToLogin: angular.noop
     };
+  });
+angular.module('esn.domain', [])
+  .factory('domainAPI', function() {
+    return {};
   });

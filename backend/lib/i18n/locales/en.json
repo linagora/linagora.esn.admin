@@ -38,7 +38,6 @@
   "This is a invalid date": "This is a invalid date",
   "This is a invalid date time": "This is a invalid date time",
   "This is a invalid time": "This is a invalid time",
-  "This is a invalid date": "This is a invalid date",
   "This must be less than or equal to": "This must be less than or equal to",
   "This must be greater than or equal to": "This must be greater than or equal to",
   "Length must be less than or equal to": "Length must be less than or equal to",
@@ -50,5 +49,17 @@
   "Sending email is proccessing...": "Sending email is proccessing...",
   "Send successfully ": "Send successfully ",
   "Send email failed with server error: ": "Send email failed with server error: ",
-  "Please fullfil valid mail configuration above": "Please fullfil valid mail configuration above"
+  "Please fullfil valid mail configuration above": "Please fullfil valid mail configuration above",
+  "List users": "List users",
+  "Users Management": "Users Management",
+  "Advanced user creation": "Advanced user creation",
+  "Add": "Add",
+  "Email": "Email",
+  "Password": "Password",
+  "Job title": "Job title",
+  "Service": "Service",
+  "Building location": "Building location",
+  "Office location": "Office location",
+  "Main phone": "Main phone",
+  "Description": "Description"
 }
