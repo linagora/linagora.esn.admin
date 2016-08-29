@@ -46,7 +46,7 @@ angular.module('linagora.esn.admin')
       }
     })
     .state('admin.domain.user', {
-      url: '/user',
+      url: '/users',
       views: {
         'root@admin': {
           template: '<admin-user />'

@@ -11,7 +11,7 @@ ng-form(name="form")
             .fg-line
               input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", required, name="password", admin-form-validator)
     .col-md-2
-        button.btn.btn-primary(type="submit", ng-click="$ctrl.save(form)")
+        button.btn.btn-primary(type="submit", ng-click="$ctrl.save(form)", ng-disabled="form.$invalid")
           | #{__('Add')}
   .row
     .col-md-6
