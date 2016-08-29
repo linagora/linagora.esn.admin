@@ -3,9 +3,11 @@
 var q = require('q');
 var esnConfig;
 var logger;
+var DEFAULT_MODULE = 'core';
 
 function getConfigurations(req, res) {
   var configNames = req.body.configNames;
+  var moduleName = req.body.moduleName || DEFAULT_MODULE;
   var user = req.user;
 
   if (!Array.isArray(configNames)) {
@@ -20,6 +22,7 @@ function getConfigurations(req, res) {
 
   q.all(configNames.map(function(configName) {
     return esnConfig(configName)
+      .inModule(moduleName)
       .forUser(user)
       .get()
       .then(function(data) {
@@ -43,6 +46,7 @@ function getConfigurations(req, res) {
 
 function updateConfigurations(req, res) {
   var configs = req.body.configs;
+  var moduleName = req.body.moduleName || DEFAULT_MODULE;
   var domainId = req.domain._id;
 
   if (!Array.isArray(configs)) {
@@ -55,7 +59,7 @@ function updateConfigurations(req, res) {
     });
   }
 
-  var esnConf = new esnConfig.EsnConfig(null, domainId);
+  var esnConf = new esnConfig.EsnConfig(moduleName, domainId);
 
   esnConf.setMultiple(configs)
     .then(function() {

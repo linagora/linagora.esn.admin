@@ -8,6 +8,7 @@ describe('The configuration API controller', function() {
 
   var deps;
   var esnConfigMock;
+  var DEFAULT_MODULE = 'core';
 
   beforeEach(function() {
     var self = this;
@@ -39,6 +40,59 @@ describe('The configuration API controller', function() {
       var req = {
         user: { _id: '123' },
         body: {
+          configNames: ['name1', 'name2', 'name3'],
+          moduleName: 'some_module'
+        },
+        domain: {
+          _id: 'domain123'
+        }
+      };
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(200);
+
+          return {
+            json: function(data) {
+              expect(data).to.deep.equal(configData);
+              done();
+            }
+          };
+        }
+      };
+
+      deps['esn-config'] = function(configName) {
+        return {
+          inModule: function(moduleName) {
+            expect(moduleName).to.equal(req.body.moduleName);
+
+            return {
+              forUser: function(user) {
+                expect(user).to.deep.equal(req.user);
+
+                return {
+                  get: function() {
+                    var config = _.find(configData, { name: configName });
+
+                    return q(config && config.value);
+                  }
+                };
+              }
+            };
+          }
+        };
+      };
+
+      this.requireController().getConfigurations(req, res);
+    });
+
+    it('should use DEFAULT_MODULE as module name if req.body.moduleName is not available', function(done) {
+      var configData = [
+        { name: 'name1', value: 'value1' },
+        { name: 'name2', value: 'value2' }
+      ];
+      var req = {
+        user: { _id: '123' },
+        body: {
           configNames: ['name1', 'name2', 'name3']
         },
         domain: {
@@ -60,14 +114,20 @@ describe('The configuration API controller', function() {
 
       deps['esn-config'] = function(configName) {
         return {
-          forUser: function(user) {
-            expect(user).to.deep.equal(req.user);
+          inModule: function(moduleName) {
+            expect(moduleName).to.equal(DEFAULT_MODULE);
 
             return {
-              get: function() {
-                var config = _.find(configData, { name: configName });
+              forUser: function(user) {
+                expect(user).to.deep.equal(req.user);
 
-                return q(config && config.value);
+                return {
+                  get: function() {
+                    var config = _.find(configData, { name: configName });
+
+                    return q(config && config.value);
+                  }
+                };
               }
             };
           }
@@ -77,7 +137,7 @@ describe('The configuration API controller', function() {
       this.requireController().getConfigurations(req, res);
     });
 
-    it('should responde 400 if req.body.configNames is missing or not an array', function(done) {
+    it('should respond 400 if req.body.configNames is missing or not an array', function(done) {
       var req = {
         body: {
           configNames: 'not an array'
@@ -139,12 +199,16 @@ describe('The configuration API controller', function() {
 
       deps['esn-config'] = function() {
         return {
-          forUser: function(user) {
-            expect(user).to.deep.equal(req.user);
-
+          inModule: function() {
             return {
-              get: function() {
-                return q.reject(new Error('some_error'));
+              forUser: function(user) {
+                expect(user).to.deep.equal(req.user);
+
+                return {
+                  get: function() {
+                    return q.reject(new Error('some_error'));
+                  }
+                };
               }
             };
           }
@@ -159,6 +223,43 @@ describe('The configuration API controller', function() {
   describe('The updateConfigurations fn', function() {
 
     it('should respond 200 if configurations are updated successfully', function(done) {
+      var req = {
+        body: {
+          configs: [{ key: 'value' }],
+          moduleName: 'some_module'
+        },
+        domain: {
+          _id: 'domain123'
+        }
+      };
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(200);
+
+          return {
+            json: function(data) {
+              expect(data).to.deep.equal(req.body.configs);
+              done();
+            }
+          };
+        }
+      };
+
+      esnConfigMock.EsnConfig = function(moduleName, domainId) {
+        expect(moduleName).to.equal(req.body.moduleName);
+        expect(domainId).to.equal(req.domain._id);
+
+        this.setMultiple = function(configs) {
+          expect(configs).to.deep.equal(req.body.configs);
+
+          return q();
+        };
+      };
+
+      this.requireController().updateConfigurations(req, res);
+    });
+
+    it('should use DEFAULT_MODULE as module name if req.body.moduleName is not available', function(done) {
       var req = {
         body: {
           configs: [{ key: 'value' }]
@@ -181,7 +282,7 @@ describe('The configuration API controller', function() {
       };
 
       esnConfigMock.EsnConfig = function(moduleName, domainId) {
-        expect(moduleName).to.be.null;
+        expect(moduleName).to.equal(DEFAULT_MODULE);
         expect(domainId).to.equal(req.domain._id);
 
         this.setMultiple = function(configs) {
@@ -228,7 +329,8 @@ describe('The configuration API controller', function() {
     it('should respond 500 if it fails to update configurations', function(done) {
       var req = {
         body: {
-          configs: [{ key: 'value' }]
+          configs: [{ key: 'value' }],
+          moduleName: 'some_module'
         },
         domain: {
           _id: 'domain123'
@@ -254,7 +356,7 @@ describe('The configuration API controller', function() {
       };
 
       esnConfigMock.EsnConfig = function(moduleName, domainId) {
-        expect(moduleName).to.be.null;
+        expect(moduleName).to.equal(req.body.moduleName);
         expect(domainId).to.equal(req.domain._id);
 
         this.setMultiple = function(configs) {
