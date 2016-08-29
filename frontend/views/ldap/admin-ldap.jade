@@ -1,10 +1,9 @@
 sub-header
   admin-ldap-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid")
 
-.card
-  ng-form(name="form")
-    div(ng-repeat="config in $ctrl.configs")
-      admin-ldap-form(ldap-config="config")
+form(name="form")
+  .card(ng-repeat="config in $ctrl.configs")
+    admin-ldap-form(ldap-config="config")
 .button.clickable(ng-click="$ctrl.addForm()")
   .form-group
     .flex-vertical-centered.m-t-10
