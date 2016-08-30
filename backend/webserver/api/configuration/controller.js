@@ -3,72 +3,83 @@
 var q = require('q');
 var esnConfig;
 var logger;
-var DEFAULT_MODULE = 'core';
+
+function _getConfig(moduleName, user, key) {
+  return esnConfig(key)
+    .inModule(moduleName)
+    .forUser(user)
+    .get()
+    .then(function(data) {
+      return {
+        name: key,
+        value: data
+      };
+    });
+}
+
+function _getConfigs(moduleName, user, keys) {
+  return q.all(keys.map(function(key) {
+    return _getConfig(moduleName, user, key);
+  }))
+  .then(function(configs) {
+    return {
+      name: moduleName,
+      configurations: configs
+    };
+  });
+}
 
 function getConfigurations(req, res) {
-  var configNames = req.body.configNames;
-  var moduleName = req.body.moduleName || DEFAULT_MODULE;
+  var modules = req.body;
   var user = req.user;
 
-  if (!Array.isArray(configNames)) {
+  if (!Array.isArray(modules)) {
     return res.status(400).json({
       error: {
         code: 400,
         message: 'Bad Request',
-        details: 'configNames should be an array of configuration\'s name'
+        details: 'body should be an array'
       }
     });
   }
 
-  q.all(configNames.map(function(configName) {
-    return esnConfig(configName)
-      .inModule(moduleName)
-      .forUser(user)
-      .get()
-      .then(function(data) {
-        if (!data) {
-          return null;
-        }
-
-        return {
-          name: configName,
-          value: data
-        };
-      });
-  })).then(function(configs) {
-    return res.status(200).json(configs.filter(Boolean));
+  q.all(modules.map(function(module) {
+    return _getConfigs(module.name, user, module.keys);
+  }))
+  .then(function(modules) {
+    return res.status(200).json(modules);
   }, function(err) {
-    logger.error('Error while getting configuration:', err);
+    logger.error('Error while getting configurations:', err);
 
     return res.status(500).json({error: {code: 500, message: 'Server Error', details: err.message}});
   });
 }
 
 function updateConfigurations(req, res) {
-  var configs = req.body.configs;
-  var moduleName = req.body.moduleName || DEFAULT_MODULE;
+  var modules = req.body;
   var domainId = req.domain._id;
 
-  if (!Array.isArray(configs)) {
+  if (!Array.isArray(modules)) {
     return res.status(400).json({
       error: {
         code: 400,
         message: 'Bad Request',
-        details: 'configs should be an array of configuration to update'
+        details: 'body should be an array'
       }
     });
   }
 
-  var esnConf = new esnConfig.EsnConfig(moduleName, domainId);
+  q.all(modules.map(function(module) {
+    var esnConf = new esnConfig.EsnConfig(module.name, domainId);
 
-  esnConf.setMultiple(configs)
-    .then(function() {
-      return res.status(200).json(configs);
-    }, function(err) {
-      logger.error('Error while updating configuration:', err);
+    return esnConf.setMultiple(module.configurations);
+  })).then(function() {
+    return res.status(204).end();
+  }, function(err) {
+    logger.error('Error while updating configuration:', err);
 
-      return res.status(500).json({error: {code: 500, message: 'Server Error', details: err.message}});
-    });
+    return res.status(500).json({error: {code: 500, message: 'Server Error', details: err.message}});
+  });
 }
 
 module.exports = function(dependencies) {
