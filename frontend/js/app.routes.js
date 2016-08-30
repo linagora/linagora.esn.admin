@@ -77,5 +77,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-ldap />'
         }
       }
+    })
+    .state('admin.domain.modules', {
+      url: '/modules',
+      views: {
+        'root@admin': {
+          template: '<admin-modules />'
+        }
+      }
     });
 });
