@@ -41,9 +41,6 @@ angular.module('linagora.esn.admin')
   };
 
   function _saveConfiguration(config) {
-    return adminDomainConfigService.set(domainId, {
-      name: CONFIG_NAME,
-      value: config
-    });
+    return adminDomainConfigService.set(domainId, CONFIG_NAME, config);
   }
 });
