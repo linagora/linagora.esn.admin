@@ -1,0 +1,21 @@
+label {{$ctrl.name}}
+.form-group
+  span.m-r-5 #{__('Active')}
+  toggle-switch(ng-model='$ctrl.resolver.active', color='green')
+div(ng-if="$ctrl.name !== 'all'")
+  p #{__('Options')}
+  .multi-input-content
+    .form-group(ng-repeat="option in $ctrl.options track by $index")
+      .row.field-option
+        .col-xs-6
+          .ng-line
+            input.form-control(ng-model="option.key", name="key", placeholder="#{__('Key')}", ng-change="$ctrl.qualifyResolver()")
+        .col-xs-6
+          .ng-line
+            input.form-control(ng-model="option.value", name="value", placeholder="#{__('Value')}", ng-change="$ctrl.qualifyResolver()")
+            i.clickable.mdi.mdi-minus-circle-outline.button-remove.show-button(ng-click="$ctrl.deleteOption($index)")
+  .button.clickable(ng-click="$ctrl.addOption()")
+    .form-group
+      .flex-vertical-centered.m-t-10
+        i.mdi.mdi-plus-circle.button-add.m-r-5
+        | #{__("Add a new options")}

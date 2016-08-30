@@ -57,18 +57,16 @@ describe('The adminMailController', function() {
           module: 'value',
           config: {
             dir: 'value',
-            browser: true,
-            host: 'value',
-            secure: false,
-            tls: {
-              rejectUnauthorized: false
-            },
-            port: 25,
-            auth: {
-              user: '',
-              pass: ''
-            },
-            service: 'gmail'
+            browser: true
+          }
+        },
+        resolvers: {
+          whatsup: {
+            active: false,
+            options: {}
+          },
+          all: {
+            active: false
           }
         }
       };

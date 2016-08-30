@@ -74,6 +74,15 @@ describe('The adminMailService', function() {
             },
             service: 'gmail'
           }
+        },
+        resolvers: {
+          whatsup: {
+            active: false,
+            options: {}
+          },
+          all: {
+            active: false
+          }
         }
       };
     });
@@ -81,7 +90,8 @@ describe('The adminMailService', function() {
     it('should return config object for Local transport type if transport type is Local and saving successfully', function() {
       var expectedConfig = {
         mail: { noreply: 'value' },
-        transport: { module: 'value', config: { dir: 'value', browser: true } }
+        transport: { module: 'value', config: { dir: 'value', browser: true } },
+        resolvers: { whatsup: { active: false, options: {} }, all: { active: false } }
       };
       var transportType = ADMIN_MAIL_TRANSPORT_TYPES[0];
       var config = adminMailService.qualifyTransportConfig(transportType, configMock);
@@ -100,6 +110,15 @@ describe('The adminMailService', function() {
             port: 25,
             auth: { user: '', pass: '' }
           }
+        },
+        resolvers: {
+          whatsup: {
+            active: false,
+            options: {}
+          },
+          all: {
+            active: false
+          }
         }
       };
       var transportType = ADMIN_MAIL_TRANSPORT_TYPES[1];
@@ -113,7 +132,8 @@ describe('The adminMailService', function() {
         mail: { noreply: 'value' },
         transport: {
           config: { service: 'gmail', auth: { user: '', pass: '' } }
-        }
+        },
+        resolvers: { whatsup: { active: false, options: {} }, all: { active: false } }
       };
       var transportType = ADMIN_MAIL_TRANSPORT_TYPES[2];
       var config = adminMailService.qualifyTransportConfig(transportType, configMock);
