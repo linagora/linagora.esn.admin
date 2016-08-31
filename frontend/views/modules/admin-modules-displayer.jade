@@ -1,0 +1,16 @@
+.card(ng-init="expanded=false", ng-class="{expanded: expanded}")
+  .card-header(ng-click="expanded=!expanded")
+    h2.flex-vertical-centered
+      i.mdi.mdi-email
+      span {{$ctrl.title}}
+    
+    .toolbar
+      span.clickable(ng-click="$ctrl.isHomePage = !$ctrl.isHomePage; $event.stopPropagation();")
+        | #{__('Home')}
+        i.mdi(ng-class="$ctrl.isHomePage ? 'mdi-star' : 'mdi-star-outline'")
+      div.flex-vertical-centered
+        | #{__('Features')}
+        i.mdi(ng-class="expanded ? 'mdi-menu-up' : 'mdi-menu-down'")
+      toggle-switch(ng-model="$ctrl.isEnabled")
+          
+  admin-modules-form(ng-show="expanded", template="$ctrl.template", configurations="$ctrl.configurations")

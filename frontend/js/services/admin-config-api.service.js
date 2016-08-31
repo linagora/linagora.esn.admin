@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminConfigApi', function(adminRestangular) {
+.factory('adminConfigApi', function($q, Restangular, adminRestangular) {
   function get(domainId, query) {
     return adminRestangular
       .all('configuration')
@@ -13,7 +13,7 @@ angular.module('linagora.esn.admin')
           return $q.reject(response);
         }
 
-        return response.data;
+        return Restangular.stripRestangular(response.data);
       });
   }
 

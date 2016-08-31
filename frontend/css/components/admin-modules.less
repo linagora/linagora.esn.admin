@@ -4,67 +4,87 @@
 @adminModuleMiniFormHeight: 35px;
 
 admin-modules {
-  .card {
-    margin: 0;
-  }
-  .card-padding {
-    border: 1px solid @adminModuleBorderColor;
-  }
-  .collapse-background {
-    background: @app-gray;
-  }
-  .admin-form-header {
-    color: @secondaryTextColor;
-    padding: 15px;
-    margin: 0;
 
-    .mdi {
-      font-size: 2.5em;
-      color: @secondaryTextColor;
-    }
+  admin-modules-displayer {
 
-    .module-title {
-
-      font-size: 1.3em;
-
-      .mdi {
-        padding-right: 5px;
-      }
-    }
-    .module-option {
-
-      font-size: @adminModuleMiniItemFontSize;
-      .mdi {
-        font-size: @adminModuleMiniIconSize;
-        color: @secondaryTextColor;
-        padding-left: 5px;
-      }
-
-      .mdi-menu-down, .mdi-menu-up {
-        padding: 0;
-        font-size: @adminModuleMiniIconSize + 0.7;
-      }
-    }
-  }
-
-  .admin-form-body {
-    padding: 15px;
-    border-top: 1px solid @adminModuleBorderColor;
-    background: @app-gray;
-
-    input {
+    .card.expanded {
       background: @app-gray;
     }
 
-    .right-features-block {
-      border-right: 1px solid @adminModuleBorderColor;
+    .card .card-header {
+      .clickable;
+      .flex-vertical-centered;
+      .flex-space-between;
+
+      font-size: 1.3em;
+      color: @secondaryTextColor;
+      padding: 15px;
+      border-bottom: 1px solid @adminModuleBorderColor;
+
+      h2 {
+        .flex-grow;
+
+        color: @secondaryTextColor;
+
+        .mdi {
+          font-size: 2.5em;
+          color: @secondaryTextColor;
+          margin-right: 10px;
+        }
+      }
+
+      .toolbar {
+        .flex-vertical-centered;
+        .flex-space-between;
+        .flex-grow;
+
+        .mdi-menu-up, .mdi-menu-down {
+          font-size: 1.5em;
+        }
+
+        .mdi-star {
+          color: @primaryColor;
+        }
+      }
     }
 
-    .admin-mini-form {
-      .form-group{
-        min-height: @adminModuleMiniFormHeight;
+    admin-modules-form {
+
+      ng-form {
+        .flex-space-between;
+
+        margin-top: 10px;
+
+        .left-block, .right-block {
+          .flex-grow;
+        }
+
+        .left-block {
+          padding-right: 5px;
+        }
+
+        .right-block {
+          padding-left: 5px;
+        }
+
+        .divider {
+          position: absolute;
+          left: 50%;
+          top: 20%;
+          bottom: 10%;
+          border-left: 1px solid @adminModuleBorderColor;
+        }
       }
-      font-size: 1.1em;
+
+      .form-group {
+        .flex-vertical-centered;
+
+        min-height: @adminModuleMiniFormHeight;
+
+        input {
+          background: @app-gray;
+        }
+      }
     }
   }
 
