@@ -6,43 +6,43 @@ angular.module('linagora.esn.admin')
   var oldFeaturesConfigs;
   var exampleJson =
     {
-      name : 'linagora.esn.unifiedinbox',
-      configurations : [
+      name: 'linagora.esn.unifiedinbox',
+      configurations: [
         {
-          name : 'api',
-          value : 'https://172.17.0.2/jmap/79a87b7e-41c4-11e6-b11d-0242ac110002/'
+          name: 'api',
+          value: 'https://172.17.0.2/jmap/79a87b7e-41c4-11e6-b11d-0242ac110002/'
         },
         {
-          name : 'view',
-          value : 'threads'
+          name: 'view',
+          value: 'threads'
         },
         {
-          name : 'uploadUrl',
-          value : 'https://172.17.0.2/upload/79a87b7e-41c4-11e6-b11d-0242ac110002/'
+          name: 'uploadUrl',
+          value: 'https://172.17.0.2/upload/79a87b7e-41c4-11e6-b11d-0242ac110002/'
         },
         {
-          name : 'isJmapSendingEnabled',
-          value : true
+          name: 'isJmapSendingEnabled',
+          value: true
         },
         {
-          name : 'isSaveDraftBeforeSendingEnabled',
-          value : false
+          name: 'isSaveDraftBeforeSendingEnabled',
+          value: false
         },
         {
           name: 'maxSizeUpload',
-          value : 20971500
+          value: 20971500
         },
         {
-          name : 'composer.attachments',
-          value : true
+          name: 'composer.attachments',
+          value: true
         },
         {
-          name : 'twitter.tweets',
-          value : true
+          name: 'twitter.tweets',
+          value: true
         },
         {
-          name : 'swipeRightAction',
-          value : 'markAsRead'
+          name: 'swipeRightAction',
+          value: 'markAsRead'
         }
       ]
     }; // fake data
