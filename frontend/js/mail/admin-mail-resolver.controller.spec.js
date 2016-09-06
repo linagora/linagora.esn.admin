@@ -64,13 +64,22 @@ describe('The adminMailResolverController', function() {
   });
 
   describe('The qualifyResolver fn', function() {
-    it('should qualify resolver.options object from options array', function() {
+    it('should qualify resolver.options object from options array and object in options must be has value of key', function() {
       var controller = initController();
-      controller.options = [{ key: 'key', value: 'value' }];
 
+      controller.options = [{ key: 'key', value: 'value' }];
       controller.qualifyResolver();
 
       expect(controller.resolver.options).to.deep.equal({key: 'value'});
+    });
+
+    it('should not qualify resolver.options object from options array if object in options do not has value of key', function() {
+      var controller = initController();
+
+      controller.options = [{ key: null, value: 'value' }];
+      controller.qualifyResolver();
+
+      expect(controller.resolver.options).to.deep.equal({});
     });
   });
 });

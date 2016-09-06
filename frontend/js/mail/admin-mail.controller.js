@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.constant('ADMIN_MAIL_TRANSPORT_TYPES', ['Local', 'SMTP', 'Gmail'])
+.constant('ADMIN_MAIL_TRANSPORT_TYPES', { local: 'Local', smtp: 'SMTP', gmail: 'Gmail' })
 
 .controller('adminMailController', function($stateParams, adminDomainConfigService, adminMailService, asyncAction, ADMIN_MAIL_TRANSPORT_TYPES, rejectWithErrorNotification) {
   var self = this;

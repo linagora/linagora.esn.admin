@@ -19,5 +19,4 @@ angular.module('linagora.esn.admin')
       resolver.options = resolver.options || {};
     }
   });
-
 });
