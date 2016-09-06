@@ -7,6 +7,6 @@ angular.module('linagora.esn.admin')
   controller: 'adminMailResolverController',
   bindings: {
     resolver: '=',
-    name: '='
+    metaData: '='
   }
 });

@@ -26,6 +26,6 @@ sub-header
               div(ng-switch-when="Gmail")
                 admin-mail-gmail(transport-config="$ctrl.config.transport.config")
         .col-md-6
-          admin-mail-resolvers(resolvers="$ctrl.config.resolvers")
+          admin-mail-resolvers(ng-if="$ctrl.config.resolvers", resolvers="$ctrl.config.resolvers")
 
 admin-mail-test(is-mail-config-valid="form.$valid", config="$ctrl.config", transport-type="$ctrl.transportType")

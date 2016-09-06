@@ -4,17 +4,17 @@ angular.module('linagora.esn.admin')
 
 .controller('adminMailResolverController', function() {
   var self = this;
+
   self.options = [];
 
   if (self.resolver) {
     angular.forEach(self.resolver.options, function(value, key) {
-      this.push({key: key, value: value});
-    }, self.options);
+      self.options.push({key: key, value: value});
+    });
   }
 
   self.addOption = function() {
     self.options.push({});
-    self.qualifyResolver();
   };
 
   self.deleteOption = function($index) {
@@ -26,7 +26,9 @@ angular.module('linagora.esn.admin')
     self.resolver.options = {};
 
     angular.forEach(self.options, function(option) {
-      self.resolver.options[option.key] = option.value;
+      if (option.key) {
+        self.resolver.options[option.key] = option.value;
+      }
     });
   };
 });

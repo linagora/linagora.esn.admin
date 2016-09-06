@@ -1,8 +1,8 @@
-label {{$ctrl.name}}
+label {{$ctrl.metaData.name}}
 .form-group
   span.m-r-5 #{__('Active')}
-  toggle-switch(ng-model='$ctrl.resolver.active', color='green')
-div(ng-if="$ctrl.name !== 'all'")
+  toggle-switch(ng-model='$ctrl.resolver.active')
+div(ng-if="$ctrl.metaData.hasOptions")
   p #{__('Options')}
   .multi-input-content
     .form-group(ng-repeat="option in $ctrl.options track by $index")
