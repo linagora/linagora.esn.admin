@@ -5,21 +5,23 @@ angular.module('linagora.esn.admin')
 .factory('adminMailService', function(ADMIN_MAIL_TRANSPORT_TYPES) {
 
   function getTransportType(mailConfig) {
-    if (mailConfig) {
+    if (mailConfig && mailConfig.transport) {
       if (mailConfig.transport.module) {
-        return ADMIN_MAIL_TRANSPORT_TYPES[0];
-      } else if (mailConfig.transport.config.service) {
-        if (mailConfig.transport.config.service === 'gmail') {
-          return ADMIN_MAIL_TRANSPORT_TYPES[2];
-        } else {
-          return ADMIN_MAIL_TRANSPORT_TYPES[0];
-        }
-      } else {
-        return ADMIN_MAIL_TRANSPORT_TYPES[1];
+        return ADMIN_MAIL_TRANSPORT_TYPES.local;
       }
-    } else {
-      return null;
+
+      if (mailConfig.transport.config.service) {
+        if (mailConfig.transport.config.service === 'gmail') {
+          return ADMIN_MAIL_TRANSPORT_TYPES.gmail;
+        }
+
+        return ADMIN_MAIL_TRANSPORT_TYPES.local;
+      }
+
+      return ADMIN_MAIL_TRANSPORT_TYPES.smtp;
     }
+
+    return null;
   }
 
   function qualifyTransportConfig(transportType, mailConfig) {

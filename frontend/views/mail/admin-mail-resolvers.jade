@@ -1,5 +1,5 @@
 label.title #{__('Resolvers')}
 .row
   .col-xs-12.col-md-12
-    .config-content(ng-repeat="key in $ctrl.ADMIN_MAIL_AVAILABLE_RESOLVERS")
-      admin-mail-resolver(ng-if="$ctrl.resolvers[key]", name="key", resolver="$ctrl.resolvers[key]")
+    .config-content(ng-repeat="resolve in $ctrl.ADMIN_MAIL_AVAILABLE_RESOLVERS")
+      admin-mail-resolver(meta-data="resolve", resolver="$ctrl.resolvers[resolve.key]")
