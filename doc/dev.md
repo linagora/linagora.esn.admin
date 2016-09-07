@@ -22,13 +22,10 @@ folder (information available at https://ci.open-paas.org/stash/projects/OR/repo
 You must also install all the required dependencies and tools from OpenPaaS RSE
 (check README.md).
 
-**Add Admin module to OpenPaaS** by creating a symbolic link in the `$SRC/rse/modules` folder:
+**Add Admin module to OpenPaaS** by creating a symbolic link in the `$SRC/rse/node_modules` folder:
 
     cd $SRC/rse
-    ln -s $SRC/linagora.esn.admin modules/linagora.esn.admin
-
-Add the module to the ESN configuration: Add `linagora.esn.admin` to the array
-of modules in `$SRC/rse/config/default.json`.
+    ln -s $SRC/linagora.esn.admin node_modules/linagora.esn.admin
 
 You can now start OpenPaaS to access to Admin module:
 
