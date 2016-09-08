@@ -4,14 +4,12 @@
   "description": "Administration module for the ESN",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test",
-    "postinstall": "node ./node_modules/bower/bin/bower install --allow-root"
+    "test": "grunt test"
   },
   "author": "Linagora folks <dev@linagora.com>",
   "license": "AGPLv3",
   "dependencies": {
     "awesome-module": "^1.0.0",
-    "bower": "^1.7.9",
     "express": "^4.2.0",
     "glob": "^7.0.3",
     "glob-all": "^3.0.3",
