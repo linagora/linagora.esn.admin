@@ -1,0 +1,2 @@
+script:
+  - bash scripts/trigger_travis.sh
