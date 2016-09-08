@@ -1,154 +1,158 @@
 'use strict';
 
 /* global chai: false */
+/* global sinon: false */
 
 var expect = chai.expect;
 
 describe('The adminDomainConfigService service', function() {
 
-  var $httpBackend;
-  var adminDomainConfigService;
-  var configsMock, domainId;
+  var adminDomainConfigService, adminConfigApi;
+  var $rootScope;
+  var DEFAULT_MODULE = 'core';
+  var DOMAIN_ID = 'domain123';
+
+  beforeEach(module('linagora.esn.admin'));
 
   beforeEach(function() {
-    configsMock = [
-      {
-        name: 'mail',
-        value: {
-          mail: {
-            noreply: 'no-reply@open-paas.org'
-          },
-          transport: {
-            module: 'nodemailer-browser',
-            config: {
-              dir: '/tmp',
-              browser: false
-            }
-          }
-        }
-      }
-    ];
-
-    domainId = 'domainId';
-
-    angular.mock.module('linagora.esn.admin');
-  });
-
-  beforeEach(function() {
-    angular.mock.inject(function(_adminDomainConfigService_, _$httpBackend_) {
+    angular.mock.inject(function(_$rootScope_, _adminDomainConfigService_, _adminConfigApi_) {
+      $rootScope = _$rootScope_;
       adminDomainConfigService = _adminDomainConfigService_;
-      $httpBackend = _$httpBackend_;
+      adminConfigApi = _adminConfigApi_;
     });
   });
 
   describe('The get fn', function() {
 
-    it('should return an Error if respose.status is not 200', function(done) {
-      var configNames = ['mail'];
-      var moduleName = 'core';
+    it('should reject on failure', function(done) {
+      var key = 'some_key';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {
-        configNames: configNames,
-        moduleName: moduleName
-      }).respond(500, 'Error');
+      adminConfigApi.get = function(domainId, query) {
+        expect(domainId).to.equal(DOMAIN_ID);
+        expect(query).to.deep.equal([{
+          name: DEFAULT_MODULE,
+          keys: [key]
+        }]);
 
-      adminDomainConfigService.get(domainId, configNames, moduleName)
-        .catch(function(err) {
-          expect(err).to.exist;
-          done();
-        });
+        return $q.reject(new Error('some_error'));
+      };
 
-      $httpBackend.flush();
+      adminDomainConfigService.get(DOMAIN_ID, key).catch(function(err) {
+        expect(err.message).to.equal('some_error');
+        done();
+      });
+
+      $rootScope.$digest();
     });
 
-    it('should return an array of configurations of domain if respose.status is 200', function(done) {
-      var configNames = ['mail'];
-      var moduleName = 'core';
+    it('should resolve nothing if configuration module is not found', function(done) {
+      var key = 'some_key';
+      var value = 'some_value';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {
-        configNames: configNames,
-        moduleName: moduleName
-      }).respond(200, configsMock);
+      adminConfigApi.get = function(domainId, query) {
+        expect(domainId).to.equal(DOMAIN_ID);
+        expect(query).to.deep.equal([{
+          name: DEFAULT_MODULE,
+          keys: [key]
+        }]);
 
-      adminDomainConfigService.get(domainId, configNames, moduleName)
-        .then(function(configs) {
-          expect(configs).to.shallowDeepEqual(configsMock);
-          done();
-        });
+        return $q.when([{
+          name: 'other_module',
+          configurations: [{
+            name: key,
+            value: value
+          }]
+        }]);
+      };
 
-      $httpBackend.flush();
+      adminDomainConfigService.get(DOMAIN_ID, key).then(function(data) {
+        expect(data).to.not.be.defined;
+        done();
+      });
+
+      $rootScope.$digest();
     });
 
-    it('should return a configuration if configNames is not an array', function(done) {
-      var configNames = 'mail';
-      var moduleName = 'core';
+    it('should resolve nothing if configuration module is found but the coressponding configuration is not found', function(done) {
+      var key = 'some_key';
+      var value = 'some_value';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, {
-        configNames: [configNames],
-        moduleName: moduleName
-      }).respond(200, configsMock);
+      adminConfigApi.get = function(domainId, query) {
+        expect(domainId).to.equal(DOMAIN_ID);
+        expect(query).to.deep.equal([{
+          name: DEFAULT_MODULE,
+          keys: [key]
+        }]);
 
-      adminDomainConfigService.get(domainId, configNames, moduleName)
-        .then(function(config) {
-          expect(config).to.deep.equal(configsMock[0].value);
-          done();
-        });
+        return $q.when([{
+          name: DEFAULT_MODULE,
+          configurations: [{
+            name: 'other_key',
+            value: value
+          }]
+        }]);
+      };
 
-      $httpBackend.flush();
+      adminDomainConfigService.get(DOMAIN_ID, key).then(function(data) {
+        expect(data).to.not.be.defined;
+        done();
+      });
+
+      $rootScope.$digest();
     });
+
+    it('should resolve configuration value when it is found', function(done) {
+      var key = 'some_key';
+      var value = 'some_value';
+
+      adminConfigApi.get = function(domainId, query) {
+        expect(domainId).to.equal(DOMAIN_ID);
+        expect(query).to.deep.equal([{
+          name: DEFAULT_MODULE,
+          keys: [key]
+        }]);
+
+        return $q.when([{
+          name: DEFAULT_MODULE,
+          configurations: [{
+            name: key,
+            value: value
+          }]
+        }]);
+      };
+
+      adminDomainConfigService.get(DOMAIN_ID, key).then(function(data) {
+        expect(data).to.equal(value);
+        done();
+      });
+
+      $rootScope.$digest();
+    });
+
   });
 
   describe('The set fn', function() {
 
-    it('should return an Error if respose.status is not 200', function(done) {
-      var moduleName = 'core';
+    it('should update a single configuration by sending the right parameters to adminConfigApi', function(done) {
+      var key = 'some_key';
+      var value = 'some_value';
+      var expectedQuery = [{
+        name: DEFAULT_MODULE,
+        configurations: [{
+          name: key,
+          value: value
+        }]
+      }];
 
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {
-        configs: configsMock,
-        moduleName: moduleName
-      }).respond(500, 'Error');
+      adminConfigApi.set = sinon.stub().returns($q.when());
 
-      adminDomainConfigService.set(domainId, configsMock, moduleName)
-        .catch(function(err) {
-          expect(err).to.exist;
-          done();
-        });
+      adminDomainConfigService.set(DOMAIN_ID, key, value).then(function() {
+        expect(adminConfigApi.set).to.have.been.calledWith(DOMAIN_ID, sinon.match(expectedQuery));
+        done();
+      });
 
-      $httpBackend.flush();
+      $rootScope.$digest();
     });
 
-    it('should return an array of configurations of domain if respose.status is 200', function(done) {
-      var moduleName = 'core';
-
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {
-        configs: configsMock,
-        moduleName: moduleName
-      }).respond(200, configsMock);
-
-      adminDomainConfigService.set(domainId, configsMock, moduleName)
-        .then(function(configs) {
-          expect(configs).to.deep.equal(configsMock);
-          done();
-        });
-
-      $httpBackend.flush();
-    });
-
-    it('should still work if configs parameter as an object', function(done) {
-      var moduleName = 'core';
-
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, {
-        configs: configsMock,
-        moduleName: moduleName
-      }).respond(200, configsMock);
-
-      adminDomainConfigService.set(domainId, configsMock[0], moduleName)
-        .then(function(configs) {
-          expect(configs).to.deep.equal(configsMock);
-          done();
-        });
-
-      $httpBackend.flush();
-    });
   });
 });

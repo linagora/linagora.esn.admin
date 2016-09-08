@@ -54,6 +54,7 @@ angular.module('linagora.esn.admin')
       return currentConfigs.filter(function(configObject) {
         if (configObject && configObject.name && !configObject.deleted) {
           delete configObject.deleted;
+
           return configObject;
         }
       });
@@ -61,9 +62,6 @@ angular.module('linagora.esn.admin')
   }
 
   function _saveConfiguration(configs) {
-    return adminDomainConfigService.set(domainId, {
-      name: CONFIG_NAME,
-      value: configs
-    });
+    return adminDomainConfigService.set(domainId, CONFIG_NAME, configs);
   }
 });

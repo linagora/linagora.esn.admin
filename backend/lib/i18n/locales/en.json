@@ -30,7 +30,7 @@
   "Enter username": "Enter username",
   "Enter password": "Enter password",
   "Add a new LDAP configuration": "Add a new LDAP configuration",
-  "UNDO": "UNDO",
+  "Undo": "Undo",
   "You removed LDAP configuration of ": "You removed LDAP configuration of ",
   "This is a invalid email": "This is a invalid email",
   "This is required": "This is required",

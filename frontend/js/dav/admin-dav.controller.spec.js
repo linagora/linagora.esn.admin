@@ -98,10 +98,7 @@ describe('The adminDavController', function() {
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.config.key = 'new value';
       controller.save(form).then(function() {
-        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
-          name: CONFIG_NAME,
-          value: controller.config
-        });
+        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, controller.config);
         done();
       });
 

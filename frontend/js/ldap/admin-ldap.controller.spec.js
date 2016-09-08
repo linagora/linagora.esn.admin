@@ -96,10 +96,7 @@ describe('The adminLdapController', function() {
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.configs[0].name = 'new name';
       controller.save(form).then(function() {
-        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, {
-          name: CONFIG_NAME,
-          value: controller.configs
-        });
+        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, controller.configs);
         done();
       });
 

@@ -2,48 +2,33 @@
 
 angular.module('linagora.esn.admin')
 
-.service('adminDomainConfigService', function(adminRestangular, _) {
-  function get(domainId, configNames, moduleName) {
-    var isArray = true;
+.factory('adminDomainConfigService', function(adminConfigApi, _) {
+  var DEFAULT_MODULE = 'core';
 
-    if (!_.isArray(configNames)) {
-      configNames = [configNames];
-      isArray = false;
-    }
+  function get(domainId, key) {
+    var query = [{
+      name: DEFAULT_MODULE,
+      keys: [key]
+    }];
 
-    var body = { configNames: configNames, moduleName: moduleName };
+    return adminConfigApi.get(domainId, query).then(function(modules) {
+      var module = _.find(modules, { name: DEFAULT_MODULE });
+      var config = module && _.find(module.configurations, { name: key });
 
-    return adminRestangular
-      .all('configuration')
-      .one('domain', domainId)
-      .customPOST(body)
-      .then(function(response) {
-        if (response.status !== 200) {
-          return $q.reject(response);
-        }
-
-        if (!isArray) {
-          return response.data.length ? response.data[0].value : null;
-        }
-
-        return response.data;
-      });
+      return config && config.value;
+    });
   }
 
-  function set(domainId, configs, moduleName) {
-    if (!_.isArray(configs)) {
-      configs = [configs];
-    }
+  function set(domainId, key, value) {
+    var query = [{
+      name: DEFAULT_MODULE,
+      configurations: [{
+        name: key,
+        value: value
+      }]
+    }];
 
-    var body = { configs: configs, moduleName: moduleName };
-
-    return adminRestangular
-      .all('configuration')
-      .one('domain', domainId)
-      .customPUT(body)
-      .then(function() {
-        return configs;
-      });
+    return adminConfigApi.set(domainId, query);
   }
 
   return {
