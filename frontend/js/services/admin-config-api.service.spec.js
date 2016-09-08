@@ -1,19 +1,21 @@
 'use strict';
 
 /* global chai: false */
+/* global sinon: false */
 
 var expect = chai.expect;
 
 describe('The adminConfigApi Angular service', function() {
 
   var $httpBackend;
-  var adminConfigApi;
+  var adminConfigApi, Restangular;
 
   beforeEach(module('linagora.esn.admin'));
 
-  beforeEach(inject(function(_$httpBackend_, _adminConfigApi_) {
+  beforeEach(inject(function(_$httpBackend_, _adminConfigApi_, _Restangular_) {
     $httpBackend = _$httpBackend_;
     adminConfigApi = _adminConfigApi_;
+    Restangular = _Restangular_;
   }));
 
   describe('The get fn', function() {
@@ -24,6 +26,7 @@ describe('The adminConfigApi Angular service', function() {
       var responseData = 'some_data';
 
       $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, query).respond(200, responseData);
+      Restangular.stripRestangular = sinon.stub().returns(responseData);
 
       adminConfigApi.get(domainId, query)
         .then(function(data) {
