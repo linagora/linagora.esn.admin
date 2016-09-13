@@ -1,16 +1,16 @@
-.card(ng-init="expanded=false", ng-class="{expanded: expanded}")
+.card(ng-init="expanded=false", ng-class="{expanded: expanded && $ctrl.hasConfiguration, clickable: $ctrl.hasConfiguration}")
   .card-header(ng-click="expanded=!expanded")
     h2.flex-vertical-centered
-      i.mdi.mdi-email
+      i.mdi(ng-class="$ctrl.icon")
       span {{$ctrl.title}}
     
     .toolbar
-      span.clickable(ng-click="$ctrl.isHomePage = !$ctrl.isHomePage; $event.stopPropagation();")
+      span.clickable(ng-click="$ctrl.setHome($event)", ng-class="{'homeActivated': $ctrl.isHomePage()}")
         | #{__('Home')}
-        i.mdi(ng-class="$ctrl.isHomePage ? 'mdi-star' : 'mdi-star-outline'")
-      div.flex-vertical-centered
+        i.mdi(ng-class="$ctrl.isHomePage() ? 'mdi-star' : 'mdi-star-outline'")
+      .flex-vertical-centered(ng-show="$ctrl.hasConfiguration")
         | #{__('Features')}
         i.mdi(ng-class="expanded ? 'mdi-menu-up' : 'mdi-menu-down'")
       toggle-switch(ng-model="$ctrl.isEnabled")
           
-  admin-modules-form(ng-show="expanded", template="$ctrl.template", configurations="$ctrl.configurations")
+  admin-modules-form(ng-show="expanded && $ctrl.hasConfiguration", template="$ctrl.template", configurations="$ctrl.configurations")
