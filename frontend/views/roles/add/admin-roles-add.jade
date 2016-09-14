@@ -1,0 +1,14 @@
+.modal.admin-roles-add
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .row
+          h3.title #{__('Add administrators')}
+          hr
+        .row
+          admin-roles-auto-complete(new-administrators="$ctrl.newAdministrators")
+        .row.footer
+          button.btn.btn-primary(ng-click="$ctrl.add(); $hide()", ng-disabled="$ctrl.newAdministrators.length==0")
+            | #{__('Add')}
+          button.btn.btn-link(ng-click="$hide()")
+            | #{__('Close')}

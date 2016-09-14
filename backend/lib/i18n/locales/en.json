@@ -96,5 +96,8 @@
   "Administrators": "Administrators",
   "Promoted on": "Promoted on",
   "Promoted": "Promoted",
-  "Revoke": "Revoke"
+  "Revoke": "Revoke",
+  "Add administrators": "Add administrators",
+  "Type a name or email...": "Type a name or email...",
+  "Close": "Close"
 }

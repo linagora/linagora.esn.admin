@@ -39,4 +39,13 @@ angular.module('esn.http', [])
 angular.module('esn.domain', [])
   .factory('domainAPI', function() {
     return {};
+  })
+  .service('domainSearchMembersProvider', function() {
+    return {};
   });
+angular.module('esn.scroll', [])
+  .factory('elementScrollService', function() {
+    return {};
+  });
+angular.module('esn.attendee', [])
+  .constant('DEFAULT_TEMPLATE_URL', '');
