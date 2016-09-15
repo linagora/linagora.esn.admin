@@ -3,6 +3,6 @@
 angular.module('linagora.esn.admin')
 
 .component('adminRoles', {
-  templateUrl: '/admin/views/role/admin-roles',
+  templateUrl: '/admin/views/roles/admin-roles',
   controller: 'adminRolesController'
 });

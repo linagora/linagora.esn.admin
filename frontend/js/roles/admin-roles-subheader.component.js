@@ -3,5 +3,5 @@
 angular.module('linagora.esn.admin')
 
 .component('adminRolesSubheader', {
-  templateUrl: '/admin/views/role/admin-roles-subheader'
+  templateUrl: '/admin/views/roles/admin-roles-subheader'
 });

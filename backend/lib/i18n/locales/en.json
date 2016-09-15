@@ -92,5 +92,8 @@
   "Mask as read": "Mask as read",
   "Max size": "Max size",
   "Create a new user": "Create a new user",
-  "Roles Management": "Roles Management"
+  "Roles Management": "Roles Management",
+  "Administrators": "Administrators",
+  "Promoted on": "Promoted on",
+  "Revoke": "Revoke"
 }

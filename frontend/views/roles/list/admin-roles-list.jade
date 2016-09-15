@@ -1,0 +1,5 @@
+.block-header.m-t-15.p-l-0
+  h2 {{ $ctrl.title }}
+.card
+  .card-body.card-padding
+    admin-roles-list-item(ng-repeat="user in $ctrl.users", template="$ctrl.template", user="user")
