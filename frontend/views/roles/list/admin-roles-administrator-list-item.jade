@@ -11,7 +11,8 @@
         span
           a(ng-href='mailto:{{::$ctrl.user.emails[0]}}' op-inbox-compose) {{::$ctrl.user.emails[0]}}
       .col-md-4.flex-vertical-centered
-        span #{__('Promoted on')} {{::$ctrl.user.promoted}}
+        | #{__('Promoted on')} 
+        span(am-time-ago="::$ctrl.user.promotedOn")
         i.mdi.mdi-calendar.m-l-5
       .col-md-1.flex-end
         a.flex-vertical-centered(href="", ng-click="doSomething()", type="button", title="#{__('Revoke')}")
