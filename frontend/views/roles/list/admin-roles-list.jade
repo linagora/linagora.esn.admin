@@ -1,5 +1,12 @@
-.block-header.m-t-15.p-l-0
-  h2 {{ $ctrl.title }}
+.row
+  .col-md-7.block-header
+    h2 {{ $ctrl.title }}
+  .col-md-4.block-header.flex-horizontal-centered
+    h2 #{__('Promoted')}
+  .col-md-1.block-header.flex-horizontal-centered
+    h2 #{__('Revoke')}
+    
 .card
-  .card-body.card-padding
-    admin-roles-list-item(ng-repeat="user in $ctrl.users", template="$ctrl.template", user="user")
+  .listview.lv-bordered.lv-lg
+    .lv-body
+      admin-roles-list-item.lv-item(ng-repeat="user in $ctrl.users", template="$ctrl.template", user="user")

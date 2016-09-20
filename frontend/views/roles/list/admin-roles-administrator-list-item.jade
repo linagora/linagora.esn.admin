@@ -1,21 +1,11 @@
-.row
+.row(ui-sref="profile({user_id: $ctrl.user._id})")
   .col-md-1
-    a(ng-href='/#/profile/{{::$ctrl.user._id}}')
-      img.img-responsive(src='/images/user.png', ng-src='/api/users/{{::member._id}}/profile/avatar')
-  .col-md-11.m-t-15
-    .row
-      .col-md-3
-        a(ng-href='/#/profile/{{::$ctrl.user._id}}')
-          h4.media-heading {{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}
-      .col-md-4
-        span
-          a(ng-href='mailto:{{::$ctrl.user.emails[0]}}' op-inbox-compose) {{::$ctrl.user.emails[0]}}
-      .col-md-4.flex-vertical-centered
-        | #{__('Promoted on')} 
-        span(am-time-ago="::$ctrl.user.promotedOn")
-        i.mdi.mdi-calendar.m-l-5
-      .col-md-1.flex-end
-        a.flex-vertical-centered(href="", ng-click="doSomething()", type="button", title="#{__('Revoke')}")
-          span #{__('Revoke')}
-          i.mdi.mdi-delete
-hr
+    img.img-responsive(src="/images/user.png", ng-src="/api/users/{{::$ctrl.user._id}}/profile/avatar")
+  .col-md-6
+    h4(title="{{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}")
+      | {{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}
+  .col-md-4.flex-horizontal-centered(title="#{__('Promoted on')} {{::$ctrl.user.role.timestamps.creation}}")
+    span.m-l-5(am-time-ago="::$ctrl.user.role.timestamps.creation")
+  .col-md-1.flex-horizontal-centered
+    a.revoke(href="", ng-click="$event.stopPropagation()", type="button", title="#{__('Revoke')}")
+      i.mdi.mdi-delete
