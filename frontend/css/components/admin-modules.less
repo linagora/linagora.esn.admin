@@ -11,43 +11,46 @@ admin-modules {
       background: @app-gray;
     }
 
-    .card .card-header {
-      .clickable;
-      .flex-vertical-centered;
-      .flex-space-between;
+    .card {
+      margin-bottom: 0;
 
-      font-size: 1.3em;
-      color: @secondaryTextColor;
-      padding: 15px;
-      border-bottom: 1px solid @adminModuleBorderColor;
-
-      h2 {
-        .flex-grow;
-
-        color: @secondaryTextColor;
-
-        .mdi {
-          font-size: 2.5em;
-          color: @secondaryTextColor;
-          margin-right: 10px;
-        }
-      }
-
-      .toolbar {
+      .card-header {
         .flex-vertical-centered;
         .flex-space-between;
-        .flex-grow;
 
-        .mdi-menu-up, .mdi-menu-down {
-          font-size: 1.5em;
+        font-size: 1.3em;
+        color: @secondaryTextColor;
+        padding: 15px;
+        border-bottom: 1px solid @adminModuleBorderColor;
+
+        h2 {
+          .flex-grow;
+
+          color: @secondaryTextColor;
+
+          .mdi {
+            font-size: 2.5em;
+            color: @secondaryTextColor;
+            margin-right: 10px;
+          }
         }
 
-        .mdi-star {
-          color: @primaryColor;
+        .toolbar {
+          .flex-vertical-centered;
+          .flex-space-between;
+
+          width:50%;
+
+          .mdi-menu-up, .mdi-menu-down {
+            font-size: 1.5em;
+          }
+
+          .homeActivated {
+            color: @primaryColor;
+          }
         }
       }
     }
-
     admin-modules-form {
 
       ng-form {
@@ -81,5 +84,4 @@ admin-modules {
       }
     }
   }
-
 }
