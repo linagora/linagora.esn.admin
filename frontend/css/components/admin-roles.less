@@ -1,3 +1,5 @@
+@adminRolesAutoCompleteMaxHeight: 105px;
+
 admin-roles admin-roles-list {
 
   & > .row {
@@ -53,5 +55,36 @@ admin-roles admin-roles-list {
 
     }
 
+  }
+}
+
+admin-roles-auto-complete {
+  .host {
+    margin: 0;
+  }
+
+  .tags {
+    max-height: @adminRolesAutoCompleteMaxHeight; // ~3 lines of tags
+    .input {
+      width: auto;
+    }
+  }
+
+  .mdi {
+    font-size: 2.5em;
+  }
+}
+
+.admin-roles-add {
+  .title {
+    color: @text-color;
+  }
+
+  .footer {
+    text-align: right;
+
+    .btn {
+      font-size: 14px;
+    }
   }
 }

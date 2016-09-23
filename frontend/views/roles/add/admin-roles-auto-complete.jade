@@ -1,0 +1,7 @@
+.form-group
+  .input-group
+    span.input-group-addon
+      i.mdi.mdi-account-multiple-plus
+    .fg-line
+      tags-input.form-control(ng-model='$ctrl.newAdministrators', placeholder='#{__("Type a name or email...")}', display-property='name', key-property='id', replace-spaces-with-dashes='false', on-tag-adding="$ctrl.onTagAdding($tag)", on-tag-added="$ctrl.onTagAdded($tag)")
+        auto-complete(source='$ctrl.search($query)', min-length='1', debounce-delay='200', max-results-to-show= '20', template="/views/modules/auto-complete/attendees.html")
