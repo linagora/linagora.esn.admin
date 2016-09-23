@@ -1,14 +1,26 @@
 admin-roles admin-roles-list {
 
   & > .row {
-    margin: 0 15px 0 15px;
-
     .block-header {
       margin-top: 15px;
     }
 
-    .col-md-7 h2 {
-      margin-left: -35px;
+    margin: 0 15px 0 15px;
+
+    @media (min-width: @screen-md-min) {
+
+      .col-md-7 h2 {
+        margin-left: -35px;
+      }
+    }
+
+    @media screen and (max-width: @screen-md-min) {
+      .col-xs-7 {
+        padding-left: 0;
+      }
+      .col-xs-1 {
+        padding-right: 0;
+      }
     }
   }
 

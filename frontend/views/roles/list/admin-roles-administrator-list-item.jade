@@ -1,11 +1,11 @@
 .row(ui-sref="profile({user_id: $ctrl.user._id})")
-  .col-md-1
+  .col-md-1.col-xs-3
     img.img-responsive(src="/images/user.png", ng-src="/api/users/{{::$ctrl.user._id}}/profile/avatar")
-  .col-md-6
+  .col-md-6.col-xs-4
     h4(title="{{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}")
       | {{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}
-  .col-md-4.flex-horizontal-centered(title="#{__('Promoted on')} {{::$ctrl.user.role.timestamps.creation}}")
+  .col-md-4.col-xs-4.flex-horizontal-centered(title="#{__('Promoted on')} {{::$ctrl.user.role.timestamps.creation}}")
     span.m-l-5(am-time-ago="::$ctrl.user.role.timestamps.creation")
-  .col-md-1.flex-horizontal-centered
+  .col-md-1.col-xs-1.flex-horizontal-centered
     a.revoke(href="", ng-click="$event.stopPropagation()", type="button", title="#{__('Revoke')}")
       i.mdi.mdi-delete
