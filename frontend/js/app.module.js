@@ -14,5 +14,6 @@ angular.module('linagora.esn.admin', [
   'esn.infinite-list',
   'esn.domain',
   'esn.scroll',
-  'esn.attendee'
+  'esn.attendee',
+  'esn.user'
 ]);

@@ -99,5 +99,9 @@
   "Revoke": "Revoke",
   "Add administrators": "Add administrators",
   "Type a name or email...": "Type a name or email...",
-  "Close": "Close"
+  "Close": "Close",
+  "you": "you",
+  "Cancel": "Cancel",
+  "Revoke administrator?": "Revoke administrator?",
+  "will become normal user after this action.": "will become normal user after this action."
 }

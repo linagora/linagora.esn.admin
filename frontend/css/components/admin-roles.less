@@ -7,12 +7,12 @@ admin-roles admin-roles-list {
       margin-top: 15px;
     }
 
-    margin: 0 15px 0 15px;
+    margin: 0 20px 0 10px;
 
     @media (min-width: @screen-md-min) {
 
       .col-md-7 h2 {
-        margin-left: -35px;
+        margin-left: -30px;
       }
     }
 
@@ -33,9 +33,15 @@ admin-roles admin-roles-list {
       .clickable;
 
       h4 {
-        .ellipsis;
+        span {
+          .ellipsis;
+        }
 
         font-weight: normal;
+
+        small {
+          margin-left: 5px;
+        }
       }
 
       a.revoke {
