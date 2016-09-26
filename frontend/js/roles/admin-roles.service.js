@@ -38,6 +38,15 @@ angular.module('linagora.esn.admin')
       });
   }
 
+  function removeAdministrator(administrator) {
+    var administratorId = administrator._id;
+
+    return domainAPI.removeAdministrator(domainId, administratorId)
+      .then(function() {
+        _.remove(administrators, { _id: administratorId });
+      });
+  }
+
   function searchAdministratorCandidates(query) {
     return domainSearchMembersProvider.get(domainId).searchAttendee(query, ADMIN_SEARCH_LIMIT)
       .then(function(attendees) {
@@ -61,6 +70,7 @@ angular.module('linagora.esn.admin')
     reset: reset,
     getAdministrators: getAdministrators,
     addAdministrators: addAdministrators,
+    removeAdministrator: removeAdministrator,
     searchAdministratorCandidates: searchAdministratorCandidates
   };
 });

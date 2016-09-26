@@ -6,5 +6,6 @@ angular.module('linagora.esn.admin')
   templateUrl: '/admin/views/roles/list/admin-roles-administrator-list-item',
   bindings: {
     user: '='
-  }
+  },
+  controller: 'adminRolesAdministratorListItem'
 });

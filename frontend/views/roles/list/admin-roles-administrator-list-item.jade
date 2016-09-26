@@ -1,11 +1,13 @@
-.row(ui-sref="profile({user_id: $ctrl.user._id})")
+.row(ui-sref="profile({user_id: ::$ctrl.user._id})")
   .col-md-1.col-xs-3
     img.img-responsive(src="/images/user.png", ng-src="/api/users/{{::$ctrl.user._id}}/profile/avatar")
   .col-md-6.col-xs-4
-    h4(title="{{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}")
-      | {{::$ctrl.user.firstname}} {{::$ctrl.user.lastname}}
+    h4.flex-vertical-centered(title=" {{::$ctrl.displayName}}")
+      span {{::$ctrl.displayName}}
+      small(ng-show="::$ctrl.isMe")
+        |  (#{__('you')})
   .col-md-4.col-xs-4.flex-horizontal-centered(title="#{__('Promoted on')} {{::$ctrl.user.role.timestamps.creation}}")
     span.m-l-5(am-time-ago="::$ctrl.user.role.timestamps.creation")
   .col-md-1.col-xs-1.flex-horizontal-centered
-    a.revoke(href="", ng-click="$event.stopPropagation()", type="button", title="#{__('Revoke')}")
+    a.revoke(ng-hide="::$ctrl.isMe", href="", esn-modal-launcher="/admin/views/roles/revoke/modal", type="button", title="#{__('Revoke')}")
       i.mdi.mdi-delete

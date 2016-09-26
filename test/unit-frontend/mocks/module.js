@@ -49,3 +49,9 @@ angular.module('esn.scroll', [])
   });
 angular.module('esn.attendee', [])
   .constant('DEFAULT_TEMPLATE_URL', '');
+angular.module('esn.user', [])
+  .factory('userUtils', function() {
+    return {
+      displayNameOf: angular.noop
+    };
+  });
