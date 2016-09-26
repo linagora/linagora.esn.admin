@@ -45,6 +45,14 @@ describe('The adminMailController', function() {
     expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
   });
 
+  it('should initial object which has resolvers is empty object for mail config if mail configuration is not existed in database', function() {
+    adminDomainConfigService.get = sinon.stub().returns($q.when({}));
+
+    var controller = initController();
+
+    expect(controller.config).to.deep.equal({ resolvers: {} });
+  });
+
   describe('The save fn', function() {
     var configMock, form;
 
