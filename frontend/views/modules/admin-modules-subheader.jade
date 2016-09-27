@@ -1,7 +1,9 @@
 extends ../layout/subheader
 
 block left
-  .title #{__('Modules Management')}
+  admin-subheader-burger-button.hidden-md
+  span.title.ellipsis
+    | #{__('Modules Management')}
 
 block right
   admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")

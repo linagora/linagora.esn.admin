@@ -1,7 +1,9 @@
 extends ../layout/subheader
 
 block left
-  .title #{__('LDAP')}
+  admin-subheader-burger-button.hidden-md
+  span.title.ellipsis
+    |  #{__('LDAP Configuration')}
 
 block right
   admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")

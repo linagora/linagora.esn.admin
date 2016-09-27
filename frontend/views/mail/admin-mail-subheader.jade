@@ -1,7 +1,9 @@
 extends ../layout/subheader
 
 block left
-  .title #{__('Mail Server')}
+  admin-subheader-burger-button.hidden-md
+  span.title.ellipsis
+    |  #{__('Mail Configuration')}
 
 block right
   admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")
