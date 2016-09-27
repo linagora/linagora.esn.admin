@@ -2,7 +2,8 @@ extends ../layout/subheader
 
 block left
   admin-subheader-burger-button.hidden-md
-  .title #{__('Mail Server')}
+  span.title.ellipsis
+    |  #{__('Mail Server')}
 
 block right
   admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")
