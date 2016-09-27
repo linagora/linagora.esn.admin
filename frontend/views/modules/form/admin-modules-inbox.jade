@@ -62,4 +62,4 @@ ng-form(name='form')
       .col-xs-8.field-name #{__('Max size upload (Bytes)')}
       .col-xs-4
         .fg-line
-          input.form-control(type="number", ng-model="$ctrl.configurations.maxSizeUpload.value", placeholder="#{__('Max size')}", required, admin-form-validator, name="sizeUpload")
+          input.form-control(type="number", ng-model="$ctrl.configurations.maxSizeUpload.value", placeholder="#{__('Max size')}", required, min="0", admin-form-validator, name="sizeUpload")
