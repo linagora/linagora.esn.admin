@@ -1,22 +1,22 @@
 .card
   .card-header
-    h2 #{__('Send test email')}
+    h2 #{__('Mail server test')}
   .card-body.card-padding
     form(name="testForm")
       .row
         .col-md-6
           .form-group.fg-line
-            input.form-control.fg-input(type="email", ng-model="$ctrl.mailto", name="email", placeholder="#{__('Enter mail you want to send')}", required)
+            input.form-control.fg-input(type="email", ng-model="$ctrl.mailto", name="email", placeholder="#{__('Enter test mail address')}", required)
         .col-md-6
           button.btn.btn-primary.btn-sm.m-t-5.waves-effect(type="submit", esn-submit="$ctrl.test(testForm)", ng-disabled="testForm.$invalid") #{__('Test')}
       .row
         .col-md-12(ng-switch="$ctrl.message.status")
           i(ng-switch-when="isSending")
-            | #{__('Sending email is proccessing...')}
+            | #{__('Email sending in progress...')}
           i(ng-switch-when="success")
-            | #{__('Send successfully ')} {{$ctrl.message.mailto}}
+            | #{__('Email send successfully to ')} {{$ctrl.message.mailto}}
           i.c-red(ng-switch-when="error")
-            | #{__('Send email failed with server error: ')} {{$ctrl.message.msg}}
+            | #{__('Email send failed with server error: ')} {{$ctrl.message.msg}}
           i.c-red(ng-switch-when="invalidEmail")
             | #{__('Please type a valid email')}
           i.c-red(ng-switch-when="invalidMailConfig")
