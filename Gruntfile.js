@@ -26,17 +26,6 @@ module.exports = function(grunt) {
       }
 
     },
-    jscs: {
-      options: {
-        config: '.jscsrc'
-      },
-      all: {
-        src: ['<%= eslint.all.src %>']
-      },
-      quick: {
-        src: ['<%= eslint.quick.src %>']
-      }
-    },
     lint_pattern: {
       options: {
         rules: [
@@ -76,7 +65,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   grunt.loadNpmTasks('grunt-lint-pattern');
-  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-mocha-cli');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -91,8 +79,8 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'jscs:all', 'lint_pattern:all']);
-  grunt.registerTask('linters-dev', 'Check changed files for lint', ['prepare-quick-lint', 'eslint:quick', 'jscs:quick', 'lint_pattern:quick']);
+  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'lint_pattern:all']);
+  grunt.registerTask('linters-dev', 'Check changed files for lint', ['prepare-quick-lint', 'eslint:quick', 'lint_pattern:quick']);
   grunt.registerTask('spawn-servers', 'spawn servers', ['shell:mongo', 'shell:redis', 'shell:elasticsearch']);
   grunt.registerTask('kill-servers', 'kill servers', ['shell:mongo:kill', 'shell:redis:kill', 'shell:elasticsearch:kill']);
   grunt.registerTask('setup-environment', 'create temp folders and files for tests', gruntfileUtils.setupEnvironment());
