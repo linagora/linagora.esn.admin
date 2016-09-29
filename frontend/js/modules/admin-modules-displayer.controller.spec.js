@@ -6,15 +6,14 @@
 var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
-  var $controller, $rootScope, $scope, ADMIN_MODULES, adminDomainConfigService, $stateParams;
+  var $controller, $rootScope, $scope, adminDomainConfigService, $stateParams;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _ADMIN_MODULES_, _adminDomainConfigService_, _$stateParams_) {
+    inject(function(_$controller_, _$rootScope_, _adminDomainConfigService_, _$stateParams_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
-      ADMIN_MODULES = _ADMIN_MODULES_;
       adminDomainConfigService = _adminDomainConfigService_;
       $stateParams = _$stateParams_;
     });

@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var request = require('supertest');
 
 describe.skip('The configuration API', function() {
-  var user, domain, feature;
+  var user, domain;
   var password = 'secret';
   var moduleName = 'linagora.esn.admin';
 
@@ -19,7 +19,6 @@ describe.skip('The configuration API', function() {
         if (err) { return done(err); }
         user = models.users[0];
         domain = models.domain;
-        feature = models.feature;
         self.models = models;
         done();
       });

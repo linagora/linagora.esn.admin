@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminUserQuickFormController', function($q, adminUserService, rejectWithErrorNotification) {
+.controller('adminUserQuickFormController', function(adminUserService, rejectWithErrorNotification) {
   var self = this;
 
   var USER_TEMPLATE = {

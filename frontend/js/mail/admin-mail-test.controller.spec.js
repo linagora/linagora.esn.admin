@@ -6,21 +6,18 @@
 var expect = chai.expect;
 
 describe('The adminMailTestController', function() {
-  var $controller, $rootScope, $stateParams, $scope, ADMIN_MAIL_TRANSPORT_TYPES;
-  var adminDomainConfigService, adminTestConfigService, adminMailService;
-  var CONFIG_NAME = 'mail';
+  var $controller, $rootScope, $stateParams, $scope;
+  var adminTestConfigService, adminMailService;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminTestConfigService_, _adminMailService_, _ADMIN_MAIL_TRANSPORT_TYPES_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminTestConfigService_, _adminMailService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
-      adminDomainConfigService = _adminDomainConfigService_;
       adminTestConfigService = _adminTestConfigService_;
       adminMailService = _adminMailService_;
-      ADMIN_MAIL_TRANSPORT_TYPES = _ADMIN_MAIL_TRANSPORT_TYPES_;
 
       $stateParams.domainId = 'domain123';
     });
