@@ -20,26 +20,27 @@ angular.module('linagora.esn.admin')
 
   function _updateMembersList() {
     self.error = false;
+
     if (self.restActive) {
       return;
-    } else {
-      self.restActive = true;
-      self.search.running = true;
-      self.search.count = 0;
-      usSpinnerService.spin('memberSpinner');
-
-      domainAPI.getMembers(self.domainId, opts)
-        .then(function(data) {
-          self.search.count = parseInt(data.headers('X-ESN-Items-Count'), 10);
-          self.members = self.members.concat(data.data);
-        }, function() {
-          self.error = true;
-        }).finally(function() {
-          self.search.running = false;
-          self.restActive = false;
-          usSpinnerService.stop('memberSpinner');
-        });
     }
+
+    self.restActive = true;
+    self.search.running = true;
+    self.search.count = 0;
+    usSpinnerService.spin('memberSpinner');
+
+    domainAPI.getMembers(self.domainId, opts)
+      .then(function(data) {
+        self.search.count = parseInt(data.headers('X-ESN-Items-Count'), 10);
+        self.members = self.members.concat(data.data);
+      }, function() {
+        self.error = true;
+      }).finally(function() {
+        self.search.running = false;
+        self.restActive = false;
+        usSpinnerService.stop('memberSpinner');
+      });
   }
 
   self.init = function() {
