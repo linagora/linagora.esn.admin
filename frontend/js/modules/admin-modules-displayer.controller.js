@@ -41,7 +41,7 @@ angular.module('linagora.esn.admin')
   };
 
   angular.forEach(moduleMetaData.configurations, function(name) {
-    var feature =  _.find(self.module.configurations, { name: name });
+    var feature = _.find(self.module.configurations, { name: name });
 
     if (!feature) {
       feature = { name: name };

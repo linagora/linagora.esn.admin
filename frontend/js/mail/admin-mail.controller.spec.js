@@ -35,7 +35,7 @@ describe('The adminMailController', function() {
   }
 
   it('should get Mail configuration from server on init', function() {
-    var config = {  mail: { noreply: 'value' }, transport: { module: 'module' } };
+    var config = { mail: { noreply: 'value' }, transport: { module: 'module' } };
 
     adminDomainConfigService.get = sinon.stub().returns($q.when(config));
 

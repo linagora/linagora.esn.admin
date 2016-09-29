@@ -46,7 +46,7 @@ angular.module('linagora.esn.admin')
   };
 
   function _qualifyConfigs() {
-    var currentConfigs =  self.configs;
+    var currentConfigs = self.configs;
 
     if (currentConfigs && currentConfigs.length) {
       return currentConfigs.filter(function(configObject) {
