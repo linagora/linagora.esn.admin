@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(dependencies) {
+module.exports = function() {
   var api = {};
 
   return api;

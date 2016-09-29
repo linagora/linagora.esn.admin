@@ -97,7 +97,7 @@ describe('The adminUserListController', function() {
         done();
       };
 
-      domainAPI.getMembers = function(domain_id, opts) {
+      domainAPI.getMembers = function() {
         return $q.when({
           headers: function() {}
         });
@@ -121,7 +121,7 @@ describe('The adminUserListController', function() {
         done();
       };
 
-      domainAPI.getMembers = function(domain_id, opts) {
+      domainAPI.getMembers = function() {
         return $q.reject({});
       };
 

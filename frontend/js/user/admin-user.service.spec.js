@@ -35,7 +35,7 @@ describe('The adminUserService', function() {
       $rootScope.$broadcast = sinon.spy();
 
       adminUserService.createMember(domainId, userMock)
-        .then(function(response) {
+        .then(function() {
           expect(domainAPI.createMember).to.have.been.calledWith(domainId, userMock);
           expect($rootScope.$broadcast).to.have.been.calledWith(ADMIN_USER_EVENTS.CREATE, userMock);
           done();

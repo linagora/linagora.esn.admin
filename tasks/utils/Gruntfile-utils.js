@@ -193,7 +193,7 @@ GruntfileUtils.prototype.setupMongoReplSet = function setupMongoReplSet() {
 
     var _doReplSet = function() {
       var client = new MongoClient(new Server(servers.host, servers.mongodb.port), {native_parser: true});
-      client.open(function(err, mongoClient) {
+      client.open(function(err) {
         if (err) {
           grunt.log.error('MongoDB - Error when open a mongodb connection : ' + err);
           return done(false);

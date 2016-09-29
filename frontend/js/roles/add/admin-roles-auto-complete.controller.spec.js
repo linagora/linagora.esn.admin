@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The adminRolesAutoCompleteController', function() {
   var $controller, $rootScope, $scope, $elementMock;
-  var elementScrollService, adminRolesService;
+  var elementScrollService;
 
   beforeEach(function() {
     module('linagora.esn.admin');
@@ -20,11 +20,10 @@ describe('The adminRolesAutoCompleteController', function() {
       $provide.value('$element', $elementMock);
     });
 
-    inject(function(_$controller_, _$rootScope_, _elementScrollService_, _adminRolesService_) {
+    inject(function(_$controller_, _$rootScope_, _elementScrollService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       elementScrollService = _elementScrollService_;
-      adminRolesService = _adminRolesService_;
     });
   });
 

@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminMailTestController', function($stateParams, adminMailService, adminTestConfigService, asyncAction, $q) {
+.controller('adminMailTestController', function($stateParams, adminMailService, adminTestConfigService, $q) {
   var self = this;
   var domainId = $stateParams.domainId;
 
