@@ -12,12 +12,10 @@ angular.module('linagora.esn.admin')
     .then(function(data) {
       if (!data) {
         self.configs = [];
+      } else if (!_.isArray(data)) {
+        self.configs = [data];
       } else {
-        if (!_.isArray(data)) {
-          self.configs = [data];
-        } else {
-          self.configs = data;
-        }
+        self.configs = data;
       }
 
       oldConfigs = angular.copy(self.configs);
