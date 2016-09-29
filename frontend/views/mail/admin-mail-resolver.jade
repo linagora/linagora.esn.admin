@@ -11,10 +11,10 @@ form(name="form")
           .row.field-option
             .col-xs-6
               .ng-line
-                input.form-control(ng-model="option.key", name="key", placeholder="#{__('Key')}", ng-change="$ctrl.qualifyResolver()", maxlength="20", admin-form-validator)
+                input.form-control(ng-model="option.key", name="key", placeholder="#{__('Key')}", ng-change="$ctrl.qualifyResolver()", maxlength="100", pattern="[a-zA-Z0-9_]+", admin-form-validator)
             .col-xs-6
               .ng-line
-                input.form-control(ng-model="option.value", name="value", placeholder="#{__('Value')}", ng-change="$ctrl.qualifyResolver()", maxlength="20", admin-form-validator)
+                input.form-control(ng-model="option.value", name="value", placeholder="#{__('Value')}", ng-change="$ctrl.qualifyResolver()", maxlength="200", admin-form-validator)
                 i.clickable.mdi.mdi-minus-circle-outline.button-remove.show-button(ng-click="$ctrl.resolver.active && $ctrl.deleteOption($index)")
       .button.clickable(ng-click="$ctrl.resolver.active && $ctrl.addOption()")
         .form-group
