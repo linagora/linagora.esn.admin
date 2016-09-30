@@ -1,9 +1,0 @@
-extends ../layout/subheader
-
-block left
-  admin-subheader-burger-button.hidden-md
-  span.title.ellipsis
-    |  #{__('DAV Configuration')}
-
-block right
-  admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")

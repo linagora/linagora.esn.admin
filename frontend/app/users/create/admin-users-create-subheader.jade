@@ -1,0 +1,7 @@
+extends ../../subheader/subheader.layout
+
+block left
+  .title #{__('Create a new user')}
+
+block right
+  admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")
