@@ -10,16 +10,42 @@ admin-mail {
     }
 
     @media (min-width: @screen-md-min) {
-      .field-option {
-        .show-button {
-          display: none;
+      fieldset:not([disabled]) {
+        .field-option {
+          .show-button {
+            display: none;
+          }
+        }
+
+        .field-option:hover {
+          .show-button {
+            display: block;
+          }
         }
       }
+    }
 
-      .field-option:hover {
-        .show-button {
-          display: block;
-        }
+    fieldset[disabled] {
+      .ng-line .form-control {
+        background: transparent;
+      }
+
+      color: @m-gray;
+
+      .clickable {
+        cursor: not-allowed;
+      }
+
+      .show-button {
+        display: none;
+      }
+
+      input {
+        color: @m-gray;
+      }
+
+      .button-add {
+        color: @m-gray;
       }
     }
   }
