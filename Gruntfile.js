@@ -3,8 +3,11 @@
 var conf_path = './test/config/';
 var servers = require(conf_path + 'servers-conf');
 var GruntfileUtils = require('./tasks/utils/Gruntfile-utils');
+var timeGrunt = require('time-grunt');
 
 module.exports = function(grunt) {
+  timeGrunt(grunt);
+
   var gruntfileUtils = new GruntfileUtils(grunt, servers);
   var runGrunt = gruntfileUtils.runGrunt();
   var shell = gruntfileUtils.shell();
