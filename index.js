@@ -4,7 +4,7 @@ var AwesomeModule = require('awesome-module');
 var Dependency = AwesomeModule.AwesomeModuleDependency;
 var path = require('path');
 var glob = require('glob-all');
-var FRONTEND_JS_PATH = __dirname + '/frontend/js/';
+var FRONTEND_JS_PATH = __dirname + '/frontend/app/';
 
 var MODULE_NAME = 'admin';
 var AWESOME_MODULE_NAME = 'linagora.esn.' + MODULE_NAME;
@@ -49,8 +49,8 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
         return filepath.replace(FRONTEND_JS_PATH, '');
       });
 
-      webserverWrapper.injectAngularModules(MODULE_NAME, frontendJsFiles, [AWESOME_MODULE_NAME], ['esn']);
-      var lessFile = path.resolve(__dirname, './frontend/css/styles.less');
+      webserverWrapper.injectAngularAppModules(MODULE_NAME, frontendJsFiles, [AWESOME_MODULE_NAME], ['esn']);
+      var lessFile = path.join(FRONTEND_JS_PATH, 'app.less');
 
       webserverWrapper.injectLess(MODULE_NAME, [lessFile], 'esn');
       webserverWrapper.addApp(MODULE_NAME, app);

@@ -18,9 +18,9 @@ module.exports = function(config) {
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
       'frontend/components/sinon-1.15.4/index.js',
       'test/unit-frontend/mocks/**/*.js',
-      'frontend/js/**/*.module.js',
-      'frontend/js/**/*.js',
-      'frontend/**/*.jade'
+      'frontend/app/**/*.module.js',
+      'frontend/app/**/*.js',
+      'frontend/app/**/*.jade'
     ],
     frameworks: ['mocha'],
     colors: true,
@@ -29,8 +29,8 @@ module.exports = function(config) {
     browsers: ['PhantomJS', 'Chrome', 'Firefox'],
     reporters: ['coverage', 'spec'],
     preprocessors: {
-      'frontend/js/**/!(*spec).js': ['coverage'],
-      '**/*.jade': ['ng-jade2module']
+      'frontend/app/**/!(*spec).js': ['coverage'],
+      'frontend/app/**/*.jade': ['ng-jade2module']
     },
 
     plugins: [

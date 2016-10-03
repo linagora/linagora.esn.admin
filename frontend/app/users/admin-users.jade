@@ -1,0 +1,12 @@
+sub-header
+  admin-users-subheader
+
+.card
+  .card-body.card-padding
+    admin-users-quick-form(domain-id="$ctrl.domainId")
+
+.card
+  .card-header
+    h2 #{__('List users')}
+  .card-body.card-padding
+    admin-users-list(domain-id="$ctrl.domainId")

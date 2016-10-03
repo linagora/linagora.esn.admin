@@ -1,0 +1,19 @@
+ng-form(name="form")
+  .row
+    .col-md-10
+      .row
+        .col-md-6
+          .form-group
+            .fg-line
+              input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", required, name="email", admin-form-validator)
+        .col-md-6
+          .form-group
+            .fg-line
+              input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", required, name="password", admin-form-validator)
+    .col-md-2
+        button.btn.btn-primary(type="submit", ng-click="$ctrl.save(form)", ng-disabled="form.$invalid")
+          | #{__('Add')}
+  .row
+    .col-md-6
+      a(href="", ui-sref="admin.domain.users.create({user: $ctrl.user})")
+        | #{__('Advanced user creation')}
