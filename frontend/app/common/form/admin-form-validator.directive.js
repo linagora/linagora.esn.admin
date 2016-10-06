@@ -23,7 +23,7 @@ angular.module('linagora.esn.admin')
         };
       });
 
-      var template = '<admin-form-validate-message ng-if="form.$invalid && !form.$pristine" options="options" error="elementForm.$error" />';
+      var template = '<admin-form-validate-message ng-if="form.$invalid && !elementForm.$pristine" options="options" error="elementForm.$error" />';
       var validateMessage = $compile(template)(scope);
 
       element.parent().after(validateMessage);
