@@ -33,7 +33,7 @@ angular.module('linagora.esn.admin')
         default: 'admin.domain.mail',
         params: true,
         fn: function() {
-          return { state: 'admin.domain.mail' };
+          return true;
         }
       }
     })
