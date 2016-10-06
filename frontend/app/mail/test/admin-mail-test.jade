@@ -14,9 +14,9 @@
           i(ng-switch-when="isSending")
             | #{__('Email sending in progress...')}
           i(ng-switch-when="success")
-            | #{__('Email send successfully to ')} {{$ctrl.message.mailto}}
+            | #{__('Email sent successfully to ')} {{$ctrl.message.mailto}}
           i.c-red(ng-switch-when="error")
-            | #{__('Email send failed with server error: ')} {{$ctrl.message.msg}}
+            | #{__('Email sent failed with server error: ')} {{$ctrl.message.msg}}
           i.c-red(ng-switch-when="invalidEmail")
             | #{__('Please type a valid email')}
           i.c-red(ng-switch-when="invalidMailConfig")

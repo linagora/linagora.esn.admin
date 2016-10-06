@@ -55,22 +55,6 @@ describe('The adminLdapController', function() {
       };
     });
 
-    it('should not call adminDomainConfigService.set to save configuration if nothing changed', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: true
-      };
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.configs[0].deleted = false;
-      controller.save(form).catch(function() {
-        expect(adminDomainConfigService.set).to.have.not.been.called;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
     it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
       var controller = initController();
       var form = {
@@ -102,6 +86,7 @@ describe('The adminLdapController', function() {
 
       $scope.$digest();
     });
+
   });
 
   describe('The _qualifyConfigs fn', function() {
