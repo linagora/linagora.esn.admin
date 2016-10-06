@@ -48,7 +48,7 @@ module.exports = function(config) {
     ngJade2ModulePreprocessor: {
       stripPrefix: 'frontend',
       cacheIdFromPath: function(filepath) {
-        var cacheId = filepath.replace(/jade$/, 'html').replace(/^frontend/, '/linagora.esn.admin');
+        var cacheId = filepath.replace(/.jade$/, '').replace(/^frontend/, '/admin');
 
         return cacheId;
       },
