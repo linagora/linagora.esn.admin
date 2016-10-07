@@ -31,6 +31,15 @@ describe('The adminFormValidator directive', function() {
     return element;
   }
 
+  it('should not load template if validator is false', function() {
+    templateMock = '<form name="form"><div class="form-group"><input ng-model="model.email" type="email" admin-form-validator="false" name="email" /></div></form>';
+    var element = initDirective();
+
+    var validatorMessageElement = angular.element(element[0].querySelectorAll('admin-form-validate-message'));
+
+    expect(validatorMessageElement.length).to.equal(0);
+  });
+
   it('should be show nothing when form valid', function() {
     var element = initDirective();
     var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));

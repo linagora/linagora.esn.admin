@@ -9,6 +9,10 @@ angular.module('linagora.esn.admin')
     link: function(scope, element, attrs) {
       var AVAILABLE_ERRORS = ['min', 'max', 'minlength', 'maxlength', 'pattern', 'email', 'required', 'url', 'date', 'datetimelocal', 'time', 'week', 'month'];
 
+      if (attrs.adminFormValidator === 'false') {
+        return;
+      }
+
       scope.options = {};
       scope.elementForm = scope.form[attrs.name];
 
