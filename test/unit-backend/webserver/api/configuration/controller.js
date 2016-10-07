@@ -2,6 +2,7 @@
 
 var q = require('q');
 var expect = require('chai').expect;
+var sinon = require('sinon');
 
 describe('The configuration API controller', function() {
 
@@ -273,6 +274,39 @@ describe('The configuration API controller', function() {
         this.setMultiple = function() {
           return q.reject(new Error('some_error'));
         };
+      };
+
+      this.requireController().updateConfigurations(req, res);
+    });
+
+    it('should call esnConf.setMultiple sequentially but not in parallel', function(done) {
+      var setMultipleMock = sinon.stub().returns(q.reject(new Error('some_error')));
+      var req = {
+        body: [{
+          name: 'module1',
+          configurations: [{ key: 'value' }]
+        }, {
+          name: 'module2',
+          configurations: [{ key: 'value' }]
+        }],
+        domain: {
+          _id: 'domain123'
+        }
+      };
+      var res = {
+        status: function() {
+          return {
+            json: function() {
+              // setMultiple fn is called only one time because it fails in the first call
+              expect(setMultipleMock).to.have.been.calledOnce;
+              done();
+            }
+          };
+        }
+      };
+
+      esnConfigMock.EsnConfig = function() {
+        this.setMultiple = setMultipleMock;
       };
 
       this.requireController().updateConfigurations(req, res);

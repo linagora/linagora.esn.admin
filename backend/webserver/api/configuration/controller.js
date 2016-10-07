@@ -69,11 +69,16 @@ function updateConfigurations(req, res) {
     });
   }
 
-  q.all(modules.map(function(module) {
-    var esnConf = new esnConfig.EsnConfig(module.name, domainId);
+  var promiseFns = modules.map(function(module) {
+    return function() {
+      var esnConf = new esnConfig.EsnConfig(module.name, domainId);
 
-    return esnConf.setMultiple(module.configurations);
-  })).then(function() {
+      return esnConf.setMultiple(module.configurations);
+    };
+  });
+
+  // update sequentially to avoid concurrent update
+  return promiseFns.reduce(q.when, q()).then(function() {
     return res.status(204).end();
   }, function(err) {
     logger.error('Error while updating configuration:', err);
