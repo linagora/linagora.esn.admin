@@ -7,15 +7,23 @@ angular.module('linagora.esn.admin')
     restrict: 'A',
     scope: true,
     link: function(scope, element, attrs) {
-      var expressionAttrs = ['type', 'min', 'max', 'minlength', 'maxlength'];
+      var AVAILABLE_ERRORS = ['min', 'max', 'minlength', 'maxlength', 'pattern', 'email', 'required', 'url', 'date', 'datetimelocal', 'time', 'week', 'month'];
 
       scope.options = {};
-      angular.forEach(expressionAttrs, function(item) {
-        scope.options[item] = attrs[item];
-      });
       scope.elementForm = scope.form[attrs.name];
 
-      var template = '<admin-form-validate-message ng-show="form.$invalid && !form.$pristine" options="options" error="elementForm.$error" />';
+      angular.forEach(AVAILABLE_ERRORS, function(error) {
+        var custom_error = error + 'ErrorMessage';
+
+        scope.options[error] = {
+          value: attrs[error],
+          message: {
+            error: attrs[custom_error]
+          }
+        };
+      });
+
+      var template = '<admin-form-validate-message ng-if="form.$invalid && !elementForm.$pristine" options="options" error="elementForm.$error" />';
       var validateMessage = $compile(template)(scope);
 
       element.parent().after(validateMessage);
