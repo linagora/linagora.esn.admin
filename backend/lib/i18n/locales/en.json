@@ -110,5 +110,6 @@
   "Cancel": "Cancel",
   "Revoke administrator?": "Revoke administrator?",
   "will become normal user after this action.": "will become normal user after this action.",
-  "Only a-z, 0-9 and _ (underscore) are allowed": "Only a-z, 0-9 and _ (underscore) are allowed"
+  "Only a-z, 0-9 and _ (underscore) are allowed": "Only a-z, 0-9 and _ (underscore) are allowed",
+  "Enter feedback mail address": "Enter feedback mail address"
 }

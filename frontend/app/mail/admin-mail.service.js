@@ -27,7 +27,8 @@ angular.module('linagora.esn.admin')
   function qualifyTransportConfig(transportType, mailConfig) {
     var config = {
       mail: {
-        noreply: mailConfig.mail.noreply
+        noreply: mailConfig.mail.noreply,
+        feedback: mailConfig.mail.feedback
       },
       resolvers: mailConfig.resolvers
     };

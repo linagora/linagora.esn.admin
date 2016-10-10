@@ -55,7 +55,8 @@ describe('The adminMailService', function() {
     beforeEach(function() {
       configMock = {
         mail: {
-          noreply: 'value'
+          noreply: 'noreply@open-paas.org',
+          feedback: 'feedback@open-paas.org'
         },
         transport: {
           module: 'value',
@@ -89,7 +90,7 @@ describe('The adminMailService', function() {
 
     it('should return config object for Local transport type if transport type is Local and saving successfully', function() {
       var expectedConfig = {
-        mail: { noreply: 'value' },
+        mail: { noreply: 'noreply@open-paas.org', feedback: 'feedback@open-paas.org' },
         transport: { module: 'value', config: { dir: 'value', browser: true } },
         resolvers: { whatsup: { active: false, options: {} }, all: { active: false } }
       };
@@ -101,7 +102,10 @@ describe('The adminMailService', function() {
 
     it('should return config object for SMTP transport type if transport type is SMTP and saving successfully', function() {
       var expectedConfig = {
-        mail: { noreply: 'value' },
+        mail: {
+          noreply: 'noreply@open-paas.org',
+          feedback: 'feedback@open-paas.org'
+        },
         transport: {
           config: {
             host: 'value',
@@ -129,7 +133,7 @@ describe('The adminMailService', function() {
 
     it('should return config object for Gmail transport type if transport type is Gmail and saving successfully', function() {
       var expectedConfig = {
-        mail: { noreply: 'value' },
+        mail: { noreply: 'noreply@open-paas.org', feedback: 'feedback@open-paas.org' },
         transport: {
           config: { service: 'gmail', auth: { user: '', pass: '' } }
         },
