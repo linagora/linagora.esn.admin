@@ -59,7 +59,6 @@ ng-form(name='form')
       .col-xs-4.flex-end
         toggle-switch(ng-model='$ctrl.configurations["composer.attachments"].value')
     .form-group
-      .col-xs-8.field-name #{__('Max size upload (Bytes)')}
-      .col-xs-4
-        .fg-line
-          input.form-control(type="number", ng-model="$ctrl.configurations.maxSizeUpload.value", placeholder="#{__('Max size')}", required, min="0", admin-form-validator, name="sizeUpload")
+      .col-xs-4.field-name #{__('Max size upload')}
+      .col-xs-8
+        admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", required="true", placeholder="#{__('Max size')}", validator="true")

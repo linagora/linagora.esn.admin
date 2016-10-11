@@ -1,0 +1,13 @@
+ng-form(name="form")
+  .input-group
+    div
+      .fg-line
+        input.form-control(type="number", ng-model="display.value", placeholder="{{placeholder}}", name="dataSizeInput", ng-change="onChange()", min="{{minValue}}", max="{{maxValue}}", required="{{required}}", min-error-message="{{ '#{__('This must be greater than or equal to')} ' + min}}", max-error-message="{{ '#{__('This must be less than or equal to')} ' + max}}", admin-form-validator="{{validator}}")
+    .input-group-btn
+      button.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+        {{display.unit}}
+        span.caret
+      ul.dropdown-menu
+        li(ng-repeat="unit in AVAILABLE_UNITS")
+          a(ng-click="onSelect(unit)")
+            {{unit}}

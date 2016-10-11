@@ -59,7 +59,7 @@ admin-modules {
         margin-top: 10px;
 
         .left-block, .right-block {
-          .flex-grow;
+          width: 50%;
         }
 
         .left-block {
@@ -80,6 +80,18 @@ admin-modules {
 
         input {
           background: @app-gray;
+        }
+      }
+
+      admin-form-input-bytes {
+
+        .input-group-btn {
+          font-size: inherit;
+
+          button {
+            background: @app-gray;
+            border: none;
+          }
         }
       }
     }
