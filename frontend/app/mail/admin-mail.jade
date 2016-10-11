@@ -6,13 +6,15 @@ sub-header
     form(name="form")
       .row
         .col-md-6
-          label {{$ctrl.transportType}} #{__('server credentials')}
           .config-content
             .form-group
               .fg-line
-                input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="name", placeholder="#{__('Enter noreply mail address')}", autofocus=true, required, admin-form-validator)
-            .form-group.fg-line
-              .select
+                input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", placeholder="#{__('Enter noreply mail address')}", autofocus=true, required, admin-form-validator)
+            .form-group
+              .fg-line
+                input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.feedback", name="feedback", placeholder="#{__('Enter feedback mail address')}", required, admin-form-validator)
+            .form-group
+              .select.fg-line
                 select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for (key, transportType) in $ctrl.transportTypes", required, admin-form-validator)
                   option(value="") #{__('Choose transport type')}
 
