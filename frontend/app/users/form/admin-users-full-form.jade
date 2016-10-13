@@ -3,11 +3,11 @@ ng-form(name="form")
     .col-md-6
       .form-group
         .fg-line
-          input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", required, admin-form-validator, name="email")
+          input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", autocomplete="off", required, admin-form-validator, name="email")
     .col-md-6
       .form-group
         .fg-line
-          input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", required, admin-form-validator, name="password")
+          input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", autocomplete="new-password", required, admin-form-validator, name="password")
   .row
     .col-md-6
       .form-group

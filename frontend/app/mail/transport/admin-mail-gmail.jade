@@ -3,9 +3,9 @@ ng-form(name="form")
     .col-xs-12
       .form-group
         .fg-line
-          input.form-control(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", placeholder="#{__('Enter username')}", required, admin-form-validator)
+          input.form-control(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", placeholder="#{__('Enter username')}", autocomplete="off", required, admin-form-validator)
   .row
     .col-xs-12
       .form-group
         .fg-line
-          input.form-control(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", placeholder="#{__('Enter password')}", required, admin-form-validator)
+          input.form-control(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", placeholder="#{__('Enter password')}", autocomplete="new-password", required, admin-form-validator)

@@ -23,9 +23,9 @@
         .form-group
           .field-name #{__('Admin')}
           .fg-line
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn',placeholder="#{__('Admin distinguished name')}", required, admin-form-validator, name="adminDn")
+            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn',placeholder="#{__('Admin distinguished name')}", autocomplete="off", required, admin-form-validator, name="adminDn")
           .fg-line
-            input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', placeholder="#{__('Admin Password')}", required, admin-form-validator, name="adminPassword")
+            input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', placeholder="#{__('Admin Password')}", autocomplete="new-password", required, admin-form-validator, name="adminPassword")
         .form-group
           .field-name #{__('Search')}
           .fg-line
