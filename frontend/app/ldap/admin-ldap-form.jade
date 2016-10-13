@@ -33,7 +33,7 @@
           .fg-line
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', placeholder="#{__('Search Filter')}", required, admin-form-validator, name="searchFilter")
       .col-xs-12.flex-end.form-bottom
-        button.btn.btn-default(ng-click="$ctrl.delete()", type="button", title="#{__('Delete')}")
+        button.btn.btn-default(ng-click="$ctrl.delete(form)", type="button", title="#{__('Delete')}")
           i.mdi.mdi-delete
 .card-body.card-padding(ng-show="$ctrl.ldapConfig.deleted && $ctrl.ldapConfig.name")
   .row

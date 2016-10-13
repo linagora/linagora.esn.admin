@@ -1,5 +1,5 @@
 sub-header
-  admin-mail-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid")
+  admin-mail-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid || form.$pristine")
 
 .card
   .card-body.card-padding

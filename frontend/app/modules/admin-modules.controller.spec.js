@@ -58,21 +58,6 @@ describe('The adminModulesController', function() {
       };
     });
 
-    it('should not call adminConfigApi.set to save configuration if nothing changed', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: true
-      };
-
-      adminConfigApi.set = sinon.stub().returns($q.when);
-      controller.save(form).catch(function() {
-        expect(adminConfigApi.set).to.have.not.been.called;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
     it('should not call adminConfigApi.set to save configuration when form is invalid', function(done) {
       var controller = initController();
       var form = {
