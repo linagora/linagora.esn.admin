@@ -6,7 +6,7 @@
       .row
         .col-md-6
           .form-group.fg-line
-            input.form-control.fg-input(type="email", ng-model="$ctrl.mailto", name="email", placeholder="#{__('Enter test mail address')}", required)
+            input.form-control.fg-input(type="email", ng-model="$ctrl.mailto", name="email", placeholder="#{__('Enter test mail address')}", autocomplete="off", required)
         .col-md-6
           button.btn.btn-primary.btn-sm.m-t-5.waves-effect(type="submit", esn-submit="$ctrl.test(testForm)", ng-disabled="testForm.$invalid") #{__('Test')}
       .row

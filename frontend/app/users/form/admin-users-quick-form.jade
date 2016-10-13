@@ -5,11 +5,11 @@ ng-form(name="form")
         .col-md-6
           .form-group
             .fg-line
-              input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", required, name="email", admin-form-validator)
+              input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", autocomplete="off", required, name="email", admin-form-validator)
         .col-md-6
           .form-group
             .fg-line
-              input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", required, name="password", admin-form-validator)
+              input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", autocomplete="new-password", required, name="password", admin-form-validator)
     .col-md-2
         button.btn.btn-primary(type="submit", ng-click="$ctrl.save(form)", ng-disabled="form.$invalid")
           | #{__('Add')}
