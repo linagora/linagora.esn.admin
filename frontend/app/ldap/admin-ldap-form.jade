@@ -9,10 +9,7 @@
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url', required, name="url")
         div
           .group-name #{__('Mapping')}
-          admin-form-group(label="#{__('First name')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.mapping.firstname', required, name="firstname")
-          admin-form-group(label="#{__('Last name')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.mapping.lastname', required, name="lastname")
+          admin-form-multi-input(ng-model="$ctrl.ldapConfig.configuration.mapping", available-types="$ctrl.AVAILABLE_KEYS")
         .form-group
           .fg-line
             .checkbox

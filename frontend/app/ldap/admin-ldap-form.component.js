@@ -6,6 +6,6 @@ angular.module('linagora.esn.admin')
   templateUrl: '/admin/app/ldap/admin-ldap-form',
   controller: 'adminLdapFormController',
   bindings: {
-    ldapConfig: '<'
+    ldapConfig: '='
   }
 });

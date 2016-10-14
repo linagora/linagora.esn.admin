@@ -58,7 +58,6 @@
   "Advanced user creation": "Advanced user creation",
   "Add": "Add",
   "Email": "Email",
-  "Password": "Password",
   "Job title": "Job title",
   "Service": "Service",
   "Building location": "Building location",
@@ -123,5 +122,6 @@
   "Public key": "Public key",
   "Generate keys": "Generate keys",
   "Download": "Download",
-  "JWT": "JWT"
+  "JWT": "JWT",
+  "Add a new mapping": "Add a new mapping"
 }
