@@ -2,7 +2,7 @@ form(name="form")
   label {{$ctrl.metaData.name}}
   .form-group
     span.m-r-5 #{__('Active')}
-    toggle-switch(ng-model='$ctrl.resolver.active')
+    toggle-switch(ng-model='$ctrl.resolver.active', form="form")
   div(ng-if="$ctrl.metaData.hasOptions")
     fieldset(ng-disabled="!$ctrl.resolver.active")
       p #{__('Options')}
@@ -15,7 +15,7 @@ form(name="form")
             .col-xs-6
               .ng-line
                 input.form-control(ng-model="option.value", name="value", placeholder="#{__('Value')}", ng-change="$ctrl.qualifyResolver()", maxlength="200", admin-form-validator)
-                i.clickable.mdi.mdi-minus-circle-outline.button-remove.show-button(ng-click="$ctrl.resolver.active && $ctrl.deleteOption($index)")
+                i.clickable.mdi.mdi-minus-circle-outline.button-remove.show-button(ng-click="$ctrl.resolver.active && $ctrl.deleteOption($index, form)")
       .button.clickable(ng-click="$ctrl.resolver.active && $ctrl.addOption()")
         .form-group
           .flex-vertical-centered.m-t-10

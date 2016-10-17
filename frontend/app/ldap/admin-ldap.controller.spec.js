@@ -74,13 +74,36 @@ describe('The adminLdapController', function() {
     it('should call adminDomainConfigService.set to save configuration', function(done) {
       var controller = initController();
       var form = {
-        $valid: true
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
       };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.configs[0].name = 'new name';
       controller.save(form).then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, controller.configs);
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form pristine when save successfully', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
+      };
+
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.save(form).then(function() {
+        expect(form.$pristine).to.be.true;
         done();
       });
 
@@ -96,7 +119,11 @@ describe('The adminLdapController', function() {
       configMock = [{name: 'test'}];
 
       form = {
-        $valid: true
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
       };
 
       adminDomainConfigService.get = function() {

@@ -55,10 +55,18 @@ describe('The adminMailResolverController', function() {
       var controller = initController();
       var expectOptions = [{ key: 'key2', value: 'value2' }];
       var $index = 0;
+      var form = {
+        $valid: true,
+        $dirty: false,
+        $setDirty: function() {
+          form.$dirty = true;
+        }
+      };
 
-      controller.deleteOption($index);
+      controller.deleteOption($index, form);
 
       expect(controller.options).to.deep.equal(expectOptions);
+      expect(form.$dirty).to.equal(true);
     });
   });
 

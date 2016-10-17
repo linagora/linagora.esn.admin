@@ -17,9 +17,10 @@ angular.module('linagora.esn.admin')
     self.options.push({});
   };
 
-  self.deleteOption = function($index) {
+  self.deleteOption = function($index, form) {
     self.options.splice($index, 1);
     self.qualifyResolver();
+    form.$setDirty();
   };
 
   self.qualifyResolver = function() {
@@ -31,4 +32,5 @@ angular.module('linagora.esn.admin')
       }
     });
   };
+
 });

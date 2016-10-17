@@ -14,7 +14,9 @@ angular.module('linagora.esn.admin')
 
   self.save = function(form) {
     if (form && form.$valid) {
-      return asyncAction('Modification of DAV Server settings', _saveConfiguration);
+      return asyncAction('Modification of DAV Server settings', _saveConfiguration).then(function() {
+        form.$setPristine();
+      });
     }
 
     return rejectWithErrorNotification('Form is invalid!');
