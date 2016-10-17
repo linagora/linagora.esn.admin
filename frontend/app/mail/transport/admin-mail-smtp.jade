@@ -1,13 +1,11 @@
 ng-form(name="form")
   .row
-    .col-xs-9
-      .form-group
-        .fg-line
-          input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.host", name="host", placeholder="#{__('Enter relay host')}", required, admin-form-validator)
-    .col-xs-3
-      .form-group
-        .fg-line
-          input.form-control(type="number", ng-model="$ctrl.transportConfig.port", name="port", placeholder="#{__('Port')}", value="25", required, admin-form-validator)
+    .col-xs-8
+      admin-form-group(label="#{__('Folder path')}")
+        input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.host", name="host", required)
+    .col-xs-4
+      admin-form-group(label="#{__('Port')}")
+        input.form-control(type="number", ng-model="$ctrl.transportConfig.port", name="port", required)
   .row
     .col-xs-12
       .form-group
@@ -21,11 +19,8 @@ ng-form(name="form")
           | #{__("Reject Unauthorized")}
   .row
     .col-xs-6
-      .form-group
-        .fg-line
-          input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", placeholder="#{__('Enter username')}", autocomplete="off", required, admin-form-validator)
-
+      admin-form-group(label="#{__('Username')}")
+        input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", autocomplete="off", required)
     .col-xs-6
-      .form-group
-        .fg-line
-          input.form-control.floating-label(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", placeholder="#{__('Enter password')}", autocomplete="new-password", required, admin-form-validator)
+      admin-form-group(label="#{__('Username')}")
+        input.form-control.floating-label(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", autocomplete="new-password", required)

@@ -141,9 +141,8 @@ angular.module('linagora.esn.admin')
       inputValue: '=',
       min: '@',
       max: '@',
-      validator: '@',
       required: '@',
-      placeholder: '@'
+      label: '@'
     },
     link: link
   };

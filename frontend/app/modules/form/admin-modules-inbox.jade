@@ -1,21 +1,14 @@
 ng-form(name='form')
-  .left-block
-    .form-group
-      .col-xs-4.field-name #{__('JMAP API')}
-      .col-xs-8
-        .fg-line
-          input.form-control(type="url", ng-model="$ctrl.configurations.api.value", placeholder="#{__('JMAP API')}", admin-form-validator, name="apiUrl")
-    .form-group
-      .col-xs-4.field-name #{__('Upload API')}
-      .col-xs-8
-        .fg-line
-          input.form-control(type="url", ng-model="$ctrl.configurations.uploadUrl.value", placeholder="#{__('Upload API')}", admin-form-validator, name="uploadUrl")
-    .form-group
-      .col-xs-4.field-name #{__('Download API')}
-      .col-xs-8
-        .fg-line
-          input.form-control(type="url", ng-model="$ctrl.configurations.downloadUrl.value", placeholder="#{__('Download API')}", admin-form-validator, name="downloadUrl")
-    .form-group
+  .left-block.p-t-25
+    admin-form-group(label="#{__('JMAP API')}")
+      input.form-control(type="url", ng-model="$ctrl.configurations.api.value", name="apiUrl")
+    admin-form-group(label="#{__('Upload API')}")
+      input.form-control(type="url", ng-model="$ctrl.configurations.uploadUrl.value", name="uploadUrl")
+    admin-form-group(label="#{__('Download API')}")
+      input.form-control(type="url", ng-model="$ctrl.configurations.downloadUrl.value", name="downloadUrl")
+    admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", label="#{__('Max size upload')}")
+  .right-block.p-t-25
+    .form-group.option-field
       .col-xs-4.field-name #{__('Swipe right action')}
       .col-xs-8.flex-space-between
         label.col-xs-6.radio.radio-inline
@@ -28,7 +21,7 @@ ng-form(name='form')
           i.input-helper
           span
             |  #{__('Move to trash')}
-    .form-group
+    .form-group.option-field
       .col-xs-4.field-name #{__('Display email as')}
       .col-xs-8.flex-space-between
         label.col-xs-6.radio.radio-inline
@@ -41,24 +34,19 @@ ng-form(name='form')
           i.input-helper
           span
             |  #{__('Messages')}
-  .right-block
-    .form-group
+    .form-group.option-field
       .col-xs-8.field-name #{__('Enable JMAP sending')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations.isJmapSendingEnabled.value", form="form")
-    .form-group
+        toggle-switch(ng-model="$ctrl.configurations.isJmapSendingEnabled.value")
+    .form-group.option-field
       .col-xs-8.field-name #{__('Allow save draft before sending')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations.isSaveDraftBeforeSendingEnabled.value", form="form")
-    .form-group
+        toggle-switch(ng-model="$ctrl.configurations.isSaveDraftBeforeSendingEnabled.value")
+    .form-group.option-field
       .col-xs-8.field-name #{__('Twitter tweets')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations['twitter.tweets'].value", form="form")
-    .form-group
+        toggle-switch(ng-model="$ctrl.configurations['twitter.tweets'].value")
+    .form-group.option-field
       .col-xs-8.field-name #{__('Enable attachments')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model='$ctrl.configurations["composer.attachments"].value', form="form")
-    .form-group
-      .col-xs-4.field-name #{__('Max size upload')}
-      .col-xs-8
-        admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", required="true", placeholder="#{__('Max size')}", validator="true")
+        toggle-switch(ng-model='$ctrl.configurations["composer.attachments"].value')

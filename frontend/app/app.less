@@ -7,7 +7,15 @@
 @import './roles/admin-roles';
 @import './common/form/admin-form-validator';
 @import './common/form/admin-form-input-bytes';
+@import './common/form/admin-form-group';
 
 .admin-root {
   margin-top: (@sub-header-height + 45);
+
+  form {
+    .group-name {
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+  }
 }

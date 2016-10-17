@@ -18,11 +18,11 @@ describe('The adminFormInputBytes directive', function() {
     });
   });
 
-  function initTemplate(inputValue, inputUnit, min, max, validator) {
+  function initTemplate(inputValue, inputUnit, min, max) {
     minErrorMessage = 'This must be greater than or equal to ' + min;
     maxErrorMessage = 'This must be less than or equal to ' + max;
 
-    return '<admin-form-input-bytes input-value="' + inputValue + '", input-unit="' + inputUnit + '", min="' + min + '", max="' + max + '", validator="' + validator + '" />';
+    return '<admin-form-input-bytes input-value="' + inputValue + '", input-unit="' + inputUnit + '", min="' + min + '", max="' + max + '" />';
   }
 
   function initDirective(scope, template) {
@@ -37,7 +37,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should optimize avalable units when max value is less than 1024', function() {
     var max = '2MB';
-    var template = initTemplate(null, null, null, max, null);
+    var template = initTemplate(null, null, null, max);
     var expectAvailableUnits = ['BYTES', 'KB', 'MB'];
 
     var element = initDirective(null, template);
@@ -53,7 +53,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should optimize avalable units when max value is greater than 1024', function() {
     var max = '1025MB';
-    var template = initTemplate(null, null, null, max, null);
+    var template = initTemplate(null, null, null, max);
 
     var expectAvailableUnits = ['BYTES', 'KB', 'MB', 'GB'];
     var element = initDirective(null, template);
@@ -70,7 +70,7 @@ describe('The adminFormInputBytes directive', function() {
   it('should return correct display value of unit if input value is odd of 1024', function() {
     var inputValue = 1025;
     var inputUnit = 'BYTES';
-    var template = initTemplate(inputValue, inputUnit, null, null, null);
+    var template = initTemplate(inputValue, inputUnit, null, null);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -83,7 +83,7 @@ describe('The adminFormInputBytes directive', function() {
   it('should return correct display value of unit if input value is even of 1024', function() {
     var inputValue = 1024;
     var inputUnit = 'BYTES';
-    var template = initTemplate(inputValue, inputUnit, null, null, null);
+    var template = initTemplate(inputValue, inputUnit, null, null);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -98,7 +98,7 @@ describe('The adminFormInputBytes directive', function() {
     var inputUnit = 'BYTES';
     var min = '1.5KB';
     var max = '50.5KB';
-    var template = initTemplate(inputValue, inputUnit, min, max, null);
+    var template = initTemplate(inputValue, inputUnit, min, max);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -113,7 +113,7 @@ describe('The adminFormInputBytes directive', function() {
     var inputValue = 1024;
     var inputUnit = 'BYTES';
     var max = '50KB';
-    var template = initTemplate(inputValue, inputUnit, null, max, null);
+    var template = initTemplate(inputValue, inputUnit, null, max);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -127,7 +127,7 @@ describe('The adminFormInputBytes directive', function() {
     var inputValue = 1024;
     var inputUnit = 'BYTES';
     var max = '50KB';
-    var template = initTemplate(inputValue, inputUnit, null, max, null);
+    var template = initTemplate(inputValue, inputUnit, null, max);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -141,7 +141,7 @@ describe('The adminFormInputBytes directive', function() {
     var inputValue = 25;
     var inputUnit = 'KB';
     var min = '1KB';
-    var template = initTemplate(inputValue, inputUnit, min, null, null);
+    var template = initTemplate(inputValue, inputUnit, min, null);
 
     var element = initDirective(null, template);
     var unitsElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'));
@@ -155,7 +155,7 @@ describe('The adminFormInputBytes directive', function() {
     var inputValue = 25;
     var inputUnit = 'BYTES';
     var min = '1KB';
-    var template = initTemplate(inputValue, inputUnit, min, null, null);
+    var template = initTemplate(inputValue, inputUnit, min, null);
 
     var element = initDirective(null, template);
     var unitsElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'));
@@ -165,26 +165,10 @@ describe('The adminFormInputBytes directive', function() {
     expect(element.isolateScope().inputValue).to.equal(25 * Math.pow(2, 10));
   });
 
-  it('shoud not show error if validator is false event though input after trigger is invalid', function() {
-    var min = '1KB';
-    var validator = false;
-    var template = initTemplate(null, null, min, null, validator);
-
-    var element = initDirective(null, template);
-    var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
-
-    unitInputElement.val(0).trigger('input');
-
-    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.length).to.equal(0);
-  });
-
   it('should show error message when user has not interacted with the input yet but unit is changed', function() {
     var inputValue = 0;
     var min = '1KB';
-    var validator = true;
-    var template = initTemplate(inputValue, null, min, null, validator);
+    var template = initTemplate(inputValue, null, min, null);
 
     var element = initDirective(null, template);
     var unitBytesElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'))[0];
@@ -198,8 +182,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should show error message when input has invalid min', function() {
     var min = '1KB';
-    var validator = true;
-    var template = initTemplate(null, null, min, null, validator);
+    var template = initTemplate(null, null, min, null);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -213,8 +196,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should show error message when input has invalid max', function() {
     var max = '50BYTES';
-    var validator = true;
-    var template = initTemplate(null, null, null, max, validator);
+    var template = initTemplate(null, null, null, max);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -228,8 +210,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should hide error message when value from invalid to valid by change input', function() {
     var max = '50BYTES';
-    var validator = true;
-    var template = initTemplate(null, null, null, max, validator);
+    var template = initTemplate(null, null, null, max);
 
     var element = initDirective(null, template);
     var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
@@ -250,8 +231,7 @@ describe('The adminFormInputBytes directive', function() {
     var inputValue = 25;
     var inputUnit = 'KB';
     var min = '1KB';
-    var validator = true;
-    var template = initTemplate(inputValue, inputUnit, min, null, validator);
+    var template = initTemplate(inputValue, inputUnit, min, null);
 
     var element = initDirective(null, template);
     var unitsElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'));

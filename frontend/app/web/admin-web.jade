@@ -6,7 +6,5 @@ sub-header
     form(name="form")
       .row
         .col-xs-12.col.md-6
-          .form-group
-            .fg-line
-              .field-name #{__('Base URL')}
-              input.form-control(type="url", ng-model="$ctrl.config.base_url", placeholder="#{__('Base URL')}", name="base_url", admin-form-validator, required)
+          admin-form-group(label="#{__('Base URL')}")
+            input.form-control(type="url", ng-model="$ctrl.config.base_url", name="base_url", required)

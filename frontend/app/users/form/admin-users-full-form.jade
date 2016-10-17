@@ -1,47 +1,37 @@
 ng-form(name="form")
   .row
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", placeholder="#{__('Email')}", autocomplete="off", required, admin-form-validator, name="email")
+      admin-form-group(label="#{__('Email')}")
+        input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", autocomplete="off", required, name="email")
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="password", ng-model="$ctrl.user.password", placeholder="#{__('Password')}", autocomplete="new-password", required, admin-form-validator, name="password")
+      admin-form-group(label="#{__('Password')}")
+        input.form-control(type="password", ng-model="$ctrl.user.password", autocomplete="new-password", required, name="password")
   .row
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.firstname", placeholder="#{__('First name')}")
+      admin-form-group(label="#{__('First name')}")
+        input.form-control(type="text", ng-model="$ctrl.user.firstname")
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.lastname", placeholder="#{__('Last name')}")
+      admin-form-group(label="#{__('Last name')}")
+        input.form-control(type="text", ng-model="$ctrl.user.lastname")
   .row
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.job_title", placeholder="#{__('Job title')}")
+      admin-form-group(label="#{__('Job title')}")
+        input.form-control(type="text", ng-model="$ctrl.user.job_title")
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.service", placeholder="#{__('Service')}")
+      admin-form-group(label="#{__('Service')}")
+        input.form-control(type="text", ng-model="$ctrl.user.service")
   .row
     .col-md-12
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.building_location", placeholder="#{__('Building location')}")
+      admin-form-group(label="#{__('Building location')}")
+        input.form-control(type="text", ng-model="$ctrl.user.building_location")
   .row
     .col-md-12
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.office_location", placeholder="#{__('Office location')}")
+      admin-form-group(label="#{__('Office location')}")
+        input.form-control(type="text", ng-model="$ctrl.user.office_location")
   .row
     .col-md-6
-      .form-group
-        .fg-line
-          input.form-control(type="text", ng-model="$ctrl.user.main_phone", placeholder="#{__('Main phone')}")
+      admin-form-group(label="#{__('Main phone')}")
+        input.form-control(type="text", ng-model="$ctrl.user.main_phone")
     .col-md-6
-      .form-group
-        .fg-line
-          textarea.form-control(ng-model="$ctrl.user.description", placeholder="#{__('Bio')}")
+      admin-form-group(label="#{__('Bio')}")
+        textarea.form-control(ng-model="$ctrl.user.description")

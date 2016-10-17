@@ -1,12 +1,8 @@
 ng-form(name="form")
-  .form-group
-    .fg-line
-      input.form-control.floating-label(type="text", ng-model="$ctrl.transport.module", name="module", placeholder="#{__('Enter Module')}", value="nodemailer-browser", required, admin-form-validator)
-
-  .form-group
-    .fg-line
-      input.form-control.floating-label(type="text", ng-model="$ctrl.transport.config.dir", name="directory", placeholder="#{__('Enter folder path')}", required, admin-form-validator)
-
+  admin-form-group(label="#{__('Module')}")
+    input.form-control.floating-label(type="text", ng-model="$ctrl.transport.module", name="module", required)
+  admin-form-group(label="#{__('Folder path')}")
+    input.form-control.floating-label(type="text", ng-model="$ctrl.transport.config.dir", name="directory", required)
   .form-group
     .checkbox
       label

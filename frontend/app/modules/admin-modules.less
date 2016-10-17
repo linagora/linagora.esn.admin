@@ -56,8 +56,6 @@ admin-modules {
       ng-form {
         .flex-space-between;
 
-        margin-top: 10px;
-
         .left-block, .right-block {
           width: 50%;
         }
@@ -73,13 +71,23 @@ admin-modules {
         }
       }
 
-      .form-group {
+      .option-field {
         .flex-vertical-centered;
 
         min-height: @adminModuleMiniFormHeight;
 
         input {
           background: @app-gray;
+        }
+      }
+
+      admin-form-group {
+        padding-left: 10px;
+
+        .form-group {
+          input {
+            background: @app-gray;
+          }
         }
       }
 
