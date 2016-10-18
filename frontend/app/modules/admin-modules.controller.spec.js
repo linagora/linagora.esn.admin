@@ -77,13 +77,36 @@ describe('The adminModulesController', function() {
     it('should call adminConfigApi.set to save configuration', function(done) {
       var controller = initController();
       var form = {
-        $valid: true
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
       };
 
       adminConfigApi.set = sinon.stub().returns($q.when());
       controller.modules[0].name = 'new value';
       controller.save(form).then(function() {
         expect(adminConfigApi.set).to.have.been.calledWith($stateParams.domainId, controller.modules);
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form pristine when save successfully', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
+      };
+
+      adminConfigApi.set = sinon.stub().returns($q.when());
+      controller.save(form).then(function() {
+        expect(form.$pristine).to.be.true;
         done();
       });
 

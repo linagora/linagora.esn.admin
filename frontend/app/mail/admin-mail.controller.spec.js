@@ -80,7 +80,11 @@ describe('The adminMailController', function() {
       };
 
       form = {
-        $valid: true
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
       };
 
       adminDomainConfigService.get = function() {
@@ -113,6 +117,25 @@ describe('The adminMailController', function() {
         var config = adminMailService.qualifyTransportConfig(controller.transportType, controller.config);
 
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, config);
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form pristine when save successfully', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: true,
+        $pristine: false,
+        $setPristine: function() {
+          form.$pristine = true;
+        }
+      };
+
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.save(form).then(function() {
+        expect(form.$pristine).to.be.true;
         done();
       });
 

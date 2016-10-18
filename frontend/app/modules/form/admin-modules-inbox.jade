@@ -45,19 +45,19 @@ ng-form(name='form')
     .form-group
       .col-xs-8.field-name #{__('Enable JMAP sending')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations.isJmapSendingEnabled.value")
+        toggle-switch(ng-model="$ctrl.configurations.isJmapSendingEnabled.value", form="form")
     .form-group
       .col-xs-8.field-name #{__('Allow save draft before sending')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations.isSaveDraftBeforeSendingEnabled.value")
+        toggle-switch(ng-model="$ctrl.configurations.isSaveDraftBeforeSendingEnabled.value", form="form")
     .form-group
       .col-xs-8.field-name #{__('Twitter tweets')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations['twitter.tweets'].value")
+        toggle-switch(ng-model="$ctrl.configurations['twitter.tweets'].value", form="form")
     .form-group
       .col-xs-8.field-name #{__('Enable attachments')}
       .col-xs-4.flex-end
-        toggle-switch(ng-model='$ctrl.configurations["composer.attachments"].value')
+        toggle-switch(ng-model='$ctrl.configurations["composer.attachments"].value', form="form")
     .form-group
       .col-xs-4.field-name #{__('Max size upload')}
       .col-xs-8

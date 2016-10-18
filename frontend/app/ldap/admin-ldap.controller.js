@@ -27,6 +27,7 @@ angular.module('linagora.esn.admin')
       })
       .then(function() {
         self.configs = configs;
+        form.$setPristine();
       });
     }
 

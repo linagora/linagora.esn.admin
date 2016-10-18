@@ -20,6 +20,8 @@ angular.module('linagora.esn.admin')
     if (form && form.$valid) {
       return asyncAction('Modification of modules\'s settings', function() {
         return adminModulesApi.set(domainId, self.modules);
+      }).then(function() {
+        form.$setPristine();
       });
     }
 
