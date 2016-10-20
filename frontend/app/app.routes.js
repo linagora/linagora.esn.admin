@@ -93,5 +93,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-roles />'
         }
       }
+    })
+    .state('admin.domain.web', {
+      url: '/web',
+      views: {
+        'root@admin': {
+          template: '<admin-web />'
+        }
+      }
     });
 });
