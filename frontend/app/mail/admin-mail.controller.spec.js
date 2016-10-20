@@ -82,8 +82,12 @@ describe('The adminMailController', function() {
       form = {
         $valid: true,
         $pristine: false,
+        $submitted: false,
         $setPristine: function() {
           form.$pristine = true;
+        },
+        $setSubmitted: function() {
+          form.$submitted = true;
         }
       };
 
@@ -125,17 +129,22 @@ describe('The adminMailController', function() {
 
     it('should make the form pristine when save successfully', function(done) {
       var controller = initController();
-      var form = {
-        $valid: true,
-        $pristine: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        }
-      };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.save(form).then(function() {
         expect(form.$pristine).to.be.true;
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form is submitted when save unsuccessfully', function(done) {
+      var controller = initController();
+
+      form.$valid = false;
+      controller.save(form).catch(function() {
+        expect(form.$submitted).to.be.true;
         done();
       });
 

@@ -27,6 +27,8 @@ angular.module('linagora.esn.admin')
         });
     }
 
+    form.$setSubmitted();
+
     return rejectWithErrorNotification('Form is invalid!');
   };
 });

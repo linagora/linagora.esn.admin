@@ -1,5 +1,5 @@
 sub-header
-  admin-modules-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$invalid || form.$pristine")
+  admin-modules-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$pristine")
 
 form(name="form")
   admin-modules-displayer(ng-repeat="module in $ctrl.modules", ng-if="module", module="module", current-homepage="$ctrl.homePage")

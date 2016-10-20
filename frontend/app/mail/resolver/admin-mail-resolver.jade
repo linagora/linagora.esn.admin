@@ -11,7 +11,7 @@ form(name="form")
           .row.field-option
             .col-xs-6
               .ng-line
-                input.form-control(ng-model="option.key", name="key", placeholder="#{__('Key')}", ng-change="$ctrl.qualifyResolver()", maxlength="100", pattern="[a-zA-Z0-9_]+", admin-form-validator, pattern-error-message="#{__('Only a-z, 0-9 and _ (underscore) are allowed')}")
+                input.form-control(ng-model="option.key", name="key", placeholder="#{__('Key')}", ng-change="$ctrl.qualifyResolver()", maxlength="{{$ctrl.resolver.active ? 100 : false }}", pattern="{{$ctrl.resolver.active ? '[a-zA-Z0-9_]+' : '.*'}}", admin-form-validator, pattern-error-message="#{__('Only a-z, 0-9 and _ (underscore) are allowed')}")
             .col-xs-6
               .ng-line
                 input.form-control(ng-model="option.value", name="value", placeholder="#{__('Value')}", ng-change="$ctrl.qualifyResolver()", maxlength="200", admin-form-validator)

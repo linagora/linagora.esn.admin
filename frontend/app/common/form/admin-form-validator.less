@@ -3,3 +3,9 @@
 [admin-form-validator].ng-pristine.ng-invalid {
   border-bottom: 1px solid @inputBorderColor;
 }
+
+form:not(.ng-submitted) {
+  admin-form-validate-message.pristine {
+    display: none;
+  }
+}
