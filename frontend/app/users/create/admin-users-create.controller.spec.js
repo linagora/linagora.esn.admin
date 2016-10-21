@@ -50,7 +50,11 @@ describe('The adminUsersCreateController', function() {
 
     it('shoud reject if form is invalid', function(done) {
       var form = {
-        $valid: false
+        $valid: false,
+        $submitted: false,
+        $setSubmitted: function() {
+          form.$submitted = true;
+        }
       };
 
       var controller = initController();
@@ -58,6 +62,25 @@ describe('The adminUsersCreateController', function() {
 
       controller.save(form).catch(function() {
         expect(domainAPI.createMember).to.have.not.been.called;
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form is submitted when save unsuccessfully', function(done) {
+      var form = {
+        $valid: false,
+        $submitted: false,
+        $setSubmitted: function() {
+          form.$submitted = true;
+        }
+      };
+
+      var controller = initController();
+
+      controller.save(form).catch(function() {
+        expect(form.$submitted).to.be.true;
         done();
       });
 

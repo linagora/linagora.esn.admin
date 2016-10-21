@@ -58,7 +58,11 @@ describe('The adminLdapController', function() {
     it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
       var controller = initController();
       var form = {
-        $valid: false
+        $valid: false,
+        $submitted: false,
+        $setSubmitted: function() {
+          form.$submitted = true;
+        }
       };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
@@ -104,6 +108,24 @@ describe('The adminLdapController', function() {
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.save(form).then(function() {
         expect(form.$pristine).to.be.true;
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form is submitted when save unsuccessfully', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: false,
+        $submitted: false,
+        $setSubmitted: function() {
+          form.$submitted = true;
+        }
+      };
+
+      controller.save(form).catch(function() {
+        expect(form.$submitted).to.be.true;
         done();
       });
 

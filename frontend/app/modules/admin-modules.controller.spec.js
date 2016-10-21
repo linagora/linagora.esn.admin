@@ -61,7 +61,11 @@ describe('The adminModulesController', function() {
     it('should not call adminConfigApi.set to save configuration when form is invalid', function(done) {
       var controller = initController();
       var form = {
-        $valid: false
+        $valid: false,
+        $submitted: false,
+        $setSubmitted: function() {
+          form.$submitted = true;
+        }
       };
 
       adminConfigApi.set = sinon.stub().returns($q.when);
@@ -113,6 +117,23 @@ describe('The adminModulesController', function() {
       $scope.$digest();
     });
 
+    it('should make the form is submitted when save unsuccessfully', function(done) {
+      var controller = initController();
+      var form = {
+        $valid: false,
+        $submitted: false,
+        $setSubmitted: function() {
+          form.$submitted = true;
+        }
+      };
+
+      controller.save(form).catch(function() {
+        expect(form.$submitted).to.be.true;
+        done();
+      });
+
+      $scope.$digest();
+    });
   });
 
 });
