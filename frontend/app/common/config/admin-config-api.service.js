@@ -24,8 +24,17 @@ angular.module('linagora.esn.admin')
       .customPUT(query);
   }
 
+  function generateJwtKeyPair(domainId) {
+    return adminRestangular
+      .all('configuration')
+      .one('domains', domainId)
+      .one('generateJwtKeyPair')
+      .post();
+  }
+
   return {
     get: get,
-    set: set
+    set: set,
+    generateJwtKeyPair: generateJwtKeyPair
   };
 });

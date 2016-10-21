@@ -16,7 +16,8 @@ describe('The configuration API controller', function() {
 
     deps = {
       logger: { error: function() {} },
-      'esn-config': esnConfigMock
+      'esn-config': esnConfigMock,
+      auth: {}
     };
 
     self.requireController = function() {
@@ -310,6 +311,74 @@ describe('The configuration API controller', function() {
       };
 
       this.requireController().updateConfigurations(req, res);
+    });
+
+  });
+
+  describe('The generateJwtKeyPair fn', function() {
+
+    var authJwtMock;
+
+    beforeEach(function() {
+      authJwtMock = {};
+      deps.auth = {
+        jwt: authJwtMock
+      };
+    });
+
+    it('should respond 200 with generated keys on success', function(done) {
+      var keys = {
+        publicKey: 'publicKey',
+        privateKey: 'privateKey'
+      };
+
+      authJwtMock.generateKeyPair = function(callback) {
+        callback(null, keys);
+      };
+
+      var req = {};
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(200);
+
+          return {
+            json: function(json) {
+              expect(json).to.deep.equal(keys);
+              done();
+            }
+          };
+        }
+      };
+
+      this.requireController().generateJwtKeyPair(req, res);
+    });
+
+    it('should respond 500 on failure', function(done) {
+      authJwtMock.generateKeyPair = function(callback) {
+        callback(new Error('some_error'));
+      };
+
+      var req = {};
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(500);
+
+          return {
+            json: function(json) {
+              expect(json).to.deep.equal({
+                error: {
+                  code: 500,
+                  message: 'Server Error',
+                  details: 'Cannot generate RSA keypair'
+                }
+              });
+              done();
+            }
+          };
+        }
+      };
+
+      this.requireController().generateJwtKeyPair(req, res);
     });
 
   });

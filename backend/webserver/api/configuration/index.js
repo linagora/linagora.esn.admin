@@ -21,5 +21,11 @@ module.exports = function(dependencies) {
     authorizationMW.requiresDomainManager,
     controller.updateConfigurations);
 
+  router.post('/domains/:uuid/generateJwtKeyPair',
+    authorizationMW.requiresAPILogin,
+    domainMiddleware.load,
+    authorizationMW.requiresDomainManager,
+    controller.generateJwtKeyPair);
+
   return router;
 };
