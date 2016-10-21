@@ -6,7 +6,7 @@ angular.module('linagora.esn.admin')
   function get(domainId, query) {
     return adminRestangular
       .all('configuration')
-      .one('domain', domainId)
+      .one('domains', domainId)
       .customPOST(query)
       .then(function(response) {
         if (response.status !== 200) {
@@ -20,7 +20,7 @@ angular.module('linagora.esn.admin')
   function set(domainId, query) {
     return adminRestangular
       .all('configuration')
-      .one('domain', domainId)
+      .one('domains', domainId)
       .customPUT(query);
   }
 

@@ -9,7 +9,7 @@ angular.module('linagora.esn.admin')
 
     return adminRestangular
       .all('test')
-      .one('domain', domainId)
+      .one('domains', domainId)
       .one('sendEmail')
       .customPOST(body);
   }

@@ -25,7 +25,7 @@ describe('The adminConfigApi Angular service', function() {
       var query = { key: 'value' };
       var responseData = 'some_data';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, query).respond(200, responseData);
+      $httpBackend.expectPOST('/admin/api/configuration/domains/' + domainId, query).respond(200, responseData);
       Restangular.stripRestangular = sinon.stub().returns(responseData);
 
       adminConfigApi.get(domainId, query)
@@ -41,7 +41,7 @@ describe('The adminConfigApi Angular service', function() {
       var domainId = 'domain123';
       var query = { key: 'value' };
 
-      $httpBackend.expectPOST('/admin/api/configuration/domain/' + domainId, query).respond(201);
+      $httpBackend.expectPOST('/admin/api/configuration/domains/' + domainId, query).respond(201);
 
       adminConfigApi.get(domainId, query)
         .catch(function(err) {
@@ -59,7 +59,7 @@ describe('The adminConfigApi Angular service', function() {
       var domainId = 'domain123';
       var query = { key: 'value' };
 
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, query).respond(204);
+      $httpBackend.expectPUT('/admin/api/configuration/domains/' + domainId, query).respond(204);
 
       adminConfigApi.set(domainId, query).then(done.bind(null, null), done.bind(null, 'should resolve'));
 
@@ -70,7 +70,7 @@ describe('The adminConfigApi Angular service', function() {
       var domainId = 'domain123';
       var query = { key: 'value' };
 
-      $httpBackend.expectPUT('/admin/api/configuration/domain/' + domainId, query).respond(500);
+      $httpBackend.expectPUT('/admin/api/configuration/domains/' + domainId, query).respond(500);
 
       adminConfigApi.set(domainId, query).then(done.bind(null, 'should reject'), done.bind(null, null));
 
