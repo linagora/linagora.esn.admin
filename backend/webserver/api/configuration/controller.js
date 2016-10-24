@@ -3,6 +3,7 @@
 var q = require('q');
 var esnConfig;
 var logger;
+var authJwt;
 
 function _getConfig(moduleName, user, key) {
   return esnConfig(key)
@@ -87,12 +88,32 @@ function updateConfigurations(req, res) {
   });
 }
 
+function generateJwtKeyPair(req, res) {
+  authJwt.generateKeyPair(function(err, keys) {
+    if (err) {
+      logger.error('Error while generating RSA keypair for JWT:', err);
+
+      return res.status(500).json({
+        error: {
+          code: 500,
+          message: 'Server Error',
+          details: 'Cannot generate RSA keypair'
+        }
+      });
+    }
+
+    res.status(200).json(keys);
+  });
+}
+
 module.exports = function(dependencies) {
   esnConfig = dependencies('esn-config');
   logger = dependencies('logger');
+  authJwt = dependencies('auth').jwt;
 
   return {
-    getConfigurations: getConfigurations,
-    updateConfigurations: updateConfigurations
+    getConfigurations,
+    updateConfigurations,
+    generateJwtKeyPair
   };
 };

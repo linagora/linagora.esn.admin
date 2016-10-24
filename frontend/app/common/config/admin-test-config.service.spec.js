@@ -21,7 +21,7 @@ describe('The adminTestConfigService service', function() {
       var domainId = 'domain123';
       var toEmail = 'to@email';
 
-      $httpBackend.expectPOST('/admin/api/test/domain/' + domainId + '/sendEmail', {
+      $httpBackend.expectPOST('/admin/api/test/domains/' + domainId + '/sendEmail', {
         to: toEmail,
         config: mailConfig
       }).respond(200);

@@ -6,7 +6,7 @@ angular.module('linagora.esn.admin')
   function get(domainId, query) {
     return adminRestangular
       .all('configuration')
-      .one('domain', domainId)
+      .one('domains', domainId)
       .customPOST(query)
       .then(function(response) {
         if (response.status !== 200) {
@@ -20,12 +20,21 @@ angular.module('linagora.esn.admin')
   function set(domainId, query) {
     return adminRestangular
       .all('configuration')
-      .one('domain', domainId)
+      .one('domains', domainId)
       .customPUT(query);
+  }
+
+  function generateJwtKeyPair(domainId) {
+    return adminRestangular
+      .all('configuration')
+      .one('domains', domainId)
+      .one('generateJwtKeyPair')
+      .post();
   }
 
   return {
     get: get,
-    set: set
+    set: set,
+    generateJwtKeyPair: generateJwtKeyPair
   };
 });
