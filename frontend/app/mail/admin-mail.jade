@@ -6,7 +6,7 @@ sub-header
     form(name="form")
       .row
         .col-md-6
-          .config-content.p-t-25
+          .config-content
             admin-form-group(label="#{__('Noreply email')}")
               input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", autofocus=true, required)
             admin-form-group(label="#{__('Feedback email')}")
