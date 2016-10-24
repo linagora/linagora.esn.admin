@@ -1,4 +1,4 @@
-form(name="form")
+ng-form(name="form")
   label {{$ctrl.metaData.name}}
   .form-group
     span.m-r-5 #{__('Active')}
@@ -6,16 +6,15 @@ form(name="form")
   div(ng-if="$ctrl.metaData.hasOptions")
     fieldset(ng-disabled="!$ctrl.resolver.active")
       p #{__('Options')}
-      .multi-input-content
-        .form-group(ng-repeat="option in $ctrl.options track by $index")
-          .row.field-option
-            .col-xs-6
-              .ng-line
-                input.form-control(ng-model="option.key", name="key", placeholder="#{__('Key')}", ng-change="$ctrl.qualifyResolver()", maxlength="{{$ctrl.resolver.active ? 100 : false }}", pattern="{{$ctrl.resolver.active ? '[a-zA-Z0-9_]+' : '.*'}}", admin-form-validator, pattern-error-message="#{__('Only a-z, 0-9 and _ (underscore) are allowed')}")
-            .col-xs-6
-              .ng-line
-                input.form-control(ng-model="option.value", name="value", placeholder="#{__('Value')}", ng-change="$ctrl.qualifyResolver()", maxlength="200", admin-form-validator)
-                i.clickable.mdi.mdi-minus-circle-outline.button-remove.show-button(ng-click="$ctrl.resolver.active && $ctrl.deleteOption($index, form)")
+      .form-group(ng-repeat="option in $ctrl.options track by $index")
+        .row.field-option.p-15
+          .col-xs-6
+            admin-form-group(label="#{__('Key')}", pattern-error-message="#{__('Only a-z, 0-9 and _ (underscore) are allowed')}")
+              input.form-control(ng-model="option.key", name="key", ng-change="$ctrl.qualifyResolver()", maxlength="{{$ctrl.resolver.active ? 100 : false }}", pattern="{{$ctrl.resolver.active ? '[a-zA-Z0-9_]+' : '.*'}}", required)
+          .col-xs-6
+            admin-form-group(label="#{__('Value')}")
+              input.form-control(ng-model="option.value", name="value", ng-change="$ctrl.qualifyResolver()", maxlength="200", required)
+            i.clickable.mdi.mdi-minus-circle-outline.button-remove.show-button(ng-click="$ctrl.resolver.active && $ctrl.deleteOption($index, form)")
       .button.clickable(ng-click="$ctrl.resolver.active && $ctrl.addOption()")
         .form-group
           .flex-vertical-centered.m-t-10

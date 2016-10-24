@@ -6,18 +6,14 @@ sub-header
     form(name="form")
       .row
         .col-md-6
-          .config-content
-            .form-group
-              .fg-line
-                input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", placeholder="#{__('Enter noreply mail address')}", autofocus=true, required, admin-form-validator)
-            .form-group
-              .fg-line
-                input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.feedback", name="feedback", placeholder="#{__('Enter feedback mail address')}", required, admin-form-validator)
-            .form-group
-              .select.fg-line
-                select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for (key, transportType) in $ctrl.transportTypes", required, admin-form-validator)
-                  option(value="") #{__('Choose transport type')}
-
+          .config-content.p-t-25
+            admin-form-group(label="#{__('Noreply email')}")
+              input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", autofocus=true, required)
+            admin-form-group(label="#{__('Feedback email')}")
+              input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.feedback", name="feedback", required)
+            admin-form-group(label="#{__('Transport type')}")
+              .select
+                select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for (key, transportType) in $ctrl.transportTypes", required)
             div(ng-switch="$ctrl.transportType")
               div(ng-switch-when="Local")
                 admin-mail-local(transport="$ctrl.config.transport")

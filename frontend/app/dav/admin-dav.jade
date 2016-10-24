@@ -6,12 +6,8 @@ sub-header
     form(name="form")
       .row
         .col-md-6
-          .form-group
-            .fg-line
-              .field-name #{__('Backend')}
-              input.form-control(type="url", ng-model="$ctrl.config.backend.url", placeholder="#{__('Enter a URL')}", auto-focus, admin-form-validator, name="backend", required)
+          admin-form-group(label="#{__('Backend')}")
+            input.form-control(type="url", ng-model="$ctrl.config.backend.url", auto-focus, name="backend", required)
         .col-md-6
-          .form-group
-            .fg-line
-              .field-name #{__('Frontend')}
-              input.form-control(type="url", ng-model="$ctrl.config.frontend.url", placeholder="#{__('Enter a URL')}", admin-form-validator, name="frontend", required)
+          admin-form-group(label="#{__('Frontend')}")
+            input.form-control(type="url", ng-model="$ctrl.config.frontend.url", name="frontend", required)
