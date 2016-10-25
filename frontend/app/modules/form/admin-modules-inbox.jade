@@ -6,8 +6,6 @@ ng-form.p-t-25(name='form')
       input.form-control(type="url", ng-model="$ctrl.configurations.uploadUrl.value", name="uploadUrl")
     admin-form-group(label="#{__('Download API')}")
       input.form-control(type="url", ng-model="$ctrl.configurations.downloadUrl.value", name="downloadUrl")
-    admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", label="#{__('Max size upload')}")
-  .right-block
     .form-group.option-field
       .col-xs-4.field-name #{__('Swipe right action')}
       .col-xs-8.flex-space-between
@@ -34,6 +32,7 @@ ng-form.p-t-25(name='form')
           i.input-helper
           span
             |  #{__('Messages')}
+  .right-block
     .form-group.option-field
       .col-xs-8.field-name #{__('Enable JMAP sending')}
       .col-xs-4.flex-end
@@ -50,3 +49,4 @@ ng-form.p-t-25(name='form')
       .col-xs-8.field-name #{__('Enable attachments')}
       .col-xs-4.flex-end
         toggle-switch(ng-model='$ctrl.configurations["composer.attachments"].value')
+    admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", label="#{__('Max size upload')}")
