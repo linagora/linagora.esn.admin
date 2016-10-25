@@ -51,7 +51,7 @@
   "Email sending in progress...": "Email sending in progress...",
   "Email sent successfully to ": "Email sent successfully to ",
   "Email sent failed with server error: ": "Email sent failed with server error: ",
-  "Please fullfil valid mail configuration above": "Please fullfil valid mail configuration above",
+  "Please check configuration above, you still have invalid data": "Please check configuration above, you still have invalid data",
   "List users": "List users",
   "Users": "Users",
   "Users Management": "Users Management",

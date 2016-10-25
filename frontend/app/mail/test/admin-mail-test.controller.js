@@ -9,6 +9,7 @@ angular.module('linagora.esn.admin')
   self.test = function(form) {
     if (!self.isMailConfigValid) {
       self.message = { status: 'invalidMailConfig' };
+
       return $q.reject();
     }
 
@@ -16,14 +17,13 @@ angular.module('linagora.esn.admin')
       var config = adminMailService.qualifyTransportConfig(self.transportType, self.config);
 
       self.message = { status: 'isSending' };
+
       return _testConfiguration(config).then(function(res) {
         self.message = { status: 'success', mailto: res.config.data.to };
       }, function(err) {
         self.message = { status: 'error', msg: err.data.error.details };
       });
     }
-
-    self.message = { status: 'invalidEmail' };
 
     return $q.reject();
   };
