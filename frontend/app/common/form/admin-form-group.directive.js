@@ -43,9 +43,14 @@ angular.module('linagora.esn.admin')
 
     angular.forEach(AVAILABLE_ERRORS, function(error) {
       var custom_error = error + 'ErrorMessage';
+      var errorValue;
+
+      if (formControlAttrs[error]) {
+        errorValue = formControlAttrs[error].value;
+      }
 
       scope.options[error] = {
-        value: formControlAttrs[error],
+        value: errorValue,
         message: {
           error: attrs[custom_error]
         }

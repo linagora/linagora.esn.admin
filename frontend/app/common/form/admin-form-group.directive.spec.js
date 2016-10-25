@@ -17,10 +17,10 @@ describe('The adminFormGroup directive', function() {
     });
   });
 
-  function initTemplate(type, required, errorMessages) {
+  function initTemplate(type, required, errorMessages, expression) {
     return '<form name="form">' +
               '<admin-form-group ' + errorMessages + ' >' +
-                '<input class="form-control" ng-model="model" type="' + type + '" ' + required + ' name="name"/>' +
+                '<input class="form-control" ng-model="model" type="' + type + '" ' + required + ' name="name" ' + expression + ' />' +
               '</admin-form-group>' +
            '</form>';
   }
@@ -36,7 +36,7 @@ describe('The adminFormGroup directive', function() {
   }
 
   it('should be show nothing when form valid', function() {
-    var template = initTemplate('text', null, null);
+    var template = initTemplate('text', null, null, null);
     var element = initDirective(null, template);
 
     var validatorMessageElement = angular.element(element[0].querySelectorAll('admin-form-validate-message'));
@@ -45,7 +45,7 @@ describe('The adminFormGroup directive', function() {
   });
 
   it('should be show default message error when given invalid value', function() {
-    var template = initTemplate('email', null, null);
+    var template = initTemplate('email', null, null, null);
     var element = initDirective(null, template);
     var formControlEle = angular.element(element[0].querySelector('.form-control'));
 
@@ -60,7 +60,7 @@ describe('The adminFormGroup directive', function() {
     var emailErrorMessage = 'This must be email format';
     var errorMessages = 'email-error-message="' + emailErrorMessage + '"';
 
-    var template = initTemplate('email', null, errorMessages);
+    var template = initTemplate('email', null, errorMessages, null);
     var element = initDirective(null, template);
     var formControlEle = angular.element(element[0].querySelector('.form-control'));
 
@@ -71,8 +71,60 @@ describe('The adminFormGroup directive', function() {
     expect(validatorMessageElement.text()).to.equal(emailErrorMessage);
   });
 
+  it('should be show default message error when given invalid expression maxlength', function() {
+    var expression = 'maxlength=6';
+    var template = initTemplate('text', null, null, expression);
+    var element = initDirective(null, template);
+    var formControlEle = angular.element(element[0].querySelector('.form-control'));
+
+    formControlEle.val('invalidmaxlength').trigger('input');
+
+    var validatorMessageElement = angular.element(element[0].querySelectorAll('admin-form-validate-message'));
+
+    expect(validatorMessageElement.text()).to.equal('Length must be less than or equal to 6');
+  });
+
+  it('should be show default message error when given invalid expression minlength', function() {
+    var expression = 'minlength=5';
+    var template = initTemplate('text', null, null, expression);
+    var element = initDirective(null, template);
+    var formControlEle = angular.element(element[0].querySelector('.form-control'));
+
+    formControlEle.val('abc').trigger('input');
+
+    var validatorMessageElement = angular.element(element[0].querySelectorAll('admin-form-validate-message'));
+
+    expect(validatorMessageElement.text()).to.equal('Length must be greater than or equal to 5');
+  });
+
+  it('should be show default message error when given invalid expression max', function() {
+    var expression = 'max=30';
+    var template = initTemplate('number', null, null, expression);
+    var element = initDirective(null, template);
+    var formControlEle = angular.element(element[0].querySelector('.form-control'));
+
+    formControlEle.val('31').trigger('input');
+
+    var validatorMessageElement = angular.element(element[0].querySelectorAll('admin-form-validate-message'));
+
+    expect(validatorMessageElement.text()).to.equal('This must be less than or equal to 30');
+  });
+
+  it('should be show default message error when given invalid expression min', function() {
+    var expression = 'min=30';
+    var template = initTemplate('number', null, null, expression);
+    var element = initDirective(null, template);
+    var formControlEle = angular.element(element[0].querySelector('.form-control'));
+
+    formControlEle.val('29').trigger('input');
+
+    var validatorMessageElement = angular.element(element[0].querySelectorAll('admin-form-validate-message'));
+
+    expect(validatorMessageElement.text()).to.equal('This must be greater than or equal to 30');
+  });
+
   it('should add class has-required for admin-form-group when input is required', function() {
-    var template = initTemplate('email', 'required', null);
+    var template = initTemplate('email', 'required', null, null);
     var element = initDirective(null, template);
 
     var adminFormGroupEle = angular.element(element[0].querySelector('admin-form-group'));
@@ -81,7 +133,7 @@ describe('The adminFormGroup directive', function() {
   });
 
   it('should add class has-invalid for admin-form-group when input has blur event and invalid', function() {
-    var template = initTemplate('email', 'required', null);
+    var template = initTemplate('email', 'required', null, null);
     var element = initDirective(null, template);
     var formControlEle = angular.element(element[0].querySelector('.form-control'));
 
@@ -95,7 +147,7 @@ describe('The adminFormGroup directive', function() {
   });
 
   it('should not add class has-invalid for admin-form-group when input has blur event and valid', function() {
-    var template = initTemplate('email', 'required', null);
+    var template = initTemplate('email', 'required', null, null);
     var element = initDirective(null, template);
     var formControlEle = angular.element(element[0].querySelector('.form-control'));
 
@@ -109,7 +161,7 @@ describe('The adminFormGroup directive', function() {
   });
 
   it('should add class has-focus for admin-form-group when input is focused', function() {
-    var template = initTemplate('email', 'required', null);
+    var template = initTemplate('email', 'required', null, null);
     var element = initDirective(null, template);
     var formControlEle = angular.element(element[0].querySelector('.form-control'));
 
@@ -121,7 +173,7 @@ describe('The adminFormGroup directive', function() {
   });
 
   it('should remove class has-focus for admin-form-group when input has blur event', function() {
-    var template = initTemplate('email', 'required', null);
+    var template = initTemplate('email', 'required', null, null);
     var element = initDirective(null, template);
     var formControlEle = angular.element(element[0].querySelector('.form-control'));
 
