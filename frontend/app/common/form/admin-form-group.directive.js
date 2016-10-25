@@ -7,6 +7,15 @@ angular.module('linagora.esn.admin')
     var AVAILABLE_ERRORS = ['min', 'max', 'minlength', 'maxlength', 'pattern', 'email', 'required', 'url', 'date', 'datetimelocal', 'time', 'week', 'month'];
     var fgLineEle = element.find('.fg-line');
     var formControlEle = element.find('.form-control');
+    var formController = scope[attrs.form];
+
+    if (!formController) {
+      if (scope.form) {
+        formController = scope.form;
+      } else {
+        throw new Error('no form is specified and form is missing in scope');
+      }
+    }
 
     if (formControlEle.attr('required')) {
       element.addClass('has-required');
@@ -37,15 +46,20 @@ angular.module('linagora.esn.admin')
     });
 
     scope.options = {};
-    scope.elementForm = scope.form[formControlEle.attr('name')];
+    scope.elementForm = formController[formControlEle.attr('name')];
 
     var formControlAttrs = formControlEle[0].attributes;
 
     angular.forEach(AVAILABLE_ERRORS, function(error) {
       var custom_error = error + 'ErrorMessage';
+      var errorValue;
+
+      if (formControlAttrs[error]) {
+        errorValue = formControlAttrs[error].value;
+      }
 
       scope.options[error] = {
-        value: formControlAttrs[error],
+        value: errorValue,
         message: {
           error: attrs[custom_error]
         }
