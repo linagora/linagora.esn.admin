@@ -55,3 +55,8 @@ angular.module('esn.user', [])
       displayNameOf: angular.noop
     };
   });
+
+angular.module('esn.file-saver', [])
+  .factory('esnFileSaver', function() {
+    return {};
+  });
