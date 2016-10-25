@@ -17,7 +17,5 @@
             | #{__('Email sent successfully to ')} {{$ctrl.message.mailto}}
           i.c-red(ng-switch-when="error")
             | #{__('Email sent failed with server error: ')} {{$ctrl.message.msg}}
-          i.c-red(ng-switch-when="invalidEmail")
-            | #{__('Please type a valid email')}
           i.c-red(ng-switch-when="invalidMailConfig")
-            | #{__('Please fullfil valid mail configuration above')}
+            | #{__('Please check configuration above, you still have invalid data')}
