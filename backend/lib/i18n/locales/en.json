@@ -114,5 +114,14 @@
   "Web Configuration": "Web Configuration",
   "Base URL": "Base URL",
   "Feedback email": "Feedback email",
-  "Module": "Module"
+  "Module": "Module",
+  "JWT Configuration": "JWT Configuration",
+  "Algorithm": "Algorithm",
+  "Choose an algorithm": "Choose an algorithm",
+  "Expires in (days)": "Expires in (days)",
+  "Private key": "Private key",
+  "Public key": "Public key",
+  "Generate keys": "Generate keys",
+  "Download": "Download",
+  "JWT": "JWT"
 }

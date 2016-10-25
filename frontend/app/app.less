@@ -5,6 +5,7 @@
 @import './mail/admin-mail';
 @import './modules/admin-modules';
 @import './roles/admin-roles';
+@import './jwt/admin-jwt';
 @import './common/form/admin-form-input-bytes';
 @import './common/form/admin-form-group';
 
@@ -16,5 +17,10 @@
       font-weight: bold;
       margin-bottom: 30px;
     }
+  }
+
+  .card-body > form, .card-body > ng-form {
+    display: block;
+    padding-top: 20px;
   }
 }

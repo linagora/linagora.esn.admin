@@ -1,0 +1,32 @@
+sub-header
+  admin-jwt-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$pristine")
+  
+.card
+  .card-body.card-padding
+    form(name="form")
+      .row
+        .col-md-6
+          admin-form-group(label="#{__('Algorithm')}")
+            .select
+              select.form-control(ng-model="$ctrl.config.algorithm", name="algorithm", ng-options="algorithm.name as algorithm.description for algorithm in $ctrl.availableAlgorithms", required)
+                option(value="") #{__('Choose an algorithm')}
+        .col-md-2
+          admin-form-group(label="#{__('Expires in (days)')}")
+            input.form-control(type="number", name="expiresIn", min="1", max="30", ng-model="$ctrl.expiration", ng-change="$ctrl.onExpirationChange()")
+              
+      .row
+        .col-md-6
+          admin-form-group(label="#{__('Public key')}")
+            textarea.form-control(rows="5", ng-model="$ctrl.config.publicKey", name="publicKey", required)
+        .col-md-6
+          admin-form-group(label="#{__('Private key')}")
+            textarea.form-control(rows="5", ng-model="$ctrl.config.privateKey", name="privateKey", required)
+      .row
+        .col-xs-6.col-md-3
+          button.btn.btn-primary.btn-sm 
+            i.mdi.mdi-sync
+            | #{__('Generate keys')}
+        .col-xs-6.col-md-3
+          button.btn.btn-success.btn-sm 
+            i.mdi.mdi-cloud-download
+            | #{__('Download')}

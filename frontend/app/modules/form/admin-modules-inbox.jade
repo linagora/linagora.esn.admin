@@ -1,5 +1,5 @@
-ng-form(name='form')
-  .left-block.p-t-25
+ng-form.p-t-25(name='form')
+  .left-block
     admin-form-group(label="#{__('JMAP API')}")
       input.form-control(type="url", ng-model="$ctrl.configurations.api.value", name="apiUrl")
     admin-form-group(label="#{__('Upload API')}")
@@ -7,7 +7,7 @@ ng-form(name='form')
     admin-form-group(label="#{__('Download API')}")
       input.form-control(type="url", ng-model="$ctrl.configurations.downloadUrl.value", name="downloadUrl")
     admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", label="#{__('Max size upload')}")
-  .right-block.p-t-25
+  .right-block
     .form-group.option-field
       .col-xs-4.field-name #{__('Swipe right action')}
       .col-xs-8.flex-space-between
