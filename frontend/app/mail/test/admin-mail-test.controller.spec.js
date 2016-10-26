@@ -51,18 +51,11 @@ describe('The adminMailTestController', function() {
 
     it('should not call adminTestConfigService.testSendEmail and push out the form invalid message if mail config form is invalid', function() {
       var controller = initController();
+
       controller.isMailConfigValid = false;
-
       controller.test(form);
+
       expect(controller.message.status).to.equal('invalidMailConfig');
-    });
-
-    it('should not call adminTestConfigService.testSendEmail and push out the mail invalid message if form is invalid', function() {
-      var controller = initController();
-      form.$valid = false;
-
-      controller.test(form);
-      expect(controller.message.status).to.equal('invalidEmail');
     });
 
     it('should call adminTestConfigService.testSendEmail to test configuration', function(done) {
