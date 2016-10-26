@@ -213,4 +213,39 @@ describe('The adminFormGroup directive', function() {
 
     expect(validatorMessageElement.text()).to.equal('');
   });
+
+  it('should support binding attribute for input', function() {
+    var expression = 'min={{minValue}}';
+    var template = initTemplate('number', null, null, expression);
+    var scope = $rootScope.$new();
+
+    scope.minValue = 8;
+
+    var element = initDirective(scope, template);
+    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
+    var formControlEle = angular.element(element[0].querySelector('.form-control'));
+
+    formControlEle.val('5').trigger('input');
+    expect(validatorMessageElement.text()).to.equal('This must be greater than or equal to 8');
+  });
+
+  it('should support binding attribute for input when attribute change value', function() {
+    var expression = 'min={{minValue}}';
+    var template = initTemplate('number', null, null, expression);
+    var scope = $rootScope.$new();
+
+    scope.minValue = 8;
+
+    var element = initDirective(scope, template);
+    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
+    var formControlEle = angular.element(element[0].querySelector('.form-control'));
+
+    formControlEle.val('5').trigger('input');
+    expect(validatorMessageElement.text()).to.equal('This must be greater than or equal to 8');
+
+    element.scope().minValue = 6;
+    element.scope().$digest();
+
+    expect(validatorMessageElement.text()).to.equal('This must be greater than or equal to 6');
+  });
 });

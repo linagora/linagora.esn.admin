@@ -9,6 +9,8 @@ angular.module('linagora.esn.admin')
     var formControlEle = element.find('.form-control');
     var formController = scope[attrs.form];
 
+    scope.options = {};
+
     if (!formController) {
       if (scope.form) {
         formController = scope.form;
@@ -45,31 +47,52 @@ angular.module('linagora.esn.admin')
       }
     });
 
-    scope.options = {};
     scope.elementForm = formController[formControlEle.attr('name')];
 
-    var formControlAttrs = formControlEle[0].attributes;
+    _getErrorMessage();
+    _updateErrorValue(_getFormControlValidateAttrs());
 
-    angular.forEach(AVAILABLE_ERRORS, function(error) {
-      var custom_error = error + 'ErrorMessage';
-      var errorValue;
-
-      if (formControlAttrs[error]) {
-        errorValue = formControlAttrs[error].value;
+    scope.$watch(_getFormControlValidateAttrs, function(newAttrs, oldAttrs) {
+      if (!angular.equals(newAttrs, oldAttrs)) {
+        _updateErrorValue(newAttrs);
       }
-
-      scope.options[error] = {
-        value: errorValue,
-        message: {
-          error: attrs[custom_error]
-        }
-      };
-    });
+    }, true);
 
     var template = '<div class="admin-form-validate-message-container"><admin-form-validate-message ng-class="elementForm.$pristine && !elementForm.$touched ? \'pristine\' : \'dirty\'" ng-if="elementForm.$error" options="options" error="elementForm.$error" /><div>';
     var validateMessage = $compile(template)(scope);
 
     element.find('.form-group').append(validateMessage);
+
+    function _getFormControlValidateAttrs() {
+      var formControlAttrs = element.find('.form-control')[0].attributes;
+      var attributes = {};
+
+      angular.forEach(AVAILABLE_ERRORS, function(error) {
+        if (formControlAttrs[error]) {
+          attributes[error] = formControlAttrs[error].value;
+        }
+      });
+
+      return attributes;
+    }
+
+    function _getErrorMessage() {
+      angular.forEach(AVAILABLE_ERRORS, function(error) {
+        var custom_error = error + 'ErrorMessage';
+
+        scope.options[error] = {
+          message: {
+            error: attrs[custom_error]
+          }
+        };
+      });
+    }
+
+    function _updateErrorValue(attibutes) {
+      angular.forEach(attibutes, function(value, key) {
+        scope.options[key].value = value;
+      });
+    }
   }
 
   return {
