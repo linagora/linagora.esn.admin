@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminJwtController', function($stateParams, adminDomainConfigService, asyncAction, rejectWithErrorNotification, ADMIN_JWT_AVAILABLE_ALGORITHMS, ADMIN_JWT_DEFAULT_EXPIRATION) {
+.controller('adminJwtController', function($stateParams, adminDomainConfigService, asyncAction, rejectWithErrorNotification, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'jwt';
@@ -29,7 +29,17 @@ angular.module('linagora.esn.admin')
   };
 
   self.onExpirationChange = function() {
-    self.config.expiresIn = self.expiration + ' days';
+    if (self.expiration) {
+      self.config.expiresIn = self.expiration + ' days';
+    }
+  };
+
+  self.downloadPublicKey = function() {
+    esnFileSaver.saveText(self.config.publicKey, 'publicKey.txt');
+  };
+
+  self.downloadPrivateKey = function() {
+    esnFileSaver.saveText(self.config.privateKey, 'privateKey.txt');
   };
 
   function _saveConfiguration() {
@@ -39,10 +49,8 @@ angular.module('linagora.esn.admin')
   function _convertExpiration(expiration) {
     var match = expiration && String(expiration).match(/^([0-9]+) days$/);
 
-    if (!match) {
-      return ADMIN_JWT_DEFAULT_EXPIRATION;
+    if (match) {
+      return parseInt(match[1], 10);
     }
-
-    return parseInt(match[1], 10);
   }
 });

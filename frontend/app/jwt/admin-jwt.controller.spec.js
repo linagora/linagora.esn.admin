@@ -8,19 +8,24 @@ var expect = chai.expect;
 describe('The adminJwtController', function() {
 
   var $controller, $rootScope, $stateParams, $scope;
-  var adminDomainConfigService;
+  var adminDomainConfigService, esnFileSaver;
   var CONFIG_NAME = 'jwt';
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _esnFileSaver_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
+      esnFileSaver = _esnFileSaver_;
 
       $stateParams.domainId = 'domain123';
+
+      adminDomainConfigService.get = function() {
+        return $q.when();
+      };
     });
 
   });
@@ -35,15 +40,47 @@ describe('The adminJwtController', function() {
     return controller;
   }
 
-  it('should get Jwt configuration from server on init', function() {
-    var config = { key: 'value' };
+  describe('On init', function() {
+    it('should get Jwt configuration from server on init', function() {
+      var config = { key: 'value' };
 
-    adminDomainConfigService.get = sinon.stub().returns($q.when(config));
+      adminDomainConfigService.get = sinon.stub().returns($q.when(config));
 
-    var controller = initController();
+      var controller = initController();
 
-    expect(controller.config).to.deep.equal(config);
-    expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
+      expect(controller.config).to.deep.equal(config);
+      expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
+    });
+
+    it('should convert expiration to number of days', function() {
+      adminDomainConfigService.get = function() {
+        return $q.when({ expiresIn: '15 days' });
+      };
+
+      var controller = initController();
+
+      expect(controller.expiration).to.deep.equal(15);
+    });
+
+    it('should use undefined expiration in case the expiresIn config is missing', function() {
+      adminDomainConfigService.get = function() {
+        return $q.when({});
+      };
+
+      var controller = initController();
+
+      expect(controller.expiration).to.not.be.defined;
+    });
+
+    it('should use undefined expiration in case the expiresIn config is not in the expected format', function() {
+      adminDomainConfigService.get = function() {
+        return $q.when({ expiresIn: '15 years' });
+      };
+
+      var controller = initController();
+
+      expect(controller.expiration).to.not.be.defined;
+    });
   });
 
   describe('The save fn', function() {
@@ -137,4 +174,61 @@ describe('The adminJwtController', function() {
 
   });
 
+  describe('The onExpirationChange fn', function() {
+
+    it('should update the expiresIn with expiration', function() {
+      var controller = initController();
+
+      controller.config.expiresIn = '20 days';
+      controller.expiration = 10;
+      controller.onExpirationChange();
+
+      expect(controller.config.expiresIn).to.equal('10 days');
+    });
+
+    it('should not update the expiresIn when expiration is null', function() {
+      var controller = initController();
+
+      controller.config.expiresIn = '20 days';
+      controller.expiration = null;
+      controller.onExpirationChange();
+
+      expect(controller.config.expiresIn).to.equal('20 days');
+    });
+
+  });
+
+  describe('The downloadPublicKey and downloadPrivateKey fn', function() {
+
+    beforeEach(function() {
+      var configMock = { publicKey: 'publicKey', privateKey: 'privateKey' };
+
+      adminDomainConfigService.get = function() {
+        return $q.when(configMock);
+      };
+    });
+
+    it('should have downloadPublicKey fn to download public key', function() {
+      var controller = initController();
+
+      esnFileSaver.saveText = sinon.spy();
+
+      controller.downloadPublicKey();
+
+      expect(esnFileSaver.saveText).to.have.been.calledOnce;
+      expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.publicKey, 'publicKey.txt');
+    });
+
+    it('should have downloadPrivateKey fn to download private key', function() {
+      var controller = initController();
+
+      esnFileSaver.saveText = sinon.spy();
+
+      controller.downloadPrivateKey();
+
+      expect(esnFileSaver.saveText).to.have.been.calledOnce;
+      expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.privateKey, 'privateKey.txt');
+    });
+
+  });
 });
