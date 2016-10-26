@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminJwtController', function($stateParams, adminDomainConfigService, asyncAction, rejectWithErrorNotification, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS) {
+.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, rejectWithErrorNotification, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'jwt';
@@ -42,6 +42,14 @@ angular.module('linagora.esn.admin')
     esnFileSaver.saveText(self.config.privateKey, 'privateKey.txt');
   };
 
+  self.generate = function() {
+    return asyncAction('Generating new keys', _generateKeyPair)
+      .then(function(resp) {
+        self.config.publicKey = resp.data.publicKey;
+        self.config.privateKey = resp.data.privateKey;
+      });
+  };
+
   function _saveConfiguration() {
     return adminDomainConfigService.set(domainId, CONFIG_NAME, self.config);
   }
@@ -52,5 +60,9 @@ angular.module('linagora.esn.admin')
     if (match) {
       return parseInt(match[1], 10);
     }
+  }
+
+  function _generateKeyPair() {
+    return adminConfigApi.generateJwtKeyPair(domainId);
   }
 });

@@ -8,18 +8,19 @@ var expect = chai.expect;
 describe('The adminJwtController', function() {
 
   var $controller, $rootScope, $stateParams, $scope;
-  var adminDomainConfigService, esnFileSaver;
+  var adminConfigApi, adminDomainConfigService, esnFileSaver;
   var CONFIG_NAME = 'jwt';
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _esnFileSaver_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminConfigApi_, _adminDomainConfigService_, _esnFileSaver_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
       esnFileSaver = _esnFileSaver_;
+      adminConfigApi = _adminConfigApi_;
 
       $stateParams.domainId = 'domain123';
 
@@ -230,5 +231,27 @@ describe('The adminJwtController', function() {
       expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.privateKey, 'privateKey.txt');
     });
 
+  });
+
+  describe('The generate fn', function() {
+    it('should call adminConfigApi.generateJwtKeyPair to generate new keys', function(done) {
+      var data = {
+        publicKey: 'publicKey',
+        privateKey: 'privateKey'
+      };
+
+      adminConfigApi.generateJwtKeyPair = sinon.stub().returns($q.when({data: data}));
+
+      var controller = initController();
+
+      controller.generate().then(function() {
+        expect(adminConfigApi.generateJwtKeyPair).to.have.been.calledWith($stateParams.domainId);
+        expect(controller.config.publicKey).to.equal(data.publicKey);
+        expect(controller.config.privateKey).to.equal(data.privateKey);
+        done();
+      });
+
+      $scope.$digest();
+    });
   });
 });
