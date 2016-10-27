@@ -26,6 +26,6 @@ sub-header
             textarea.form-control(rows="5", ng-model="$ctrl.config.privateKey", name="privateKey", required)
       .row
         .col-xs-12
-          button.btn.btn-primary.btn-sm.pull-right(type="button")
+          button.btn.btn-primary.btn-sm.pull-right(type="button", esn-submit="$ctrl.generate()")
             i.mdi.mdi-sync
             | #{__('Generate keys')}
