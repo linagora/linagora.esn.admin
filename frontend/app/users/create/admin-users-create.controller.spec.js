@@ -90,16 +90,18 @@ describe('The adminUsersCreateController', function() {
     it('shoud call domainAPI.createMember to create member of domain', function(done) {
       var form = {
         $valid: true,
-        $setPristine: sinon.spy()
+        $setPristine: sinon.spy(),
+        $setUntouched: sinon.spy()
       };
-
       var controller = initController();
+
       domainAPI.createMember = sinon.stub().returns($q.when({data: 'value'}));
       controller.user = userMock;
 
       controller.save(form).then(function() {
         expect(domainAPI.createMember).to.have.been.calledWith($stateParams.domainId, userMock);
         expect(form.$setPristine).to.have.been.called;
+        expect(form.$setUntouched).to.have.been.called;
         done();
       });
 
