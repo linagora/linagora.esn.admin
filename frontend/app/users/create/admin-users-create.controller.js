@@ -24,6 +24,7 @@ angular.module('linagora.esn.admin')
           // Reset form state
           self.user = angular.copy(USER_TEMPLATE);
           form.$setPristine();
+          form.$setUntouched();
         });
     }
 
