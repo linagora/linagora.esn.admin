@@ -48,60 +48,14 @@ describe('The adminUsersCreateController', function() {
       };
     });
 
-    it('shoud reject if form is invalid', function(done) {
-      var form = {
-        $valid: false,
-        $submitted: false,
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
-      var controller = initController();
-      domainAPI.createMember = sinon.stub().returns($q.when());
-
-      controller.save(form).catch(function() {
-        expect(domainAPI.createMember).to.have.not.been.called;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
-    it('should make the form is submitted when save unsuccessfully', function(done) {
-      var form = {
-        $valid: false,
-        $submitted: false,
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
-      var controller = initController();
-
-      controller.save(form).catch(function() {
-        expect(form.$submitted).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
     it('shoud call domainAPI.createMember to create member of domain', function(done) {
-      var form = {
-        $valid: true,
-        $setPristine: sinon.spy(),
-        $setUntouched: sinon.spy()
-      };
       var controller = initController();
 
       domainAPI.createMember = sinon.stub().returns($q.when({data: 'value'}));
       controller.user = userMock;
 
-      controller.save(form).then(function() {
+      controller.save().then(function() {
         expect(domainAPI.createMember).to.have.been.calledWith($stateParams.domainId, userMock);
-        expect(form.$setPristine).to.have.been.called;
-        expect(form.$setUntouched).to.have.been.called;
         done();
       });
 

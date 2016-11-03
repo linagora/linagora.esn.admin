@@ -1,5 +1,5 @@
 sub-header
-  admin-jwt-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$pristine")
+  admin-jwt-subheader(on-form-submit="$ctrl.save()", form="form")
   
 .card
   .card-body.card-padding

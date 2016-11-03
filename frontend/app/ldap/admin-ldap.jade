@@ -1,5 +1,5 @@
 sub-header
-  admin-ldap-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$pristine")
+  admin-ldap-subheader(on-form-submit="$ctrl.save()", form="form")
 
 form(name="form")
   .card(ng-repeat="config in $ctrl.configs")

@@ -54,7 +54,7 @@ describe('The adminMailController', function() {
   });
 
   describe('The save fn', function() {
-    var configMock, form;
+    var configMock;
 
     beforeEach(function() {
       configMock = {
@@ -79,36 +79,9 @@ describe('The adminMailController', function() {
         }
       };
 
-      form = {
-        $valid: true,
-        $pristine: false,
-        $submitted: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        },
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
-    });
-
-    it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
-      var controller = initController();
-
-      form.$valid = false;
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.config.key = 'new value';
-      controller.save(form).catch(function() {
-        expect(adminDomainConfigService.set).to.have.not.been.called;
-        done();
-      });
-
-      $scope.$digest();
     });
 
     it('should call adminDomainConfigService.set to save configuration', function(done) {
@@ -117,7 +90,7 @@ describe('The adminMailController', function() {
       controller.config.transport.config.dir = 'new value';
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save(form).then(function() {
+      controller.save().then(function() {
         var config = adminMailService.qualifyTransportConfig(controller.transportType, controller.config);
 
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, config);
@@ -126,31 +99,6 @@ describe('The adminMailController', function() {
 
       $scope.$digest();
     });
-
-    it('should make the form pristine when save successfully', function(done) {
-      var controller = initController();
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save(form).then(function() {
-        expect(form.$pristine).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
-    it('should make the form is submitted when save unsuccessfully', function(done) {
-      var controller = initController();
-
-      form.$valid = false;
-      controller.save(form).catch(function() {
-        expect(form.$submitted).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
   });
 
 });

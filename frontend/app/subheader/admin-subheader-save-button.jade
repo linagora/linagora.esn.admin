@@ -1,4 +1,4 @@
-button.btn.bgm-amber.waves-effect(esn-submit="$ctrl.onClick()", ng-disabled="$ctrl.disabled")
+button.btn.bgm-amber.waves-effect(esn-submit="$ctrl.checkValidThenSubmit()", ng-disabled="$ctrl.form.$pristine")
   .flex-vertical-centered
     span #{__('Save')}
     i.mdi.mdi-check

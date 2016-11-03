@@ -1,5 +1,5 @@
 sub-header
-  admin-users-create-subheader(on-save-button-click="$ctrl.save(form)", disable-save-button="form.$pristine")
+  admin-users-create-subheader(on-form-submit="$ctrl.save()", form="form")
 
 .card
   .card-body.card-padding

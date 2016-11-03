@@ -55,98 +55,25 @@ describe('The adminLdapController', function() {
       };
     });
 
-    it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: false,
-        $submitted: false,
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.configs[0].name = 'new name';
-      controller.save(form).catch(function() {
-        expect(adminDomainConfigService.set).to.have.not.been.called;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
     it('should call adminDomainConfigService.set to save configuration', function(done) {
       var controller = initController();
-      var form = {
-        $valid: true,
-        $pristine: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        }
-      };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.configs[0].name = 'new name';
-      controller.save(form).then(function() {
+      controller.save().then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, controller.configs);
         done();
       });
 
       $scope.$digest();
     });
-
-    it('should make the form pristine when save successfully', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: true,
-        $pristine: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        }
-      };
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save(form).then(function() {
-        expect(form.$pristine).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
-    it('should make the form is submitted when save unsuccessfully', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: false,
-        $submitted: false,
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
-      controller.save(form).catch(function() {
-        expect(form.$submitted).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
   });
 
   describe('The _qualifyConfigs fn', function() {
-    var configMock, form;
+    var configMock;
 
     beforeEach(function() {
       configMock = [{name: 'test'}];
-
-      form = {
-        $valid: true,
-        $pristine: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        }
-      };
 
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
@@ -160,7 +87,7 @@ describe('The adminLdapController', function() {
       ctrl.configs[0].name = 'new name';
       ctrl.configs[0].deleted = false;
 
-      ctrl.save(form).catch(function() {
+      ctrl.save().catch(function() {
         expect(adminDomainConfigService.set).to.have.been.calledOnce;
 
         expect(ctrl.configs).to.deep.equal(configMock);
@@ -176,7 +103,7 @@ describe('The adminLdapController', function() {
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       ctrl.configs = [{}, { name: 'ldap1', deleted: true }, { name: 'ldap2', deleted: false }];
 
-      ctrl.save(form).then(function() {
+      ctrl.save().then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledOnce;
         expect(ctrl.configs).to.deep.equal([{name: 'ldap2'}]);
         done();

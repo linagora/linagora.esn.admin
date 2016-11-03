@@ -6,4 +6,4 @@ block left
     |  #{__('Mail Configuration')}
 
 block right
-  admin-subheader-save-button(on-click="$ctrl.onSaveButtonClick()", disabled="$ctrl.disableSaveButton")
+  admin-subheader-save-button(on-click="$ctrl.onFormSubmit()", form="$ctrl.form")

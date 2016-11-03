@@ -16,18 +16,9 @@ angular.module('linagora.esn.admin')
     self.modules = modules;
   });
 
-  self.save = function(form) {
-    if (form && form.$valid) {
-      return asyncAction('Modification of modules\'s settings', function() {
-        return adminModulesApi.set(domainId, self.modules);
-      }).then(function() {
-        form.$setPristine();
-      });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+  self.save = function() {
+    return asyncAction('Modification of modules\'s settings', function() {
+      return adminModulesApi.set(domainId, self.modules);
+    });
   };
-
 });

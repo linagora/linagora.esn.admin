@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, rejectWithErrorNotification, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS) {
+.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'jwt';
@@ -15,17 +15,8 @@ angular.module('linagora.esn.admin')
 
   self.availableAlgorithms = ADMIN_JWT_AVAILABLE_ALGORITHMS;
 
-  self.save = function(form) {
-    if (form && form.$valid) {
-      return asyncAction('Modification of JWT configuration', _saveConfiguration)
-        .then(function() {
-          form.$setPristine();
-        });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+  self.save = function() {
+    return asyncAction('Modification of JWT configuration', _saveConfiguration);
   };
 
   self.onExpirationChange = function() {
