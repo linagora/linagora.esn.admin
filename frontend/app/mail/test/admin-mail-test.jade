@@ -5,7 +5,7 @@
     form(name="testForm")
       .row
         .col-md-6
-          admin-form-group(label="#{__('Email address')}", form="testForm")
+          esn-form-group(label="#{__('Email address')}", form="testForm")
             input.form-control.fg-input(type="email", ng-model="$ctrl.mailto", name="email", autocomplete="off", required)
         .col-md-6
           button.btn.btn-primary.btn-sm.m-t-5.waves-effect(type="submit", esn-submit="$ctrl.test(testForm)", ng-disabled="testForm.$invalid") #{__('Test')}

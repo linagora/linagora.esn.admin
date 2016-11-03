@@ -7,11 +7,11 @@ sub-header
       .row
         .col-md-6
           .config-content
-            admin-form-group(label="#{__('Noreply email')}")
+            esn-form-group(label="#{__('Noreply email')}")
               input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", autofocus=true, required)
-            admin-form-group(label="#{__('Feedback email')}")
+            esn-form-group(label="#{__('Feedback email')}")
               input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.feedback", name="feedback", required)
-            admin-form-group(label="#{__('Transport type')}")
+            esn-form-group(label="#{__('Transport type')}")
               .select
                 select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for (key, transportType) in $ctrl.transportTypes", required)
             div(ng-switch="$ctrl.transportType")

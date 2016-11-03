@@ -3,9 +3,9 @@
     .row
       .col-xs-12.col-md-6
         div
-          admin-form-group(label="#{__('Name')}")
+          esn-form-group(label="#{__('Name')}")
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.name', required, name="name")
-          admin-form-group(label="#{__('URL')}")
+          esn-form-group(label="#{__('URL')}")
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url', required, name="url")
         div
           .group-name #{__('Mapping')}
@@ -18,15 +18,15 @@
                 i.input-helper #{__('Auto Provisioning')}
       .col-xs-12.col-md-6
         div
-          admin-form-group(label="#{__('Admin distinguished name')}")
+          esn-form-group(label="#{__('Admin distinguished name')}")
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn', autocomplete="off", required, name="adminDn")
-          admin-form-group(label="#{__('Admin Password')}")
+          esn-form-group(label="#{__('Admin Password')}")
             input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", required, name="adminPassword")
         div
           .group-name #{__('Search')}
-          admin-form-group(label="#{__('Search Base')}")
+          esn-form-group(label="#{__('Search Base')}")
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', required, name="searchBase")
-          admin-form-group(label="#{__('Search Filter')}")
+          esn-form-group(label="#{__('Search Filter')}")
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', required, name="searchFilter")
       .col-xs-12.flex-end.form-bottom
         button.btn.btn-default(ng-click="$ctrl.delete(form)", type="button", title="#{__('Delete')}")

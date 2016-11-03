@@ -1,10 +1,10 @@
 ng-form.p-t-25(name='form')
   .left-block
-    admin-form-group(label="#{__('JMAP API')}")
+    esn-form-group(label="#{__('JMAP API')}")
       input.form-control(type="url", ng-model="$ctrl.configurations.api.value", name="apiUrl")
-    admin-form-group(label="#{__('Upload API')}")
+    esn-form-group(label="#{__('Upload API')}")
       input.form-control(type="url", ng-model="$ctrl.configurations.uploadUrl.value", name="uploadUrl")
-    admin-form-group(label="#{__('Download API')}")
+    esn-form-group(label="#{__('Download API')}")
       input.form-control(type="url", ng-model="$ctrl.configurations.downloadUrl.value", name="downloadUrl")
     .form-group.option-field
       .col-xs-4.field-name #{__('Swipe right action')}
