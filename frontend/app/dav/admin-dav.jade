@@ -6,8 +6,8 @@ sub-header
     form(name="form")
       .row
         .col-md-6
-          admin-form-group(label="#{__('Backend')}")
+          esn-form-group(label="#{__('Backend')}")
             input.form-control(type="url", ng-model="$ctrl.config.backend.url", auto-focus, name="backend", required)
         .col-md-6
-          admin-form-group(label="#{__('Frontend')}")
+          esn-form-group(label="#{__('Frontend')}")
             input.form-control(type="url", ng-model="$ctrl.config.frontend.url", name="frontend", required)

@@ -3,10 +3,10 @@ form(name="form")
     .col-md-10
       .row
         .col-md-6
-          admin-form-group(label="Email")
+          esn-form-group(label="Email")
             input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", autocomplete="off", required, name="email")
         .col-md-6
-          admin-form-group(label="Password")
+          esn-form-group(label="Password")
             input.form-control(type="password", ng-model="$ctrl.user.password", autocomplete="new-password", required, name="password")
     .col-md-2
         button.btn.btn-primary(type="submit", esn-submit="$ctrl.save(form)", ng-disabled="form.$pristine")

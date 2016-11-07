@@ -10,11 +10,11 @@ angular.module('linagora.esn.admin', [
   'esn.subheader',
   'esn.sidebar',
   'esn.async-action',
-  'ngMessages',
   'esn.infinite-list',
   'esn.domain',
   'esn.scroll',
   'esn.attendee',
   'esn.user',
-  'esn.file-saver'
+  'esn.file-saver',
+  'esn.form.helper'
 ]);
