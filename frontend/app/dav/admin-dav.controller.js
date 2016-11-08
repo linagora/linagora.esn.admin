@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminDavController', function($stateParams, adminDomainConfigService, asyncAction, rejectWithErrorNotification) {
+.controller('adminDavController', function($stateParams, adminDomainConfigService, asyncAction) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'davserver';
@@ -12,16 +12,8 @@ angular.module('linagora.esn.admin')
       self.config = data;
     });
 
-  self.save = function(form) {
-    if (form && form.$valid) {
-      return asyncAction('Modification of DAV Server settings', _saveConfiguration).then(function() {
-        form.$setPristine();
-      });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+  self.save = function() {
+    return asyncAction('Modification of DAV Server settings', _saveConfiguration);
   };
 
   function _saveConfiguration() {

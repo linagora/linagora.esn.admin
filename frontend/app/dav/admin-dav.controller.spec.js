@@ -58,83 +58,18 @@ describe('The adminDavController', function() {
       };
     });
 
-    it('should not call adminDomainConfigService.set to save configuration if form is invalid', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: false,
-        $submitted: false,
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.config.key = 'new value';
-      controller.save(form).catch(function() {
-        expect(adminDomainConfigService.set).to.have.not.been.called;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
     it('should call adminDomainConfigService.set to save configuration', function(done) {
       var controller = initController();
-      var form = {
-        $valid: true,
-        $pristine: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        }
-      };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.config.key = 'new value';
-      controller.save(form).then(function() {
+      controller.save().then(function() {
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, controller.config);
         done();
       });
 
       $scope.$digest();
     });
-
-    it('should make the form pristine when save successfully', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: true,
-        $pristine: false,
-        $setPristine: function() {
-          form.$pristine = true;
-        }
-      };
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.save(form).then(function() {
-        expect(form.$pristine).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
-    it('should make the form is submitted when save unsuccessfully', function(done) {
-      var controller = initController();
-      var form = {
-        $valid: false,
-        $submitted: false,
-        $setSubmitted: function() {
-          form.$submitted = true;
-        }
-      };
-
-      controller.save(form).catch(function() {
-        expect(form.$submitted).to.be.true;
-        done();
-      });
-
-      $scope.$digest();
-    });
-
   });
 
 });

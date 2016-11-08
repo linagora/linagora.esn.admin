@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminWebController', function($stateParams, adminDomainConfigService, asyncAction, rejectWithErrorNotification) {
+.controller('adminWebController', function($stateParams, adminDomainConfigService, asyncAction) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'web';
@@ -12,17 +12,8 @@ angular.module('linagora.esn.admin')
       self.config = data;
     });
 
-  self.save = function(form) {
-    if (form && form.$valid) {
-      return asyncAction('Modification of web configuration', _saveConfiguration)
-        .then(function() {
-          form.$setPristine();
-        });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+  self.save = function() {
+    return asyncAction('Modification of web configuration', _saveConfiguration);
   };
 
   function _saveConfiguration() {

@@ -4,7 +4,7 @@ angular.module('linagora.esn.admin')
 
 .constant('ADMIN_MAIL_TRANSPORT_TYPES', { local: 'Local', smtp: 'SMTP', gmail: 'Gmail' })
 
-.controller('adminMailController', function($stateParams, adminDomainConfigService, adminMailService, asyncAction, ADMIN_MAIL_TRANSPORT_TYPES, rejectWithErrorNotification) {
+.controller('adminMailController', function($stateParams, adminDomainConfigService, adminMailService, asyncAction, ADMIN_MAIL_TRANSPORT_TYPES) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'mail';
@@ -18,21 +18,12 @@ angular.module('linagora.esn.admin')
       self.transportType = adminMailService.getTransportType(self.config);
     });
 
-  self.save = function(form) {
-    if (form && form.$valid) {
-      var config = adminMailService.qualifyTransportConfig(self.transportType, self.config);
+  self.save = function() {
+    var config = adminMailService.qualifyTransportConfig(self.transportType, self.config);
 
-      return asyncAction('Modification of Mail Server settings', function() {
-        return _saveConfiguration(config);
-      }).then(function() {
-        self.config = config;
-        form.$setPristine();
-      });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+    return asyncAction('Modification of Mail Server settings', function() {
+      return _saveConfiguration(config);
+    });
   };
 
   function _saveConfiguration(config) {

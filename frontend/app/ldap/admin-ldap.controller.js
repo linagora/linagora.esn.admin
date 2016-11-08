@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminLdapController', function($stateParams, adminDomainConfigService, asyncAction, rejectWithErrorNotification, _) {
+.controller('adminLdapController', function($stateParams, adminDomainConfigService, asyncAction, _) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'ldap';
@@ -18,22 +18,15 @@ angular.module('linagora.esn.admin')
       }
     });
 
-  self.save = function(form) {
+  self.save = function() {
     var configs = _qualifyConfigs();
 
-    if (form && form.$valid) {
-      return asyncAction('Modification of LDAP Server settings', function() {
-        return _saveConfiguration(configs);
-      })
-      .then(function() {
-        self.configs = configs;
-        form.$setPristine();
-      });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+    return asyncAction('Modification of LDAP Server settings', function() {
+      return _saveConfiguration(configs);
+    })
+    .then(function() {
+      self.configs = configs;
+    });
   };
 
   self.addForm = function() {

@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminUsersCreateController', function($stateParams, adminUsersService, rejectWithErrorNotification) {
+.controller('adminUsersCreateController', function($stateParams, adminUsersService) {
   var self = this;
   var domainId = $stateParams.domainId;
   var USER_TEMPLATE = {
@@ -17,19 +17,11 @@ angular.module('linagora.esn.admin')
 
   self.user = $stateParams.user || angular.copy(USER_TEMPLATE);
 
-  self.save = function(form) {
-    if (form && form.$valid) {
-      return adminUsersService.createMember(domainId, self.user)
-        .then(function() {
-          // Reset form state
-          self.user = angular.copy(USER_TEMPLATE);
-          form.$setPristine();
-          form.$setUntouched();
-        });
-    }
-
-    form.$setSubmitted();
-
-    return rejectWithErrorNotification('Form is invalid!');
+  self.save = function() {
+    return adminUsersService.createMember(domainId, self.user)
+      .then(function() {
+        // Reset form state
+        self.user = angular.copy(USER_TEMPLATE);
+      });
   };
 });
