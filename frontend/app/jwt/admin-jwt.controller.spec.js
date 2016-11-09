@@ -53,35 +53,6 @@ describe('The adminJwtController', function() {
       expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
     });
 
-    it('should convert expiration to number of days', function() {
-      adminDomainConfigService.get = function() {
-        return $q.when({ expiresIn: '15 days' });
-      };
-
-      var controller = initController();
-
-      expect(controller.expiration).to.deep.equal(15);
-    });
-
-    it('should use undefined expiration in case the expiresIn config is missing', function() {
-      adminDomainConfigService.get = function() {
-        return $q.when({});
-      };
-
-      var controller = initController();
-
-      expect(controller.expiration).to.not.be.defined;
-    });
-
-    it('should use undefined expiration in case the expiresIn config is not in the expected format', function() {
-      adminDomainConfigService.get = function() {
-        return $q.when({ expiresIn: '15 years' });
-      };
-
-      var controller = initController();
-
-      expect(controller.expiration).to.not.be.defined;
-    });
   });
 
   describe('The save fn', function() {
@@ -107,30 +78,6 @@ describe('The adminJwtController', function() {
       });
 
       $scope.$digest();
-    });
-
-  });
-
-  describe('The onExpirationChange fn', function() {
-
-    it('should update the expiresIn with expiration', function() {
-      var controller = initController();
-
-      controller.config.expiresIn = '20 days';
-      controller.expiration = 10;
-      controller.onExpirationChange();
-
-      expect(controller.config.expiresIn).to.equal('10 days');
-    });
-
-    it('should not update the expiresIn when expiration is null', function() {
-      var controller = initController();
-
-      controller.config.expiresIn = '20 days';
-      controller.expiration = null;
-      controller.onExpirationChange();
-
-      expect(controller.config.expiresIn).to.equal('20 days');
     });
 
   });

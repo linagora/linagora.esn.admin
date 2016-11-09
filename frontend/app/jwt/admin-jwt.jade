@@ -9,10 +9,6 @@ sub-header
           esn-form-group(label="#{__('Algorithm')}")
             .select
               select.form-control(ng-model="$ctrl.config.algorithm", name="algorithm", ng-options="algorithm.name as algorithm.description for algorithm in $ctrl.availableAlgorithms", required)
-        .col-md-6
-          esn-form-group(label="#{__('Expires in (days)')}")
-            input.form-control(type="number", name="expiresIn", min="1", max="30", ng-model="$ctrl.expiration", ng-change="$ctrl.onExpirationChange()")
-              
       .row
         .col-md-6
           esn-form-group(label="#{__('Public key')}")
