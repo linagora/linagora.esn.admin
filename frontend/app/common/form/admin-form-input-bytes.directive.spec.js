@@ -6,7 +6,6 @@ var expect = chai.expect;
 
 describe('The adminFormInputBytes directive', function() {
   var $rootScope, $compile;
-  var minErrorMessage, maxErrorMessage;
 
   beforeEach(function() {
     module('jadeTemplates');
@@ -19,9 +18,6 @@ describe('The adminFormInputBytes directive', function() {
   });
 
   function initTemplate(inputValue, inputUnit, min, max) {
-    minErrorMessage = 'This must be greater than or equal to ' + min;
-    maxErrorMessage = 'This must be less than or equal to ' + max;
-
     return '<admin-form-input-bytes input-value="' + inputValue + '", input-unit="' + inputUnit + '", min="' + min + '", max="' + max + '" />';
   }
 
@@ -163,88 +159,5 @@ describe('The adminFormInputBytes directive', function() {
     unitsElement[1].click();
 
     expect(element.isolateScope().inputValue).to.equal(25 * Math.pow(2, 10));
-  });
-
-  it('should show error message when user has not interacted with the input yet but unit is changed', function() {
-    var inputValue = 0;
-    var min = '1KB';
-    var template = initTemplate(inputValue, null, min, null);
-
-    var element = initDirective(null, template);
-    var unitBytesElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'))[0];
-
-    unitBytesElement.click();
-
-    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal(minErrorMessage);
-  });
-
-  it('should show error message when input has invalid min', function() {
-    var min = '1KB';
-    var template = initTemplate(null, null, min, null);
-
-    var element = initDirective(null, template);
-    var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
-
-    unitInputElement.val(0).trigger('input');
-
-    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal(minErrorMessage);
-  });
-
-  it('should show error message when input has invalid max', function() {
-    var max = '50BYTES';
-    var template = initTemplate(null, null, null, max);
-
-    var element = initDirective(null, template);
-    var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
-
-    unitInputElement.val(60).trigger('input');
-
-    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal(maxErrorMessage);
-  });
-
-  it('should hide error message when value from invalid to valid by change input', function() {
-    var max = '50BYTES';
-    var template = initTemplate(null, null, null, max);
-
-    var element = initDirective(null, template);
-    var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
-
-    unitInputElement.val(60).trigger('input');
-
-    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal(maxErrorMessage);
-
-    unitInputElement.val(40).trigger('input');
-    validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal('');
-  });
-
-  it('should hide error message when value from invalid to valid by change unit', function() {
-    var inputValue = 25;
-    var inputUnit = 'KB';
-    var min = '1KB';
-    var template = initTemplate(inputValue, inputUnit, min, null);
-
-    var element = initDirective(null, template);
-    var unitsElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'));
-
-    unitsElement[0].click();
-
-    var validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal(minErrorMessage);
-
-    unitsElement[1].click();
-    validatorMessageElement = angular.element(element[0].querySelector('admin-form-validate-message'));
-
-    expect(validatorMessageElement.text()).to.equal('');
   });
 });

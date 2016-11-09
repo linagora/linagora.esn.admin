@@ -17,6 +17,7 @@ angular.module('esn.session', []);
 angular.module('esn.subheader', []);
 angular.module('esn.sidebar', []);
 angular.module('esn.infinite-list', []);
+angular.module('esn.form.helper', []);
 angular.module('esn.async-action', [])
   .factory('asyncAction', function() {
     return function(message, action) {
