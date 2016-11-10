@@ -33,11 +33,12 @@ angular.module('linagora.esn.admin')
     esnFileSaver.saveText(self.config.privateKey, 'privateKey.txt');
   };
 
-  self.generate = function() {
+  self.generate = function(form) {
     return asyncAction('Generating new keys', _generateKeyPair)
       .then(function(resp) {
         self.config.publicKey = resp.data.publicKey;
         self.config.privateKey = resp.data.privateKey;
+        form.$setDirty();
       });
   };
 
