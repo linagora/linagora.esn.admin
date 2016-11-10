@@ -179,11 +179,44 @@ describe('The adminJwtController', function() {
       adminConfigApi.generateJwtKeyPair = sinon.stub().returns($q.when({data: data}));
 
       var controller = initController();
+      var form = { $setDirty: angular.noop };
 
-      controller.generate().then(function() {
+      controller.generate(form).then(function() {
         expect(adminConfigApi.generateJwtKeyPair).to.have.been.calledWith($stateParams.domainId);
         expect(controller.config.publicKey).to.equal(data.publicKey);
         expect(controller.config.privateKey).to.equal(data.privateKey);
+        done();
+      });
+
+      $scope.$digest();
+    });
+
+    it('should make the form dirty when keys are generated successfully', function(done) {
+      adminConfigApi.generateJwtKeyPair = function() {
+        return $q.when({ data: {} });
+      };
+
+      var controller = initController();
+      var form = { $setDirty: sinon.spy() };
+
+      controller.generate(form).then(function() {
+        expect(form.$setDirty).to.have.been.calledWith();
+        done();
+      }, done.bind(null, 'should resolve'));
+
+      $scope.$digest();
+    });
+
+    it('should not make the form dirty when keys are not generated successfully', function(done) {
+      adminConfigApi.generateJwtKeyPair = function() {
+        return $q.reject();
+      };
+
+      var controller = initController();
+      var form = { $setDirty: sinon.spy() };
+
+      controller.generate(form).then(done.bind(null, 'should reject'), function() {
+        expect(form.$setDirty).to.not.have.been.called;
         done();
       });
 
