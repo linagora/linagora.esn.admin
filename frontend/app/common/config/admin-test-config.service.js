@@ -14,7 +14,18 @@ angular.module('linagora.esn.admin')
       .customPOST(body);
   }
 
+  function testAccessLdap(domainId, ldapConfig) {
+    var body = { config: ldapConfig };
+
+    return adminRestangular
+      .all('test')
+      .one('domains', domainId)
+      .one('accessLdap')
+      .customPOST(body);
+  }
+
   return {
-    testSendEmail: testSendEmail
+    testSendEmail: testSendEmail,
+    testAccessLdap: testAccessLdap
   };
 });
