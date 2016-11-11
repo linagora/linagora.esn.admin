@@ -22,9 +22,10 @@
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', required, name="searchBase")
           esn-form-group(label="#{__('Search Filter')}")
             input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', required, name="searchFilter")
-      .col-xs-12.flex-end.form-bottom
-        button.btn.btn-default(ng-click="$ctrl.delete(form)", type="button", title="#{__('Delete')}")
-          i.mdi.mdi-delete
+      .col-xs-12.flex-end
+          admin-ldap-test(domain-id="$ctrl.domainId", config="$ctrl.ldapConfig.configuration")
+          button.btn.btn-danger.waves-effect(ng-click="$ctrl.delete(form)", type="button", title="#{__('Delete')}")
+            | #{__('Remove')}
 .card-body.card-padding(ng-show="$ctrl.ldapConfig.deleted && $ctrl.ldapConfig.name")
   .row
     .col-xs-12
