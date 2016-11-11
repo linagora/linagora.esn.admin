@@ -15,5 +15,11 @@ module.exports = function(dependencies) {
     authorizationMW.requiresDomainManager,
     controller.testSendEmail);
 
+  router.post('/domains/:uuid/accessLdap',
+    authorizationMW.requiresAPILogin,
+    domainMiddleware.load,
+    authorizationMW.requiresDomainManager,
+    controller.testAccessLdap);
+
   return router;
 };
