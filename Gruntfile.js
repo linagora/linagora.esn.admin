@@ -45,7 +45,7 @@ module.exports = function(grunt) {
           ]
         },
         src: [
-          'frontend/css/**/*.less'
+          'frontend/app/**/*.less'
         ]
       },
       quick: {
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'lint_pattern:all']);
+  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'lint_pattern:all', 'lint_pattern:css']);
   grunt.registerTask('linters-dev', 'Check changed files for lint', ['prepare-quick-lint', 'eslint:quick', 'lint_pattern:quick']);
   grunt.registerTask('spawn-servers', 'spawn servers', ['shell:mongo', 'shell:redis', 'shell:elasticsearch']);
   grunt.registerTask('kill-servers', 'kill servers', ['shell:mongo:kill', 'shell:redis:kill', 'shell:elasticsearch:kill']);
