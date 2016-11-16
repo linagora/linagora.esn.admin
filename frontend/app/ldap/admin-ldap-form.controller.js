@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linagora.esn.admin')
-.constant('ADMIN_LDAP_MAPPING', ['firstname', 'lastname', 'description', 'main_phone', 'office_location', 'building_location', 'service', 'job_title'])
+.constant('ADMIN_LDAP_MAPPING', ['firstname', 'lastname', 'email', 'description', 'main_phone', 'office_location', 'building_location', 'service', 'job_title'])
 
 .controller('adminLdapFormController', function(_, ADMIN_LDAP_MAPPING) {
   var self = this;
