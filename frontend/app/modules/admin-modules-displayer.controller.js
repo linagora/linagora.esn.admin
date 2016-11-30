@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminModulesDisplayerController', function($stateParams, $timeout, ADMIN_MODULES, _, adminDomainConfigService, rejectWithErrorNotification) {
+.controller('adminModulesDisplayerController', function($stateParams, $timeout, ADMIN_MODULES, _, adminDomainConfigService, asyncAction) {
   var self = this;
   var moduleMetaData = ADMIN_MODULES[self.module.name];
   var domainId = $stateParams.domainId;
@@ -25,10 +25,9 @@ angular.module('linagora.esn.admin')
 
       self.currentHomepage = moduleMetaData.homePage;
 
-      return adminDomainConfigService.set(domainId, HOMEPAGE_KEY, moduleMetaData.homePage)
-      .catch(function() {
-        rejectWithErrorNotification('Failed to set ' + moduleMetaData.title + ' as home');
-
+      return asyncAction('Setting ' + moduleMetaData.title + ' as home', function() {
+        return adminDomainConfigService.set(domainId, HOMEPAGE_KEY, moduleMetaData.homePage);
+      }).catch(function() {
         $timeout(function() {
           self.currentHomepage = currentHomePage;
         }, timeoutDuration);
