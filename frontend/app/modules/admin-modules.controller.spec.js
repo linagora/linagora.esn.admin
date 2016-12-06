@@ -47,30 +47,4 @@ describe('The adminModulesController', function() {
     expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, 'homePage');
   });
 
-  describe('The save fn', function() {
-    var modulesMock;
-
-    beforeEach(function() {
-      modulesMock = [{name: 'name', configurations: { key: 'key', value: 'value' }}];
-
-      adminConfigApi.get = function() {
-        return $q.when(modulesMock);
-      };
-    });
-
-    it('should call adminConfigApi.set to save configuration', function(done) {
-      var controller = initController();
-
-      adminConfigApi.set = sinon.stub().returns($q.when());
-      controller.modules[0].name = 'new value';
-      controller.save().then(function() {
-        expect(adminConfigApi.set).to.have.been.calledWith($stateParams.domainId, controller.modules);
-        done();
-      });
-
-      $scope.$digest();
-    });
-
-  });
-
 });

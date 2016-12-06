@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminModulesController', function($stateParams, rejectWithErrorNotification, adminModulesApi, adminDomainConfigService, asyncAction) {
+.controller('adminModulesController', function($stateParams, rejectWithErrorNotification, adminModulesApi, adminDomainConfigService) {
   var self = this;
   var domainId = $stateParams.domainId;
   var HOMEPAGE_VALUE = 'unifiedinbox';
@@ -15,10 +15,4 @@ angular.module('linagora.esn.admin')
   adminModulesApi.get(domainId).then(function(modules) {
     self.modules = modules;
   });
-
-  self.save = function() {
-    return asyncAction('Modification of modules\'s settings', function() {
-      return adminModulesApi.set(domainId, self.modules);
-    });
-  };
 });

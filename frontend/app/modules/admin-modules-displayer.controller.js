@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminModulesDisplayerController', function($stateParams, $timeout, ADMIN_MODULES, _, adminDomainConfigService, asyncAction) {
+.controller('adminModulesDisplayerController', function($stateParams, $scope, $timeout, ADMIN_MODULES, ADMIN_FORM_EVENT, _, adminDomainConfigService, asyncAction, adminModulesApi) {
   var self = this;
   var moduleMetaData = ADMIN_MODULES[self.module.name];
   var domainId = $stateParams.domainId;
@@ -50,4 +50,21 @@ angular.module('linagora.esn.admin')
     self.configurations[name] = feature;
   });
 
+  self.save = function() {
+    var modules = [];
+
+    modules.push(self.module);
+
+    return asyncAction('Modification of ' + moduleMetaData.title + ' module\'s settings', function() {
+      return adminModulesApi.set(domainId, modules).then(function() {
+        $scope.$broadcast(ADMIN_FORM_EVENT.submit);
+        $scope.form.$setPristine();
+      });
+    });
+  };
+
+  self.reset = function() {
+    $scope.$broadcast(ADMIN_FORM_EVENT.reset);
+    $scope.form.$setPristine();
+  };
 });
