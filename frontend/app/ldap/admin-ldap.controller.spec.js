@@ -6,18 +6,28 @@
 var expect = chai.expect;
 
 describe('The adminLdapController', function() {
-  var $controller, $rootScope, $stateParams, $scope;
-  var adminDomainConfigService;
+  var $controller, $rootScope, $stateParams, $scope, $timeout, $elementMock;
+  var adminDomainConfigService, elementScrollService;
   var CONFIG_NAME = 'ldap';
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_) {
+    $elementMock = {
+      find: function() {}
+    };
+
+    angular.mock.module(function($provide) {
+      $provide.value('$element', $elementMock);
+    });
+
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _$timeout_, _adminDomainConfigService_, _elementScrollService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
+      elementScrollService = _elementScrollService_;
+      $timeout = _$timeout_;
 
       $stateParams.domainId = 'domain123';
     });
@@ -122,6 +132,8 @@ describe('The adminLdapController', function() {
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
+
+      elementScrollService.scrollDownToElement = sinon.spy();
     });
 
     it('should add an empty object to configs', function() {
@@ -131,6 +143,10 @@ describe('The adminLdapController', function() {
       ctrl.addForm();
 
       expect(ctrl.configs).to.deep.equal([{}]);
+
+      $timeout.flush();
+
+      expect(elementScrollService.scrollDownToElement).to.have.been.calledOnce;
     });
   });
 

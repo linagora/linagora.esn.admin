@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminLdapController', function($stateParams, adminDomainConfigService, asyncAction, _) {
+.controller('adminLdapController', function($stateParams, $element, $timeout, elementScrollService, adminDomainConfigService, asyncAction, _) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'ldap';
@@ -31,6 +31,11 @@ angular.module('linagora.esn.admin')
 
   self.addForm = function() {
     self.configs.push({});
+    $timeout(function() {
+      var lastAdminLdapForm = _.last($element.find('admin-ldap-form'));
+
+      elementScrollService.scrollDownToElement($(lastAdminLdapForm));
+    }, 0);
   };
 
   function _qualifyConfigs() {
