@@ -4,8 +4,4 @@ sub-header
 form(name="form")
   .card(ng-repeat="config in $ctrl.configs")
     admin-ldap-form(ldap-config="config")
-.button.clickable(ng-click="$ctrl.addForm()")
-  .form-group
-    .flex-vertical-centered.m-t-10
-      i.mdi.mdi-plus-circle.button-add.m-r-5
-      | #{__("Add a new LDAP configuration")}
+fab(icon="plus", ng-click="$ctrl.addForm()")

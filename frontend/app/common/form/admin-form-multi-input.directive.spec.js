@@ -72,7 +72,7 @@ describe('The adminFormGroup directive', function() {
     var template = initTemplate();
     var element = initDirective(null, template);
     var ctrl = element.isolateScope().$ctrl;
-    var deleteButton = angular.element(element[0].querySelector('.button-remove'));
+    var deleteButton = angular.element(element[0].querySelector('btn'));
     var deleteField = sinon.spy(ctrl, 'deleteField');
 
     deleteButton[0].click();
