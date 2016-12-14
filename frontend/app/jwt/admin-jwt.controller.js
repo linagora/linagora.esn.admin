@@ -10,19 +10,12 @@ angular.module('linagora.esn.admin')
   adminDomainConfigService.get(domainId, CONFIG_NAME)
     .then(function(data) {
       self.config = data || {};
-      self.expiration = _convertExpiration(self.config.expiresIn);
     });
 
   self.availableAlgorithms = ADMIN_JWT_AVAILABLE_ALGORITHMS;
 
   self.save = function() {
     return asyncAction('Modification of JWT configuration', _saveConfiguration);
-  };
-
-  self.onExpirationChange = function() {
-    if (self.expiration) {
-      self.config.expiresIn = self.expiration + ' days';
-    }
   };
 
   self.downloadPublicKey = function() {
@@ -44,14 +37,6 @@ angular.module('linagora.esn.admin')
 
   function _saveConfiguration() {
     return adminDomainConfigService.set(domainId, CONFIG_NAME, self.config);
-  }
-
-  function _convertExpiration(expiration) {
-    var match = expiration && String(expiration).match(/^([0-9]+) days$/);
-
-    if (match) {
-      return parseInt(match[1], 10);
-    }
   }
 
   function _generateKeyPair() {
