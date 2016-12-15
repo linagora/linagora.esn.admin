@@ -153,7 +153,8 @@ describe('The test API controller', function() {
         return {
           _adminBind: function(cb) {
             return cb(new Error('Something error'));
-          }
+          },
+          on: function() {}
         };
       };
 
@@ -186,7 +187,8 @@ describe('The test API controller', function() {
         return {
           _adminBind: function(cb) {
             return cb(null);
-          }
+          },
+          on: function() {}
         };
       };
 
