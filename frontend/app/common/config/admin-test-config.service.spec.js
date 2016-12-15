@@ -35,4 +35,20 @@ describe('The adminTestConfigService service', function() {
     });
   });
 
+  describe('The testAccessLdap fn', function() {
+
+    it('should send POST request to /admin/api/test/domains/uuid/accessLdap', function(done) {
+      var ldapConfig = { key: 'value' };
+      var domainId = 'domain123';
+
+      $httpBackend.expectPOST('/admin/api/test/domains/' + domainId + '/accessLdap', {
+        config: ldapConfig
+      }).respond(200);
+
+      adminTestConfigService.testAccessLdap(domainId, ldapConfig)
+        .then(done.bind(null, null));
+
+      $httpBackend.flush();
+    });
+  });
 });

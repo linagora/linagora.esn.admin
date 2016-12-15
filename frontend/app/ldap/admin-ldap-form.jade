@@ -1,30 +1,37 @@
-.card-body.card-padding(ng-if="!$ctrl.ldapConfig.deleted")
-  ng-form(role="form", aria-hidden="true", name="form")
-    .row
-      .col-xs-12.col-md-6
-        div
-          esn-form-group(label="#{__('Name')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.name', required, name="name")
-          esn-form-group(label="#{__('URL')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url', required, name="url")
-        div
+.card(ng-if="!$ctrl.ldapConfig.deleted")
+  .card-header.flex-vertical-centered
+    .col-xs-6
+      h2(ng-show='$ctrl.ldapConfig.name') {{$ctrl.ldapConfig.name}}
+    .col-xs-6.flex-end
+      admin-ldap-test(domain-id="$ctrl.domainId", config="$ctrl.ldapConfig.configuration")
+      button.btn.btn-link.btn-default(ng-click="$ctrl.delete(form)", type="button", title="#{__('Delete')}")
+        i.mdi.mdi-delete
+  .card-body.card-padding
+    ng-form(role="form", aria-hidden="true", name="form")
+      .row
+        .col-xs-12.col-md-6
+          div
+            esn-form-group(label="#{__('Name')}")
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.name', required, name="name")
+            esn-form-group(label="#{__('URL')}")
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url', required, name="url")
+        .col-xs-12.col-md-6
+          div
+            esn-form-group(label="#{__('Admin distinguished name')}")
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn', autocomplete="off", required, name="adminDn")
+            esn-form-group(label="#{__('Admin Password')}")
+              input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", required, name="adminPassword")
+        .col-xs-12
+          .group-name #{__('Search')}
+          .col-xs-12.col-md-6
+            esn-form-group(label="#{__('Search Base')}")
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', required, name="searchBase")
+          .col-xs-12.col-md-6
+            esn-form-group(label="#{__('Search Filter')}")
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', required, name="searchFilter")
+        .col-xs-12
           .group-name #{__('Mapping')}
           admin-form-multi-input(ng-model="$ctrl.ldapConfig.configuration.mapping", available-types="$ctrl.AVAILABLE_KEYS")
-      .col-xs-12.col-md-6
-        div
-          esn-form-group(label="#{__('Admin distinguished name')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn', autocomplete="off", required, name="adminDn")
-          esn-form-group(label="#{__('Admin Password')}")
-            input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", required, name="adminPassword")
-        div
-          .group-name #{__('Search')}
-          esn-form-group(label="#{__('Search Base')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', required, name="searchBase")
-          esn-form-group(label="#{__('Search Filter')}")
-            input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', required, name="searchFilter")
-      .col-xs-12.flex-end.form-bottom
-        button.btn.btn-default(ng-click="$ctrl.delete(form)", type="button", title="#{__('Delete')}")
-          i.mdi.mdi-delete
 .card-body.card-padding(ng-show="$ctrl.ldapConfig.deleted && $ctrl.ldapConfig.name")
   .row
     .col-xs-12

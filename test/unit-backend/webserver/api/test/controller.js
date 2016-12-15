@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect;
+var mockery = require('mockery');
 
 describe('The test API controller', function() {
 
@@ -94,6 +95,121 @@ describe('The test API controller', function() {
       this.requireController().testSendEmail(req, res);
     });
 
+  });
+
+  describe('The testAccessLdap fn', function() {
+    it('should respond 400 if ldapConfig is missing in request', function(done) {
+      var req = {
+        body: {}
+      };
+
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(400);
+
+          return {
+            json: function(json) {
+              expect(json).to.deep.equal({error: {code: 400, message: 'Bad Request', details: 'The ldap\'s configuration is missing'}});
+              done();
+            }
+          };
+        }
+      };
+
+      this.requireController().testAccessLdap(req, res);
+    });
+
+    it('should respond 500 if there is error while initialize LdapAuth instance', function(done) {
+      var ldapAuthMock = function() {
+        throw new Error('Something error');
+      };
+
+      mockery.registerMock('ldapauth-fork', ldapAuthMock);
+
+      var req = {
+        body: {
+          config: { key: 'value' }
+        }
+      };
+
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(500);
+
+          return {
+            json: function(json) {
+              expect(json).to.deep.equal({error: {code: 500, message: 'Server Error', details: 'Something error'}});
+              done();
+            }
+          };
+        }
+      };
+
+      this.requireController().testAccessLdap(req, res);
+    });
+
+    it('should respond 500 when failed to access ldap server', function(done) {
+      var ldapAuthMock = function() {
+        return {
+          _adminBind: function(cb) {
+            return cb(new Error('Something error'));
+          }
+        };
+      };
+
+      mockery.registerMock('ldapauth-fork', ldapAuthMock);
+
+      var req = {
+        body: {
+          config: { key: 'value' }
+        }
+      };
+
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(500);
+
+          return {
+            json: function(json) {
+              expect(json).to.deep.equal({error: {code: 500, message: 'Server Error', details: 'Something error'}});
+              done();
+            }
+          };
+        }
+      };
+
+      this.requireController().testAccessLdap(req, res);
+    });
+
+    it('should respond 200 when access successfuly to ldap server', function(done) {
+      var ldapAuthMock = function() {
+        return {
+          _adminBind: function(cb) {
+            return cb(null);
+          }
+        };
+      };
+
+      mockery.registerMock('ldapauth-fork', ldapAuthMock);
+
+      var req = {
+        body: {
+          config: { key: 'value' }
+        }
+      };
+
+      var res = {
+        status: function(code) {
+          expect(code).to.equal(200);
+
+          return {
+            end: done
+          };
+        }
+      };
+
+      this.requireController().testAccessLdap(req, res);
+    });
   });
 
 });

@@ -111,5 +111,11 @@
   "Generate keys": "Generate keys",
   "Download": "Download",
   "JWT": "JWT",
-  "Add a new mapping": "Add a new mapping"
+  "Add a new mapping": "Add a new mapping",
+  "Check connection to LDAP server": "Check connection to LDAP server",
+  "Check": "Check",
+  "Checking...": "Checking...",
+  "Connected successfully to LDAP server": "Connected successfully to LDAP server",
+  "Failed to connect to LDAP server: ": "Failed to connect to LDAP server: ",
+  "Remove": "Remove"
 }

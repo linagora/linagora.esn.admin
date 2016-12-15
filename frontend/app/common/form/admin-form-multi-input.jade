@@ -1,16 +1,18 @@
 ng-form(name="form")
   .form-group(ng-repeat='field in $ctrl.fields track by $index')
-    .row.field-option
+    .row.field-option.flex-vertical-centered
       .col-xs-5
         esn-form-group(label="#{__('Key')}")
           .select
             select.form-control.multi-input-type(ng-model="field.type", ng-change="$ctrl.onDataChange()")
               option(ng-repeat="type in $ctrl.availableTypes", ng-selected="type === field.type", value="{{type}}", ng-disabled="$ctrl.isTypeSelected(type)")
                 | {{type}}
-      .col-xs-7
+      .col-xs-6
         esn-form-group(label="#{__('Value')}")
           input.form-control.multi-input-text(type="text" ng-model='field.value', ng-change="$ctrl.onDataChange()", required)
-          i.clickable.mdi.mdi-minus-circle-outline.button-remove(ng-click="$ctrl.deleteField(field, form)")
+      .col-xs-1.flex-end
+        btn.btn.btn-link(ng-click="$ctrl.deleteField(field, form)")
+          i.mdi.mdi-close-circle
   .button.clickable(ng-show='$ctrl.showAddButton()', ng-click="$ctrl.addField()")
     .form-group
       .flex-vertical-centered.m-t-10
