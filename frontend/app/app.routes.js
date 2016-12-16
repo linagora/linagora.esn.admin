@@ -101,13 +101,5 @@ angular.module('linagora.esn.admin')
           template: '<admin-web />'
         }
       }
-    })
-    .state('admin.domain.jwt', {
-      url: '/jwt',
-      views: {
-        'root@admin': {
-          template: '<admin-jwt />'
-        }
-      }
     });
 });
