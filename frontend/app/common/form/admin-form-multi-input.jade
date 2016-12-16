@@ -5,7 +5,7 @@ ng-form(name="form")
         esn-form-group(label="#{__('Key')}")
           .select
             select.form-control.multi-input-type(ng-model="field.type", ng-change="$ctrl.onDataChange()")
-              option(ng-repeat="type in $ctrl.availableTypes", ng-selected="type === field.type", value="{{type}}", ng-disabled="$ctrl.isTypeSelected(type)")
+              option(ng-repeat="type in $ctrl.availableTypes", ng-selected="type === field.type", value="{{type}}", ng-disabled="type !== field.type && $ctrl.isTypeSelected(type)")
                 | {{type}}
       .col-xs-6
         esn-form-group(label="#{__('Value')}")
