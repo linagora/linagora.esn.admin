@@ -6,6 +6,6 @@ angular.module('linagora.esn.admin')
   return {
     restrict: 'E',
     replace: true,
-    template: applicationMenuTemplateBuilder('/#/admin', 'mdi-server-security', 'Administration')
+    template: applicationMenuTemplateBuilder('/#/admin', 'admin-center', 'Administration')
   };
 });
