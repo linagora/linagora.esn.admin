@@ -30,7 +30,11 @@ angular.module('linagora.esn.admin')
   };
 
   self.addForm = function() {
-    self.configs.push({});
+    self.configs.push({
+      configuration: {
+        mapping: {}
+      }
+    });
     $timeout(function() {
       var lastAdminLdapForm = _.last($element.find('admin-ldap-form'));
 
