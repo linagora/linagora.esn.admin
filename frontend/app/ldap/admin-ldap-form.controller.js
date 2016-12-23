@@ -8,6 +8,7 @@ angular.module('linagora.esn.admin')
 
   self.domainId = $stateParams.domainId;
   self.AVAILABLE_KEYS = ADMIN_LDAP_MAPPING;
+  self.ldapConfig.configuration.mapping = self.ldapConfig.configuration.mapping || {};
 
   self.delete = function(form) {
     self.ldapConfig.deleted = true;

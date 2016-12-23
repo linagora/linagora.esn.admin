@@ -142,7 +142,11 @@ describe('The adminLdapController', function() {
       ctrl.configs = [];
       ctrl.addForm();
 
-      expect(ctrl.configs).to.deep.equal([{}]);
+      expect(ctrl.configs).to.deep.equal([{
+        configuration: {
+          mapping: {}
+        }
+      }]);
 
       $timeout.flush();
 
