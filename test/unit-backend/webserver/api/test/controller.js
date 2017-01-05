@@ -1,7 +1,8 @@
 'use strict';
 
-var expect = require('chai').expect;
-var mockery = require('mockery');
+const expect = require('chai').expect;
+const mockery = require('mockery');
+const q = require('q');
 
 describe('The test API controller', function() {
 
@@ -119,54 +120,22 @@ describe('The test API controller', function() {
       this.requireController().testAccessLdap(req, res);
     });
 
-    it('should respond 500 if there is error while initialize LdapAuth instance', function(done) {
-      var ldapAuthMock = function() {
-        throw new Error('Something error');
+    it('should respond 500 if there is error while connecting to LDAP server', function(done) {
+      const ldapModuleMock = {
+        testAccessLdap: function() {
+          return q.reject(new Error('Something error'));
+        }
       };
 
-      mockery.registerMock('ldapauth-fork', ldapAuthMock);
+      mockery.registerMock('../../../lib/ldap', ldapModuleMock);
 
-      var req = {
+      const req = {
         body: {
           config: { key: 'value' }
         }
       };
 
-      var res = {
-        status: function(code) {
-          expect(code).to.equal(500);
-
-          return {
-            json: function(json) {
-              expect(json).to.deep.equal({error: {code: 500, message: 'Server Error', details: 'Something error'}});
-              done();
-            }
-          };
-        }
-      };
-
-      this.requireController().testAccessLdap(req, res);
-    });
-
-    it('should respond 500 when failed to access ldap server', function(done) {
-      var ldapAuthMock = function() {
-        return {
-          _adminBind: function(cb) {
-            return cb(new Error('Something error'));
-          },
-          on: function() {}
-        };
-      };
-
-      mockery.registerMock('ldapauth-fork', ldapAuthMock);
-
-      var req = {
-        body: {
-          config: { key: 'value' }
-        }
-      };
-
-      var res = {
+      const res = {
         status: function(code) {
           expect(code).to.equal(500);
 
@@ -183,24 +152,21 @@ describe('The test API controller', function() {
     });
 
     it('should respond 200 when access successfuly to ldap server', function(done) {
-      var ldapAuthMock = function() {
-        return {
-          _adminBind: function(cb) {
-            return cb(null);
-          },
-          on: function() {}
-        };
+      const ldapModuleMock = {
+        testAccessLdap: function() {
+          return q.when();
+        }
       };
 
-      mockery.registerMock('ldapauth-fork', ldapAuthMock);
+      mockery.registerMock('../../../lib/ldap', ldapModuleMock);
 
-      var req = {
+      const req = {
         body: {
           config: { key: 'value' }
         }
       };
 
-      var res = {
+      const res = {
         status: function(code) {
           expect(code).to.equal(200);
 
