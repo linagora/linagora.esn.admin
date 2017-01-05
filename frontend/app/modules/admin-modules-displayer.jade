@@ -1,9 +1,9 @@
-.card(ng-init="expanded=false", ng-class="{expanded: expanded && $ctrl.hasConfiguration, clickable: $ctrl.hasConfiguration}")
+.card(ng-init="expanded=false", ng-class="{clickable: $ctrl.hasConfiguration}")
   .card-header(ng-click="expanded=!expanded")
-    h2.flex-vertical-centered
+    h2.flex-vertical-centered(ng-class="form.$pristine ? '': 'unsaved-changes'")
       i.mdi(ng-class="$ctrl.icon")
       span {{$ctrl.title}}
-    
+
     .toolbar
       span.clickable(ng-click="$ctrl.setHome($event)", ng-class="{'homeActivated': $ctrl.isHomePage()}")
         | #{__('Home')}
@@ -12,5 +12,9 @@
         | #{__('Features')}
         i.mdi(ng-class="expanded ? 'mdi-menu-up' : 'mdi-menu-down'")
       toggle-switch(ng-model="$ctrl.isEnabled")
-          
-  admin-modules-form(ng-show="expanded && $ctrl.hasConfiguration", template="$ctrl.template", configurations="$ctrl.configurations")
+form(name="form", ng-show="expanded && $ctrl.hasConfiguration")
+  admin-modules-form(template="$ctrl.template", configurations="$ctrl.configurations", on-save="$ctrl.save()", on-reset="$ctrl.reset()")
+  .flex-end.admin-form-bottom
+    a.text-uppercase.flex-vertical-centered(href="", ng-click="$ctrl.reset()")
+      |  #{__('Cancel')}
+    admin-modules-save-button(form="form", on-form-submit="$ctrl.save()")

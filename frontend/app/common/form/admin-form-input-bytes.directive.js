@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.directive('adminFormInputBytes', function() {
+.directive('adminFormInputBytes', function(ADMIN_FORM_EVENT) {
   function link(scope) {
     var limit;
     var UNITS = {
@@ -131,6 +131,20 @@ angular.module('linagora.esn.admin')
         }
       });
     }
+
+    var unmodifiedInputValue = angular.copy(scope.inputValue);
+
+    scope.$on(ADMIN_FORM_EVENT.reset, function() {
+      scope.inputValue = angular.copy(unmodifiedInputValue);
+
+      init();
+    });
+
+    scope.$on(ADMIN_FORM_EVENT.submit, function() {
+      unmodifiedInputValue = angular.copy(scope.inputValue);
+
+      init();
+    });
   }
 
   return {
