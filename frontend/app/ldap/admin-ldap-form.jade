@@ -22,6 +22,14 @@
             esn-form-group(label="#{__('Admin Password')}")
               input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", required, name="adminPassword")
         .col-xs-12
+          .group-name #{__('Usage')}
+          .col-xs-12.col-md-6
+            .form-group
+              toggle-switch(ng-model='$ctrl.ldapConfig.usage.auth', form="form", label="#{__('Authentication')}")
+          .col-xs-12.col-md-6
+            .form-group
+              toggle-switch(ng-model='$ctrl.ldapConfig.usage.search', form="form", label="#{__('Search provider')}")
+        .col-xs-12
           .group-name #{__('Search')}
           .col-xs-12.col-md-6
             esn-form-group(label="#{__('Search Base')}")

@@ -117,5 +117,8 @@
   "Checking...": "Checking...",
   "Connected successfully to LDAP server": "Connected successfully to LDAP server",
   "Failed to connect to LDAP server: ": "Failed to connect to LDAP server: ",
-  "Remove": "Remove"
+  "Remove": "Remove",
+  "Usage": "Usage",
+  "Authentication": "Authentication",
+  "Search provider": "Search provider"
 }
