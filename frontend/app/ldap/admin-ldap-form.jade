@@ -18,9 +18,9 @@
         .col-xs-12.col-md-6
           div
             esn-form-group(label="#{__('Admin distinguished name')}")
-              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn', autocomplete="off", required, name="adminDn")
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.adminDn', autocomplete="off", name="adminDn")
             esn-form-group(label="#{__('Admin Password')}")
-              input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", required, name="adminPassword")
+              input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", name="adminPassword")
         .col-xs-12
           .group-name #{__('Usage')}
           .col-xs-12.col-md-6
