@@ -32,11 +32,11 @@
         .col-xs-12
           .group-name #{__('Search')}
           .col-xs-12.col-md-6
-            esn-form-group(label="#{__('Search Base')}")
+            esn-form-group(label="#{__('Search base')}")
               input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchBase', required, name="searchBase")
           .col-xs-12.col-md-6
-            esn-form-group(label="#{__('Search Filter')}")
-              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.searchFilter', required, name="searchFilter")
+            esn-form-group(label="#{__('Username field')}")
+              input.form-control(type="text", ng-model='$ctrl.usernameField', ng-model-options="{ getterSetter: true }", required, name="usernameField")
         .col-xs-12
           .group-name #{__('Mapping')}
           admin-form-multi-input(ng-model="$ctrl.ldapConfig.configuration.mapping", available-types="$ctrl.AVAILABLE_KEYS")
