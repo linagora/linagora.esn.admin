@@ -20,7 +20,7 @@ ng-form(name="form")
   .row
     .col-xs-6
       esn-form-group(label="#{__('Username')}")
-        input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", autocomplete="off", required)
+        input.form-control.floating-label(type="text", ng-model="$ctrl.transportConfig.auth.user", name="user", autocomplete="off")
     .col-xs-6
-      esn-form-group(label="#{__('Username')}")
-        input.form-control.floating-label(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", autocomplete="new-password", required)
+      esn-form-group(label="#{__('Password')}")
+        input.form-control.floating-label(type="password", ng-model="$ctrl.transportConfig.auth.pass", name="pass", autocomplete="new-password")
