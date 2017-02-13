@@ -16,7 +16,6 @@
     "awesome-module": "1.0.0",
     "express": "4.14.0",
     "glob-all": "3.1.0",
-    "i18n": "0.8.3",
     "q": "1.4.1",
     "ldapauth-fork": "github:linagora/node-ldapauth-fork#a07fabf472c16cbf533dfe0c7319d5ce79a869dc"
   },

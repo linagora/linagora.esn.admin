@@ -16,7 +16,8 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.email', 'email'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.auth', 'auth'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.domain', 'domainMiddleware'),
-    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.authorization', 'authorizationMW')
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.authorization', 'authorizationMW'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.i18n', 'i18n')
   ],
 
   states: {
@@ -37,7 +38,7 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     },
 
     deploy: function(dependencies, callback) {
-      var app = require('./backend/webserver/application')(this, dependencies);
+      const app = require('./backend/webserver/application')(dependencies);
 
       app.use('/api/configuration', this.api.configuration);
       app.use('/api/test', this.api.test);
