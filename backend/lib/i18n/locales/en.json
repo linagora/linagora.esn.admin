@@ -120,5 +120,6 @@
   "Remove": "Remove",
   "Usage": "Usage",
   "Authentication": "Authentication",
-  "Search provider": "Search provider"
+  "Search provider": "Search provider",
+  "Enable draft email": "Enable draft email"
 }
