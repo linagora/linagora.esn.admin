@@ -39,7 +39,7 @@ describe('The adminModulesDisplayerController', function() {
 
     var module = {name: 'linagora.esn.unifiedinbox', configurations: [{name: 'view'}, {name: 'api'}]};
     var ctrl = initController(module);
-    var expectConfigurations = [{name: 'view'}, {name: 'api'}, {name: 'uploadUrl'}, {name: 'downloadUrl'}, {name: 'isJmapSendingEnabled'}, {name: 'isSaveDraftBeforeSendingEnabled'}, {name: 'composer.attachments'}, {name: 'maxSizeUpload'}, {name: 'twitter.tweets'}, {name: 'swipeRightAction'}];
+    var expectConfigurations = [{name: 'view'}, {name: 'api'}, {name: 'uploadUrl'}, {name: 'downloadUrl'}, {name: 'isJmapSendingEnabled'}, {name: 'isSaveDraftBeforeSendingEnabled'}, {name: 'composer.attachments'}, {name: 'maxSizeUpload'}, {name: 'twitter.tweets'}, {name: 'swipeRightAction'}, {name: 'drafts'}];
 
     expect(ctrl.module.configurations).to.deep.equal(expectConfigurations);
   });
@@ -72,11 +72,11 @@ describe('The adminModulesDisplayerController', function() {
   describe('The Save fn', function() {
 
     it('should call adminConfigApi.set to save configuration', function(done) {
-      var module = {name: 'linagora.esn.unifiedinbox', configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'twitter.tweets' }, { name: 'swipeRightAction' }]};
+      var module = {name: 'linagora.esn.unifiedinbox', configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'twitter.tweets' }, { name: 'swipeRightAction' }, { name: 'drafts' }]};
       var ctrl = initController(module);
       var moduleConfig = [{
         name: 'linagora.esn.unifiedinbox',
-        configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'twitter.tweets' }, { name: 'swipeRightAction' }]
+        configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'twitter.tweets' }, { name: 'swipeRightAction' }, { name: 'drafts' }]
       }];
       var message = 'Modification of Unified Inbox module\'s settings';
 

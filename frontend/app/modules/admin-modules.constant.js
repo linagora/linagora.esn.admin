@@ -11,7 +11,7 @@ angular.module('linagora.esn.admin')
       configurations: [
         'view', 'api', 'uploadUrl', 'downloadUrl', 'isJmapSendingEnabled',
         'isSaveDraftBeforeSendingEnabled', 'composer.attachments', 'maxSizeUpload',
-        'twitter.tweets', 'swipeRightAction']
+        'twitter.tweets', 'swipeRightAction', 'drafts']
     },
     'linagora.esn.contact': {
       title: 'Contact',
