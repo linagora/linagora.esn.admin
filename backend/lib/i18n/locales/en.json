@@ -121,5 +121,7 @@
   "Usage": "Usage",
   "Authentication": "Authentication",
   "Search provider": "Search provider",
-  "Enable draft email": "Enable draft email"
+  "Enable draft email": "Enable draft email",
+  "No LDAP configuration, click": "No LDAP configuration, click",
+  "to add a new one!": "to add a new one!"
 }

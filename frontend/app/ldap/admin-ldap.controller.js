@@ -42,6 +42,12 @@ angular.module('linagora.esn.admin')
     }, 0);
   };
 
+  self.showEmptyMessage = function(ldapConfigs) {
+    return !ldapConfigs.some(function(ldapConfig) {
+      return ldapConfig.name || !ldapConfig.deleted;
+    });
+  };
+
   function _qualifyConfigs() {
     var currentConfigs = self.configs;
 
