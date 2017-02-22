@@ -154,4 +154,52 @@ describe('The adminLdapController', function() {
     });
   });
 
+  describe('The showEmptyMessage fn', function() {
+    var configMock;
+
+    beforeEach(function() {
+      configMock = { key: 'value' };
+
+      adminDomainConfigService.get = function() {
+        return $q.when(configMock);
+      };
+    });
+
+    it('should show empty message if have no LDAP configuration', function() {
+      var controller = initController();
+
+      controller.configs = [];
+      var isShowEmptyMessage = controller.showEmptyMessage(controller.configs);
+
+      expect(isShowEmptyMessage).to.be.true;
+    });
+
+    it('should show empty message if all empty LDAP configuration form have been deleted', function() {
+      var controller = initController();
+
+      controller.configs = [{deleted: true}];
+      var isShowEmptyMessage = controller.showEmptyMessage(controller.configs);
+
+      expect(isShowEmptyMessage).to.be.true;
+    });
+
+    it('should not show empty message if all LDAP configuration forms those contain a form that is not empty have been deleted', function() {
+      var controller = initController();
+
+      controller.configs = [{name: 'some name', deleted: true}];
+      var isShowEmptyMessage = controller.showEmptyMessage(controller.configs);
+
+      expect(isShowEmptyMessage).to.not.be.true;
+    });
+
+    it('should not show empty message if having a LDAP configuration form has not been deleted', function() {
+      var controller = initController();
+
+      controller.configs = [{deleted: false}];
+      var isShowEmptyMessage = controller.showEmptyMessage(controller.configs);
+
+      expect(isShowEmptyMessage).to.not.be.true;
+    });
+  });
+
 });

@@ -121,5 +121,7 @@
   "Usage": "Utilisation",
   "Authentication": "Authentification",
   "Search provider": "Fournisseur de recherche",
-  "Enable draft email": "Activer les brouillons"
+  "Enable draft email": "Activer les brouillons",
+  "No LDAP configuration, click": "Aucune configuration LDAP, cliquez sur"
+  "to add a new one!": "pour en ajouter une nouvelle!"
 }
