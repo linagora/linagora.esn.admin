@@ -62,6 +62,25 @@ module.exports = function(grunt) {
       midway_backend: runGrunt.newProcess(['test-midway-backend']),
       unit_backend: runGrunt.newProcess(['test-unit-backend']),
       unit_frontend: runGrunt.newProcess(['test-frontend'])
+    },
+
+    i18n_checker: {
+      all: {
+        options: {
+          baseDir: __dirname,
+          dirs: [{
+            localeDir: 'backend/lib/i18n/locales',
+            templateSrc: [
+              'frontend/app/**/*.jade'
+            ],
+            core: true
+          }],
+          verifyOptions: {
+            defaultLocale: 'en',
+            locales: ['en', 'fr', 'vi']
+          }
+        }
+      }
     }
   });
 
@@ -79,10 +98,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-run-grunt');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-wait-server');
+  grunt.loadNpmTasks('grunt-i18n-checker');
 
   grunt.loadTasks('tasks');
-
-  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'lint_pattern:all', 'lint_pattern:css']);
+  grunt.registerTask('i18n', 'Check the translation files', ['i18n_checker']);
+  grunt.registerTask('linters', 'Check code for lint', ['eslint:all', 'lint_pattern:all', 'lint_pattern:css', 'i18n']);
   grunt.registerTask('linters-dev', 'Check changed files for lint', ['prepare-quick-lint', 'eslint:quick', 'lint_pattern:quick']);
   grunt.registerTask('spawn-servers', 'spawn servers', ['shell:mongo', 'shell:redis', 'shell:elasticsearch']);
   grunt.registerTask('kill-servers', 'kill servers', ['shell:mongo:kill', 'shell:redis:kill', 'shell:elasticsearch:kill']);
