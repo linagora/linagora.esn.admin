@@ -5,6 +5,6 @@
     i.c-green(ng-switch-when="success")
       | #{__('Connected successfully to LDAP server')}
     i.c-red(ng-switch-when="error")
-      | #{__('Failed to connect to LDAP server: ' )} {{$ctrl.message.msg}}
+      | #{__('Failed to connect to LDAP server: "%s"', '{{$ctrl.message.msg}}')} 
   button.btn.btn-link.btn-default(esn-submit="$ctrl.test()", type="button", title="#{__('Check connection to LDAP server')}")
     i.mdi.mdi-file-check
