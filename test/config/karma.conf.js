@@ -16,7 +16,7 @@ module.exports = function(config) {
       'frontend/components/restangular/dist/restangular.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
-      'frontend/components/sinon-1.15.4/index.js',
+      'node_modules/sinon/pkg/sinon.js',
       'test/unit-frontend/mocks/**/*.js',
       'frontend/app/**/*.module.js',
       'frontend/app/**/*.js',
