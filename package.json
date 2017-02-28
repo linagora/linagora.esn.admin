@@ -35,7 +35,7 @@
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-watch": "1.0.0",
     "grunt-eslint": "19.0.0",
-    "grunt-i18n-checker": "git+https://ci.open-paas.org/stash/scm/or/grunt-i18n-checker.git#dfc89b58fee",
+    "grunt-i18n-checker": "git+https://ci.open-paas.org/stash/scm/or/grunt-i18n-checker.git#2b9ea43c15e",
     "grunt-karma": "2.0.0",
     "grunt-lint-pattern": "git+https://github.com/linagora/grunt-lint-pattern.git",
     "grunt-mocha-cli": "2.1.0",
