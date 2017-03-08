@@ -1,0 +1,10 @@
+sub-header
+  admin-james-subheader(on-form-submit="$ctrl.save()", form="form")
+
+.card
+  .card-body.card-padding
+    form(name="form")
+      .row
+        .col-md-6
+          esn-form-group(label="#{__('James URL')}")
+            input.form-control(type="url", ng-model="$ctrl.config.url", auto-focus, name="url")

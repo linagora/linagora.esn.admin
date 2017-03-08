@@ -113,5 +113,8 @@
   "This must be greater than or equal to": "Phải lớn hơn hoặc bằng",
   "This must be less than or equal to": "Phải nhỏ hơn hoặc bằng",
   "Delete": "Xóa",
-  "Transport type": "Phương thức truyền thư"
+  "Transport type": "Phương thức truyền thư",
+  "James URL": "Địa chỉ James",
+  "James Configuration": "Cấu hình James",
+  "James": "James"
 }

@@ -113,5 +113,8 @@
   "This must be greater than or equal to": "Ceci doit être supérieur ou égal à",
   "This must be less than or equal to": "Ceci doit être inférieur ou égal à",
   "Delete": "Effacer",
-  "Transport type": "Type de transport"
+  "Transport type": "Type de transport",
+  "James URL": "URL de James",
+  "James Configuration": "James Configuration",
+  "James": "James"
 }
