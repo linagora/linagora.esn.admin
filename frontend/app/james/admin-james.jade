@@ -8,3 +8,6 @@ sub-header
         .col-md-6
           esn-form-group(label="#{__('James URL')}")
             input.form-control(type="url", ng-model="$ctrl.config.url", auto-focus, name="url")
+        .col-md-6
+          button.btn.btn-primary(type="button", ng-click="$ctrl.test()")
+            | #{__('Test')}
