@@ -18,11 +18,11 @@
   })
 
   .factory('adminJamesClientProvider', function($q, adminConfigApi, adminDomainConfigService, james, httpTransport) {
-    var cachedPromise;
+    var cachedPromises = {};
 
     function get(domainId) {
-      if (!cachedPromise) {
-        cachedPromise = $q.all([
+      if (!cachedPromises[domainId]) {
+        cachedPromises[domainId] = $q.all([
           adminDomainConfigService.get(domainId, 'james'),
           adminConfigApi.generateJwtToken(domainId)
         ]).then(function(data) {
@@ -37,7 +37,7 @@
           });
       }
 
-      return cachedPromise;
+      return cachedPromises[domainId];
     }
 
     return {
