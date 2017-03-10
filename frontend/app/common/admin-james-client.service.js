@@ -30,7 +30,7 @@
               httpClient: httpTransport,
               promiseProvider: null,
               apiUrl: data[0].url,
-              token: data[1]
+              token: data[1].data
             };
 
             return new james.Client(options);
