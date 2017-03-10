@@ -11,3 +11,18 @@ sub-header
         .col-md-6
           button.btn.btn-primary(type="button", ng-click="$ctrl.test()")
             | #{__('Test')}
+.card
+  .card-body.card-padding
+    form(name="form")
+      .row
+        .col-md-6
+          esn-form-group(label="#{__('Quota size')}")
+            input.form-control(type="number", ng-model="$ctrl.quota.size", name="quotaSize")
+      .row
+        .col-md-6
+          esn-form-group(label="#{__('Quota count')}")
+            input.form-control(type="number", ng-model="$ctrl.quota.count", name="quotaCount")
+      .row
+        .col-md-2
+          button.btn.btn-primary(type="button", ng-click="$ctrl.setQuota($ctrl.quota)")
+            | #{__('Set')}
