@@ -1,7 +1,7 @@
 ng-form(name="form")
   .input-group
-    esn-form-group(label="{{label}}", min-error-message="{{ '#{__('This must be greater than or equal to')} ' + min}}", max-error-message="{{ '#{__('This must be less than or equal to')} ' + max}}")
-      input.form-control(type="number", ng-model="display.value", name="dataSizeInput", ng-change="onChange()", min="{{minValue}}", max="{{maxValue}}", required)
+    esn-form-group(label="{{label}}", min-error-message="{{ '#{__('This must be greater than or equal to')} ' + min}}", max-error-message="{{ '#{__('This must be less than or equal to')} ' + max}}", ng-class="{ 'has-required': required }")
+      input.form-control(type="number", ng-model="display.value", name="dataSizeInput", ng-change="onChange()", min="{{minValue}}", max="{{maxValue}}", ng-required="required")
     .input-group-btn
       .dropdown
         button.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")

@@ -53,4 +53,4 @@ ng-form.p-t-25(name='form')
       .col-xs-8.field-name #{__('Enable attachments')}
       .col-xs-4.flex-end
         toggle-switch(ng-model="$ctrl.configurations['composer.attachments'].value", form="form")
-    admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", label="#{__('Max size upload')}")
+    admin-form-input-bytes(input-value="$ctrl.configurations.maxSizeUpload.value", min="1KB", max="50TB", label="#{__('Max size upload')}", required="true")
