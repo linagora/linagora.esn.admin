@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.admin')
@@ -25,27 +25,26 @@
   .factory('adminJamesClientProvider', function($q, adminConfigApi, adminDomainConfigService, james, httpTransport) {
     var cachedPromises = {};
 
-    function get(domainId) {
+    function get(domainId, apiUrl) {
       if (!cachedPromises[domainId]) {
-        cachedPromises[domainId] = $q.all([
-          adminDomainConfigService.get(domainId, 'james'),
-          adminConfigApi.generateJwtToken(domainId)
-        ]).then(function(data) {
-            var options = {
-              httpClient: httpTransport,
-              promiseProvider: null,
-              apiUrl: data[0].url,
-              token: data[1].data
-            };
-            return new james.Client(options);
-          });
+        cachedPromises[domainId] = adminConfigApi.generateJwtToken(domainId);
       }
 
-      return cachedPromises[domainId];
+      return cachedPromises[domainId].then(function(resp) {
+        var token = resp.data;
+        var options = {
+          httpClient: httpTransport,
+          promiseProvider: null,
+          apiUrl: apiUrl,
+          token: token
+        };
+
+        return new james.Client(options);
+      });
     }
 
     return {
       get: get
     };
   });
-})();
+})(angular);
