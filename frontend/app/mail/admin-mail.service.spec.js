@@ -70,8 +70,8 @@ describe('The adminMailService', function() {
             },
             port: 25,
             auth: {
-              user: '',
-              pass: ''
+              user: 'username',
+              pass: 'password'
             },
             service: 'gmail'
           }
@@ -112,7 +112,7 @@ describe('The adminMailService', function() {
             secure: false,
             tls: { rejectUnauthorized: false },
             port: 25,
-            auth: { user: '', pass: '' }
+            auth: { user: 'username', pass: 'password' }
           }
         },
         resolvers: {
@@ -131,11 +131,57 @@ describe('The adminMailService', function() {
       expect(config).to.deep.equal(expectedConfig);
     });
 
+    it('shoud not return auth object if auth credentials is empty with SMTP transport', function() {
+      configMock.transport.config.auth = { user: '', pass: '' };
+
+      var transportType = ADMIN_MAIL_TRANSPORT_TYPES.smtp;
+      var config = adminMailService.qualifyTransportConfig(transportType, configMock);
+
+      expect(config.transport.config.auth).to.not.exist;
+    });
+
+    it('should not return config.auth object if it is empty with SMTP transport', function() {
+      configMock.transport.config.auth = {};
+
+      var transportType = ADMIN_MAIL_TRANSPORT_TYPES.smtp;
+      var config = adminMailService.qualifyTransportConfig(transportType, configMock);
+
+      expect(config.transport.config.auth).to.not.exist;
+    });
+
+    it('shoud not return config.auth object if auth object is undefined with SMTP transport', function() {
+      configMock.transport.config.auth = undefined;
+      var transportType = ADMIN_MAIL_TRANSPORT_TYPES.smtp;
+      var config = adminMailService.qualifyTransportConfig(transportType, configMock);
+
+      expect(config.transport.config.auth).to.not.exist;
+    });
+
+    it('shoud return config.auth object even with only auth user or password with SMTP transport', function() {
+      var expectedAuth = { user: 'user' };
+      var transportType = ADMIN_MAIL_TRANSPORT_TYPES.smtp;
+
+      configMock.transport.config.auth = expectedAuth;
+      var config = adminMailService.qualifyTransportConfig(transportType, configMock);
+
+      expect(config.transport.config.auth).to.equal(expectedAuth);
+    });
+
+    it('should return config.auth object even with only auth password with SMTP transport', function() {
+      var expectedAuth = { pass: 'password' };
+      var transportType = ADMIN_MAIL_TRANSPORT_TYPES.smtp;
+
+      configMock.transport.config.auth = expectedAuth;
+      var config = adminMailService.qualifyTransportConfig(transportType, configMock);
+
+      expect(config.transport.config.auth).to.equal(expectedAuth);
+    });
+
     it('should return config object for Gmail transport type if transport type is Gmail and saving successfully', function() {
       var expectedConfig = {
         mail: { noreply: 'noreply@open-paas.org', feedback: 'feedback@open-paas.org' },
         transport: {
-          config: { service: 'gmail', auth: { user: '', pass: '' } }
+          config: { service: 'gmail', auth: { user: 'username', pass: 'password' } }
         },
         resolvers: { whatsup: { active: false, options: {} }, all: { active: false } }
       };

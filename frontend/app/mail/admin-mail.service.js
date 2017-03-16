@@ -56,10 +56,7 @@ angular.module('linagora.esn.admin')
               rejectUnauthorized: transportConfig.tls.rejectUnauthorized || false
             },
             port: transportConfig.port,
-            auth: {
-              user: transportConfig.auth.user,
-              pass: transportConfig.auth.pass
-            }
+            auth: qualifyAuthConfig(transportConfig.auth)
           }
         };
         break;
@@ -81,6 +78,12 @@ angular.module('linagora.esn.admin')
     }
 
     return config;
+  }
+
+  function qualifyAuthConfig(auth) {
+    if (auth && (auth.user || auth.pass)) {
+      return auth;
+    }
   }
 
   return {
