@@ -61,3 +61,7 @@ angular.module('esn.file-saver', [])
   .factory('esnFileSaver', function() {
     return {};
   });
+angular.module('esn.module-registry', [])
+  .factory('esnModuleRegistry', function() {
+    return {};
+  });

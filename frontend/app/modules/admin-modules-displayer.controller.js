@@ -4,7 +4,7 @@ angular.module('linagora.esn.admin')
 
 .controller('adminModulesDisplayerController', function($stateParams, $scope, $timeout, ADMIN_MODULES, ADMIN_FORM_EVENT, _, adminDomainConfigService, asyncAction, adminModulesApi) {
   var self = this;
-  var moduleMetaData = ADMIN_MODULES[self.module.name];
+  var moduleMetaData = adminModulesApi.getModuleMetadata(self.module.name);
   var domainId = $stateParams.domainId;
   var HOMEPAGE_KEY = 'homePage';
   var timeoutDuration = 500;
