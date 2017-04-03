@@ -7,20 +7,23 @@ var expect = chai.expect;
 
 describe('The adminModulesController', function() {
   var $controller, $rootScope, $stateParams, $scope;
-  var adminConfigApi, adminDomainConfigService;
+  var adminConfigApi, adminDomainConfigService, esnModuleRegistry;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminConfigApi_, _adminDomainConfigService_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminConfigApi_, _adminDomainConfigService_, _esnModuleRegistry_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminConfigApi = _adminConfigApi_;
       adminDomainConfigService = _adminDomainConfigService_;
+      esnModuleRegistry = _esnModuleRegistry_;
 
       $stateParams.domainId = 'domain123';
     });
+
+    esnModuleRegistry.getAll = sinon.stub().returns({});
   });
 
   function initController(scope) {

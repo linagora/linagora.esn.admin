@@ -6,7 +6,8 @@
 var expect = chai.expect;
 
 describe('The adminModulesApi service', function() {
-  var adminModulesApi, adminConfigApi, esnModuleRegistry, ADMIN_MODULES;
+  var adminModulesApi, adminConfigApi, esnModuleRegistry;
+  var ADMIN_MODULES;
   var DOMAIN_ID = 'domain123';
 
   beforeEach(module('linagora.esn.admin'));
@@ -18,6 +19,8 @@ describe('The adminModulesApi service', function() {
       esnModuleRegistry = _esnModuleRegistry_;
       ADMIN_MODULES = _ADMIN_MODULES_;
     });
+
+    esnModuleRegistry.getAll = sinon.stub().returns({});
   });
 
   var getQueryFromAdminModules = function(modules) {
@@ -26,7 +29,7 @@ describe('The adminModulesApi service', function() {
     angular.forEach(modules, function(module, name) {
       query.push({
         name: name,
-        keys: module.configurations
+        keys: module.configurations || []
       });
     });
 
@@ -35,7 +38,6 @@ describe('The adminModulesApi service', function() {
 
   describe('The getModuleMetadata fn', function() {
     it('should call esnModuleRegistry.getAll', function() {
-      esnModuleRegistry.getAll = sinon.stub().returns({});
 
       adminModulesApi.getModuleMetadata();
 
@@ -43,8 +45,6 @@ describe('The adminModulesApi service', function() {
     });
 
     it('should cache modulesMetadata if it was defined', function() {
-      esnModuleRegistry.getAll = sinon.stub().returns({});
-
       adminModulesApi.getModuleMetadata(); // Init modulesMetadata
 
       adminModulesApi.getModuleMetadata();
@@ -54,9 +54,27 @@ describe('The adminModulesApi service', function() {
   });
 
   describe('The get fn', function() {
+    var modulesmetadataMock;
+
+    beforeEach(function() {
+      modulesmetadataMock = {
+        'linagora.esn.unifiedinbox': {
+          title: 'Unified Inbox',
+          homePage: 'unifiedinbox',
+          configurations: ADMIN_MODULES['linagora.esn.unifiedinbox'].configurations
+        },
+        'linagora.esn.contact': {
+          title: 'Contact',
+          homePage: 'contact'
+        }
+      };
+
+      esnModuleRegistry.getAll = sinon.stub().returns(modulesmetadataMock);
+    });
+
     it('should call adminConfigApi.get', function() {
       var getConfig = sinon.spy(adminConfigApi, 'get');
-      var query = getQueryFromAdminModules(ADMIN_MODULES);
+      var query = getQueryFromAdminModules(modulesmetadataMock);
 
       adminModulesApi.get(DOMAIN_ID);
 

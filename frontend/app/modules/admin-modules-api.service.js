@@ -5,25 +5,32 @@ angular.module('linagora.esn.admin')
 .factory('adminModulesApi', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODULES) {
   var modulesMetadata;
 
-  function getModuleMetadata(moduleName) {
-    if (modulesMetadata) { return modulesMetadata[moduleName]; }
+  function _getModulesMetadata() {
+    if (modulesMetadata) { return modulesMetadata; }
 
-    modulesMetadata = esnModuleRegistry.getAll();
+    modulesMetadata = _.cloneDeep(esnModuleRegistry.getAll());
 
     angular.forEach(modulesMetadata, function(module, name) {
       _.assign(module, ADMIN_MODULES[name]);
     });
 
-    return modulesMetadata[moduleName];
+    return modulesMetadata;
+  }
+
+  function getModuleMetadata(moduleName) {
+    return _getModulesMetadata()[moduleName];
   }
 
   function get(domainId) {
     var query = [];
+    var modulesMetadata = _getModulesMetadata();
 
-    angular.forEach(ADMIN_MODULES, function(module, name) {
+    angular.forEach(modulesMetadata, function(module, name) {
+      var keys = module.configurations || [];
+
       query.push({
         name: name,
-        keys: module.configurations
+        keys: keys
       });
     });
 
