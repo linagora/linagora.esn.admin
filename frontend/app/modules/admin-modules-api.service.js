@@ -2,7 +2,21 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminModulesApi', function(adminConfigApi, ADMIN_MODULES) {
+.factory('adminModulesApi', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODULES) {
+  var modulesMetadata;
+
+  function getModuleMetadata(moduleName) {
+    if (modulesMetadata) { return modulesMetadata[moduleName]; }
+
+    modulesMetadata = esnModuleRegistry.getAll();
+
+    angular.forEach(modulesMetadata, function(module, name) {
+      _.assign(module, ADMIN_MODULES[name]);
+    });
+
+    return modulesMetadata[moduleName];
+  }
+
   function get(domainId) {
     var query = [];
 
@@ -22,6 +36,7 @@ angular.module('linagora.esn.admin')
 
   return {
     get: get,
-    set: set
+    set: set,
+    getModuleMetadata: getModuleMetadata
   };
 });

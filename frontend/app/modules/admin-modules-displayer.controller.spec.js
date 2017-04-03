@@ -6,7 +6,9 @@
 var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
-  var $controller, $rootScope, $scope, adminDomainConfigService, asyncAction, adminModulesApi, $stateParams;
+  var $controller, $rootScope, $scope, $stateParams;
+  var adminDomainConfigService, asyncAction, adminModulesApi, esnModuleRegistry;
+  var metadataMock;
 
   beforeEach(function() {
     module('linagora.esn.admin', function($provide) {
@@ -16,14 +18,29 @@ describe('The adminModulesDisplayerController', function() {
     });
   });
 
-  beforeEach(inject(function(_$controller_, _$rootScope_, _adminDomainConfigService_, _adminModulesApi_, _$stateParams_) {
+  beforeEach(function() {
+    metadataMock = {
+      'linagora.esn.unifiedinbox': {
+        title: 'Unified Inbox',
+        homePage: 'unifiedinbox'
+      },
+      'linagora.esn.contact': {
+        title: 'Contact',
+        homePage: 'contact'
+      }
+    };
+
+    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesApi_, _esnModuleRegistry_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       adminDomainConfigService = _adminDomainConfigService_;
       adminModulesApi = _adminModulesApi_;
       $stateParams = _$stateParams_;
-    })
-  );
+      esnModuleRegistry = _esnModuleRegistry_;
+    });
+
+    esnModuleRegistry.getAll = sinon.stub().returns(metadataMock);
+  });
 
   function initController(module) {
     $scope = $rootScope.$new();
