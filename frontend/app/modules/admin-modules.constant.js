@@ -9,11 +9,5 @@ angular.module('linagora.esn.admin')
         'view', 'api', 'uploadUrl', 'downloadUrl', 'isJmapSendingEnabled',
         'isSaveDraftBeforeSendingEnabled', 'composer.attachments', 'maxSizeUpload',
         'twitter.tweets', 'swipeRightAction', 'drafts']
-    },
-    'linagora.esn.contact': {
-      configurations: []
-    },
-    'linagora.esn.calendar': {
-      configurations: []
     }
   });
