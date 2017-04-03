@@ -13,8 +13,8 @@ ng-form(name="form")
       .col-xs-1.flex-end
         btn.btn.btn-link(ng-click="$ctrl.deleteField(field, form)")
           i.mdi.mdi-close-circle
-  .button.clickable(ng-show='$ctrl.showAddButton()', ng-click="$ctrl.addField()")
-    .form-group
-      .flex-vertical-centered.m-t-10
+  .form-group
+    .flex-vertical-centered
+      .button.clickable(ng-show='$ctrl.showAddButton()', ng-click="$ctrl.addField()")
         i.mdi.mdi-plus-circle.button-add.m-r-5
         | #{__("Add a new mapping")}
