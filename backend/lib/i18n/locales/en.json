@@ -114,7 +114,13 @@
   "This must be less than or equal to": "This must be less than or equal to",
   "Delete": "Delete",
   "Transport type": "Transport type",
-  "James URL": "James URL",
   "James Configuration": "James Configuration",
-  "James": "James"
+  "James": "James",
+  "Server URL": "Server URL",
+  "Connect": "Connect",
+  "Cannot connect to James server": "Cannot connect to James server",
+  "Quota": "Quota",
+  "Define the quota limit for each user. Leave the fields empty for no quota.": "Define the quota limit for each user. Leave the fields empty for no quota.",
+  "Data usage quota": "Data usage quota",
+  "Message count quota": "Message count quota"
 }
