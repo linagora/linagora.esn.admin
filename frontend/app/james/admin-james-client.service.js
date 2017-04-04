@@ -22,7 +22,7 @@
     };
   })
 
-  .factory('adminJamesClientProvider', function($q, adminConfigApi, adminDomainConfigService, james, httpTransport) {
+  .factory('adminJamesClientProvider', function(adminConfigApi, james, httpTransport) {
     var cachedPromises = {};
 
     function get(domainId, apiUrl) {
