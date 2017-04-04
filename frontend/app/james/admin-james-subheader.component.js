@@ -1,11 +1,13 @@
-'use strict';
+(function(angular) {
+  'use strict';
 
-angular.module('linagora.esn.admin')
+  angular.module('linagora.esn.admin')
 
-.component('adminJamesSubheader', {
-  templateUrl: '/admin/app/james/admin-james-subheader',
-  bindings: {
-    onFormSubmit: '&',
-    form: '<'
-  }
-});
+  .component('adminJamesSubheader', {
+    templateUrl: '/admin/app/james/admin-james-subheader',
+    bindings: {
+      onFormSubmit: '&',
+      form: '<'
+    }
+  });
+})(angular);
