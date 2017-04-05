@@ -44,6 +44,11 @@ admin-roles admin-roles-list {
         }
       }
 
+      .col-md-1 {
+        padding-left: 11px;
+        padding-right: 0;
+      }
+
       a.revoke {
         .flex-vertical-centered;
 
@@ -58,9 +63,13 @@ admin-roles admin-roles-list {
           font-size: 2em;
         }
       }
-
     }
 
+    @media screen and (max-width: @screen-md-min) {
+      .avatar-with-bubble i {
+        margin-right: 17px;
+      }
+    }
   }
 }
 
