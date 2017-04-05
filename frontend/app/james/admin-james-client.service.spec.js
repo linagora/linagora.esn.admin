@@ -10,12 +10,12 @@ describe('The adminJamesQuota service', function() {
     module('linagora.esn.admin');
   });
 
-  describe('The httpTransport factory', function() {
-    var $httpBackend, httpTransport;
+  describe('The adminJamesClientTransport factory', function() {
+    var $httpBackend, adminJamesClientTransport;
 
-    beforeEach(inject(function(_$httpBackend_, _httpTransport_) {
+    beforeEach(inject(function(_$httpBackend_, _adminJamesClientTransport_) {
       $httpBackend = _$httpBackend_;
-      httpTransport = _httpTransport_;
+      adminJamesClientTransport = _adminJamesClientTransport_;
     }));
 
     describe('The get fn', function() {
@@ -26,7 +26,7 @@ describe('The adminJamesQuota service', function() {
           return true;
         }).respond(200);
 
-        httpTransport.get('/testing', { a: 'x', b: 1 }).then(function() { done(); });
+        adminJamesClientTransport.get('/testing', { a: 'x', b: 1 }).then(function() { done(); });
 
         $httpBackend.flush();
       });
@@ -34,7 +34,7 @@ describe('The adminJamesQuota service', function() {
       it('should parse the data as JSON and resolve the promise with it', function(done) {
         $httpBackend.expectGET('/testing').respond(200, '[["test",{"a":"b"}]]');
 
-        httpTransport.get('/testing').then(function(data) {
+        adminJamesClientTransport.get('/testing').then(function(data) {
           expect(data).to.deep.equal([['test', { a: 'b' }]]);
 
           done();
@@ -46,7 +46,7 @@ describe('The adminJamesQuota service', function() {
       it('should reject the promise if HTTP status code is not 200', function(done) {
         $httpBackend.expectGET('/testing').respond(400);
 
-        httpTransport.get('/testing').catch(function() { done(); });
+        adminJamesClientTransport.get('/testing').catch(function() { done(); });
 
         $httpBackend.flush();
       });
@@ -64,7 +64,7 @@ describe('The adminJamesQuota service', function() {
           return true;
         }).respond(200);
 
-        httpTransport.put('/testing', { a: 'x', b: 1 }, [0, 1]).then(function() { done(); });
+        adminJamesClientTransport.put('/testing', { a: 'x', b: 1 }, [0, 1]).then(function() { done(); });
 
         $httpBackend.flush();
       });
@@ -72,7 +72,7 @@ describe('The adminJamesQuota service', function() {
       it('should parse the data as JSON and resolve the promise with it', function(done) {
         $httpBackend.expectPUT('/testing').respond(200, '[["test",{"a":"b"}]]');
 
-        httpTransport.put('/testing').then(function(data) {
+        adminJamesClientTransport.put('/testing').then(function(data) {
           expect(data).to.deep.equal([['test', { a: 'b' }]]);
 
           done();
@@ -84,7 +84,7 @@ describe('The adminJamesQuota service', function() {
       it('should reject the promise if HTTP status code is not 200', function(done) {
         $httpBackend.expectPUT('/testing').respond(400);
 
-        httpTransport.put('/testing').catch(function() { done(); });
+        adminJamesClientTransport.put('/testing').catch(function() { done(); });
 
         $httpBackend.flush();
       });

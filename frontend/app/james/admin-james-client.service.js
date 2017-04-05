@@ -7,7 +7,7 @@
     return $window.james;
   })
 
-  .factory('httpTransport', function($http) {
+  .factory('adminJamesClientTransport', function($http) {
     return {
       get: function(url, headers) {
         return $http.get(url, {headers: headers}).then(function(response) {
@@ -22,7 +22,7 @@
     };
   })
 
-  .factory('adminJamesClientProvider', function(adminConfigApi, james, httpTransport) {
+  .factory('adminJamesClientProvider', function(adminConfigApi, james, adminJamesClientTransport) {
     var cachedPromises = {};
 
     function get(domainId, apiUrl) {
@@ -33,7 +33,7 @@
       return cachedPromises[domainId].then(function(resp) {
         var token = resp.data;
         var options = {
-          httpClient: httpTransport,
+          httpClient: adminJamesClientTransport,
           promiseProvider: null,
           apiUrl: apiUrl,
           token: token
