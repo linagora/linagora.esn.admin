@@ -113,5 +113,14 @@
   "This must be greater than or equal to": "Phải lớn hơn hoặc bằng",
   "This must be less than or equal to": "Phải nhỏ hơn hoặc bằng",
   "Delete": "Xóa",
-  "Transport type": "Phương thức truyền thư"
+  "Transport type": "Phương thức truyền thư",
+  "James Configuration": "Cấu hình James",
+  "James": "James",
+  "Server URL": "Địa chỉ máy chủ",
+  "Connect": "Kết nối",
+  "Cannot connect to James server": "Không thể kết nối tới máy chủ James",
+  "Quota": "Giới hạn sử dụng",
+  "Define the quota limit for each user. Leave the fields empty for no quota.": "Xác định giới hạn định mức cho mỗi người dùng. Để trống nếu không có định mức.",
+  "Data usage quota": "Dung lượng tối đa",
+  "Message count quota": "Số tin nhắn tối đa"
 }

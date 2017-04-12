@@ -113,5 +113,14 @@
   "This must be greater than or equal to": "Ceci doit être supérieur ou égal à",
   "This must be less than or equal to": "Ceci doit être inférieur ou égal à",
   "Delete": "Effacer",
-  "Transport type": "Type de transport"
+  "Transport type": "Type de transport",
+  "James Configuration": "James Configuration",
+  "James": "James",
+  "Server URL": "URL du serveur",
+  "Connect": "Se connecter",
+  "Cannot connect to James server": "Impossible de se connecter au serveur James",
+  "Quota": "Quota",
+  "Define the quota limit for each user. Leave the fields empty for no quota.": "Définir la limite du quota pour chaque utilisateur. Laisser les champs vides si aucun quota.",
+  "Data usage quota": "Quota d'utilisation des données",
+  "Message count quota": "Quota de nombre de messages"
 }
