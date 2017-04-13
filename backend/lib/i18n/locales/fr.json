@@ -122,5 +122,7 @@
   "Quota": "Quota",
   "Define the quota limit for each user. Leave the fields empty for no quota.": "Définir la limite du quota pour chaque utilisateur. Laisser les champs vides si aucun quota.",
   "Data usage quota": "Quota d'utilisation des données",
-  "Message count quota": "Quota de nombre de messages"
+  "Message count quota": "Quota de nombre de messages",
+  "Platform Administration": "Administration de la plateforme",
+  "Switch to %s page": "Passer à la page %s"
 }
