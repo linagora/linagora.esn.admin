@@ -49,7 +49,7 @@ describe('The configuration API controller', function() {
           { name: 'config3', value: 'config3'}
         ]
       }];
-      var req = { user: {} };
+      var req = { user: {}, params: {} };
       var res = {
         status: function(code) {
           expect(code).to.equal(200);
@@ -71,7 +71,7 @@ describe('The configuration API controller', function() {
     });
 
     it('should respond 500 if server fails to get configurations', function(done) {
-      var req = { user: {} };
+      var req = { user: {}, params: {} };
       var res = {
         status: function(code) {
           expect(code).to.equal(500);
@@ -103,7 +103,7 @@ describe('The configuration API controller', function() {
   describe('The updateConfigurations fn', function() {
 
     it('should respond 204 if configurations are updated successfully', function(done) {
-      var req = { user: {} };
+      var req = { user: {}, params: {} };
       var res = {
         status: function(code) {
           expect(code).to.equal(204);
@@ -118,7 +118,7 @@ describe('The configuration API controller', function() {
     });
 
     it('should respond 500 if it fails to update configurations', function(done) {
-      var req = { user: {} };
+      var req = { user: {}, params: {} };
       var res = {
         status: function(code) {
           expect(code).to.equal(500);

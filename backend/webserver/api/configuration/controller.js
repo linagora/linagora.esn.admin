@@ -6,9 +6,9 @@ let authJwt;
 
 function getConfigurations(req, res) {
   const modules = req.body;
-  const user = req.user;
+  const domainId = req.params.uuid ? req.params.uuid : null;
 
-  return esnConfig.configurations.getConfigurations(modules, user.preferredDomainId)
+  return esnConfig.configurations.getConfigurations(modules, domainId)
     .then(
       modules => res.status(200).json(modules),
       (err) => {
@@ -21,9 +21,9 @@ function getConfigurations(req, res) {
 
 function updateConfigurations(req, res) {
   const modules = req.body;
-  const user = req.user;
+  const domainId = req.params.uuid ? req.params.uuid : null;
 
-  return esnConfig.configurations.updateConfigurations(modules, user.preferredDomainId)
+  return esnConfig.configurations.updateConfigurations(modules, domainId)
     .then(
       () => res.status(204).end(),
       (err) => {
