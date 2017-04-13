@@ -7,6 +7,7 @@ module.exports = function(dependencies) {
   const domainMiddleware = dependencies('domainMiddleware');
   const configurationMW = dependencies('configurationMW');
   const helperMW = dependencies('helperMW');
+  const platformadminsMW = dependencies('platformadminsMW');
   const controller = require('./controller')(dependencies);
 
   const router = express.Router();
@@ -38,6 +39,20 @@ module.exports = function(dependencies) {
     domainMiddleware.load,
     authorizationMW.requiresDomainManager,
     controller.generateJwtToken);
+
+  router.post('/',
+    authorizationMW.requiresAPILogin,
+    platformadminsMW.requirePlatformAdmin,
+    helperMW.requireBodyAsArray,
+    configurationMW.canReadPlatformConfig,
+    controller.getConfigurations);
+
+  router.put('/',
+    authorizationMW.requiresAPILogin,
+    platformadminsMW.requirePlatformAdmin,
+    helperMW.requireBodyAsArray,
+    configurationMW.canWritePlatformConfig,
+    controller.updateConfigurations);
 
   return router;
 };
