@@ -21,9 +21,17 @@
       adminDomainConfigService.get(domainId, CONFIG_NAME)
         .then(function(data) {
           data = data || {};
+
           self.serverUrl = data.url;
         })
-        .then(connect);
+        .then(getJamesConfigurations)
+        .then(function() {
+          self.connectionStatus = 'connected';
+        })
+        .catch(function() {
+          self.connectionStatus = 'error';
+          self.config = {};
+        });
     }
 
     function connect() {
@@ -32,29 +40,27 @@
       self.connectionStatus = 'connecting';
 
       return getJamesConfigurations()
-        .then(function(data) {
+        .then(_saveJamesUrl)
+        .then(function() {
           self.connectionStatus = 'connected';
-          var config = {
-            quota: data[0]
-          };
-
-          self.config = _qualifyJamesConfig(config);
         })
         .catch(function() {
           self.connectionStatus = 'error';
           self.config = {};
-
-          return $q.reject();
         });
     }
 
-    function onServerUrlChange() {
+    function onServerUrlChange(configForm) {
       self.connectionStatus = '';
       self.config = {};
+
+      if (configForm) {
+        configForm.$setPristine();
+      }
     }
 
     function save() {
-      return asyncAction('Modification of James settings', _saveConfiguration);
+      return asyncAction('Modification of James settings', _saveJamesConfigurations);
     }
 
     function getJamesConfigurations() {
@@ -63,11 +69,21 @@
         .then(function(jamesClient) {
           return $q.all([
             jamesClient.getQuota()
-          ]);
+          ]).then(function(data) {
+            var config = {
+              quota: data[0]
+            };
+
+            self.config = _qualifyJamesConfig(config);
+          });
         });
     }
 
-    function setJamesConfigurations() {
+    function _saveJamesUrl() {
+      return adminDomainConfigService.set(domainId, CONFIG_NAME, { url: self.serverUrl });
+    }
+
+    function _saveJamesConfigurations() {
       var config = _qualifyJamesConfig(self.config, ACTION_DEFAULT_VALUE.set);
 
       return adminJamesClientProvider
@@ -77,13 +93,6 @@
             jamesClient.setQuota(config.quota)
           ]);
         });
-    }
-
-    function _saveConfiguration() {
-      return $q.all([
-        adminDomainConfigService.set(domainId, CONFIG_NAME, { url: self.serverUrl }),
-        setJamesConfigurations()
-      ]);
     }
 
     function _qualifyJamesConfig(config, defaultValue) {

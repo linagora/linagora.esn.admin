@@ -41,6 +41,10 @@ describe('The adminJamesController', function() {
 
       $stateParams.domainId = 'domain123';
       adminJamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
+
+      adminDomainConfigService.get = function() {
+        return $q.when({});
+      };
     });
   });
 
@@ -81,20 +85,7 @@ describe('The adminJamesController', function() {
       };
     });
 
-    it('should call adminDomainConfigService.set to save configuration', function(done) {
-      var controller = initController();
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.serverUrl = 'new value';
-      controller.save().then(function() {
-        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, { url: 'new value' });
-        done();
-      });
-
-      $scope.$digest();
-    });
-
-    it('should call james client to save quota configuration', function(done) {
+    it('should call James client to save James configuration', function(done) {
       var controller = initController();
 
       adminDomainConfigService.set = function() {
@@ -113,8 +104,7 @@ describe('The adminJamesController', function() {
   });
 
   describe('The onServerUrlChange fn', function() {
-    it('should reset connectionStatus and james config if server url on change', function() {
-      adminDomainConfigService.get = sinon.stub().returns($q.when({}));
+    it('should reset connectionStatus and James config if server URL on change', function() {
       var controller = initController();
 
       controller.onServerUrlChange();
@@ -125,35 +115,76 @@ describe('The adminJamesController', function() {
   });
 
   describe('The connect fn', function() {
-    it('should set connectionStatus and james config if connect to server successfuly', function(done) {
-      adminDomainConfigService.get = sinon.stub().returns($q.when({}));
+
+    it('should call adminDomainConfigService.set to save James URL', function() {
       var controller = initController();
 
-      controller.serverUrl = 'url';
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
+      controller.serverUrl = 'new value';
 
-      controller.connect().then(function() {
-        expect(controller.connectionStatus).to.equal('connected');
-        expect(controller.config).to.deep.equal({ quota: { size: null, count: null } });
-        done();
-      });
-
+      controller.connect();
       $scope.$digest();
+
+      expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, { url: 'new value' });
+
     });
 
-    it('should reject if connect to server fail', function(done) {
-      adminDomainConfigService.get = sinon.stub().returns($q.when({}));
+    it('should set connectionStatus to connected and James config if connect to server successfuly', function() {
+      adminDomainConfigService.set = sinon.stub().returns($q.when());
       var controller = initController();
 
       controller.serverUrl = 'url';
-      adminJamesClientProvider.get = sinon.stub().returns($q.reject());
 
-      controller.connect().catch(function() {
-        expect(controller.connectionStatus).to.equal('error');
-        expect(controller.config).to.deep.equal({});
-        done();
-      });
-
+      controller.connect();
       $scope.$digest();
+
+      expect(controller.connectionStatus).to.equal('connected');
+      expect(controller.config).to.deep.equal({ quota: { size: null, count: null } });
+      expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, { url: 'url' });
+    });
+
+    it('should set connectionStatus to error if connect successfuly but fails to save James URL', function() {
+      var controller = initController();
+
+      adminDomainConfigService.set = function() {
+        return $q.reject({});
+      };
+      controller.serverUrl = 'url';
+
+      controller.connect();
+      $scope.$digest();
+
+      expect(controller.connectionStatus).to.equal('error');
+      expect(controller.config).to.deep.equal({});
+    });
+
+    it('should set connectionStatus to error if it fails to get James client', function() {
+      var controller = initController();
+
+      controller.serverUrl = 'url';
+      adminJamesClientProvider.get = function() {
+        return $q.reject({});
+      };
+
+      controller.connect();
+      $scope.$digest();
+
+      expect(controller.connectionStatus).to.equal('error');
+      expect(controller.config).to.deep.equal({});
+    });
+
+    it('should set connectionStatus to error if it fails to get James config', function() {
+      var controller = initController();
+
+      controller.serverUrl = 'url';
+      jamesClientInstanceMock.getQuota = sinon.stub().returns($q.reject());
+
+      controller.connect();
+      $scope.$digest();
+
+      expect(jamesClientInstanceMock.getQuota).to.have.been.calledOnce;
+      expect(controller.connectionStatus).to.equal('error');
+      expect(controller.config).to.deep.equal({});
     });
   });
 });
