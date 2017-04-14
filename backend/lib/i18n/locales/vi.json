@@ -122,5 +122,7 @@
   "Quota": "Giới hạn sử dụng",
   "Define the quota limit for each user. Leave the fields empty for no quota.": "Xác định giới hạn định mức cho mỗi người dùng. Để trống nếu không có định mức.",
   "Data usage quota": "Dung lượng tối đa",
-  "Message count quota": "Số tin nhắn tối đa"
+  "Message count quota": "Số tin nhắn tối đa",
+  "Platform Administration": "Quản trị hệ thống",
+  "Switch to %s page": "Chuyển đến trang %s"
 }

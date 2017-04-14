@@ -1,0 +1,10 @@
+.lv-actions.actions(ng-if="$ctrl.isAdmin")
+  li.dropdown
+    a(href='', data-toggle='dropdown', aria-expanded='true')
+      i.mdi.mdi-chevron-down
+    ul.dropdown-menu.dropdown-menu-right
+      li
+        a(ng-click="$ctrl.transition()")
+          .flex-vertical-centered
+            .item-text  
+              span #{__('Switch to %s page', '{{$ctrl.nextState}}')}
