@@ -1,10 +1,14 @@
-.actions(ng-if="$ctrl.isAdmin")
+.actions(ng-if="$ctrl.hasTwoAdminRoles")
   li.dropdown
     a(href='', data-toggle='dropdown', aria-expanded='true')
       i.mdi.mdi-chevron-down
     ul.dropdown-menu.dropdown-menu-right
-      li
-        a(ng-click="$ctrl.transition()")
+      li(ng-switch="$ctrl.isPlatformMode")
+        a(ng-switch-when="true", ng-click="$ctrl.goToDomainMode()")
           .flex-vertical-centered
             .item-text  
-              span #{__('Switch to %s page', '{{$ctrl.nextState}}')}
+              span #{__('Switch to domain mode')}
+        a(ng-switch-when="false", ng-click="$ctrl.goToPlatformMode()")
+          .flex-vertical-centered
+            .item-text  
+              span #{__('Switch to platform mode')}

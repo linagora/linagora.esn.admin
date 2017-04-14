@@ -3,18 +3,17 @@
 angular.module('linagora.esn.admin')
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.when('/admin', function($state, $location, session) {
+  $urlRouterProvider.when('/admin', function($state, $location, session, adminModeService) {
     session.ready.then(function() {
-      if (!session.userIsDomainAdministrator() && !session.user.isPlatformAdmin) {
-        return $location.path('/');
-      }
-      if (!session.userIsDomainAdministrator() && session.user.isPlatformAdmin) {
-        return $state.go('admin.platform');
+      if (session.userIsDomainAdministrator()) {
+        return adminModeService.goToDomainMode();
       }
 
-      var domainId = session.domain._id; // we suppose that an admin manages only 1 domain
+      if (session.user.isPlatformAdmin) {
+        return adminModeService.goToPlatformMode();
+      }
 
-      $state.go('admin.domain', { domainId: domainId });
+      return $location.path('/');
     });
   });
 
@@ -30,21 +29,6 @@ angular.module('linagora.esn.admin')
         }
       }
     })
-    .state('admin.platform', {
-      url: '/platform',
-      views: {
-        'root@admin': {
-          template: '<admin-platform />'
-        }
-      },
-      resolve: {
-        isPlatformAdmin: function($location, session) {
-          return session.ready.then(function() {
-            if (!session.user.isPlatformAdmin) { $location.path('/'); }
-          });
-        }
-      }
-    })
     .state('admin.domain', {
       url: '/:domainId',
       deepStateRedirect: {
@@ -55,9 +39,9 @@ angular.module('linagora.esn.admin')
         }
       },
       resolve: {
-        isDomainAdmin: function($location, session) {
+        isAdmin: function($location, session) {
           return session.ready.then(function() {
-            if (!session.userIsDomainAdministrator()) { $location.path('/'); }
+            if (!session.userIsDomainAdministrator() && !session.user.isPlatformAdmin) { $location.path('/'); }
           });
         }
       }
