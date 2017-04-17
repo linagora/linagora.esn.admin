@@ -1,19 +1,19 @@
 sub-header
-  admin-james-subheader(on-form-submit="$ctrl.save()", form="form")
+  admin-james-subheader(on-form-submit="$ctrl.save()", form="configForm")
 
-form(name="form")
+form(name='urlForm')
   .card
     .card-header
     .card-body.card-padding
       .row
-        ng-form(name='urlForm')
-          .col-xs-8
-            esn-form-group(label="#{__('Server URL')}", form="urlForm")
-              input.form-control(type="url", ng-model="$ctrl.serverUrl", auto-focus, name="url", ng-change="$ctrl.onServerUrlChange()")
-          .col-xs-4.text-center(ng-show="!$ctrl.connectionStatus || $ctrl.connectionStatus === 'error'")
-            button.btn.btn-primary(type="button", esn-submit="$ctrl.connect()", ng-disabled="urlForm.$invalid")
-              | #{__('Connect')}
+        .col-xs-8
+          esn-form-group(label="#{__('Server URL')}", form="urlForm")
+            input.form-control(type="url", ng-model="$ctrl.serverUrl", auto-focus, name="url", ng-change="$ctrl.onServerUrlChange(configForm)", required)
+        .col-xs-4.text-center(ng-show="!$ctrl.connectionStatus || $ctrl.connectionStatus === 'error'")
+          button.btn.btn-primary(type="button", esn-submit="$ctrl.connect()", ng-disabled="urlForm.$invalid")
+            | #{__('Connect')}
 
+form(name="configForm")
   div(ng-switch="$ctrl.connectionStatus")
     div(ng-switch-when="connected")
       admin-james-quota(quota="$ctrl.config.quota")
