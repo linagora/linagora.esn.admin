@@ -6,6 +6,6 @@ angular.module('linagora.esn.admin')
   return {
     restrict: 'E',
     replace: true,
-    template: applicationMenuTemplateBuilder('/#/admin', 'admin-center', 'Administration')
+    template: applicationMenuTemplateBuilder('/#/admin', { url: '/admin/images/admin-center-icon.svg' }, 'Administration')
   };
 });

@@ -1,7 +1,7 @@
 .card(ng-init="expanded=false", ng-class="{clickable: $ctrl.hasConfiguration}")
   .card-header(ng-click="expanded=!expanded")
     h2.flex-vertical-centered(ng-class="form.$pristine ? '': 'unsaved-changes'")
-      img(ng-src="/images/application-menu/{{$ctrl.icon}}.svg")
+      img(ng-src="{{$ctrl.icon}}")
       span {{$ctrl.title}}
 
     .toolbar
