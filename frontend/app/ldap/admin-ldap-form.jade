@@ -45,6 +45,6 @@
     .col-xs-12
       .p-t-5.flex-space-between
         span
-          |  #{__('You removed LDAP configuration "%s"', '{{$ctrl.ldapConfig.name}}')}
+          |  #{__('You are about to remove the LDAP configuration "%s"', '{{$ctrl.ldapConfig.name}}')}
         a(ng-click='$ctrl.undo()', href='')
-          |  #{__("Undo")}
+          |  #{__("Cancel")}
