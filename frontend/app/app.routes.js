@@ -126,5 +126,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-jwt />'
         }
       }
+    })
+    .state('admin.domain.general', {
+      url: '/general',
+      views: {
+        'root@admin': {
+          template: '<admin-general />'
+        }
+      }
     });
 });
