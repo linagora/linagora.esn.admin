@@ -129,7 +129,7 @@ describe('The adminJwtController', function() {
       var form = { $setDirty: angular.noop };
 
       controller.generate(form).then(function() {
-        expect(adminConfigApi.generateJwtKeyPair).to.have.been.calledWith($stateParams.domainId);
+        expect(adminConfigApi.generateJwtKeyPair).to.have.been.calledWith();
         expect(controller.config.publicKey).to.equal(data.publicKey);
         expect(controller.config.privateKey).to.equal(data.privateKey);
         done();

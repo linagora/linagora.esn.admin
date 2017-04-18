@@ -28,17 +28,16 @@ module.exports = function(dependencies) {
     configurationMW.canWriteAdminConfig,
     controller.updateConfigurations);
 
-  router.post('/domains/:uuid/generateJwtKeyPair',
-    authorizationMW.requiresAPILogin,
-    domainMiddleware.load,
-    authorizationMW.requiresDomainManager,
-    controller.generateJwtKeyPair);
-
   router.post('/domains/:uuid/generateJwtToken',
     authorizationMW.requiresAPILogin,
     domainMiddleware.load,
     authorizationMW.requiresDomainManager,
     controller.generateJwtToken);
+
+  router.post('/generateJwtKeyPair',
+    authorizationMW.requiresAPILogin,
+    platformadminsMW.requirePlatformAdmin,
+    controller.generateJwtKeyPair);
 
   router.post('/',
     authorizationMW.requiresAPILogin,

@@ -71,4 +71,12 @@ angular.module('linagora.esn.admin')
     domain: true,
     platform: false
   }
+}, {
+  id: 'jwt',
+  name: 'JWT',
+  icon: 'mdi-shield',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
 }]);
