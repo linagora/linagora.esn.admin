@@ -8,27 +8,6 @@
           i.mdi.mdi-server
           .menu-title #{__('Administration Center')}
           admin-platform-panel-switch
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.mail", ui-sref-active="selected")
-          i.mdi.mdi-email
-          .menu-title #{__('Mail')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.users", ui-sref-active="selected")
-          i.mdi.mdi-account-multiple
-          .menu-title #{__('Users')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.roles", ui-sref-active="selected")
-          i.mdi.mdi-clipboard-account
-          .menu-title #{__('Roles')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.dav", ui-sref-active="selected")
-          i.mdi.mdi-calendar-blank
-          .menu-title #{__('DAV')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.ldap", ui-sref-active="selected")
-          i.mdi.mdi-book
-          .menu-title #{__('LDAP')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.web", ui-sref-active="selected")
-          i.mdi.mdi-web
-          .menu-title #{__('Web')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.modules", ui-sref-active="selected")
-          i.mdi.mdi-view-module
-          .menu-title #{__('Modules')}
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.james", ui-sref-active="selected")
-          i.mdi.mdi-fire
-          .menu-title #{__('James')}
+        a.lv-item.menu-item(href="", ui-sref="admin.domain.{{page.id}}", ui-sref-active="selected", ng-repeat="page in $ctrl.availablePages")
+          i.mdi(ng-class="page.icon")
+          .menu-title {{page.name}}
