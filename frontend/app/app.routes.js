@@ -134,5 +134,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-general />'
         }
       }
+    })
+    .state('admin.domain.oauth', {
+      url: '/oauth',
+      views: {
+        'root@admin': {
+          template: '<admin-oauth />'
+        }
+      }
     });
 });

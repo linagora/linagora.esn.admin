@@ -117,5 +117,10 @@
   "Switch to domain mode": "Switch to domain mode",
   "Switch to platform mode": "Switch to platform mode",
   "Max login retries": "Max login retries",
-  "General configuration": "General configuration"
+  "General configuration": "General configuration",
+  "API Key": "API Key",
+  "API Secret": "API Secret",
+  "Social connections": "Social connections",
+  "How to obtain your API keys?": "How to obtain your API keys?",
+  "Twitter": "Twitter"
 }
