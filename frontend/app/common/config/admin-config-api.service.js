@@ -2,11 +2,15 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminConfigApi', function($q, Restangular, adminRestangular) {
+.factory('adminConfigApi', function($q, Restangular, adminRestangular, ADMIN_MODE) {
   function get(domainId, query) {
-    return adminRestangular
-      .all('configuration')
-      .one('domains', domainId)
+    var request = adminRestangular.all('configuration');
+
+    if (domainId !== ADMIN_MODE.platform) {
+      request = request.one('domains', domainId);
+    }
+
+    return request
       .customPOST(query)
       .then(function(response) {
         if (response.status !== 200) {
@@ -18,10 +22,13 @@ angular.module('linagora.esn.admin')
   }
 
   function set(domainId, query) {
-    return adminRestangular
-      .all('configuration')
-      .one('domains', domainId)
-      .customPUT(query);
+    var request = adminRestangular.all('configuration');
+
+    if (domainId !== ADMIN_MODE.platform) {
+      request = request.one('domains', domainId);
+    }
+
+    return request.customPUT(query);
   }
 
   function generateJwtKeyPair(domainId) {
