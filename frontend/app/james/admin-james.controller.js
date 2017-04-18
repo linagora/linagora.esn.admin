@@ -15,9 +15,9 @@
     self.connect = connect;
     self.onServerUrlChange = onServerUrlChange;
 
-    self.connectionStatus = '';
-
     function $onInit() {
+      self.connectionStatus = 'connecting';
+
       adminDomainConfigService.get(domainId, CONFIG_NAME)
         .then(function(data) {
           data = data || {};
