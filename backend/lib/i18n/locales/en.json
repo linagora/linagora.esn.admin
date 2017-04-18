@@ -115,5 +115,7 @@
   "Data usage quota": "Data usage quota",
   "Message count quota": "Message count quota",
   "Switch to domain mode": "Switch to domain mode",
-  "Switch to platform mode": "Switch to platform mode"
+  "Switch to platform mode": "Switch to platform mode",
+  "Max login retries": "Max login retries",
+  "General configuration": "General configuration"
 }

@@ -1,0 +1,9 @@
+sub-header
+  admin-general-subheader(on-form-submit="$ctrl.save()", form="form")
+
+.card
+  .card-body.card-padding
+    form(name="form")
+      .row
+        .col-xs-12.col-md-6
+          admin-general-login(login="$ctrl.configs.login")
