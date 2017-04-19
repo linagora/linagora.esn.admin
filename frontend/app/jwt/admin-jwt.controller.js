@@ -40,6 +40,6 @@ angular.module('linagora.esn.admin')
   }
 
   function _generateKeyPair() {
-    return adminConfigApi.generateJwtKeyPair(domainId);
+    return adminConfigApi.generateJwtKeyPair();
   }
 });

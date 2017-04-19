@@ -31,10 +31,9 @@ angular.module('linagora.esn.admin')
     return request.customPUT(query);
   }
 
-  function generateJwtKeyPair(domainId) {
+  function generateJwtKeyPair() {
     return adminRestangular
       .all('configuration')
-      .one('domains', domainId)
       .one('generateJwtKeyPair')
       .post();
   }

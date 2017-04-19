@@ -104,11 +104,9 @@ describe('The adminConfigApi Angular service', function() {
   describe('The generateJwtKeypair fn', function() {
 
     it('should send POST request to the right endpoint', function(done) {
-      var domainId = 'domain123';
+      $httpBackend.expectPOST('/admin/api/configuration/generateJwtKeyPair').respond(200);
 
-      $httpBackend.expectPOST('/admin/api/configuration/domains/' + domainId + '/generateJwtKeyPair').respond(200);
-
-      adminConfigApi.generateJwtKeyPair(domainId).then(done.bind(null, null), done.bind(null, 'should resolve'));
+      adminConfigApi.generateJwtKeyPair().then(done.bind(null, null), done.bind(null, 'should resolve'));
 
       $httpBackend.flush();
     });
