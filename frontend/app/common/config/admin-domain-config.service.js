@@ -1,38 +1,60 @@
-'use strict';
+(function(angular) {
+  'use strict';
 
-angular.module('linagora.esn.admin')
+  angular.module('linagora.esn.admin')
+    .factory('adminDomainConfigService', adminDomainConfigService);
 
-.factory('adminDomainConfigService', function(adminConfigApi, _) {
-  var DEFAULT_MODULE = 'core';
+  function adminDomainConfigService(adminConfigApi, _) {
+    var DEFAULT_MODULE = 'core';
 
-  function get(domainId, key) {
-    var query = [{
-      name: DEFAULT_MODULE,
-      keys: [key]
-    }];
+    return {
+      get: get,
+      set: set,
+      getMultiple: getMultiple,
+      setMultiple: setMultiple
+    };
 
-    return adminConfigApi.get(domainId, query).then(function(modules) {
-      var module = _.find(modules, { name: DEFAULT_MODULE });
-      var config = module && _.find(module.configurations, { name: key });
+    function get(domainId, key) {
+      var keys = [key];
 
-      return config && config.value;
-    });
+      return getMultiple(domainId, keys).then(function(configurations) {
+        return configurations[key];
+      });
+    }
+
+    function getMultiple(domainId, keys) {
+      var query = [{
+        name: DEFAULT_MODULE,
+        keys: keys
+      }];
+
+      return adminConfigApi.get(domainId, query).then(function(modules) {
+        var module = _.find(modules, { name: DEFAULT_MODULE });
+        var configurations = {};
+
+        if (module) {
+          _.forEach(module.configurations, function(config) {
+            configurations[config.name] = config.value;
+          });
+        }
+
+        return configurations;
+      });
+    }
+
+    function set(domainId, key, value) {
+      var configurations = [{ name: key, value: value }];
+
+      return setMultiple(domainId, configurations);
+    }
+
+    function setMultiple(domainId, configurations) {
+      var query = [{
+        name: DEFAULT_MODULE,
+        configurations: configurations
+      }];
+
+      return adminConfigApi.set(domainId, query);
+    }
   }
-
-  function set(domainId, key, value) {
-    var query = [{
-      name: DEFAULT_MODULE,
-      configurations: [{
-        name: key,
-        value: value
-      }]
-    }];
-
-    return adminConfigApi.set(domainId, query);
-  }
-
-  return {
-    get: get,
-    set: set
-  };
-});
+})(angular);

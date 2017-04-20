@@ -131,6 +131,58 @@ describe('The adminDomainConfigService service', function() {
 
   });
 
+  describe('The getMultiple fn', function() {
+    it('should reject on failure', function(done) {
+      var keys = ['a', 'b'];
+
+      adminConfigApi.get = function(domainId, query) {
+        expect(domainId).to.equal(DOMAIN_ID);
+        expect(query).to.deep.equal([{
+          name: DEFAULT_MODULE,
+          keys: keys
+        }]);
+
+        return $q.reject(new Error('some_error'));
+      };
+
+      adminDomainConfigService.getMultiple(DOMAIN_ID, keys).catch(function(err) {
+        expect(err.message).to.equal('some_error');
+        done();
+      });
+
+      $rootScope.$digest();
+    });
+
+    it('should resolve a list configurations when they are found', function(done) {
+      var keys = ['a', 'b'];
+      var configurations = [
+        {name: 'a', value: 'value a' },
+        {name: 'b', value: 'value b' }
+      ];
+      var expectResult = { a: 'value a', b: 'value b' };
+
+      adminConfigApi.get = function(domainId, query) {
+        expect(domainId).to.equal(DOMAIN_ID);
+        expect(query).to.deep.equal([{
+          name: DEFAULT_MODULE,
+          keys: keys
+        }]);
+
+        return $q.when([{
+          name: DEFAULT_MODULE,
+          configurations: configurations
+        }]);
+      };
+
+      adminDomainConfigService.getMultiple(DOMAIN_ID, keys).then(function(data) {
+        expect(data).to.deep.equal(expectResult);
+        done();
+      });
+
+      $rootScope.$digest();
+    });
+  });
+
   describe('The set fn', function() {
 
     it('should update a single configuration by sending the right parameters to adminConfigApi', function(done) {
@@ -154,5 +206,27 @@ describe('The adminDomainConfigService service', function() {
       $rootScope.$digest();
     });
 
+  });
+
+  describe('The setMultiple fn', function() {
+    it('should update multiple configurations by sending the right parameters to adminConfigApi', function(done) {
+      var configurations = [
+        {name: 'a', value: 'value a' },
+        {name: 'b', value: 'value b' }
+      ];
+      var expectedQuery = [{
+        name: DEFAULT_MODULE,
+        configurations: configurations
+      }];
+
+      adminConfigApi.set = sinon.stub().returns($q.when());
+
+      adminDomainConfigService.setMultiple(DOMAIN_ID, configurations).then(function() {
+        expect(adminConfigApi.set).to.have.been.calledWith(DOMAIN_ID, sinon.match(expectedQuery));
+        done();
+      });
+
+      $rootScope.$digest();
+    });
   });
 });

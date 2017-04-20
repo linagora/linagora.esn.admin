@@ -115,5 +115,7 @@
   "Data usage quota": "Quota d'utilisation des données",
   "Message count quota": "Quota de nombre de messages",
   "Switch to domain mode": "Passer au mode domaine",
-  "Switch to platform mode": "Passer au mode plateforme"
+  "Switch to platform mode": "Passer au mode plateforme",
+  "Max login retries": "Nombre maximum de tentatives d'authentification",
+  "General configuration": "Configuration générale"
 }

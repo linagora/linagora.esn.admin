@@ -79,4 +79,12 @@ angular.module('linagora.esn.admin')
     domain: false,
     platform: true
   }
+}, {
+  id: 'general',
+  name: 'General',
+  icon: 'mdi-settings',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
 }]);

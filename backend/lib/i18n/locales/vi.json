@@ -115,5 +115,7 @@
   "Data usage quota": "Dung lượng tối đa",
   "Message count quota": "Số tin nhắn tối đa",
   "Switch to domain mode": "Chuyển sang chế độ miền",
-  "Switch to platform mode": "Chuyển sang chế độ hệ thống"
+  "Switch to platform mode": "Chuyển sang chế độ hệ thống",
+  "Max login retries": "Số lần thử đăng nhập tối đa",
+  "General configuration": "Cấu hình chung"
 }
