@@ -8,6 +8,5 @@
           i.mdi.mdi-server
           .menu-title #{__('Administration Center')}
           admin-platform-panel-switch
-        a.lv-item.menu-item(href="", ui-sref="admin.domain.{{page.id}}", ui-sref-active="selected", ng-repeat="page in $ctrl.availablePages track by $index")
-          i.mdi(ng-class="page.icon")
-          .menu-title {{page.name}}
+        admin-sidebar-items(ng-if="$ctrl.displayIn === 'platform'", items="$ctrl.platformPages")
+        admin-sidebar-items(ng-if="$ctrl.displayIn === 'domain'", items="$ctrl.domainPages")
