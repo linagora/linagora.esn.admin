@@ -1,12 +1,14 @@
 ng-form(name='form')
   .card
     .card-header
-      h2 
+      h2
+        i.mdi.mdi-twitter
         | #{__('Twitter')}
-      a.action-link(href="http://apps.twitter.com", target="_blank") 
-        | #{__('How to obtain your API keys?')}
+      small
+        a.action-link(href="http://apps.twitter.com", target="_blank")
+          | #{__('How to register a Twitter application?')}
     .card-body.card-padding
-      .row 
+      .row
         .col-xs-12.col-md-4
           esn-form-group(label="#{__('API Key')}")
             input.form-control(type="text", ng-model="$ctrl.config.consumer_key", autocomplete="off", name="consumer_key")
