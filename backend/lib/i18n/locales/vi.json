@@ -117,5 +117,10 @@
   "Switch to domain mode": "Chuyển sang chế độ miền",
   "Switch to platform mode": "Chuyển sang chế độ hệ thống",
   "Max login retries": "Số lần thử đăng nhập tối đa",
-  "General configuration": "Cấu hình chung"
+  "General configuration": "Cấu hình chung",
+  "API Key": "API Key",
+  "API Secret": "API Secret",
+  "Social connections": "Cấu hình xác thực liên kết mạng xã hội",
+  "How to obtain your API keys?": "Làm thế nào để lấy API key?",
+  "Twitter": "Twitter"
 }

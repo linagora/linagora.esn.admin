@@ -80,6 +80,14 @@ angular.module('linagora.esn.admin')
     platform: true
   }
 }, {
+  id: 'oauth',
+  name: 'Social connections',
+  icon: 'mdi-twitter',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
+}, {
   id: 'general',
   name: 'General',
   icon: 'mdi-settings',
