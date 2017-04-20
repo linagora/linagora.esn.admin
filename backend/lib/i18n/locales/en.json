@@ -123,8 +123,12 @@
   "Social connections": "Social connections",
   "Twitter": "Twitter",
   "Github": "Github",
+  "Facebook": "Facebook",
   "How to register a Twitter application?": "How to register a Twitter application?",
   "How to register a Github application?": "How to register a Github application?",
+  "How to register a Facebook application?": "How to register a Facebook application?",
   "Client ID": "Client ID",
-  "Client Secret": "Client Secret"
+  "Client Secret": "Client Secret",
+  "Applicattion ID": "Applicattion ID",
+  "Application Secret": "Application Secret"
 }
