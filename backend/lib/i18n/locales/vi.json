@@ -120,11 +120,15 @@
   "General configuration": "Cấu hình chung",
   "API Key": "API Key",
   "API Secret": "API Secret",
-  "Social connections": "Cấu hình xác thực liên kết mạng xã hội",
+  "Social connections": "Kết nối mạng xã hội",
   "Twitter": "Twitter",
   "Github": "Github",
+  "Facebook": "Facebook",
   "How to register a Twitter application?": "Xem hướng dẫn tạo ứng dụng Twitter?",
   "How to register a Github application?": "Xem hướng dẫn tạo ứng dụng Github?",
+  "How to register a Facebook application?": "Xem hướng dẫn tạo ứng dụng Facebook?",
   "Client ID": "Client ID",
-  "Client Secret": "Client Secret"
+  "Client Secret": "Client Secret",
+  "Applicattion ID": "Applicattion ID",
+  "Application Secret": "Application Secret"
 }
