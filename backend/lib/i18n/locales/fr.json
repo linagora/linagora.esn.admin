@@ -121,6 +121,10 @@
   "API Key": "API Key",
   "API Secret": "API Secret",
   "Social connections": "Connexions sociales",
-  "How to obtain your API keys?": "Comment obtenir vos clés pour l'API?",
-  "Twitter": "Twitter"
+  "Twitter": "Twitter",
+  "Github": "Github",
+  "How to register a Twitter application?": "Comment enregistrer une application Twitter ?",
+  "How to register a Github application?": "Comment enregistrer une application Github ?",
+  "Client ID": "Client ID",
+  "Client Secret": "Client Secret"
 }
