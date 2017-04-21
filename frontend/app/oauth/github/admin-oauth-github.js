@@ -6,7 +6,8 @@
   .component('adminOauthGithub', {
     templateUrl: '/admin/app/oauth/github/admin-oauth-github',
     bindings: {
-      config: '='
+      config: '=',
+      isEnabled: '='
     }
   });
 })(angular);

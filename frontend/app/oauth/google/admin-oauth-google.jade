@@ -3,14 +3,14 @@ ng-form(name='form')
     .card-header
       div
         h2
-          i.mdi.mdi-github-circle
-          | #{__('Github')}
+          i.mdi.mdi-google
+          | #{__('Google')}
         small(ng-if="$ctrl.isEnabled")
-          a.action-link(href="https://github.com/settings/applications/new", target="_blank")
-            | #{__('How to register a Github application?')}
+          a.action-link(href="https://console.developers.google.com/", target="_blank") 
+            | #{__('How to register a Google application?')}
       toggle-switch(ng-model="$ctrl.isEnabled", form="form")
     .card-body.card-padding(ng-if="$ctrl.isEnabled")
-      .row
+      .row 
         .col-xs-12.col-md-4
           esn-form-group(label="#{__('Client ID')}")
             input.form-control(type="text", ng-model="$ctrl.config.client_id", autocomplete="off", name="client_id", required)

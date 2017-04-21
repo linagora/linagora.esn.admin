@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
 
-  .controller('adminOauthController', function($stateParams, adminDomainConfigService, asyncAction) {
+  .controller('adminOauthController', function($stateParams, adminDomainConfigService, asyncAction, _) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAME = 'oauth';
@@ -12,14 +12,29 @@
     self.save = save;
 
     function $onInit() {
+      self.enabledOauths = {};
       adminDomainConfigService.get(domainId, CONFIG_NAME)
         .then(function(config) {
           self.config = config;
+
+          _.forEach(self.config, function(value, key) {
+            self.enabledOauths[key] = !_.isEmpty(value);
+          });
         });
     }
 
     function save() {
+      _qualifyConfig(self.config);
+
       return asyncAction('Modification of social configuration', _saveConfiguration);
+    }
+
+    function _qualifyConfig(config) {
+      _.forEach(self.enabledOauths, function(value, key) {
+        if (!self.enabledOauths[key]) {
+          delete config[key];
+        }
+      });
     }
 
     function _saveConfiguration() {
