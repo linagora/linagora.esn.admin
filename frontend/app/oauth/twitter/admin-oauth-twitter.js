@@ -6,7 +6,8 @@
   .component('adminOauthTwitter', {
     templateUrl: '/admin/app/oauth/twitter/admin-oauth-twitter',
     bindings: {
-      config: '='
+      config: '=',
+      isEnabled: '='
     }
   });
 })(angular);

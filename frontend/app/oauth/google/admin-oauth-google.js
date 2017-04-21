@@ -6,7 +6,8 @@
   .component('adminOauthGoogle', {
     templateUrl: '/admin/app/oauth/google/admin-oauth-google',
     bindings: {
-      config: '='
+      config: '=',
+      isEnabled: '='
     }
   });
 })(angular);

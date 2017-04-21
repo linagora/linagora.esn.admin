@@ -6,7 +6,8 @@
   .component('adminOauthFacebook', {
     templateUrl: '/admin/app/oauth/facebook/admin-oauth-facebook',
     bindings: {
-      config: '='
+      config: '=',
+      isEnabled: '='
     }
   });
 })(angular);

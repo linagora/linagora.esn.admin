@@ -46,9 +46,11 @@ describe('The adminOauthController', function() {
   }
 
   it('should get oauth configuration from server on init', function() {
+    var expectEnabledOauths = { twitter: true };
     var controller = initController();
 
     expect(controller.config).to.deep.equal(configMock);
+    expect(controller.enabledOauths).to.deep.equal(expectEnabledOauths);
     expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
   });
 
