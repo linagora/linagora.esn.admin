@@ -38,6 +38,7 @@ describe('The adminLdapController', function() {
 
     var controller = $controller('adminLdapController', { $scope: $scope });
 
+    controller.$onInit();
     $scope.$digest();
 
     return controller;
@@ -163,6 +164,15 @@ describe('The adminLdapController', function() {
       adminDomainConfigService.get = function() {
         return $q.when(configMock);
       };
+    });
+
+    it('should show empty message if LDAP configuration is undefined', function() {
+      var controller = initController();
+
+      controller.configs = undefined;
+      var isShowEmptyMessage = controller.showEmptyMessage(controller.configs);
+
+      expect(isShowEmptyMessage).to.be.true;
     });
 
     it('should show empty message if have no LDAP configuration', function() {
