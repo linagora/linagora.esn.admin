@@ -16,7 +16,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     eslint: {
       all: {
-        src: ['Gruntfile.js', 'Gruntfile-tests.js', 'tasks/**/*.js', 'test/**/**/*.js', 'backend/**/*.js', 'frontend/app/**/*.js']
+        src: ['Gruntfile.js', 'Gruntfile-tests.js', 'index.js', 'tasks/**/*.js', 'test/**/**/*.js', 'backend/**/*.js', 'frontend/app/**/*.js']
       },
       quick: {
         src: [],
