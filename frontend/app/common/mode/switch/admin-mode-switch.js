@@ -2,12 +2,12 @@
   'use strict';
 
   angular.module('linagora.esn.admin')
-    .component('adminPlatformPanelSwitch', {
-      templateUrl: '/admin/app/platform/admin-platform-panel-switch',
-      controller: adminPlatformPanelSwitchController
+    .component('adminModeSwitch', {
+      templateUrl: '/admin/app/common/mode/switch/admin-mode-switch',
+      controller: adminmModeSwitchController
     });
 
-  function adminPlatformPanelSwitchController(session, adminModeService) {
+  function adminmModeSwitchController(session, adminModeService) {
     var self = this;
 
     self.$onInit = $onInit;
