@@ -132,5 +132,6 @@
   "Client ID": "Client ID",
   "Client Secret": "Client Secret",
   "Applicattion ID": "Applicattion ID",
-  "Application Secret": "Application Secret"
+  "Application Secret": "Application Secret",
+  "You are in platform administration mode. Any change you make will affect the whole platform.": "You are in platform administration mode. Any change you make will affect the whole platform."
 }

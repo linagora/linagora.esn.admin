@@ -11,9 +11,12 @@
 @import './common/form/admin-form-input-bytes';
 @import './common/form/admin-form-multi-input';
 @import './common/empty-message/admin-empty-message';
+@import './common/mode/indicator/admin-mode-indicator';
 
 .admin-root {
-  margin-top: (@sub-header-height + 45);
+  & > .col-md-3, & > .col-md-8 {
+    margin-top: 45px;
+  }
 
   form {
     .group-name {
