@@ -65,6 +65,9 @@ describe('The adminPlatformPanelSwitch component', function() {
     element.find('li>a span').click();
     expect(adminModeService.goToDomainMode).to.have.been.calledOnce;
 
+    adminModeService.isPlatformMode = function() { return false; };
+    element.scope().$digest();
+
     expect(element.find('li>a span').html()).to.contain('Switch to platform mode');
     element.find('li>a span').click();
     expect(adminModeService.goToPlatformMode).to.have.been.calledOnce;

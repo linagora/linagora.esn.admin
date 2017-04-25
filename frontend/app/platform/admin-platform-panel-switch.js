@@ -7,28 +7,28 @@
       controller: adminPlatformPanelSwitchController
     });
 
-  function adminPlatformPanelSwitchController($scope, $state, session, adminModeService) {
+  function adminPlatformPanelSwitchController(session, adminModeService) {
     var self = this;
 
     self.$onInit = $onInit;
     self.goToDomainMode = goToDomainMode;
     self.goToPlatformMode = goToPlatformMode;
+    self.isPlatformMode = isPlatformMode;
 
     function $onInit() {
       self.hasTwoAdminRoles = session.user.isPlatformAdmin && session.userIsDomainAdministrator();
-      self.isPlatformMode = adminModeService.isPlatformMode();
     }
 
     function goToDomainMode() {
-      self.isPlatformMode = false;
-
       return adminModeService.goToDomainMode();
     }
 
     function goToPlatformMode() {
-      self.isPlatformMode = true;
-
       return adminModeService.goToPlatformMode();
+    }
+
+    function isPlatformMode() {
+      return adminModeService.isPlatformMode();
     }
   }
 })(angular);
