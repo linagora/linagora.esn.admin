@@ -3,7 +3,7 @@
     a(href='', data-toggle='dropdown', aria-expanded='true')
       i.mdi.mdi-chevron-down
     ul.dropdown-menu.dropdown-menu-right
-      li(ng-switch="$ctrl.isPlatformMode")
+      li(ng-switch="$ctrl.isPlatformMode()")
         a(ng-switch-when="true", ng-click="$ctrl.goToDomainMode()")
           .flex-vertical-centered
             .item-text  

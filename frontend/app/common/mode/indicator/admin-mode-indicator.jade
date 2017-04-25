@@ -1,0 +1,3 @@
+div(ng-show="$ctrl.isInPlatformMode()")
+  | #{__('You are in platform administration mode. Any change you make will affect the whole platform.')}
+  a(ng-if="::$ctrl.isDomainAdmin", href="", ng-click="$ctrl.goToDomainMode()") #{__('Switch to domain mode')}

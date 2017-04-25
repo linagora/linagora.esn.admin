@@ -5,7 +5,7 @@
 
 var expect = chai.expect;
 
-describe('The adminPlatformPanelSwitch component', function() {
+describe('The adminModeSwitch component', function() {
   var $rootScope, $compile, session, adminModeService;
 
   beforeEach(function() {
@@ -25,7 +25,7 @@ describe('The adminPlatformPanelSwitch component', function() {
 
   function initComponent() {
     var scope = $rootScope.$new();
-    var element = $compile('<admin-platform-panel-switch />')(scope);
+    var element = $compile('<admin-mode-switch />')(scope);
 
     scope.$digest();
 
@@ -64,6 +64,9 @@ describe('The adminPlatformPanelSwitch component', function() {
     expect(element.find('li>a span').html()).to.contain('Switch to domain mode');
     element.find('li>a span').click();
     expect(adminModeService.goToDomainMode).to.have.been.calledOnce;
+
+    adminModeService.isPlatformMode = function() { return false; };
+    element.scope().$digest();
 
     expect(element.find('li>a span').html()).to.contain('Switch to platform mode');
     element.find('li>a span').click();
