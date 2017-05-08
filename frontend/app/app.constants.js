@@ -37,7 +37,7 @@ angular.module('linagora.esn.admin')
   icon: 'mdi-calendar-blank',
   displayIn: {
     domain: true,
-    platform: false
+    platform: true
   }
 }, {
   id: 'ldap',
