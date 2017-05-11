@@ -88,6 +88,14 @@ angular.module('linagora.esn.admin')
     platform: true
   }
 }, {
+  id: 'autoconf',
+  name: 'Autoconf',
+  icon: 'mdi-layers',
+  displayIn: {
+    domain: true,
+    platform: false
+  }
+}, {
   id: 'general',
   name: 'General',
   icon: 'mdi-settings',

@@ -1,0 +1,18 @@
+.card
+  .card-header
+    h2 #{__('Accounts')}
+    .flex-end
+      button.btn.btn-float.btn-accent.waves-effect.waves-light(ng-click="$ctrl.addForm(form)")
+        i.mdi.mdi-plus
+  .card-body
+    ng-form(name="form")
+      .autoconf-empty-container-message(ng-if="$ctrl.showEmptyMessage($ctrl.accounts)")
+        .message
+          i.autoconf-empty-icon.mdi.mdi-layers
+          div
+            | #{__('No account configuration, click')}
+            span.mdi.mdi-plus
+            | #{__('to add a new one!')}
+      div(ng-repeat="account in $ctrl.accounts")
+        admin-autoconf-account(account="account", on-remove-btn-click="$ctrl.remove(form, account)")
+        hr
