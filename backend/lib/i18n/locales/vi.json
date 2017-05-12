@@ -133,5 +133,17 @@
   "Client Secret": "Client Secret",
   "Applicattion ID": "Applicattion ID",
   "Application Secret": "Application Secret",
-  "You are in platform administration mode. Any change you make will affect the whole platform.": "Bạn đang ở chế độ hệ thống, bất cứ thay đổi nào sẽ ảnh hưởng đến toàn bộ hệ thống."
+  "You are in platform administration mode. Any change you make will affect the whole platform.": "Bạn đang ở chế độ hệ thống, bất cứ thay đổi nào sẽ ảnh hưởng đến toàn bộ hệ thống.",
+  "Autoconf configuration": "Cấu hình Autoconf",
+  "Accounts": "Tài khoản",
+  "IMAP": "IMAP",
+  "Display name": "Tên hiển thị",
+  "Server hostname": "Địa chỉ máy chủ",
+  "SMTP": "SMTP",
+  "Description": "Mô tả",
+  "No account configuration, click": "Không có cấu hình tài khoản, bấm",
+  "Connection security": "Bảo mật kết nối",
+  "None": "Không sử dụng",
+  "STARTTLS": "STARTTLS",
+  "SSL": "SSL"
 }

@@ -133,5 +133,17 @@
   "Client Secret": "Client Secret",
   "Applicattion ID": "Applicattion ID",
   "Application Secret": "Application Secret",
-  "You are in platform administration mode. Any change you make will affect the whole platform.": "Vous êtes en mode d'administration de la plate-forme. Tout changement que vous produisez affectera l'ensemble de la plate-forme."
+  "You are in platform administration mode. Any change you make will affect the whole platform.": "Vous êtes en mode d'administration de la plate-forme. Tout changement que vous produisez affectera l'ensemble de la plate-forme.",
+  "Autoconf configuration": "Configuration Autoconf",
+  "Accounts": "Comptes",
+  "IMAP": "IMAP",
+  "Display name": "Nom d'affichage",
+  "Server hostname": "Nom d'hôte du serveur",
+  "SMTP": "SMTP",
+  "Description": "Description",
+  "No account configuration, click": "Aucune configuration compte, cliquez sur",
+  "Connection security": "Sécurité de la connexion",
+  "None": "Aucun",
+  "STARTTLS": "STARTTLS",
+  "SSL": "SSL"
 }
