@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminWebController', function($stateParams, adminDomainConfigService, asyncAction) {
+.controller('adminWebController', function($stateParams, adminDomainConfigService, asyncAction, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'web';
@@ -13,7 +13,7 @@ angular.module('linagora.esn.admin')
     });
 
   self.save = function() {
-    return asyncAction('Modification of web configuration', _saveConfiguration);
+    return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, _saveConfiguration);
   };
 
   function _saveConfiguration() {

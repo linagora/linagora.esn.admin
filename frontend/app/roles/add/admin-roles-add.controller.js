@@ -12,6 +12,7 @@ angular.module('linagora.esn.admin')
     }
 
     var promotedTime = Date.now();
+    var notificationMessages = _getNotificationMessages(self.newAdministrators.length);
 
     self.newAdministrators.forEach(function(administrator) {
       administrator.role = {
@@ -21,8 +22,18 @@ angular.module('linagora.esn.admin')
       };
     });
 
-    return asyncAction('Adding ' + self.newAdministrators.length + ' administrators', function() {
+    return asyncAction(notificationMessages, function() {
       return adminRolesService.addAdministrators(self.newAdministrators);
     });
   };
+
+  function _getNotificationMessages(length) {
+    var context = length > 1 ? 'administrators' : 'administrator';
+
+    return {
+      progressing: ['Adding', length, context, '...'].join(' '),
+      success: ['Added', length, context].join(' '),
+      failure: 'Failed to add ' + context
+    };
+  }
 });

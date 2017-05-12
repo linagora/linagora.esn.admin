@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
   var $controller, $rootScope, $scope, $stateParams;
-  var adminDomainConfigService, asyncAction, adminModulesApi, esnModuleRegistry;
+  var adminDomainConfigService, asyncAction, adminModulesApi, esnModuleRegistry, ADMIN_DEFAULT_NOTIFICATION_MESSAGES;
   var metadataMock;
 
   beforeEach(function() {
@@ -30,13 +30,14 @@ describe('The adminModulesDisplayerController', function() {
       }
     };
 
-    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesApi_, _esnModuleRegistry_) {
+    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesApi_, _esnModuleRegistry_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       adminDomainConfigService = _adminDomainConfigService_;
       adminModulesApi = _adminModulesApi_;
       $stateParams = _$stateParams_;
       esnModuleRegistry = _esnModuleRegistry_;
+      ADMIN_DEFAULT_NOTIFICATION_MESSAGES = _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_;
     });
 
     esnModuleRegistry.getAll = sinon.stub().returns(metadataMock);
@@ -71,12 +72,11 @@ describe('The adminModulesDisplayerController', function() {
       var event = {
         stopPropagation: angular.noop
       };
-      var message = 'Setting Contact as home';
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
       ctrl.module.name = 'linagora.esn.contact';
       ctrl.setHome(event).then(function() {
-        expect(asyncAction).to.have.been.calledWith(message);
+        expect(asyncAction).to.have.been.calledWith(ADMIN_DEFAULT_NOTIFICATION_MESSAGES);
         expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, HOMEPAGE_KEY, expectedState);
         expect(ctrl.currentHomepage).to.equal(expectedState);
         done();
@@ -95,7 +95,6 @@ describe('The adminModulesDisplayerController', function() {
         name: 'linagora.esn.unifiedinbox',
         configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'twitter.tweets' }, { name: 'swipeRightAction' }, { name: 'drafts' }]
       }];
-      var message = 'Modification of Unified Inbox module\'s settings';
 
       adminModulesApi.set = sinon.stub().returns($q.when());
       $scope.form = {
@@ -103,7 +102,7 @@ describe('The adminModulesDisplayerController', function() {
       };
 
       ctrl.save().then(function() {
-        expect(asyncAction).to.have.been.calledWith(message);
+        expect(asyncAction).to.have.been.calledWith(ADMIN_DEFAULT_NOTIFICATION_MESSAGES);
         expect(adminModulesApi.set).to.have.been.calledWith($stateParams.domainId, moduleConfig);
         expect($scope.form.$setPristine).to.have.been.called;
         done();

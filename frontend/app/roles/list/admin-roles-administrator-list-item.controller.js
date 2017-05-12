@@ -9,9 +9,17 @@ angular.module('linagora.esn.admin')
   self.displayName = userUtils.displayNameOf(self.user);
 
   self.revoke = function() {
-    return asyncAction('Revoking administrator "' + self.displayName + '"', function() {
+    return asyncAction(_getNotificationMessages(self.displayName), function() {
       return adminRolesService.removeAdministrator(self.user);
     });
   };
+
+  function _getNotificationMessages(displayName) {
+    return {
+      progressing: 'Revoking administration right of ' + displayName,
+      success: 'Revoked administration right of ' + displayName,
+      failure: 'Failed to revoke administration right of ' + displayName
+    };
+  }
 
 });

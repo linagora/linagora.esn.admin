@@ -4,7 +4,7 @@ angular.module('linagora.esn.admin')
 
 .constant('ADMIN_MAIL_TRANSPORT_TYPES', { local: 'Local', smtp: 'SMTP', gmail: 'Gmail' })
 
-.controller('adminMailController', function($stateParams, adminDomainConfigService, adminMailService, asyncAction, ADMIN_MAIL_TRANSPORT_TYPES) {
+.controller('adminMailController', function($stateParams, adminDomainConfigService, adminMailService, asyncAction, ADMIN_MAIL_TRANSPORT_TYPES, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'mail';
@@ -21,7 +21,7 @@ angular.module('linagora.esn.admin')
   self.save = function() {
     var config = adminMailService.qualifyTransportConfig(self.transportType, self.config);
 
-    return asyncAction('Modification of Mail Server settings', function() {
+    return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, function() {
       return _saveConfiguration(config);
     });
   };
