@@ -49,7 +49,7 @@
           .col-xs-6
             esn-form-group(label="#{__('Connection security')}")
               .select
-                select.form-control(ng-model="$ctrl.account.imap.socketType", required)
+                select.form-control(ng-model="$ctrl.account.smtp.socketType", required)
                   option(value="1") #{__('None')}
                   option(value="2") #{__('STARTTLS')}
                   option(value="3") #{__('SSL')}
