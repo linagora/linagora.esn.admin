@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
     .controller('adminGeneralController', adminGeneralController);
 
-  function adminGeneralController($stateParams, adminDomainConfigService, asyncAction, _) {
+  function adminGeneralController($stateParams, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAMES = ['login'];
@@ -20,7 +20,7 @@
     }
 
     function save() {
-      return asyncAction('Modification of general settings', _saveConfiguration);
+      return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, _saveConfiguration);
     }
 
     function _saveConfiguration() {

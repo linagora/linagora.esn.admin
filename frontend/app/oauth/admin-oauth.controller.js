@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
 
-  .controller('adminOauthController', function($stateParams, adminDomainConfigService, asyncAction, _) {
+  .controller('adminOauthController', function($stateParams, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAME = 'oauth';
@@ -26,7 +26,7 @@
     function save() {
       _qualifyConfig(self.config);
 
-      return asyncAction('Modification of social configuration', _saveConfiguration);
+      return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, _saveConfiguration);
     }
 
     function _qualifyConfig(config) {

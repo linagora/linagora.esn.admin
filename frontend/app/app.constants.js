@@ -7,6 +7,12 @@ angular.module('linagora.esn.admin')
   platform: 'platform'
 })
 
+.constant('ADMIN_DEFAULT_NOTIFICATION_MESSAGES', {
+  progressing: 'Saving configuration...',
+  success: 'Configuration saved',
+  failure: 'Failed to save configuration'
+})
+
 .constant('ADMIN_PAGES', [{
   id: 'mail',
   name: 'Mail',

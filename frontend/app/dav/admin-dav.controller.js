@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminDavController', function($stateParams, adminDomainConfigService, asyncAction) {
+.controller('adminDavController', function($stateParams, adminDomainConfigService, asyncAction, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'davserver';
@@ -13,7 +13,7 @@ angular.module('linagora.esn.admin')
     });
 
   self.save = function() {
-    return asyncAction('Modification of DAV Server settings', _saveConfiguration);
+    return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, _saveConfiguration);
   };
 
   function _saveConfiguration() {

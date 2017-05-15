@@ -2,10 +2,15 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS) {
+.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'jwt';
+  var notificationMessages = {
+    progressing: 'Generating new keys...',
+    success: 'Keys generated',
+    failure: 'Failed to generate keys'
+  };
 
   adminDomainConfigService.get(domainId, CONFIG_NAME)
     .then(function(data) {
@@ -15,7 +20,7 @@ angular.module('linagora.esn.admin')
   self.availableAlgorithms = ADMIN_JWT_AVAILABLE_ALGORITHMS;
 
   self.save = function() {
-    return asyncAction('Modification of JWT configuration', _saveConfiguration);
+    return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, _saveConfiguration);
   };
 
   self.downloadPublicKey = function() {
@@ -27,7 +32,7 @@ angular.module('linagora.esn.admin')
   };
 
   self.generate = function(form) {
-    return asyncAction('Generating new keys', _generateKeyPair)
+    return asyncAction(notificationMessages, _generateKeyPair)
       .then(function(resp) {
         self.config.publicKey = resp.data.publicKey;
         self.config.privateKey = resp.data.privateKey;

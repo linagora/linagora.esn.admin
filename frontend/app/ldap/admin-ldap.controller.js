@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
 
-  .controller('adminLdapController', function($stateParams, $element, $timeout, elementScrollService, adminDomainConfigService, asyncAction, _) {
+  .controller('adminLdapController', function($stateParams, $element, $timeout, elementScrollService, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAME = 'ldap';
@@ -29,7 +29,7 @@
     function save() {
       var configs = _qualifyConfigs();
 
-      return asyncAction('Modification of LDAP Server settings', function() {
+      return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, function() {
         return _saveConfiguration(configs);
       })
       .then(function() {
