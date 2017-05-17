@@ -145,5 +145,8 @@
   "Connection security": "Bảo mật kết nối",
   "None": "Không sử dụng",
   "STARTTLS": "STARTTLS",
-  "SSL": "SSL"
+  "SSL": "SSL",
+  "DAV server URL to be used in backend": "Địa chỉ máy chủ DAV để dùng phía backend",
+  "DAV server URL to be used in frontend": "Địa chỉ máy chủ DAV để dùng phía frontend",
+  "The address where your website is served": "Địa chỉ trang web của bạn"
 }

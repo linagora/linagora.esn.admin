@@ -145,5 +145,8 @@
   "Connection security": "Sécurité de la connexion",
   "None": "Aucun",
   "STARTTLS": "STARTTLS",
-  "SSL": "SSL"
+  "SSL": "SSL",
+  "DAV server URL to be used in backend": "URL du serveur DAV à utiliser dans le backend",
+  "DAV server URL to be used in frontend": "URL du serveur DAV à utiliser dans l'interface",
+  "The address where your website is served": "L'adresse sur laquelle votre site est desservi"
 }
