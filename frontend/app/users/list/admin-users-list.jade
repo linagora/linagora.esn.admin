@@ -2,7 +2,7 @@ infinite-list.lv-body(load-more-elements='$ctrl.loadMoreElements()')
   .lv-item.media(ng-repeat="member in $ctrl.members")
     .row.clickable(ui-sref="profile({user_id: member._id})")
       .pull-left.p-r-15
-        img.members-avatar(src='/images/user.png', ng-src='/api/users/{{::member._id}}/profile/avatar')
+        esn-avatar.members-avatar(user-id="{{::member._id}}")
       .media-body
         .lv-title
           h4.media-heading {{::member.firstname}} {{::member.lastname}}
