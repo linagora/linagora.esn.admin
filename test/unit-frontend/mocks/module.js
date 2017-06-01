@@ -65,3 +65,12 @@ angular.module('esn.module-registry', [])
   .factory('esnModuleRegistry', function() {
     return {};
   });
+angular.module('esn.i18n', [])
+  .filter('translate', function() {
+    return function(input) { return input; };
+  })
+  .factory('$translate', function() {
+    return {
+      instant: function() {}
+    };
+  });

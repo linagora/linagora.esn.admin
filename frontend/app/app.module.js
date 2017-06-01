@@ -17,5 +17,6 @@ angular.module('linagora.esn.admin', [
   'esn.user',
   'esn.file-saver',
   'esn.form.helper',
-  'esn.module-registry'
+  'esn.module-registry',
+  'esn.i18n'
 ]);
