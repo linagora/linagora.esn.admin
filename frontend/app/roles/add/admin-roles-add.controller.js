@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminRolesAddController', function($q, asyncAction, adminRolesService) {
+.controller('adminRolesAddController', function($q, $translate, asyncAction, adminRolesService) {
   var self = this;
 
   self.newAdministrators = [];
@@ -29,11 +29,12 @@ angular.module('linagora.esn.admin')
 
   function _getNotificationMessages(length) {
     var context = length > 1 ? 'administrators' : 'administrator';
-
-    return {
-      progressing: ['Adding', length, context, '...'].join(' '),
-      success: ['Added', length, context].join(' '),
-      failure: 'Failed to add ' + context
+    var result = {
+      progessing: $translate.instant('Adding %s ' + context, [length]),
+      success: $translate.instant('Added %s ' + context, [length]),
+      failure: $translate.instant('Failed to add ' + context)
     };
+
+    return result;
   }
 });
