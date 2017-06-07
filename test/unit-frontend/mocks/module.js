@@ -74,3 +74,4 @@ angular.module('esn.i18n', [])
       instant: function() {}
     };
   });
+angular.module('esn.datetime', []);
