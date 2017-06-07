@@ -32,7 +32,7 @@ angular.module('linagora.esn.admin')
     .state('admin.domain', {
       url: '/:domainId',
       deepStateRedirect: {
-        default: 'admin.domain.mail',
+        default: 'admin.domain.general',
         params: true,
         fn: function() {
           return true;
