@@ -11,7 +11,7 @@ describe('The adminGeneralController', function() {
   var adminDomainConfigService;
   var ADMIN_MODE;
   var configuraionsMock;
-  var PLATFORM_CONFIG_NAMES = ['login'];
+  var PLATFORM_CONFIG_NAMES = ['login', 'businessHours'];
   var DOMAIN_CONFIG_NAMES = ['businessHours'];
 
   beforeEach(function() {
