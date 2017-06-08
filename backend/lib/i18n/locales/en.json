@@ -167,5 +167,6 @@
   "Failed to revoke administration right for %s": "Failed to revoke administration right for %s",
   "Creating user...": "Creating user...",
   "User created": "User created",
-  "Failed to create user": "Failed to create user"
+  "Failed to create user": "Failed to create user",
+  "Login": "Login"
 }
