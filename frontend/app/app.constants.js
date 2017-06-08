@@ -14,6 +14,14 @@ angular.module('linagora.esn.admin')
 })
 
 .constant('ADMIN_PAGES', [{
+  id: 'general',
+  name: 'General',
+  icon: 'mdi-settings',
+  displayIn: {
+    domain: true,
+    platform: true
+  }
+}, {
   id: 'mail',
   name: 'Mail',
   icon: 'mdi-email',
@@ -100,13 +108,5 @@ angular.module('linagora.esn.admin')
   displayIn: {
     domain: true,
     platform: false
-  }
-}, {
-  id: 'general',
-  name: 'General',
-  icon: 'mdi-settings',
-  displayIn: {
-    domain: false,
-    platform: true
   }
 }]);

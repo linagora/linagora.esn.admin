@@ -1,9 +1,7 @@
 sub-header
   admin-general-subheader(on-form-submit="$ctrl.save()", form="form")
 
-.card
-  .card-body.card-padding
-    form(name="form")
-      .row
-        .col-xs-12.col-md-6
-          admin-general-login(login="$ctrl.configs.login")
+form(name="form")
+  .flex-column(ng-if="$ctrl.configs")
+    admin-general-login(ng-if="$ctrl.hasConfig('login')", login="$ctrl.configs.login")
+    esn-business-hours(ng-if="$ctrl.hasConfig('businessHours')", business-hours="$ctrl.configs.businessHours")
