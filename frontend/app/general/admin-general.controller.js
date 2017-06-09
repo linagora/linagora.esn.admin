@@ -4,11 +4,17 @@
   angular.module('linagora.esn.admin')
     .controller('adminGeneralController', adminGeneralController);
 
-  function adminGeneralController($stateParams, adminDomainConfigService, asyncAction, adminModeService, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
+  function adminGeneralController(
+    $stateParams,
+    adminDomainConfigService,
+    asyncAction,
+    adminModeService,
+    _,
+    ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
+    ADMIN_GENERAL_CONFIG
+  ) {
     var self = this;
     var domainId = $stateParams.domainId;
-    var PLATFORM_CONFIG_NAMES = ['login', 'businessHours'];
-    var DOMAIN_CONFIG_NAMES = ['businessHours'];
     var configNames;
 
     self.$onInit = $onInit;
@@ -24,7 +30,7 @@
     }
 
     function _determineConfigNames() {
-      var configNames = adminModeService.isPlatformMode() ? PLATFORM_CONFIG_NAMES : DOMAIN_CONFIG_NAMES;
+      var configNames = adminModeService.isPlatformMode() ? ADMIN_GENERAL_CONFIG.platform : ADMIN_GENERAL_CONFIG.domain;
 
       return configNames;
     }

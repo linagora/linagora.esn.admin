@@ -168,5 +168,6 @@
   "Creating user...": "Đang tạo người dùng...",
   "User created": "Người dùng đã được tạo",
   "Failed to create user": "Không thể tạo người dùng",
-  "Login": "Đăng nhập"
+  "Login": "Đăng nhập",
+  "Date time": "Ngày giờ"
 }
