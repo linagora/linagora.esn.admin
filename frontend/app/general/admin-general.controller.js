@@ -7,7 +7,7 @@
   function adminGeneralController($stateParams, adminDomainConfigService, asyncAction, adminModeService, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
     var self = this;
     var domainId = $stateParams.domainId;
-    var PLATFORM_CONFIG_NAMES = ['login'];
+    var PLATFORM_CONFIG_NAMES = ['login', 'businessHours'];
     var DOMAIN_CONFIG_NAMES = ['businessHours'];
     var configNames;
 

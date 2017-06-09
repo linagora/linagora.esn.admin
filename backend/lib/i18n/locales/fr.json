@@ -167,5 +167,6 @@
   "Failed to revoke administration right for %s": "Impossible de révoquer le droit d'administration pour %s",
   "Creating user...": "Création d'utilisateurs...",
   "User created": "Créé par l'utilisateur",
-  "Failed to create user": "Impossible de créer un utilisateur"
+  "Failed to create user": "Impossible de créer un utilisateur",
+  "Login": "Connection"
 }
