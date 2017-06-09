@@ -8,6 +8,6 @@ angular.module('linagora.esn.admin')
       configurations: [
         'view', 'api', 'uploadUrl', 'downloadUrl', 'isJmapSendingEnabled',
         'isSaveDraftBeforeSendingEnabled', 'composer.attachments', 'maxSizeUpload',
-        'twitter.tweets', 'swipeRightAction', 'drafts']
+        'swipeRightAction', 'drafts']
     }
   });
