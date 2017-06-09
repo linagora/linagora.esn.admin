@@ -9,20 +9,19 @@ describe('The adminGeneralController', function() {
 
   var $rootScope, $stateParams, $scope, $controller;
   var adminDomainConfigService;
-  var ADMIN_MODE;
+  var ADMIN_MODE, ADMIN_GENERAL_CONFIG;
   var configuraionsMock;
-  var PLATFORM_CONFIG_NAMES = ['login', 'businessHours'];
-  var DOMAIN_CONFIG_NAMES = ['businessHours'];
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _ADMIN_MODE_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _ADMIN_MODE_, _ADMIN_GENERAL_CONFIG_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
       ADMIN_MODE = _ADMIN_MODE_;
+      ADMIN_GENERAL_CONFIG = _ADMIN_GENERAL_CONFIG_;
 
       $stateParams.domainId = 'domain123';
     });
@@ -47,7 +46,7 @@ describe('The adminGeneralController', function() {
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, DOMAIN_CONFIG_NAMES);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ADMIN_GENERAL_CONFIG.domain);
     });
 
     it('should get a list of configurations from server on init in platform mode', function() {
@@ -56,7 +55,7 @@ describe('The adminGeneralController', function() {
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, PLATFORM_CONFIG_NAMES);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ADMIN_GENERAL_CONFIG.platform);
     });
   });
 

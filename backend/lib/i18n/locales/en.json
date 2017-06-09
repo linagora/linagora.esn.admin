@@ -168,5 +168,6 @@
   "Creating user...": "Creating user...",
   "User created": "User created",
   "Failed to create user": "Failed to create user",
-  "Login": "Login"
+  "Login": "Login",
+  "Date time": "Date time"
 }

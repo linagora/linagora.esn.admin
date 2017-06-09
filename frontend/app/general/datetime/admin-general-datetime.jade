@@ -1,0 +1,6 @@
+ng-form(name="form")
+  .card
+    .card-header
+      h2 #{__('Date time')}
+    .card-body.card-padding
+      esn-datetime-format-selector(date-format="$ctrl.datetime.dateFormat", time-format="$ctrl.datetime.timeFormat")
