@@ -169,5 +169,11 @@
   "User created": "Người dùng đã được tạo",
   "Failed to create user": "Không thể tạo người dùng",
   "Login": "Đăng nhập",
-  "Date time": "Ngày giờ"
+  "Date time": "Ngày giờ",
+  "Created on": "Đã tạo vào",
+  "Company": "Công ty",
+  "Created": "Đã tạo",
+  "Domains management": "Quản lý domain",
+  "Domains": "Domains",
+  "No domain": "Không có domain"
 }

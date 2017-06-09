@@ -169,5 +169,11 @@
   "User created": "Créé par l'utilisateur",
   "Failed to create user": "Impossible de créer un utilisateur",
   "Login": "Connection",
-  "Date time": "Date et heure"
+  "Date time": "Date et heure",
+  "Created on": "Créé le",
+  "Company": "Compagnie",
+  "Created": "Créé",
+  "Domains management": "Gestion du domaines",
+  "Domains": "Domaines",
+  "No domain": "Aucune domaine"
 }

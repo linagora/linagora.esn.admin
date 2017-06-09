@@ -150,5 +150,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-autoconf />'
         }
       }
+    })
+    .state('admin.domain.domains', {
+      url: '/domains',
+      views: {
+        'root@admin': {
+          template: '<admin-domains />'
+        }
+      }
     });
 });

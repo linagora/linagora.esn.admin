@@ -1,0 +1,50 @@
+admin-domains-list {
+  admin-empty-message {
+    height: 70vh;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .listview {
+    .lv-header {
+      text-align: left;
+
+      .block-header {
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  admin-domains-item {
+    .row {
+      .flex-vertical-centered;
+
+      span {
+        .ellipsis;
+
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  admin-domains-list {
+    .listview {
+      .lv-header {
+        padding-left: 0;
+
+        .block-header h2{
+          margin-left: -15px;
+        }
+      }
+
+      .lv-body .lv-item{
+        .col-md-4 {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

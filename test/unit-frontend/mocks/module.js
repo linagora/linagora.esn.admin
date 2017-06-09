@@ -74,4 +74,7 @@ angular.module('esn.i18n', [])
       instant: function() {}
     };
   });
-angular.module('esn.datetime', []);
+angular.module('esn.datetime', [])
+  .filter('esnDatetime', function() {
+    return function(input) { return input; };
+  });
