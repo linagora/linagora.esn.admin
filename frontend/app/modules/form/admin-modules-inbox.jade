@@ -42,10 +42,6 @@ ng-form.p-t-25(name='form')
       .col-xs-4.flex-end
         toggle-switch(ng-model="$ctrl.configurations.isSaveDraftBeforeSendingEnabled.value", form="form")
     .form-group.option-field
-      .col-xs-8.field-name #{__('Twitter tweets')}
-      .col-xs-4.flex-end
-        toggle-switch(ng-model="$ctrl.configurations['twitter.tweets'].value", form="form")
-    .form-group.option-field
       .col-xs-8.field-name #{__('Enable draft email')}
       .col-xs-4.flex-end
         toggle-switch(ng-model="$ctrl.configurations.drafts.value", form="form")
