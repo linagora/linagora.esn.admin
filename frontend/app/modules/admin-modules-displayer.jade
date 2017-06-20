@@ -2,7 +2,7 @@
   .card-header(ng-click="expanded=!expanded")
     h2.flex-vertical-centered(ng-class="form.$pristine ? '': 'unsaved-changes'")
       img(ng-src="{{$ctrl.icon}}")
-      span {{$ctrl.title | translate}}
+      span {{$ctrl.title | esnI18n}}
 
     .toolbar
       span.clickable(ng-click="$ctrl.setHome($event)", ng-class="{'homeActivated': $ctrl.isHomePage()}")

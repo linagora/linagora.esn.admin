@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminRolesAdministratorListItem', function($translate, asyncAction, adminRolesService, session, userUtils) {
+.controller('adminRolesAdministratorListItem', function(asyncAction, adminRolesService, session, userUtils, esnI18nService) {
   var self = this;
 
   self.isMe = session.user._id === self.user._id;
@@ -18,9 +18,9 @@ angular.module('linagora.esn.admin')
 
   function _getNotificationMessages(displayName) {
     return {
-      progressing: $translate.instant('Revoking administration right for %s', [displayName]),
-      success: $translate.instant('Revoked administration right for %s', [displayName]),
-      failure: $translate.instant('Failed to revoke administration right for %s', [displayName])
+      progressing: esnI18nService.translate('Revoking administration right for %s', displayName),
+      success: esnI18nService.translate('Revoked administration right for %s', displayName),
+      failure: esnI18nService.translate('Failed to revoke administration right for %s', displayName)
     };
   }
 });

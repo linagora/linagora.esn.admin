@@ -66,12 +66,12 @@ angular.module('esn.module-registry', [])
     return {};
   });
 angular.module('esn.i18n', [])
-  .filter('translate', function() {
+  .filter('esnI18n', function() {
     return function(input) { return input; };
   })
-  .factory('$translate', function() {
+  .factory('esnI18nService', function() {
     return {
-      instant: function() {}
+      translate: function() {}
     };
   });
 angular.module('esn.datetime', []);
