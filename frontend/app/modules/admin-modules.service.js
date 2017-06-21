@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminModulesApi', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODULES) {
+.factory('adminModulesService', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODULES) {
   var modulesMetadata;
 
   function _getModulesMetadata() {
