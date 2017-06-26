@@ -3,7 +3,7 @@
 angular.module('linagora.esn.admin')
 
 .component('adminModulesDisplayer', {
-  templateUrl: '/admin/app/modules/admin-modules-displayer',
+  templateUrl: '/admin/app/modules/displayer/admin-modules-displayer',
   bindings: {
     module: '=',
     currentHomepage: '='

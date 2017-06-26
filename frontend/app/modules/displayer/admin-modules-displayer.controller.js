@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminModulesDisplayerController', function($stateParams, $scope, $timeout, _, adminDomainConfigService, asyncAction, adminModulesApi, ADMIN_MODULES, ADMIN_FORM_EVENT, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
+.controller('adminModulesDisplayerController', function($stateParams, $scope, $timeout, _, adminDomainConfigService, asyncAction, adminModulesService, ADMIN_MODULES, ADMIN_FORM_EVENT, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
   var self = this;
   var domainId = $stateParams.domainId;
   var HOMEPAGE_KEY = 'homePage';
@@ -12,7 +12,7 @@ angular.module('linagora.esn.admin')
   self.$onInit = $onInit();
 
   function $onInit() {
-    moduleMetaData = adminModulesApi.getModuleMetadata(self.module.name);
+    moduleMetaData = adminModulesService.getModuleMetadata(self.module.name);
 
     self.title = moduleMetaData.title;
     self.template = moduleMetaData.template;
@@ -62,7 +62,7 @@ angular.module('linagora.esn.admin')
     modules.push(self.module);
 
     return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, function() {
-      return adminModulesApi.set(domainId, modules).then(function() {
+      return adminModulesService.set(domainId, modules).then(function() {
         $scope.$broadcast(ADMIN_FORM_EVENT.submit);
         $scope.form.$setPristine();
       });

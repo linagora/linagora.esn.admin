@@ -5,17 +5,17 @@
 
 var expect = chai.expect;
 
-describe('The adminModulesApi service', function() {
-  var adminModulesApi, adminConfigApi, esnModuleRegistry;
+describe('The adminModulesService service', function() {
+  var adminModulesService, adminConfigApi, esnModuleRegistry;
   var ADMIN_MODULES;
   var DOMAIN_ID = 'domain123';
 
   beforeEach(module('linagora.esn.admin'));
 
   beforeEach(function() {
-    angular.mock.inject(function(_adminConfigApi_, _adminModulesApi_, _esnModuleRegistry_, _ADMIN_MODULES_) {
+    angular.mock.inject(function(_adminConfigApi_, _adminModulesService_, _esnModuleRegistry_, _ADMIN_MODULES_) {
       adminConfigApi = _adminConfigApi_;
-      adminModulesApi = _adminModulesApi_;
+      adminModulesService = _adminModulesService_;
       esnModuleRegistry = _esnModuleRegistry_;
       ADMIN_MODULES = _ADMIN_MODULES_;
     });
@@ -39,15 +39,15 @@ describe('The adminModulesApi service', function() {
   describe('The getModuleMetadata fn', function() {
     it('should call esnModuleRegistry.getAll', function() {
 
-      adminModulesApi.getModuleMetadata();
+      adminModulesService.getModuleMetadata();
 
       expect(esnModuleRegistry.getAll).to.have.been.calledOnce;
     });
 
     it('should cache modulesMetadata if it was defined', function() {
-      adminModulesApi.getModuleMetadata(); // Init modulesMetadata
+      adminModulesService.getModuleMetadata(); // Init modulesMetadata
 
-      adminModulesApi.getModuleMetadata();
+      adminModulesService.getModuleMetadata();
 
       expect(esnModuleRegistry.getAll).to.have.been.calledOnce;
     });
@@ -76,7 +76,7 @@ describe('The adminModulesApi service', function() {
       var getConfig = sinon.spy(adminConfigApi, 'get');
       var query = getQueryFromAdminModules(modulesmetadataMock);
 
-      adminModulesApi.get(DOMAIN_ID);
+      adminModulesService.get(DOMAIN_ID);
 
       expect(getConfig).to.have.been.calledOnce;
       expect(getConfig).to.have.been.calledWith(DOMAIN_ID, query);
@@ -88,7 +88,7 @@ describe('The adminModulesApi service', function() {
       var setChange = sinon.spy(adminConfigApi, 'set');
       var query = [{name: 'value'}];
 
-      adminModulesApi.set(DOMAIN_ID, query);
+      adminModulesService.set(DOMAIN_ID, query);
 
       expect(setChange).to.have.been.calledOnce;
       expect(setChange).to.have.been.calledWith(DOMAIN_ID, query);

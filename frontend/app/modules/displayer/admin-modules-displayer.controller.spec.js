@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
   var $controller, $rootScope, $scope, $stateParams;
-  var adminDomainConfigService, asyncAction, adminModulesApi, esnModuleRegistry, ADMIN_DEFAULT_NOTIFICATION_MESSAGES;
+  var adminDomainConfigService, asyncAction, adminModulesService, esnModuleRegistry, ADMIN_DEFAULT_NOTIFICATION_MESSAGES;
   var metadataMock;
 
   beforeEach(function() {
@@ -30,11 +30,11 @@ describe('The adminModulesDisplayerController', function() {
       }
     };
 
-    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesApi_, _esnModuleRegistry_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_) {
+    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesService_, _esnModuleRegistry_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       adminDomainConfigService = _adminDomainConfigService_;
-      adminModulesApi = _adminModulesApi_;
+      adminModulesService = _adminModulesService_;
       $stateParams = _$stateParams_;
       esnModuleRegistry = _esnModuleRegistry_;
       ADMIN_DEFAULT_NOTIFICATION_MESSAGES = _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_;
@@ -96,14 +96,14 @@ describe('The adminModulesDisplayerController', function() {
         configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'swipeRightAction' }, { name: 'drafts' }]
       }];
 
-      adminModulesApi.set = sinon.stub().returns($q.when());
+      adminModulesService.set = sinon.stub().returns($q.when());
       $scope.form = {
         $setPristine: sinon.spy()
       };
 
       ctrl.save().then(function() {
         expect(asyncAction).to.have.been.calledWith(ADMIN_DEFAULT_NOTIFICATION_MESSAGES);
-        expect(adminModulesApi.set).to.have.been.calledWith($stateParams.domainId, moduleConfig);
+        expect(adminModulesService.set).to.have.been.calledWith($stateParams.domainId, moduleConfig);
         expect($scope.form.$setPristine).to.have.been.called;
         done();
       });
@@ -115,7 +115,7 @@ describe('The adminModulesDisplayerController', function() {
       var module = {name: 'linagora.esn.unifiedinbox', configurations: [{ name: 'view' }, { name: 'api', value: 'some_value'}, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'swipeRightAction' }]};
       var ctrl = initController(module);
 
-      adminModulesApi.set = sinon.stub().returns($q.when());
+      adminModulesService.set = sinon.stub().returns($q.when());
       $scope.form = {
         $setPristine: sinon.spy()
       };
