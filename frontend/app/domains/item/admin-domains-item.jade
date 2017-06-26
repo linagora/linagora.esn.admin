@@ -4,5 +4,5 @@
       span {{::$ctrl.domain.name}}
   .col-md-4.col-xs-4(title="{{::$ctrl.domain.company_name}}")
     span {{::$ctrl.domain.company_name}}
-  .col-md-4.col-xs-4(title="#{__('Created on')} {{::$ctrl.domain.timestamps.creation | esnDatetime:'date'}}")
-    span {{::$ctrl.domain.timestamps.creation | esnDatetime:'date'}}
+  .col-md-4.col-xs-4(title="#{__('Created on')} {{::$ctrl.domain.timestamps.creation | esnDatetime: 'mediumDate'}}")
+    span {{::$ctrl.domain.timestamps.creation | esnDatetime: 'mediumDate'}}
