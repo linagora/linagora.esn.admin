@@ -27,12 +27,10 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   states: {
     lib: function(dependencies, callback) {
       var libModule = require('./backend/lib')(dependencies);
-      var configuration = require('./backend/webserver/api/configuration')(dependencies);
       var test = require('./backend/webserver/api/test')(dependencies);
 
       var lib = {
         api: {
-          configuration: configuration,
           test: test
         },
         lib: libModule
@@ -44,7 +42,6 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     deploy: function(dependencies, callback) {
       const app = require('./backend/webserver/application')(dependencies);
 
-      app.use('/api/configuration', this.api.configuration);
       app.use('/api/test', this.api.test);
 
       var webserverWrapper = dependencies('webserver-wrapper');

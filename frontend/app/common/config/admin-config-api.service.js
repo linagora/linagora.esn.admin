@@ -2,33 +2,21 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminConfigApi', function($q, Restangular, adminRestangular, ADMIN_MODE) {
-  function get(domainId, query) {
-    var request = adminRestangular.all('configuration');
-
+.factory('adminConfigApi', function($q, adminRestangular, ADMIN_MODE, esnConfigApi) {
+  function get(domainId, configsToGet) {
     if (domainId !== ADMIN_MODE.platform) {
-      request = request.one('domains', domainId);
+      return esnConfigApi.getDomainConfigurations(domainId, configsToGet);
     }
 
-    return request
-      .customPOST(query)
-      .then(function(response) {
-        if (response.status !== 200) {
-          return $q.reject(response);
-        }
-
-        return Restangular.stripRestangular(response.data);
-      });
+    return esnConfigApi.getPlatformConfigurations(configsToGet);
   }
 
-  function set(domainId, query) {
-    var request = adminRestangular.all('configuration');
-
+  function set(domainId, configsToSet) {
     if (domainId !== ADMIN_MODE.platform) {
-      request = request.one('domains', domainId);
+      return esnConfigApi.setDomainConfigurations(domainId, configsToSet);
     }
 
-    return request.customPUT(query);
+    return esnConfigApi.setPlatformConfigurations(configsToSet);
   }
 
   function generateJwtKeyPair() {
