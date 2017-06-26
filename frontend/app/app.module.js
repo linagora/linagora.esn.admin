@@ -19,5 +19,6 @@ angular.module('linagora.esn.admin', [
   'esn.form.helper',
   'esn.module-registry',
   'esn.i18n',
-  'esn.datetime'
+  'esn.datetime',
+  'esn.configuration'
 ]);

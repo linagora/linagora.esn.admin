@@ -73,25 +73,27 @@ describe('The adminModulesService service', function() {
     });
 
     it('should call adminConfigApi.get', function() {
-      var getConfig = sinon.spy(adminConfigApi, 'get');
+      adminConfigApi.get = sinon.spy();
+
       var query = getQueryFromAdminModules(modulesmetadataMock);
 
       adminModulesService.get(DOMAIN_ID);
 
-      expect(getConfig).to.have.been.calledOnce;
-      expect(getConfig).to.have.been.calledWith(DOMAIN_ID, query);
+      expect(adminConfigApi.get).to.have.been.calledOnce;
+      expect(adminConfigApi.get).to.have.been.calledWith(DOMAIN_ID, query);
     });
   });
 
   describe('The set fn', function() {
     it('should call adminConfigApi.set', function() {
-      var setChange = sinon.spy(adminConfigApi, 'set');
+      adminConfigApi.set = sinon.spy();
+
       var query = [{name: 'value'}];
 
       adminModulesService.set(DOMAIN_ID, query);
 
-      expect(setChange).to.have.been.calledOnce;
-      expect(setChange).to.have.been.calledWith(DOMAIN_ID, query);
+      expect(adminConfigApi.set).to.have.been.calledOnce;
+      expect(adminConfigApi.set).to.have.been.calledWith(DOMAIN_ID, query);
     });
 
   });

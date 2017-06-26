@@ -7,97 +7,100 @@ var expect = chai.expect;
 
 describe('The adminConfigApi Angular service', function() {
 
-  var $httpBackend;
-  var adminConfigApi, Restangular, ADMIN_MODE;
+  var $rootScope, $httpBackend, esnConfigApi;
+  var adminConfigApi, ADMIN_MODE;
 
   beforeEach(module('linagora.esn.admin'));
 
-  beforeEach(inject(function(_$httpBackend_, _adminConfigApi_, _Restangular_, _ADMIN_MODE_) {
+  beforeEach(inject(function(_$rootScope_, _$httpBackend_, _esnConfigApi_, _adminConfigApi_, _Restangular_, _ADMIN_MODE_) {
+    $rootScope = _$rootScope_;
     $httpBackend = _$httpBackend_;
+    esnConfigApi = _esnConfigApi_;
     adminConfigApi = _adminConfigApi_;
-    Restangular = _Restangular_;
     ADMIN_MODE = _ADMIN_MODE_;
   }));
 
   describe('The get fn', function() {
 
-    it('should return response data on 200 success', function(done) {
+    it('should call esnConfigApi to get domain configurations', function(done) {
       var domainId = 'domain123';
-      var query = { key: 'value' };
+      var query = [{ name: 'a module name', keys: ['a config key'] }];
       var responseData = 'some_data';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domains/' + domainId, query).respond(200, responseData);
-      Restangular.stripRestangular = sinon.stub().returns(responseData);
+      esnConfigApi.getDomainConfigurations = sinon.stub().returns($q.when(responseData));
 
       adminConfigApi.get(domainId, query)
         .then(function(data) {
           expect(data).to.deep.equal(responseData);
+          expect(esnConfigApi.getDomainConfigurations).to.have.been.calledWith(domainId, query);
           done();
         });
 
-      $httpBackend.flush();
+      $rootScope.$digest();
     });
 
-    it('should return an Error if respose.status is not 200', function(done) {
-      var domainId = 'domain123';
-      var query = { key: 'value' };
+    it('should support getting platform configurations', function(done) {
+      var domainId = ADMIN_MODE.platform;
+      var query = [{ name: 'a module name', keys: ['a config key'] }];
+      var responseData = 'some_data';
 
-      $httpBackend.expectPOST('/admin/api/configuration/domains/' + domainId, query).respond(201);
+      esnConfigApi.getPlatformConfigurations = sinon.stub().returns($q.when(responseData));
 
       adminConfigApi.get(domainId, query)
-        .catch(function(err) {
-          expect(err).to.exist;
+        .then(function(data) {
+          expect(data).to.deep.equal(responseData);
+          expect(esnConfigApi.getPlatformConfigurations).to.have.been.calledWith(query);
           done();
         });
 
-      $httpBackend.flush();
-    });
-
-    it('should send POST to right endpoint to get platform configurations', function() {
-      var domainId = ADMIN_MODE.platform;
-      var query = { key: 'value' };
-
-      $httpBackend.expectPOST('/admin/api/configuration', query).respond(200);
-
-      adminConfigApi.get(domainId, query);
-
-      $httpBackend.flush();
+      $rootScope.$digest();
     });
 
   });
 
   describe('The set fn', function() {
-    it('should resolve on success', function(done) {
+    it('should call esnConfigApi to set domain configurations', function(done) {
       var domainId = 'domain123';
-      var query = { key: 'value' };
+      var query = [{
+        name: 'a module name',
+        configurations: [{
+          name: 'a config key',
+          value: 'a config value'
+        }]
+      }];
 
-      $httpBackend.expectPUT('/admin/api/configuration/domains/' + domainId, query).respond(204);
+      esnConfigApi.setDomainConfigurations = sinon.stub().returns($q.when());
 
-      adminConfigApi.set(domainId, query).then(done.bind(null, null), done.bind(null, 'should resolve'));
+      adminConfigApi
+        .set(domainId, query)
+        .then(function() {
+          expect(esnConfigApi.setDomainConfigurations).to.have.been.calledWith(domainId, query);
+          done();
+        });
 
-      $httpBackend.flush();
+      $rootScope.$digest();
     });
 
-    it('should reject on failure', function(done) {
-      var domainId = 'domain123';
-      var query = { key: 'value' };
-
-      $httpBackend.expectPUT('/admin/api/configuration/domains/' + domainId, query).respond(500);
-
-      adminConfigApi.set(domainId, query).then(done.bind(null, 'should reject'), done.bind(null, null));
-
-      $httpBackend.flush();
-    });
-
-    it('should send PUT to right endpoint to change platform configurations', function() {
+    it('should support setting platform configurations', function(done) {
       var domainId = ADMIN_MODE.platform;
-      var query = { key: 'value' };
+      var query = [{
+        name: 'a module name',
+        configurations: [{
+          name: 'a config key',
+          value: 'a config value'
+        }]
+      }];
 
-      $httpBackend.expectPUT('/admin/api/configuration', query).respond(204);
+      esnConfigApi.setPlatformConfigurations = sinon.stub().returns($q.when());
 
-      adminConfigApi.set(domainId, query);
+      adminConfigApi
+        .set(domainId, query)
+        .then(function() {
+          expect(esnConfigApi.setPlatformConfigurations).to.have.been.calledWith(query);
+          done();
+        });
 
-      $httpBackend.flush();
+      $rootScope.$digest();
     });
   });
 

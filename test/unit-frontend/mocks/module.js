@@ -78,3 +78,8 @@ angular.module('esn.datetime', [])
   .filter('esnDatetime', function() {
     return function(input) { return input; };
   });
+
+angular.module('esn.configuration', [])
+  .factory('esnConfigApi', function() {
+    return {};
+  });
