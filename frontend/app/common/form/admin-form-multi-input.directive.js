@@ -6,7 +6,7 @@ angular.module('linagora.esn.admin')
 
   return {
     restrict: 'E',
-    templateUrl: '/admin/app/common/form/admin-form-multi-input',
+    templateUrl: '/admin/app/common/form/admin-form-multi-input.html',
     controller: 'adminFormMultiInputController',
     controllerAs: '$ctrl',
     scope: {

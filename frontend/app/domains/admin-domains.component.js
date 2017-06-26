@@ -4,6 +4,6 @@
   angular.module('linagora.esn.admin')
 
   .component('adminDomains', {
-    templateUrl: '/admin/app/domains/admin-domains'
+    templateUrl: '/admin/app/domains/admin-domains.html'
   });
 })(angular);

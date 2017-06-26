@@ -20,7 +20,7 @@ angular.module('linagora.esn.admin')
   $stateProvider
     .state('admin', {
       url: '/admin',
-      templateUrl: '/admin/app/app',
+      templateUrl: '/admin/app/app.html',
       resolve: {
         isAdmin: function($location, session) {
           return session.ready.then(function() {

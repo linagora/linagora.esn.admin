@@ -149,7 +149,7 @@ angular.module('linagora.esn.admin')
 
   return {
     restrict: 'E',
-    templateUrl: '/admin/app/common/form/admin-form-input-bytes',
+    templateUrl: '/admin/app/common/form/admin-form-input-bytes.html',
     scope: {
       inputUnit: '@',
       inputValue: '=',

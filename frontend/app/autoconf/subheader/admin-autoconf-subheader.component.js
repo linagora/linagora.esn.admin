@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminAutoconfSubheader', {
-    templateUrl: '/admin/app/autoconf/subheader/admin-autoconf-subheader',
+    templateUrl: '/admin/app/autoconf/subheader/admin-autoconf-subheader.html',
     bindings: {
       onFormSubmit: '&',
       form: '<'

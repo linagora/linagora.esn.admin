@@ -1,7 +1,7 @@
 (function(angular) {
   angular.module('linagora.esn.admin')
     .component('adminModeIndicator', {
-      templateUrl: '/admin/app/common/mode/indicator/admin-mode-indicator',
+      templateUrl: '/admin/app/common/mode/indicator/admin-mode-indicator.html',
       controller: adminModeIndicatorController
     });
 

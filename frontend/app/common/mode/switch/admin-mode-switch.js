@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
     .component('adminModeSwitch', {
-      templateUrl: '/admin/app/common/mode/switch/admin-mode-switch',
+      templateUrl: '/admin/app/common/mode/switch/admin-mode-switch.html',
       controller: adminmModeSwitchController
     });
 

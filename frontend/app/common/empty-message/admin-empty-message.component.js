@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminEmptyMessage', {
-    templateUrl: '/admin/app/common/empty-message/admin-empty-message',
+    templateUrl: '/admin/app/common/empty-message/admin-empty-message.html',
     bindings: {
       message: '@',
       type: '@',
