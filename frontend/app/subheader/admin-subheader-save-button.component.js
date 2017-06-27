@@ -3,7 +3,7 @@
 angular.module('linagora.esn.admin')
 
 .component('adminSubheaderSaveButton', {
-  templateUrl: '/admin/app/subheader/admin-subheader-save-button',
+  templateUrl: '/admin/app/subheader/admin-subheader-save-button.html',
   controller: 'adminSubheaderSaveButtonController',
   bindings: {
     onClick: '&',

@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminOauthSubheader', {
-    templateUrl: '/admin/app/oauth/admin-oauth-subheader',
+    templateUrl: '/admin/app/oauth/admin-oauth-subheader.html',
     bindings: {
       onFormSubmit: '&',
       form: '<'

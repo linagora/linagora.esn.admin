@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminJamesSubheader', {
-    templateUrl: '/admin/app/james/admin-james-subheader',
+    templateUrl: '/admin/app/james/admin-james-subheader.html',
     bindings: {
       onFormSubmit: '&',
       form: '<'

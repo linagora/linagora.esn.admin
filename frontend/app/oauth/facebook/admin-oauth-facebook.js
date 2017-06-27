@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminOauthFacebook', {
-    templateUrl: '/admin/app/oauth/facebook/admin-oauth-facebook',
+    templateUrl: '/admin/app/oauth/facebook/admin-oauth-facebook.html',
     bindings: {
       config: '=',
       isEnabled: '='

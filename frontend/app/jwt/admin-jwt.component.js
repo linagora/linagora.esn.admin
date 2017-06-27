@@ -3,6 +3,6 @@
 angular.module('linagora.esn.admin')
 
 .component('adminJwt', {
-  templateUrl: '/admin/app/jwt/admin-jwt',
+  templateUrl: '/admin/app/jwt/admin-jwt.html',
   controller: 'adminJwtController'
 });

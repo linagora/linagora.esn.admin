@@ -3,7 +3,7 @@
 angular.module('linagora.esn.admin')
 
 .component('adminSubheaderCloseButton', {
-  templateUrl: '/admin/app/subheader/admin-subheader-close-button',
+  templateUrl: '/admin/app/subheader/admin-subheader-close-button.html',
   bindings: {
     backState: '@'
   }

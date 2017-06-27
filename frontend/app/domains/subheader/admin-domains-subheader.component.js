@@ -4,6 +4,6 @@
   angular.module('linagora.esn.admin')
 
   .component('adminDomainsSubheader', {
-    templateUrl: '/admin/app/domains/subheader/admin-domains-subheader'
+    templateUrl: '/admin/app/domains/subheader/admin-domains-subheader.html'
   });
 })(angular);
