@@ -1,15 +1,15 @@
 'use strict';
 
-var AwesomeModule = require('awesome-module');
-var Dependency = AwesomeModule.AwesomeModuleDependency;
-var path = require('path');
-var glob = require('glob-all');
-var FRONTEND_JS_PATH = __dirname + '/frontend/app/';
+const AwesomeModule = require('awesome-module');
+const Dependency = AwesomeModule.AwesomeModuleDependency;
+const path = require('path');
+const glob = require('glob-all');
+const FRONTEND_JS_PATH = __dirname + '/frontend/app/';
 
-var MODULE_NAME = 'admin';
-var AWESOME_MODULE_NAME = 'linagora.esn.' + MODULE_NAME;
+const MODULE_NAME = 'admin';
+const AWESOME_MODULE_NAME = 'linagora.esn.' + MODULE_NAME;
 
-var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
+const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   dependencies: [
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.wrapper', 'webserver-wrapper'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.esn-config', 'esn-config'),
@@ -26,12 +26,14 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
 
   states: {
     lib: function(dependencies, callback) {
-      var libModule = require('./backend/lib')(dependencies);
-      var test = require('./backend/webserver/api/test')(dependencies);
+      const libModule = require('./backend/lib')(dependencies);
+      const configuration = require('./backend/webserver/api/configuration')(dependencies);
+      const test = require('./backend/webserver/api/test')(dependencies);
 
-      var lib = {
+      const lib = {
         api: {
-          test: test
+          configuration,
+          test
         },
         lib: libModule
       };
@@ -42,9 +44,10 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     deploy: function(dependencies, callback) {
       const app = require('./backend/webserver/application')(dependencies);
 
+      app.use('/api/configuration', this.api.configuration);
       app.use('/api/test', this.api.test);
 
-      var webserverWrapper = dependencies('webserver-wrapper');
+      const webserverWrapper = dependencies('webserver-wrapper');
       const frontendJsFilesFullPath = glob.sync([
         FRONTEND_JS_PATH + '**/*.module.js',
         FRONTEND_JS_PATH + '**/!(*spec).js'
@@ -57,7 +60,7 @@ var adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       webserverWrapper.injectAngularAppModules(MODULE_NAME, frontendJsFilesUri, [AWESOME_MODULE_NAME], ['esn'], {
         localJsFiles: frontendJsFilesFullPath
       });
-      var lessFile = path.join(FRONTEND_JS_PATH, 'app.less');
+      const lessFile = path.join(FRONTEND_JS_PATH, 'app.less');
 
       webserverWrapper.injectLess(MODULE_NAME, [lessFile], 'esn');
       webserverWrapper.addApp(MODULE_NAME, app);
