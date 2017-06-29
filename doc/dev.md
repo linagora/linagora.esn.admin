@@ -1,8 +1,5 @@
 # How to develop Admin module
 
-- Note: Replace `$SRC` in the following instructions with the folder you put
-sources into.
-
 Vanilla repository information can be found at https://ci.open-paas.org/stash/projects/OM/repos/linagora.esn.admin/browse
 
 ## Add module to OpenPaaS ESN
@@ -11,25 +8,23 @@ Vanilla repository information can be found at https://ci.open-paas.org/stash/pr
 
 https://ci.open-paas.org/stash/projects/OM/repos/linagora.esn.admin?fork
 
-Once forked, **clone** the fork in the folder of your choice:
+Once forked, **clone** the fork in the folder of your choice, linagora.esn.admin now contains Admin module sources.
 
-    cd $SRC
-    git clone <your repo>
-    # $SRC/linagora.esn.admin now contains Admin module sources.
-
-If not already done, do the same for the OpenPaaS RSE repository in the $SRC
-folder (information available at https://ci.open-paas.org/stash/projects/OR/repos/rse/browse).
+If not already done, do the same for the OpenPaaS RSE repository (information available at https://ci.open-paas.org/stash/projects/OR/repos/rse/browse).
 You must also install all the required dependencies and tools from OpenPaaS RSE
 (check README.md).
 
-**Add Admin module to OpenPaaS** by creating a symbolic link in the `$SRC/rse/node_modules` folder:
+**Add Admin module to OpenPaaS** by `npm link`:
+First go to the module folder (linagora.esn.admin):
 
-    cd $SRC/rse
-    ln -s $SRC/linagora.esn.admin node_modules/linagora.esn.admin
+	npm link
 
-You can now start OpenPaaS to access to Admin module:
+Then go to the OpenPaaS RSE folder (rse):
 
-    cd $SRC/rse
+	npm link linagora.esn.admin
+
+You can now start OpenPaaS to access to Admin module (still in OpenPaaS RSE folder):
+
     npm start # or 'grunt dev'
 
 OpenPaaS should be started and available at http://localhost:8080.
