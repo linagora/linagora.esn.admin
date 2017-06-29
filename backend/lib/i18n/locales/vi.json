@@ -169,11 +169,12 @@
   "User created": "Người dùng đã được tạo",
   "Failed to create user": "Không thể tạo người dùng",
   "Login": "Đăng nhập",
-  "Date time": "Ngày giờ",
   "Created on": "Đã tạo vào",
   "Company": "Công ty",
   "Created": "Đã tạo",
   "Domains management": "Quản lý domain",
   "Domains": "Domains",
-  "No domain": "Không có domain"
+  "No domain": "Không có domain",
+  "Time format": "Định dạng thời gian",
+  "Change your preferred time format": "Thay đổi định dạng thời gian"
 }
