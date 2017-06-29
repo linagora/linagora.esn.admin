@@ -169,11 +169,12 @@
   "User created": "User created",
   "Failed to create user": "Failed to create user",
   "Login": "Login",
-  "Date time": "Date time",
   "Created on": "Created on",
   "Company": "Company",
   "Created": "Created",
   "Domains management": "Domains management",
   "Domains": "Domains",
-  "No domain": "No domain"
+  "No domain": "No domain",
+  "Time format": "Time format",
+  "Change your preferred time format": "Change your preferred time format"
 }
