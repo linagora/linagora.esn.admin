@@ -75,7 +75,7 @@ angular.module('linagora.esn.admin')
   icon: 'mdi-view-module',
   displayIn: {
     domain: true,
-    platform: false
+    platform: true
   }
 }, {
   id: 'james',

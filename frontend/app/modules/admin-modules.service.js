@@ -2,48 +2,65 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminModulesService', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODULES) {
-  var modulesMetadata;
-
-  function _getModulesMetadata() {
-    if (modulesMetadata) { return modulesMetadata; }
-
-    modulesMetadata = _.cloneDeep(esnModuleRegistry.getAll());
-
-    angular.forEach(modulesMetadata, function(module, name) {
-      _.assign(module, ADMIN_MODULES[name]);
-    });
-
-    return modulesMetadata;
-  }
-
-  function getModuleMetadata(moduleName) {
-    return _getModulesMetadata()[moduleName];
-  }
-
-  function get(domainId) {
-    var query = [];
-    var modulesMetadata = _getModulesMetadata();
-
-    angular.forEach(modulesMetadata, function(module, name) {
-      var keys = module.configurations || [];
-
-      query.push({
-        name: name,
-        keys: keys
-      });
-    });
-
-    return adminConfigApi.get(domainId, query);
-  }
-
-  function set(domainId, query) {
-    return adminConfigApi.set(domainId, query);
-  }
-
+.factory('adminModulesService', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODE) {
   return {
     get: get,
-    set: set,
-    getModuleMetadata: getModuleMetadata
+    set: set
   };
+
+  function get(domainId) {
+    var inPlatformMode = domainId === ADMIN_MODE.platform;
+    var modulesMetadata = cloneModulesMetadata();
+    var modulesThatHasConfig = _.values(modulesMetadata)
+      .filter(function(module) {
+        return moduleHasConfig(inPlatformMode, module);
+      })
+      .map(function(module) {
+        return module.id;
+      });
+
+    return adminConfigApi
+      .inspect(domainId, modulesThatHasConfig)
+      .then(function(modules) {
+        modules.forEach(function(module) {
+          modulesMetadata[module.name].config.configurations = module.configurations;
+        });
+
+        return modulesMetadata;
+      });
+  }
+
+  function moduleHasConfig(inPlatformMode, module) {
+    if (inPlatformMode) {
+      return module.config && module.config.displayIn.platform;
+    }
+
+    return module.config && module.config.displayIn.domain;
+  }
+
+  function set(domainId, modules) {
+    var configsToSet = modules.map(function(module) {
+      var writableConfigs = module.config.configurations
+        .filter(function(config) {
+          return config.writable && angular.isDefined(config.value);
+        })
+        .map(function(config) {
+          return {
+            name: config.name,
+            value: config.value
+          };
+        });
+
+      return {
+        name: module.id,
+        configurations: writableConfigs
+      };
+    });
+
+    return adminConfigApi.set(domainId, configsToSet);
+  }
+
+  function cloneModulesMetadata() {
+    return _.cloneDeep(esnModuleRegistry.getAll());
+  }
 });
