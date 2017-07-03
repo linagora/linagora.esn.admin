@@ -1,43 +1,68 @@
-'use strict';
+(function(angular) {
+  'use strict';
 
-angular.module('linagora.esn.admin')
+  angular.module('linagora.esn.admin')
 
-.factory('adminConfigApi', function($q, adminRestangular, ADMIN_MODE, esnConfigApi) {
-  function get(domainId, configsToGet) {
-    if (domainId !== ADMIN_MODE.platform) {
-      return esnConfigApi.getDomainConfigurations(domainId, configsToGet);
+  .factory('adminConfigApi', adminConfigApi);
+
+  function adminConfigApi($q, adminRestangular, esnConfigApi, ADMIN_MODE) {
+    return {
+      get: get,
+      set: set,
+      inspect: inspect,
+      generateJwtKeyPair: generateJwtKeyPair,
+      generateJwtToken: generateJwtToken
+    };
+
+    function get(domainId, configsToGet) {
+      if (!configsToGet.length) {
+        return $q.when([]);
+      }
+
+      if (domainId !== ADMIN_MODE.platform) {
+        return esnConfigApi.getDomainConfigurations(domainId, configsToGet);
+      }
+
+      return esnConfigApi.getPlatformConfigurations(configsToGet);
     }
 
-    return esnConfigApi.getPlatformConfigurations(configsToGet);
-  }
+    function set(domainId, configsToSet) {
+      if (!configsToSet.length) {
+        return $q.when();
+      }
 
-  function set(domainId, configsToSet) {
-    if (domainId !== ADMIN_MODE.platform) {
-      return esnConfigApi.setDomainConfigurations(domainId, configsToSet);
+      if (domainId !== ADMIN_MODE.platform) {
+        return esnConfigApi.setDomainConfigurations(domainId, configsToSet);
+      }
+
+      return esnConfigApi.setPlatformConfigurations(configsToSet);
     }
 
-    return esnConfigApi.setPlatformConfigurations(configsToSet);
-  }
+    function inspect(domainId, modules) {
+      if (!modules.length) {
+        return $q.when([]);
+      }
 
-  function generateJwtKeyPair() {
-    return adminRestangular
-      .all('configuration')
-      .one('generateJwtKeyPair')
-      .post();
-  }
+      if (domainId !== ADMIN_MODE.platform) {
+        return esnConfigApi.inspectDomainConfigurations(domainId, modules);
+      }
 
-  function generateJwtToken(domainId) {
-    return adminRestangular
-      .all('configuration')
-      .one('domains', domainId)
-      .one('generateJwtToken')
-      .post();
-  }
+      return esnConfigApi.inspectPlatformConfigurations(modules);
+    }
 
-  return {
-    get: get,
-    set: set,
-    generateJwtKeyPair: generateJwtKeyPair,
-    generateJwtToken: generateJwtToken
-  };
-});
+    function generateJwtKeyPair() {
+      return adminRestangular
+        .all('configuration')
+        .one('generateJwtKeyPair')
+        .post();
+    }
+
+    function generateJwtToken(domainId) {
+      return adminRestangular
+        .all('configuration')
+        .one('domains', domainId)
+        .one('generateJwtToken')
+        .post();
+    }
+  }
+})(angular);

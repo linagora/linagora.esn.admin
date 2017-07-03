@@ -7,8 +7,7 @@ var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
   var $controller, $rootScope, $scope, $stateParams;
-  var adminDomainConfigService, asyncAction, adminModulesService, esnModuleRegistry, ADMIN_DEFAULT_NOTIFICATION_MESSAGES;
-  var metadataMock;
+  var adminDomainConfigService, asyncAction, adminModulesService, ADMIN_DEFAULT_NOTIFICATION_MESSAGES;
 
   beforeEach(function() {
     module('linagora.esn.admin', function($provide) {
@@ -19,66 +18,44 @@ describe('The adminModulesDisplayerController', function() {
   });
 
   beforeEach(function() {
-    metadataMock = {
-      'linagora.esn.unifiedinbox': {
-        title: 'Unified Inbox',
-        homePage: 'unifiedinbox'
-      },
-      'linagora.esn.contact': {
-        title: 'Contact',
-        homePage: 'contact'
-      }
-    };
-
-    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesService_, _esnModuleRegistry_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_) {
+    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesService_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       adminDomainConfigService = _adminDomainConfigService_;
       adminModulesService = _adminModulesService_;
       $stateParams = _$stateParams_;
-      esnModuleRegistry = _esnModuleRegistry_;
       ADMIN_DEFAULT_NOTIFICATION_MESSAGES = _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_;
     });
-
-    esnModuleRegistry.getAll = sinon.stub().returns(metadataMock);
   });
 
   function initController(module) {
     $scope = $rootScope.$new();
 
-    var controller = $controller('adminModulesDisplayerController', { $scope: $scope }, { module: module});
+    var controller = $controller('adminModulesDisplayerController', { $scope: $scope }, { module: module });
 
     $scope.$digest();
 
     return controller;
   }
 
-  it('should add feature when it\'s not in database', function() {
-
-    var module = {name: 'linagora.esn.unifiedinbox', configurations: [{name: 'view'}, {name: 'api'}]};
-    var ctrl = initController(module);
-    var expectConfigurations = [{name: 'view'}, {name: 'api'}, {name: 'uploadUrl'}, {name: 'downloadUrl'}, {name: 'isJmapSendingEnabled'}, {name: 'isSaveDraftBeforeSendingEnabled'}, {name: 'composer.attachments'}, {name: 'maxSizeUpload'}, {name: 'swipeRightAction'}, {name: 'drafts'}];
-
-    expect(ctrl.module.configurations).to.deep.equal(expectConfigurations);
-  });
-
   describe('The setHome fn', function() {
-
     it('should call adminDomainConfigService.setHomePage to save configuration', function(done) {
-      var module = {name: 'linagora.esn.contact', configurations: []};
+      var module = {
+        name: 'linagora.esn.test',
+        homePage: 'test',
+        configurations: []
+      };
       var ctrl = initController(module);
       var HOMEPAGE_KEY = 'homePage';
-      var expectedState = 'contact';
       var event = {
         stopPropagation: angular.noop
       };
 
       adminDomainConfigService.set = sinon.stub().returns($q.when());
-      ctrl.module.name = 'linagora.esn.contact';
       ctrl.setHome(event).then(function() {
         expect(asyncAction).to.have.been.calledWith(ADMIN_DEFAULT_NOTIFICATION_MESSAGES);
-        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, HOMEPAGE_KEY, expectedState);
-        expect(ctrl.currentHomepage).to.equal(expectedState);
+        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, HOMEPAGE_KEY, module.homePage);
+        expect(ctrl.currentHomepage).to.equal(module.homePage);
         done();
       });
 
@@ -86,8 +63,7 @@ describe('The adminModulesDisplayerController', function() {
     });
   });
 
-  describe('The Save fn', function() {
-
+  describe('The save fn', function() {
     it('should call adminConfigApi.set to save configuration', function(done) {
       var module = {name: 'linagora.esn.unifiedinbox', configurations: [{ name: 'some_configs', value: 'some_value' }, { name: 'view' }, { name: 'api' }, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'swipeRightAction' }, { name: 'drafts' }]};
       var ctrl = initController(module);

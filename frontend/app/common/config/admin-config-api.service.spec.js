@@ -21,6 +21,20 @@ describe('The adminConfigApi Angular service', function() {
   }));
 
   describe('The get fn', function() {
+    it('should do nothing if configsToGet is empty', function(done) {
+      var domainId = 'domain123';
+      var configsToGet = [];
+
+      esnConfigApi.getDomainConfigurations = sinon.spy();
+
+      adminConfigApi.get(domainId, configsToGet)
+        .then(function() {
+          expect(esnConfigApi.getDomainConfigurations).to.not.have.been.called;
+          done();
+        });
+
+      $rootScope.$digest();
+    });
 
     it('should call esnConfigApi to get domain configurations', function(done) {
       var domainId = 'domain123';
@@ -59,6 +73,21 @@ describe('The adminConfigApi Angular service', function() {
   });
 
   describe('The set fn', function() {
+    it('should do nothing if configsToSet is empty', function(done) {
+      var domainId = 'domain123';
+      var configsToSet = [];
+
+      esnConfigApi.setDomainConfigurations = sinon.spy();
+
+      adminConfigApi.set(domainId, configsToSet)
+        .then(function() {
+          expect(esnConfigApi.setDomainConfigurations).to.not.have.been.called;
+          done();
+        });
+
+      $rootScope.$digest();
+    });
+
     it('should call esnConfigApi to set domain configurations', function(done) {
       var domainId = 'domain123';
       var query = [{
@@ -97,6 +126,56 @@ describe('The adminConfigApi Angular service', function() {
         .set(domainId, query)
         .then(function() {
           expect(esnConfigApi.setPlatformConfigurations).to.have.been.calledWith(query);
+          done();
+        });
+
+      $rootScope.$digest();
+    });
+  });
+
+  describe('The inspect fn', function() {
+    it('should do nothing if the modules is empty', function(done) {
+      var domainId = 'domain123';
+      var modules = [];
+
+      esnConfigApi.inspectDomainConfigurations = sinon.spy();
+
+      adminConfigApi
+        .inspect(domainId, modules)
+        .then(function() {
+          expect(esnConfigApi.inspectDomainConfigurations).to.not.have.been.called;
+          done();
+        });
+
+      $rootScope.$digest();
+    });
+
+    it('should call esnConfigApi to inspect domain configurations', function(done) {
+      var domainId = 'domain123';
+      var modules = ['module1', 'module2'];
+
+      esnConfigApi.inspectDomainConfigurations = sinon.stub().returns($q.when());
+
+      adminConfigApi
+        .inspect(domainId, modules)
+        .then(function() {
+          expect(esnConfigApi.inspectDomainConfigurations).to.have.been.calledWith(domainId, modules);
+          done();
+        });
+
+      $rootScope.$digest();
+    });
+
+    it('should support inspecting platform configurations', function(done) {
+      var domainId = ADMIN_MODE.platform;
+      var modules = ['module1', 'module2'];
+
+      esnConfigApi.inspectPlatformConfigurations = sinon.stub().returns($q.when());
+
+      adminConfigApi
+        .inspect(domainId, modules)
+        .then(function() {
+          expect(esnConfigApi.inspectPlatformConfigurations).to.have.been.calledWith(modules);
           done();
         });
 
