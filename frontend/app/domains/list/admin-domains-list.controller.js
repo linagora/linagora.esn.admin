@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
     .controller('adminDomainsListController', adminDomainsListController);
 
-  function adminDomainsListController($q, domainAPI, infiniteScrollHelper) {
+  function adminDomainsListController($scope, $q, domainAPI, infiniteScrollHelper, ADMIN_DOMAINS_EVENTS) {
     var self = this;
     var DEFAULT_LIMIT = 20;
 
@@ -17,6 +17,10 @@
 
     function $onInit() {
       self.loadMoreElements = infiniteScrollHelper(self, _loadNextItems);
+
+      $scope.$on(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, function(event, domain) {
+        _onDomainCreated(domain);
+      });
     }
 
     function _loadNextItems() {
@@ -26,6 +30,14 @@
         .then(function(response) {
           return response.data;
         });
+    }
+
+    function _onDomainCreated(newDomain) {
+      if (!newDomain) {
+        return;
+      }
+
+      self.elements.unshift(newDomain);
     }
   }
 })(angular);

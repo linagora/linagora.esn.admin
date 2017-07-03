@@ -159,9 +159,14 @@
   "Created on": "Đã tạo vào",
   "Company": "Công ty",
   "Created": "Đã tạo",
-  "Domains management": "Quản lý domain",
-  "Domains": "Domains",
-  "No domain": "Không có domain",
+  "Domains management": "Quản lý miền",
+  "Domains": "Miền",
+  "No domain": "Không có miền",
   "Time format": "Định dạng thời gian",
-  "Change your preferred time format": "Thay đổi định dạng thời gian"
+  "Change your preferred time format": "Thay đổi định dạng thời gian",
+  "New domain": "Miền mới",
+  "Create": "Tạo",
+  "Company name": "Tên công ty",
+  "Administrator": "Quản trị viên",
+  "Domain name is invalid": "Tên miền không hợp lệ"
 }

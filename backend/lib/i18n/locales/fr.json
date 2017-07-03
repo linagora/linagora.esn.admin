@@ -163,5 +163,10 @@
   "Domains": "Domaines",
   "No domain": "Aucune domaine",
   "Time format": "Format de l'heure",
-  "Change your preferred time format": "Modifiez votre format de heure préféré"
+  "Change your preferred time format": "Modifiez votre format de heure préféré",
+  "New domain": "Nouveau domaine",
+  "Create": "Créer",
+  "Company name": "Nom de l'entreprise",
+  "Administrator": "Administrateur",
+  "Domain name is invalid": "Le nom de domaine n'est pas valide"
 }

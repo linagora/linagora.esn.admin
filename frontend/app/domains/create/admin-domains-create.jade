@@ -1,0 +1,15 @@
+.modal.admin-domains-create
+  .modal-dialog
+    .modal-content
+      .body
+        .row
+          h4.title #{__('New domain')}
+          hr
+        .row
+          form(name="form")
+            admin-domains-form(domain="$ctrl.domain")
+        .row.footer.flex-end
+          button.btn.btn-primary(ng-click="$ctrl.create(); $hide()", ng-disabled="form.$invalid")
+            | #{__('Create')}
+          button.btn.btn-link(ng-click="$hide()")
+            | #{__('Close')}
