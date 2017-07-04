@@ -1,21 +1,24 @@
 form(name="form")
-  .card(ng-init="expanded=false", ng-class="{clickable: $ctrl.configurations}", ng-click="expanded=!expanded")
-    .card-header
+  .card(ng-init="expanded=false", ng-class="{clickable: $ctrl.configurations}")
+    .card-header(ng-click="expanded=!expanded")
       h2.flex-vertical-centered(ng-class="form.$pristine ? '': 'unsaved-changes'")
         img(ng-src="{{$ctrl.module.icon}}")
         span {{$ctrl.module.title | esnI18n}}
 
       .toolbar
-        span.clickable(ng-click="$ctrl.setHome($event)", ng-class="{'homeActivated': $ctrl.isHomePage()}")
-          | #{__('Home')}
-          i.mdi(ng-class="$ctrl.isHomePage() ? 'mdi-star' : 'mdi-star-outline'")
-        .flex-vertical-centered(ng-if="$ctrl.configurations")
-          | #{__('Features')}
-          i.mdi(ng-class="expanded ? 'mdi-menu-up' : 'mdi-menu-down'")
-        toggle-switch(ng-model="$ctrl.isEnabled")
-  .form(ng-if="$ctrl.configurations", ng-show="expanded")
-    admin-modules-form(template="$ctrl.module.config.template", configurations="$ctrl.configurations")
-    .flex-end.admin-form-bottom
-      a.text-uppercase.flex-vertical-centered(href="", ng-click="$ctrl.reset()")
-        |  #{__('Cancel')}
-      admin-modules-save-button(form="form", on-form-submit="$ctrl.save()")
+        .admin-modules-set-homepage
+          span.clickable(ng-show="$ctrl.module.homePage", ng-click="$ctrl.setHome($event)", ng-class="{'homeActivated': $ctrl.isHomePage()}")
+            | #{__('Home')}
+            i.mdi(ng-class="$ctrl.isHomePage() ? 'mdi-star' : 'mdi-star-outline'")
+        .admin-modules-features
+          span(ng-show="$ctrl.configurations")
+            | #{__('Features')}
+            i.mdi(ng-class="expanded ? 'mdi-menu-up' : 'mdi-menu-down'")
+      toggle-switch(ng-model="$ctrl.isEnabled")
+    .card-body
+      .form(ng-if="$ctrl.configurations", ng-show="expanded")
+        admin-modules-form(template="$ctrl.module.config.template", configurations="$ctrl.configurations")
+        .flex-end.admin-form-bottom
+          a.text-uppercase.flex-vertical-centered(href="", ng-click="$ctrl.reset()")
+            |  #{__('Cancel')}
+          admin-modules-save-button(form="form", on-form-submit="$ctrl.save()")

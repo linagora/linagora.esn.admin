@@ -11,7 +11,8 @@ angular.module('linagora.esn.admin')
     controllerAs: '$ctrl',
     scope: {
       ngModel: '=',
-      availableTypes: '='
+      availableTypes: '=',
+      requiredTypes: '='
     }
   };
 });

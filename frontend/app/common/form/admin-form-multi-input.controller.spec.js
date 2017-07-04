@@ -29,14 +29,26 @@ describe('The adminFormMultiInput controller', function() {
     });
 
     $scope.$digest();
+
     return ctrl;
   };
 
   it('should init fields value if ngModel is undefined', function() {
-
     var ctrl = initController();
 
     expect(ctrl.fields).to.deep.equal([]);
+  });
+
+  it('should init required fields value with required type', function() {
+    $scope.requiredTypes = ['type1', 'type2'];
+
+    var ctrl = initController($scope);
+
+    expect(ctrl.requiredFields).to.shallowDeepEqual([
+      { type: 'type1', value: '' },
+      { type: 'type2', value: '' }
+    ]);
+
   });
 
   describe('The showAddButton fn', function() {

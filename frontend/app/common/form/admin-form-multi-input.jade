@@ -1,4 +1,14 @@
 ng-form(name="form")
+
+  .form-group(ng-repeat='field in $ctrl.requiredFields track by $index')
+    .row.field-option.flex-vertical-centered
+      .col-xs-5
+        esn-form-group(label="#{__('Key')}")
+          input.form-control.multi-input-text(type="text" ng-model='field.type', disabled)
+      .col-xs-6
+        esn-form-group(label="#{__('Value')}")
+          input.form-control.multi-input-text(type="text" ng-model='field.value', ng-change="$ctrl.onDataChange()", required)
+          
   .form-group(ng-repeat='field in $ctrl.fields track by $index')
     .row.field-option.flex-vertical-centered
       .col-xs-5
