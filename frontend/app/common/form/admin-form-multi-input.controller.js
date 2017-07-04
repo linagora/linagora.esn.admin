@@ -3,18 +3,40 @@
 angular.module('linagora.esn.admin')
 
 .controller('adminFormMultiInputController', function($scope, $timeout, $element, _) {
+  $scope.ngModel = $scope.ngModel ? $scope.ngModel : {};
+
   var self = this;
   var ngModel = $scope.ngModel || {};
 
   self.fields = [];
+  self.requiredFields = [];
   self.availableTypes = $scope.availableTypes;
+  self.requiredTypes = $scope.requiredTypes;
 
   angular.forEach(ngModel, function(value, key) {
-    self.fields.push({
-      type: key,
-      value: value
-    });
+    if (_.contains(self.availableTypes, key)) {
+      self.fields.push({
+        type: key,
+        value: value
+      });
+    }
+
+    if (_.contains(self.requiredTypes, key)) {
+      self.requiredFields.push({
+        type: key,
+        value: value
+      });
+    }
   });
+
+  if (self.requiredTypes && self.requiredFields.length === 0) {
+    self.requiredTypes.forEach(function(type) {
+      self.requiredFields.push({
+        type: type,
+        value: ''
+      });
+    });
+  }
 
   self.showAddButton = function() {
     return getUnselectedTypes().length > 0;
@@ -30,6 +52,10 @@ angular.module('linagora.esn.admin')
     });
 
     self.fields.forEach(function(item) {
+      ngModel[item.type] = item.value;
+    });
+
+    self.requiredFields.forEach(function(item) {
       ngModel[item.type] = item.value;
     });
   };
