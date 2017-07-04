@@ -1,7 +1,6 @@
 @adminModuleMiniIconSize: 1.2em;
 @adminModuleMiniItemFontSize: 1.2em;
 @adminModuleBorderColor: #DDDDDD;
-@adminModuleMiniFormHeight: 35px;
 
 admin-modules {
 
@@ -39,7 +38,7 @@ admin-modules {
         }
 
         .toolbar {
-          width:50%;
+          width: 50%;
 
           .flex-vertical-centered;
           .flex-space-between;
@@ -63,33 +62,6 @@ admin-modules {
       }
     }
 
-    admin-modules-form {
-
-      ng-form {
-        .flex-space-between;
-      }
-
-      .option-field {
-        .flex-vertical-centered;
-
-        min-height: @adminModuleMiniFormHeight;
-
-        input {
-          background: @app-gray;
-        }
-      }
-
-      admin-form-input-bytes {
-        ng-form {
-          padding-left: 15px;
-
-          input[name=dataSizeInput] {
-            text-align: right;
-          }
-        }
-      }
-    }
-
     .admin-form-bottom {
       padding-right: 10px;
       padding-bottom: 10px;
@@ -98,36 +70,6 @@ admin-modules {
       a {
         margin-right: 10px;
         text-decoration: underline;
-      }
-    }
-  }
-}
-
-@media (min-width: @screen-xs-min) {
-  admin-modules {
-
-    admin-modules-displayer {
-
-      admin-modules-form {
-
-        ng-form {
-          flex-direction: row;
-
-          .left-block, .right-block {
-            width: 50%;
-          }
-
-          .left-block {
-            padding-right: 5px;
-            padding-left: 15px;
-          }
-
-          .right-block {
-            padding-left: 5px;
-            border-left: 1px solid @adminModuleBorderColor;
-            margin-bottom: 10px;
-          }
-        }
       }
     }
   }
