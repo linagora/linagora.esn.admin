@@ -4,16 +4,14 @@ const express = require('express');
 
 module.exports = function(dependencies) {
   const authorizationMW = dependencies('authorizationMW');
-  const domainMiddleware = dependencies('domainMiddleware');
   const platformadminsMW = dependencies('platformadminsMW');
   const controller = require('./controller')(dependencies);
 
   const router = express.Router();
 
-  router.post('/domains/:uuid/generateJwtToken',
+  router.post('/generateJwtToken',
     authorizationMW.requiresAPILogin,
-    domainMiddleware.load,
-    authorizationMW.requiresDomainManager,
+    platformadminsMW.requirePlatformAdmin,
     controller.generateJwtToken);
 
   router.post('/generateJwtKeyPair',

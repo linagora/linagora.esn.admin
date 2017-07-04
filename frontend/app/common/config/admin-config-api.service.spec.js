@@ -197,11 +197,9 @@ describe('The adminConfigApi Angular service', function() {
 
   describe('The generateJwtToken fn', function() {
     it('should send POST request to the right endpoint', function(done) {
-      var domainId = 'domain123';
+      $httpBackend.expectPOST('/admin/api/configuration/generateJwtToken').respond(200);
 
-      $httpBackend.expectPOST('/admin/api/configuration/domains/' + domainId + '/generateJwtToken').respond(200);
-
-      adminConfigApi.generateJwtToken(domainId).then(done.bind(null, null), done.bind(null, 'should resolve'));
+      adminConfigApi.generateJwtToken().then(done.bind(null, null), done.bind(null, 'should resolve'));
 
       $httpBackend.flush();
     });

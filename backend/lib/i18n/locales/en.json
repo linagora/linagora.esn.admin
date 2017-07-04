@@ -163,5 +163,10 @@
   "Domains": "Domains",
   "No domain": "No domain",
   "Time format": "Time format",
-  "Change your preferred time format": "Change your preferred time format"
+  "Change your preferred time format": "Change your preferred time format",
+  "New domain": "New domain",
+  "Create": "Create",
+  "Company name": "Company name",
+  "Administrator": "Administrator",
+  "Domain name is invalid": "Domain name is invalid"
 }
