@@ -102,7 +102,7 @@ describe('The adminModulesDisplayer component', function() {
   it('should expand (show) the configuration form on click', function() {
     var element = initComponent();
 
-    element.find('.card').click();
+    element.find('.card-header').click();
 
     expect(element.find('.form').hasClass('ng-hide')).to.be.false;
   });
@@ -132,7 +132,7 @@ describe('The adminModulesDisplayer component', function() {
 
       var element = initComponent();
 
-      expect(element.find('.toolbar > span.clickable').hasClass('homeActivated')).to.be.true;
+      expect(element.find('.toolbar > .admin-modules-set-homepage > span.clickable').hasClass('homeActivated')).to.be.true;
     });
 
     it('should set home page on click', function() {
@@ -141,7 +141,7 @@ describe('The adminModulesDisplayer component', function() {
 
       var element = initComponent();
 
-      element.find('.toolbar > span.clickable').click();
+      element.find('.toolbar > .admin-modules-set-homepage > span.clickable').click();
 
       expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, 'homePage', testModule.homePage);
     });

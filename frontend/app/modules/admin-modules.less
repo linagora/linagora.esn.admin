@@ -2,7 +2,6 @@
 @adminModuleMiniItemFontSize: 1.2em;
 @adminModuleBorderColor: #DDDDDD;
 @adminModuleMiniFormHeight: 35px;
-@adminModuleExpandedBackground: #F4F4F4;
 
 admin-modules {
 
@@ -40,10 +39,18 @@ admin-modules {
         }
 
         .toolbar {
+          width:50%;
+
           .flex-vertical-centered;
           .flex-space-between;
 
-          width:50%;
+          .admin-modules-set-homepage {
+            width: 40%;
+          }
+
+          .admin-modules-features {
+            width: 60%;
+          }
 
           .mdi-menu-up, .mdi-menu-down {
             font-size: 1.5em;
@@ -60,13 +67,6 @@ admin-modules {
 
       ng-form {
         .flex-space-between;
-
-        background: @adminModuleExpandedBackground;
-        flex-direction: column;
-
-        .left-block, .right-block {
-          width: 100%;
-        }
       }
 
       .option-field {
@@ -91,9 +91,8 @@ admin-modules {
     }
 
     .admin-form-bottom {
-      margin-right: 10px;
+      padding-right: 10px;
       padding-bottom: 10px;
-      background: @adminModuleExpandedBackground;
       border-bottom: 1px solid @adminModuleBorderColor;
 
       a {
