@@ -23,14 +23,14 @@
   })
 
   .factory('adminJamesClientProvider', function(adminConfigApi, james, adminJamesClientTransport) {
-    var cachedPromises = {};
+    var cachedPromise;
 
-    function get(domainId, apiUrl) {
-      if (!cachedPromises[domainId]) {
-        cachedPromises[domainId] = adminConfigApi.generateJwtToken(domainId);
+    function get(apiUrl) {
+      if (!cachedPromise) {
+        cachedPromise = adminConfigApi.generateJwtToken();
       }
 
-      return cachedPromises[domainId].then(function(resp) {
+      return cachedPromise.then(function(resp) {
         var token = resp.data;
         var options = {
           httpClient: adminJamesClientTransport,

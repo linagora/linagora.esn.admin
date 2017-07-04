@@ -82,8 +82,8 @@ angular.module('linagora.esn.admin')
   name: 'James',
   icon: 'mdi-fire',
   displayIn: {
-    domain: true,
-    platform: false
+    domain: false,
+    platform: true
   }
 }, {
   id: 'jwt',

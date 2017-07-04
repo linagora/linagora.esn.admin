@@ -57,10 +57,9 @@
         .post();
     }
 
-    function generateJwtToken(domainId) {
+    function generateJwtToken() {
       return adminRestangular
         .all('configuration')
-        .one('domains', domainId)
         .one('generateJwtToken')
         .post();
     }
