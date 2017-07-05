@@ -70,7 +70,7 @@ describe('The adminJamesController', function() {
     expect(controller.serverUrl).to.deep.equal(config.url);
     expect(controller.config).to.deep.equal({quota: { size: null, count: null }});
     expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
-    expect(adminJamesClientProvider.get).to.have.been.calledWith($stateParams.domainId, config.url);
+    expect(adminJamesClientProvider.get).to.have.been.calledWith(config.url);
   });
 
   describe('The save fn', function() {
