@@ -64,8 +64,7 @@
     }
 
     function getJamesConfigurations() {
-      return adminJamesClientProvider
-        .get(domainId, self.serverUrl)
+      return _getJamesClient()
         .then(function(jamesClient) {
           return $q.all([
             jamesClient.getQuota()
@@ -86,13 +85,16 @@
     function _saveJamesConfigurations() {
       var config = _qualifyJamesConfig(self.config, ACTION_DEFAULT_VALUE.set);
 
-      return adminJamesClientProvider
-        .get(domainId, self.serverUrl)
+      return _getJamesClient()
         .then(function(jamesClient) {
           return $q.all([
             jamesClient.setQuota(config.quota)
           ]);
         });
+    }
+
+    function _getJamesClient() {
+      return adminJamesClientProvider.get(self.serverUrl);
     }
 
     function _qualifyJamesConfig(config, defaultValue) {
