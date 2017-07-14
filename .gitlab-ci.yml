@@ -1,5 +1,5 @@
 before_script:
-  - . ~/.nvm/nvm.sh && nvm use 6
+  - . ~/.nvm/nvm.sh && nvm use 8
 
 stages:
   - test
@@ -15,6 +15,7 @@ test:
     - redis
   script:
     - npm i
+    - npm update
     - bower i
     - grunt --chunk=1 --ci
 
@@ -33,6 +34,7 @@ deploy_dev:
     - git fetch --all
     - git checkout ${CI_COMMIT_SHA}
     - npm install --ignore-scripts --production
+    - npm update --production
     - npm prune
     - bower install --production
     - bower prune
