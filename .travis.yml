@@ -19,3 +19,4 @@ deploy:
   on:
     repo: linagora/linagora.esn.admin
     branch: master
+    node: "6"
