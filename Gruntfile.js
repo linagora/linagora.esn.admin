@@ -122,6 +122,33 @@ module.exports = function(grunt) {
         configFile: './test/config/karma.conf.js',
         browsers: ['PhantomJS']
       }
+    },
+
+    swagger_generate: {
+      options: {
+        baseDir: __dirname,
+        swaggerOutputFile: 'doc/REST_API/swagger/admin-swagger.json',
+        info: {
+          title: 'OpenPaaS Admin Module',
+          description: 'OpenPaaS Admin Module API',
+          version: '0.1'
+        },
+        host: 'localhost:8080',
+        securityDefinitions: {
+          auth: {
+            type: 'oauth2',
+            description: 'OAuth2 security scheme for the OpenPaaS Admin Module API',
+            flow: 'password',
+            tokenUrl: 'localhost:8080/oauth/token',
+            scopes: {}
+          }
+        },
+        paths: [
+          'doc/REST_API/swagger/*/*.js',
+          'backend/webserver/api/*/*.js',
+          'node_modules/linagora-rse/doc/REST_API/swagger/*/*.js'
+        ]
+      }
     }
   });
 
@@ -138,6 +165,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('@linagora/grunt-i18n-checker');
   grunt.loadNpmTasks('grunt-puglint');
   grunt.loadNpmTasks('grunt-release');
+  grunt.loadNpmTasks('grunt-swagger-generate');
 
   grunt.loadTasks('tasks');
   grunt.registerTask('i18n', 'Check the translation files', ['i18n_checker']);
@@ -149,4 +177,5 @@ module.exports = function(grunt) {
   grunt.registerTask('test-unit-frontend', 'Test frontend code', ['karma:unit']);
   grunt.registerTask('test', ['linters', 'test-unit-frontend', 'test-unit-backend']);
   grunt.registerTask('default', ['test']);
+  grunt.registerTask('swagger-generate', 'Grunt plugin for swagger generate', ['swagger_generate']);
 };

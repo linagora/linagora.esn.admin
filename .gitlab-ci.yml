@@ -2,6 +2,8 @@ image: linagora/node-test-base:8
 
 stages:
   - test
+  - swagger
+  - deploy-swagger
   - deploy_dev
   - release
 
@@ -15,6 +17,34 @@ test:
     - npm i
     - bower i --allow-root
     - grunt --chunk=1 --ci
+
+swagger:
+  stage: swagger
+  tags:
+    - master
+    - shell
+  script:
+   - npm i
+   - npm prune
+   - grunt swagger-generate
+  artifacts:
+    paths:
+     - ./doc/REST_API/swagger/admin-swagger.json
+
+deploy-swagger:
+  stage: deploy-swagger
+  tags:
+    - deployment
+    - api.open-paas.org
+    - shell
+  environment:
+    name: api
+    url: https://api.open-paas.org
+  only:
+    - master
+  script:
+    - perl -i -pe's/"host":"localhost:8080"/"schemes":["https"],"host":"demo.open-paas.org"/' ./doc/REST_API/swagger/admin-swagger.json
+    - cp ./doc/REST_API/swagger/admin-swagger.json /var/www/html
 
 deploy_dev:
   stage: deploy_dev
