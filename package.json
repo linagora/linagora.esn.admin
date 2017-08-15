@@ -39,6 +39,7 @@
     "grunt-karma": "2.0.0",
     "grunt-lint-pattern": "git+https://github.com/linagora/grunt-lint-pattern.git",
     "grunt-mocha-cli": "2.1.0",
+    "grunt-puglint": "^1.0.0",
     "grunt-run-grunt": "linagora/grunt-run-grunt",
     "grunt-shell": "2.0.0",
     "grunt-shell-spawn": "0.3.10",
