@@ -1,0 +1,11 @@
+ng-form(name="form")
+  esn-form-group(label=__('Module'))
+    input.form-control.floating-label(type="text", ng-model="$ctrl.transport.module", name="module", required)
+  esn-form-group(label=__('Folder path'))
+    input.form-control.floating-label(type="text", ng-model="$ctrl.transport.config.dir", name="directory", required)
+  .form-group
+    .checkbox
+      label
+        input(type="checkbox", ng-model="$ctrl.transport.config.browser", name="browser")
+        i.input-helper
+        | #{__('Browser')}

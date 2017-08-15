@@ -1,8 +1,0 @@
-extends ../../subheader/subheader.layout
-
-block left
-  admin-subheader-close-button(back-state="^")
-  .title #{__('Create a new user')}
-
-block right
-  esn-subheader-save-button(on-click="$ctrl.onFormSubmit()", form="$ctrl.form")

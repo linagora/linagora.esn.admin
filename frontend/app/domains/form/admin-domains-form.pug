@@ -1,0 +1,18 @@
+ng-form(name="form", esn-autocomplete-off)
+  .row
+    .col-md-6
+      esn-form-group(label=__('Name'), pattern-error-message=__('Domain name is invalid'))
+        input.form-control(type="text", ng-model="$ctrl.domain.name", pattern="^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?", maxlength="255", name="domainName", required)
+    .col-md-6
+      esn-form-group(label=__('Company name'))
+        input.form-control(type="text", ng-model="$ctrl.domain.company_name", name="companyName", required)
+  .row
+    .col-xs-6
+      h5 #{__('Administrator')}
+  .row.m-t-15
+    .col-md-6
+      esn-form-group(label=__('Email'))
+        input.form-control(type="email", ng-model="$ctrl.domain.administrator.email", autocomplete="off", required, name="email")
+    .col-md-6
+      esn-form-group(label=__('Password'))
+        input.form-control(type="password", ng-model="$ctrl.domain.administrator.password", autocomplete="new-password", required, name="password")
