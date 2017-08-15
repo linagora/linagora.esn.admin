@@ -71,7 +71,7 @@ module.exports = function(grunt) {
           dirs: [{
             localeDir: 'backend/lib/i18n/locales',
             templateSrc: [
-              'frontend/app/**/*.jade'
+              'frontend/app/**/*.pug'
             ],
             core: true
           }],
