@@ -1,0 +1,17 @@
+form(name="form", esn-autocomplete-off)
+  .row
+    .col-md-10
+      .row
+        .col-md-6
+          esn-form-group(label=__('Email'))
+            input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", autocomplete="off", required, name="email")
+        .col-md-6
+          esn-form-group(label=__('Password'))
+            input.form-control(type="password", ng-model="$ctrl.user.password", autocomplete="new-password", required, name="password")
+    .col-md-2
+      button.btn.btn-primary(type="submit", esn-submit="$ctrl.save(form)", ng-disabled="form.$pristine")
+        | #{__('Add')}
+  .row
+    .col-md-6
+      a(href="", ui-sref="admin.domain.users.create({user: $ctrl.user})")
+        | #{__('Advanced user creation')}

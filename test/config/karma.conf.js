@@ -20,7 +20,7 @@ module.exports = function(config) {
       'test/unit-frontend/mocks/**/*.js',
       'frontend/app/**/*.module.js',
       'frontend/app/**/*.js',
-      'frontend/app/**/*.jade'
+      'frontend/app/**/*.pug'
     ],
     frameworks: ['mocha'],
     colors: true,
@@ -30,7 +30,7 @@ module.exports = function(config) {
     reporters: ['coverage', 'spec'],
     preprocessors: {
       'frontend/app/**/!(*spec).js': ['coverage'],
-      'frontend/app/**/*.jade': ['ng-jade2module']
+      'frontend/app/**/*.pug': ['ng-jade2module']
     },
 
     plugins: [
@@ -48,7 +48,7 @@ module.exports = function(config) {
     ngJade2ModulePreprocessor: {
       stripPrefix: 'frontend',
       cacheIdFromPath: function(filepath) {
-        var cacheId = filepath.replace(/.jade$/, '.html').replace(/^frontend/, '/admin');
+        var cacheId = filepath.replace(/.pug$/, '.html').replace(/^frontend/, '/admin');
 
         return cacheId;
       },

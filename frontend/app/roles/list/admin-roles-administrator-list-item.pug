@@ -1,0 +1,12 @@
+.row(ui-sref="profile({user_id: $ctrl.isMe ? '' : $ctrl.user._id})")
+  esn-avatar.members-avatar(user-id="$ctrl.user._id")
+  .col-md-6.col-xs-4
+    h4.flex-vertical-centered(title=" {{::$ctrl.displayName}}")
+      span {{::$ctrl.displayName}}
+      small(ng-show="::$ctrl.isMe")
+        |  (#{__('you')})
+  .col-md-4.col-xs-4.flex-horizontal-centered(title=`${__('Promoted on')} {{::$ctrl.user.role.timestamps.creation | esnDatetime: 'mediumDate'}}`)
+    span.m-l-5(am-time-ago="::$ctrl.user.role.timestamps.creation")
+  .col-md-1.col-xs-1.flex-horizontal-centered
+    a.revoke(ng-hide="::$ctrl.isMe", href="", esn-modal-launcher="/admin/app/roles/revoke/modal", type="button", title=__('Revoke'))
+      i.mdi.mdi-delete
