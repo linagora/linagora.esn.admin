@@ -8,42 +8,22 @@ admin-domains-list {
   .listview {
     .lv-header {
       text-align: left;
+      margin-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
 
-      .block-header {
-        margin-top: 5px;
-        margin-bottom: 0;
+      .lv-item:hover {
+        background-color: transparent;
       }
     }
-  }
 
-  admin-domains-item {
-    .row {
-      .flex-vertical-centered;
+    .lv-item .row {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 17px 35px 17px 10px;
 
-      span {
-        .ellipsis;
-
-        font-weight: normal;
-      }
-    }
-  }
-}
-
-@media (min-width: @screen-md-min) {
-  admin-domains-list {
-    .listview {
-      .lv-header {
-        padding-left: 0;
-
-        .block-header h2{
-          margin-left: -15px;
-        }
-      }
-
-      .lv-body .lv-item{
-        .col-md-4 {
-          padding-left: 0;
-        }
+      .lv-title {
+        color: @text-color;
       }
     }
   }

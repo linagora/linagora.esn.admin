@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
     .controller('adminDomainsListController', adminDomainsListController);
 
-  function adminDomainsListController($scope, $q, domainAPI, infiniteScrollHelper, ADMIN_DOMAINS_EVENTS) {
+  function adminDomainsListController($scope, $modal, domainAPI, infiniteScrollHelper, _, ADMIN_DOMAINS_EVENTS) {
     var self = this;
     var DEFAULT_LIMIT = 20;
 
@@ -14,6 +14,7 @@
     };
 
     self.$onInit = $onInit;
+    self.showEditDomainForm = showEditDomainForm;
 
     function $onInit() {
       self.loadMoreElements = infiniteScrollHelper(self, _loadNextItems);
@@ -21,6 +22,27 @@
       $scope.$on(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, function(event, domain) {
         _onDomainCreated(domain);
       });
+
+      $scope.$on(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, function(event, updatedDomain) {
+        _onDomainUpdated(updatedDomain);
+      });
+    }
+
+    function showEditDomainForm(domain) {
+
+      var updateDomainModal = $modal({
+        templateUrl: '/admin/app/domains/update/admin-domains-update.html',
+        backdrop: 'static',
+        placement: 'center',
+        controller: 'adminDomainUpdateController',
+        controllerAs: '$ctrl',
+        locals: {
+          domain: domain
+        },
+        show: false
+      });
+      // ensure template has been loaded
+      updateDomainModal.$promise.then(updateDomainModal.show);
     }
 
     function _loadNextItems() {
@@ -38,6 +60,18 @@
       }
 
       self.elements.unshift(newDomain);
+    }
+
+    function _onDomainUpdated(updatedDomain) {
+      if (!updatedDomain || !updatedDomain.id) {
+        return;
+      }
+
+      var index = _.findIndex(self.elements, { id: updatedDomain.id });
+
+      if (index !== -1) {
+        self.elements[index] = updatedDomain;
+      }
     }
   }
 })(angular);

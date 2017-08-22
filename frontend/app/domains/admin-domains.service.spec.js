@@ -80,4 +80,19 @@ describe('The adminDomainsService', function() {
       $rootScope.$digest();
     });
   });
+
+  describe('The update method', function() {
+    it('should broadcast an event when sucessfully to update domain', function() {
+      domainAPI.update = sinon.stub().returns($q.when());
+      $rootScope.$broadcast = sinon.spy();
+      var modifiedDomain = {};
+
+      adminDomainsService.update(modifiedDomain);
+
+      $rootScope.$digest();
+
+      expect(domainAPI.update).to.have.been.calledWith(modifiedDomain);
+      expect($rootScope.$broadcast).to.have.been.calledWith(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, modifiedDomain);
+    });
+  });
 });

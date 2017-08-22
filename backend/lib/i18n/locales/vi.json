@@ -168,5 +168,10 @@
   "Create": "Tạo",
   "Company name": "Tên công ty",
   "Administrator": "Quản trị viên",
-  "Domain name is invalid": "Tên miền không hợp lệ"
+  "Domain name is invalid": "Tên miền không hợp lệ",
+  "Edit": "Chỉnh sửa",
+  "Edit domain": "Chỉnh sửa miền",
+  "Updating domain...": "Đang cập nhật miền...",
+  "Domain updated": "Miền đã được cập nhật",
+  "Failed to update domain": "Không thể cập nhật miền"
 }

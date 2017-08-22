@@ -17,7 +17,8 @@
     var CONFIG_NAME = 'james';
 
     return {
-      create: create
+      create: create,
+      update: update
     };
 
     function create(domain) {
@@ -35,6 +36,20 @@
         return _createDomain(domain);
       }).then(function(createdDomain) {
         $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, createdDomain);
+      });
+    }
+
+    function update(domain) {
+      var notificationMessages = {
+        progressing: 'Updating domain...',
+        success: 'Domain updated',
+        failure: 'Failed to update domain'
+      };
+
+      return asyncAction(notificationMessages, function() {
+        return domainAPI.update(domain);
+      }).then(function() {
+        $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, domain);
       });
     }
 

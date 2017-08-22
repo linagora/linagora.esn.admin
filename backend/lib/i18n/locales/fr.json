@@ -168,5 +168,10 @@
   "Create": "Créer",
   "Company name": "Nom de l'entreprise",
   "Administrator": "Administrateur",
-  "Domain name is invalid": "Le nom de domaine n'est pas valide"
+  "Domain name is invalid": "Le nom de domaine n'est pas valide",
+  "Edit": "Éditer",
+  "Edit domain": "Éditer le domaine",
+  "Updating domain...": "Mettre à jour le domaine...",
+  "Domain updated": "Le domaine est mis à jour",
+  "Failed to update domain": "Impossible de mettre à jour le domaine"
 }
