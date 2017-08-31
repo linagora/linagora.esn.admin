@@ -6,6 +6,7 @@
   .component('adminDomainsForm', {
     templateUrl: '/admin/app/domains/form/admin-domains-form.html',
     bindings: {
+      updateMode: '<',
       domain: '='
     }
   });

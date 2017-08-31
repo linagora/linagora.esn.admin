@@ -1,8 +1,13 @@
 .row
-  .col-md-4.col-xs-4
-    h4.flex-vertical-centered(title="{{::$ctrl.domain.name}}")
-      span {{::$ctrl.domain.name}}
-  .col-md-4.col-xs-4(title="{{::$ctrl.domain.company_name}}")
-    span {{::$ctrl.domain.company_name}}
-  .col-md-4.col-xs-4(title=`${__('Created on')} {{::$ctrl.domain.timestamps.creation | esnDatetime: 'mediumDate'}}`)
+  .col-md-4.col-xs-4.lv-title
+    span {{::$ctrl.domain.name}}
+  .col-md-4.col-xs-4.lv-title
+    span {{$ctrl.domain.company_name}}
+  .col-md-4.col-xs-4.lv-title
     span {{::$ctrl.domain.timestamps.creation | esnDatetime: 'mediumDate'}}
+.lv-actions.actions
+  a(href="", data-toggle="dropdown", aria-expanded="false")
+    i.mdi.mdi-dots-vertical
+  ul.dropdown-menu.dropdown-menu-right
+    li
+      a(href="", ng-click="$ctrl.onEditBtnClick()") #{__('Edit')}

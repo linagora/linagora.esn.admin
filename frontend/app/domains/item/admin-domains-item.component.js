@@ -6,7 +6,8 @@
   .component('adminDomainsItem', {
     templateUrl: '/admin/app/domains/item/admin-domains-item.html',
     bindings: {
-      domain: '<'
+      domain: '<',
+      onEditBtnClick: '&'
     }
   });
 })(angular);

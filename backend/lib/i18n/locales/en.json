@@ -168,5 +168,10 @@
   "Create": "Create",
   "Company name": "Company name",
   "Administrator": "Administrator",
-  "Domain name is invalid": "Domain name is invalid"
+  "Domain name is invalid": "Domain name is invalid",
+  "Edit": "Edit",
+  "Edit domain": "Edit domain",
+  "Updating domain...": "Updating domain...",
+  "Domain updated": "Domain updated",
+  "Failed to update domain": "Failed to update domain"
 }
