@@ -65,6 +65,10 @@ angular.module('esn.module-registry', [])
   .factory('esnModuleRegistry', function() {
     return {};
   });
+angular.module('esn.feature-registry', [])
+  .factory('esnFeatureRegistry', function() {
+    return {};
+  });
 angular.module('esn.i18n', [])
   .filter('esnI18n', function() {
     return function(input) { return input; };

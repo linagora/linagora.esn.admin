@@ -174,5 +174,7 @@
   "Edit domain": "Éditer le domaine",
   "Updating domain...": "Mettre à jour le domaine...",
   "Domain updated": "Le domaine est mis à jour",
-  "Failed to update domain": "Impossible de mettre à jour le domaine"
+  "Failed to update domain": "Impossible de mettre à jour le domaine",
+  "Display in:": "Rendu dans:",
+  "Features flipping": "Fonctionnalités"
 }

@@ -174,5 +174,7 @@
   "Edit domain": "Edit domain",
   "Updating domain...": "Updating domain...",
   "Domain updated": "Domain updated",
-  "Failed to update domain": "Failed to update domain"
+  "Failed to update domain": "Failed to update domain",
+  "Display in:": "Display in:",
+  "Features flipping": "Features flipping"
 }
