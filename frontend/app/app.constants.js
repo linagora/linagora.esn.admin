@@ -22,6 +22,14 @@ angular.module('linagora.esn.admin')
     platform: true
   }
 }, {
+  id: 'features',
+  name: 'Features',
+  icon: 'mdi-toggle-switch',
+  displayIn: {
+    domain: true,
+    platform: true
+  }
+}, {
   id: 'mail',
   name: 'Mail',
   icon: 'mdi-email',

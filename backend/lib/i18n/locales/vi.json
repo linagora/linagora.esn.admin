@@ -174,5 +174,7 @@
   "Edit domain": "Chỉnh sửa miền",
   "Updating domain...": "Đang cập nhật miền...",
   "Domain updated": "Miền đã được cập nhật",
-  "Failed to update domain": "Không thể cập nhật miền"
+  "Failed to update domain": "Không thể cập nhật miền",
+  "Display in:": "Hiển thị trong:",
+  "Features flipping": "Hiển thị tính năng"
 }
