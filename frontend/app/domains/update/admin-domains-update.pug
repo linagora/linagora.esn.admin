@@ -11,5 +11,5 @@
         .flex-vertical-centered.flex-end
           button.btn.btn-link(ng-click="$hide()")
             | #{__('Cancel')}
-          button.btn.btn-primary(ng-click="$ctrl.update(); $hide()", ng-disabled="form.$invalid")
+          button.btn.btn-primary(ng-click="$ctrl.update(); $hide()", ng-disabled="form.$pristine || form.$invalid")
             | #{__('Save')}
