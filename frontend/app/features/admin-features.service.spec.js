@@ -49,6 +49,34 @@ describe('The adminFeaturesService service', function() {
 
       expect(result).to.shallowDeepEqual(expectedResult);
     });
+
+    it('should return featuresMetadata with config value equal false in case of there is no saved configurations', function() {
+      var featuresMetadata = {
+        feature1: {
+          name: 'Feature 1',
+          description: 'Feature No.1',
+          configurations: [{
+            displayIn: 'module1',
+            name: 'feature1'
+          }]
+        }
+      };
+      var expectedResult = [{
+        name: 'Feature 1',
+        description: 'Feature No.1',
+        configurations: [{
+          displayIn: 'module1',
+          name: 'feature1',
+          value: false
+        }]
+      }];
+
+      esnFeatureRegistry.getAll = sinon.stub().returns(featuresMetadata);
+
+      var result = adminFeaturesService.includeFeaturesMetadata(undefined);
+
+      expect(result).to.shallowDeepEqual(expectedResult);
+    });
   });
 
   describe('The getFeaturesConfigValue fn', function() {

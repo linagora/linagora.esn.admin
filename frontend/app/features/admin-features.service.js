@@ -9,7 +9,8 @@
       getFeaturesConfigValue: getFeaturesConfigValue
     };
 
-    function includeFeaturesMetadata(configData) {
+    function includeFeaturesMetadata(config) {
+      var configData = config || {};
       var featuresMetadata = _.values(esnFeatureRegistry.getAll());
 
       return featuresMetadata.map(function(feature) {
