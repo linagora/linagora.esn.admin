@@ -5,6 +5,6 @@
     .lv-attrs
       .lv-small #{__('Display in:')}
       label.checkbox.checkbox-inline(ng-repeat="configuration in $ctrl.feature.configurations")
-        input(type="checkbox", ng-model="configuration.value", ng-change="$ctrl.onConfigChange()")
+        input(type="checkbox", ng-model="configuration.value")
         i.input-helper
         | {{configuration.displayIn | esnI18n}}
