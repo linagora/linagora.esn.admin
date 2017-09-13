@@ -8,6 +8,7 @@
     bindings: {
       updateMode: '<',
       domain: '='
-    }
+    },
+    controller: 'adminDomainsFormController'
   });
 })(angular);

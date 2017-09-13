@@ -176,5 +176,6 @@
   "Domain updated": "Domain updated",
   "Failed to update domain": "Failed to update domain",
   "Display in:": "Display in:",
-  "Features flipping": "Features flipping"
+  "Features flipping": "Features flipping",
+  "That domain is already used. Try another.": "That domain is already used. Try another."
 }
