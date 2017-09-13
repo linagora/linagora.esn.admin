@@ -1,8 +1,8 @@
 ng-form(name="form", esn-autocomplete-off)
   .row
     .col-md-6
-      esn-form-group(ng-if="!$ctrl.updateMode", label=__('Name'), pattern-error-message=__('Domain name is invalid'))
-        input.form-control(type="text", ng-model="$ctrl.domain.name", pattern="^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?", maxlength="255", name="domainName", required)
+      esn-form-group(ng-if="!$ctrl.updateMode", label=__('Name'), pattern-error-message=__('Domain name is invalid'), async-validator-error-message=__('That domain is already used. Try another.'), async-validator="$ctrl.uniqueDomainName")
+        input.form-control(type="text", ng-model="$ctrl.domain.name", ng-model-options="{ debounce: {'default': 500} }", pattern="^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?", maxlength="255", name="domainName", required)
       esn-form-group(ng-if="$ctrl.updateMode", label=__('Name'))
         input.form-control(type="text", ng-model="$ctrl.domain.name", name="domainName", disabled)
     .col-md-6

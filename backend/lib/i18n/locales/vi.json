@@ -176,5 +176,6 @@
   "Domain updated": "Miền đã được cập nhật",
   "Failed to update domain": "Không thể cập nhật miền",
   "Display in:": "Hiển thị trong:",
-  "Features flipping": "Hiển thị tính năng"
+  "Features flipping": "Hiển thị tính năng",
+  "That domain is already used. Try another.": "Tên miền đã được sử dụng. Hãy thử tên khác."
 }

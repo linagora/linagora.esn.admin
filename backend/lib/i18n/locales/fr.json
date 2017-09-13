@@ -176,5 +176,6 @@
   "Domain updated": "Le domaine est mis à jour",
   "Failed to update domain": "Impossible de mettre à jour le domaine",
   "Display in:": "Rendu dans:",
-  "Features flipping": "Fonctionnalités"
+  "Features flipping": "Fonctionnalités",
+  "That domain is already used. Try another.": "Ce domaine est déjà utilisé. Esseyez en un autre"
 }
