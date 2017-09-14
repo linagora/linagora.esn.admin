@@ -125,4 +125,12 @@ angular.module('linagora.esn.admin')
     domain: false,
     platform: true
   }
+}, {
+  id: 'maintenance',
+  name: 'Maintenance',
+  icon: 'mdi-library-books',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
 }]);
