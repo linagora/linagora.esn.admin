@@ -7,7 +7,9 @@
     templateUrl: '/admin/app/domains/item/admin-domains-item.html',
     bindings: {
       domain: '<',
-      onEditBtnClick: '&'
+      onEditBtnClick: '&',
+      error: '<',
+      onFixBtnClick: '&'
     }
   });
 })(angular);

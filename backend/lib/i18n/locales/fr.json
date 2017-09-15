@@ -177,5 +177,13 @@
   "Failed to update domain": "Impossible de mettre à jour le domaine",
   "Display in:": "Rendu dans:",
   "Features flipping": "Fonctionnalités",
-  "That domain is already used. Try another.": "Ce domaine est déjà utilisé. Esseyez en un autre"
+  "That domain is already used. Try another.": "Ce domaine est déjà utilisé. Esseyez en un autre",
+  "Domain": "Domaine",
+  "You can either try auto fixing or change the James settings.": "Vous pouvez essayer de réparer automatiquement ou modifier les paramètres de James.",
+  "Settings": "Paramètres",
+  "Auto fix": "Réparation automatique",
+  "Could not find the corresponding domain in James server.": "Impossible de trouver le domaine correspondant dans le serveur James.",
+  "Fixing...": "Réparation...",
+  "Fixed": "Réparé",
+  "Cannot fix, please check your James configuration": "Impossible de réparer, vérifiez votre configuration de James"
 }

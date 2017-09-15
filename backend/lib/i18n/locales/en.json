@@ -177,5 +177,13 @@
   "Failed to update domain": "Failed to update domain",
   "Display in:": "Display in:",
   "Features flipping": "Features flipping",
-  "That domain is already used. Try another.": "That domain is already used. Try another."
+  "That domain is already used. Try another.": "That domain is already used. Try another.",
+  "Domain": "Domain",
+  "You can either try auto fixing or change the James settings.": "You can either try auto fixing or change the James settings.",
+  "Settings": "Settings",
+  "Auto fix": "Auto fix",
+  "Could not find the corresponding domain in James server.": "Could not find the corresponding domain in James server.",
+  "Fixing...": "Fixing...",
+  "Fixed": "Fixed",
+  "Cannot fix, please check your James configuration": "Cannot fix, please check your James configuration"
 }
