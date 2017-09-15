@@ -59,6 +59,9 @@
           return _createDomainInJames(domain.name)
             .then(function() {
               return response.data;
+            })
+            .catch(function() {
+              return response.data;
             });
         });
     }
