@@ -8,7 +8,7 @@ var expect = chai.expect;
 describe('The adminJamesController', function() {
 
   var $controller, $rootScope, $stateParams, $scope;
-  var adminDomainConfigService, adminJamesClientProvider;
+  var adminDomainConfigService, adminJamesService, adminJamesClientProvider;
   var CONFIG_NAME = 'james';
   var $windowMock, jamesClientInstanceMock;
 
@@ -32,12 +32,20 @@ describe('The adminJamesController', function() {
       $provide.value('$window', $windowMock);
     });
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminJamesClientProvider_) {
+    inject(function(
+      _$controller_,
+      _$rootScope_,
+      _$stateParams_,
+      _adminDomainConfigService_,
+      _adminJamesClientProvider_,
+      _adminJamesService_
+    ) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
       adminJamesClientProvider = _adminJamesClientProvider_;
+      adminJamesService = _adminJamesService_;
 
       $stateParams.domainId = 'domain123';
       adminJamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
@@ -61,16 +69,16 @@ describe('The adminJamesController', function() {
   }
 
   it('should get James configuration from server on init', function() {
-    var config = { url: 'url' };
+    var serverUrl = 'url';
 
-    adminDomainConfigService.get = sinon.stub().returns($q.when(config));
+    adminJamesService.getServerUrl = sinon.stub().returns($q.when(serverUrl));
 
     var controller = initController();
 
-    expect(controller.serverUrl).to.deep.equal(config.url);
+    expect(controller.serverUrl).to.deep.equal(serverUrl);
     expect(controller.config).to.deep.equal({quota: { size: null, count: null }});
-    expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
-    expect(adminJamesClientProvider.get).to.have.been.calledWith(config.url);
+    expect(adminJamesService.getServerUrl).to.have.been.calledOnce;
+    expect(adminJamesClientProvider.get).to.have.been.calledWith(serverUrl);
   });
 
   describe('The save fn', function() {
