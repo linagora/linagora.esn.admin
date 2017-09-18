@@ -185,5 +185,14 @@
   "Could not find the corresponding domain in James server.": "Could not find the corresponding domain in James server.",
   "Fixing...": "Fixing...",
   "Fixed": "Fixed",
-  "Cannot fix, please check your James configuration": "Cannot fix, please check your James configuration"
+  "Cannot fix, please check your James configuration": "Cannot fix, please check your James configuration",
+  "Maintenance": "Maintenance",
+  "User index": "User index",
+  "Reindex": "Reindex",
+  "Reconfigure": "Reconfigure",
+  "Correct the index configuration and reindex data (slow)": "Correct the index configuration and reindex data (slow)",
+  "Correct the index configuration (quick)": "Correct the index configuration (quick)",
+  "Submitting reindexing users request...": "Submitting reindexing users request...",
+  "Request submitted": "Request submitted",
+  "Failed to submit request": "Failed to submit request"
 }

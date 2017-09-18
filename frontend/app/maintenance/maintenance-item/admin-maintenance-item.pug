@@ -1,0 +1,13 @@
+.block-header
+  h2 {{$ctrl.action.category | esnI18n}}
+.card
+  .card-header
+    h2 {{$ctrl.action.resourceType | esnI18n}}
+  .card-body
+    .listview.lv-bordered.lv-lg
+      .lv-body
+        .lv-item.media(ng-repeat="action in $ctrl.action.items")
+          .media-body
+            .lv-title {{action.description | esnI18n}}
+            .lv-attrs
+              button.btn.btn-primary(ng-click="action.onClick()") {{action.buttonTitle | esnI18n}}
