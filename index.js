@@ -21,7 +21,10 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.configuration', 'configurationMW'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.helper', 'helperMW'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.platformadmins', 'platformadminsMW'),
-    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.i18n', 'i18n')
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.i18n', 'i18n'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.jobqueue', 'jobqueue'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.elasticsearch', 'elasticsearch'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.user', 'user')
   ],
 
   states: {
@@ -64,6 +67,10 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
 
       webserverWrapper.injectLess(MODULE_NAME, [lessFile], 'esn');
       webserverWrapper.addApp(MODULE_NAME, app);
+
+      const libModule = require('./backend/lib')(dependencies);
+
+      libModule.init();
 
       return callback();
     },

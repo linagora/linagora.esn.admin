@@ -1,7 +1,13 @@
 'use strict';
 
-module.exports = function() {
-  var api = {};
+module.exports = function(dependencies) {
+  const maintainES = require('./maintenance/elasticsearch')(dependencies);
 
-  return api;
+  return {
+    init
+  };
+
+  function init() {
+    maintainES.init();
+  }
 };
