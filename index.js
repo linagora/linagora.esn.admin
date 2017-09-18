@@ -32,11 +32,13 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       const libModule = require('./backend/lib')(dependencies);
       const configuration = require('./backend/webserver/api/configuration')(dependencies);
       const test = require('./backend/webserver/api/test')(dependencies);
+      const maintenance = require('./backend/webserver/api/maintenance')(dependencies);
 
       const lib = {
         api: {
           configuration,
-          test
+          test,
+          maintenance
         },
         lib: libModule
       };
@@ -49,6 +51,7 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
 
       app.use('/api/configuration', this.api.configuration);
       app.use('/api/test', this.api.test);
+      app.use('/api/maintenance', this.api.maintenance);
 
       const webserverWrapper = dependencies('webserver-wrapper');
       const frontendJsFilesFullPath = glob.sync([
