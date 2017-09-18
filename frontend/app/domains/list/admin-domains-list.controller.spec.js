@@ -8,7 +8,7 @@ var expect = chai.expect;
 describe('The adminDomainsListController', function() {
 
   var $rootScope, $scope, $controller, $modalMock;
-  var domainAPI, ADMIN_DOMAINS_EVENTS;
+  var domainAPI, adminJamesService, ADMIN_DOMAINS_EVENTS;
   var infiniteScrollHelperMock;
   var domain1, domain2;
 
@@ -28,11 +28,25 @@ describe('The adminDomainsListController', function() {
     module('jadeTemplates');
     module('linagora.esn.admin');
 
-    inject(function(_$rootScope_, _$controller_, _domainAPI_, _ADMIN_DOMAINS_EVENTS_) {
+    inject(function(
+      _$rootScope_,
+      _$controller_,
+      _domainAPI_,
+      _adminJamesService_,
+      _ADMIN_DOMAINS_EVENTS_
+    ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
       domainAPI = _domainAPI_;
+      adminJamesService = _adminJamesService_;
       ADMIN_DOMAINS_EVENTS = _ADMIN_DOMAINS_EVENTS_;
+
+      adminJamesService.listDomains = function() {
+        return $q.when([]);
+      };
+      adminJamesService.createDomain = function() {
+        return $q.when([]);
+      };
     });
 
   });
@@ -55,28 +69,102 @@ describe('The adminDomainsListController', function() {
     expect(infiniteScrollHelperMock).to.have.been.called;
   });
 
-  it('should update list domains when domain creation event fire', function() {
-    domainAPI.list = sinon.stub().returns($q.when([]));
-    var controller = initController();
+  describe('on DOMAIN_CREATED event', function() {
+    it('should add domain to the list', function() {
+      domainAPI.list = sinon.stub().returns($q.when([]));
+      var controller = initController();
+      var domain3 = { id: 3, name: 'domain3.org', company_name: 'c3' };
+      var expectResult = [domain3, domain2, domain1];
 
-    var domain3 = { id: 3, name: 'domain3.org', company_name: 'c3' };
+      $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, domain3);
 
-    var expectResult = [domain3, domain2, domain1];
+      expect(controller.elements).to.deep.equal(expectResult);
+    });
 
-    $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, domain3);
+    it('should check the availability of the domain in James', function() {
+      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
 
-    expect(controller.elements).to.deep.equal(expectResult);
+      adminJamesService.listDomains = function() {
+        return $q.when([domain.name]);
+      };
+
+      var controller = initController();
+
+      controller.errors = {};
+      controller.errors[domain.id] = 'some error';
+
+      $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, domain);
+      $scope.$digest();
+
+      expect(controller.errors[domain.id]).to.be.undefined;
+    });
   });
 
-  it('should update list domains after getting DOMAIN_UPDATED event', function() {
-    var controller = initController();
+  describe('on DOMAIN_UPDATED event', function() {
+    it('should update the corresponding domain in the list', function() {
+      var controller = initController();
+      var updatedDomain = { id: 2, name: 'domain2.org', company_name: 'c22' };
+      var expectResult = [updatedDomain, domain1];
 
-    var updatedDomain = { id: 2, name: 'domain2.org', company_name: 'c22' };
+      $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, updatedDomain);
 
-    var expectResult = [updatedDomain, domain1];
+      expect(controller.elements).to.deep.equal(expectResult);
+    });
 
-    $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, updatedDomain);
+    it('should check the availability of the domain in James', function() {
+      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
 
-    expect(controller.elements).to.deep.equal(expectResult);
+      adminJamesService.listDomains = function() {
+        return $q.when([domain.name]);
+      };
+
+      var controller = initController();
+
+      controller.errors = {};
+      controller.errors[domain.id] = 'some error';
+
+      $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, domain);
+      $scope.$digest();
+
+      expect(controller.errors[domain.id]).to.be.undefined;
+    });
+  });
+
+  describe('The onFixBtnClick fn', function() {
+    it('should check the availability of the given domain in James', function() {
+      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
+
+      adminJamesService.listDomains = function() {
+        return $q.when([domain.name]);
+      };
+
+      var controller = initController();
+
+      controller.errors = {};
+      controller.errors[domain.id] = 'some error';
+      controller.onFixBtnClick(domain);
+      $scope.$digest();
+
+      expect(controller.errors[domain.id]).to.be.undefined;
+    });
+
+    it('should try creating James domain if it is unavailable', function() {
+      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
+
+      adminJamesService.listDomains = function() {
+        return $q.when([]);
+      };
+      adminJamesService.createDomain = sinon.stub().returns($q.when());
+
+      var controller = initController();
+
+      controller.errors = {};
+      controller.errors[domain.id] = 'some error';
+      controller.onFixBtnClick(domain);
+      $scope.$digest();
+
+      expect(adminJamesService.createDomain).to.have.been.calledWith(domain.name);
+      expect(controller.errors[domain.id]).to.be.undefined;
+    });
   });
 });

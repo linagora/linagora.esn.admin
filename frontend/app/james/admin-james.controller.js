@@ -4,7 +4,15 @@
   angular.module('linagora.esn.admin')
     .controller('adminJamesController', adminJamesController);
 
-  function adminJamesController($stateParams, $q, adminDomainConfigService, asyncAction, adminJamesClientProvider, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
+  function adminJamesController(
+    $stateParams,
+    $q,
+    adminDomainConfigService,
+    adminJamesService,
+    asyncAction,
+    adminJamesClientProvider,
+    ADMIN_DEFAULT_NOTIFICATION_MESSAGES
+  ) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAME = 'james';
@@ -18,11 +26,9 @@
     function $onInit() {
       self.connectionStatus = 'connecting';
 
-      adminDomainConfigService.get(domainId, CONFIG_NAME)
-        .then(function(data) {
-          data = data || {};
-
-          self.serverUrl = data.url;
+      adminJamesService.getServerUrl()
+        .then(function(serverUrl) {
+          self.serverUrl = serverUrl;
         })
         .then(getJamesConfigurations)
         .then(function() {

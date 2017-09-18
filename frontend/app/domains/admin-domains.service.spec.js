@@ -79,6 +79,17 @@ describe('The adminDomainsService', function() {
 
       $rootScope.$digest();
     });
+
+    it('should not reject when James domain creation fails', function(done) {
+      domainAPI.create = function() { return $q.when({}); };
+      jamesClientInstanceMock.createDomain = function() { return $q.reject(new Error('some error')); };
+
+      adminDomainsService.create({}).then(function() {
+        done();
+      });
+
+      $rootScope.$digest();
+    });
   });
 
   describe('The update method', function() {

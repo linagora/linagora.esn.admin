@@ -177,5 +177,13 @@
   "Failed to update domain": "Không thể cập nhật miền",
   "Display in:": "Hiển thị trong:",
   "Features flipping": "Hiển thị tính năng",
-  "That domain is already used. Try another.": "Tên miền đã được sử dụng. Hãy thử tên khác."
+  "That domain is already used. Try another.": "Tên miền đã được sử dụng. Hãy thử tên khác.",
+  "Domain": "Miền",
+  "You can either try auto fixing or change the James settings.": "Bạn có thể thử sửa tự động hoặc cài đặt lại James.",
+  "Settings": "Cài đặt",
+  "Auto fix": "Tự động sửa",
+  "Could not find the corresponding domain in James server.": "Không tìm thấy tên miền tương ứng trong máy chủ James.",
+  "Fixing...": "Đang sửa...",
+  "Fixed": "Sửa thành công",
+  "Cannot fix, please check your James configuration": "Không thể sửa, vui lòng kiểm tra lại cấu hình James"
 }

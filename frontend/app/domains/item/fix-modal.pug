@@ -1,0 +1,16 @@
+.modal(tabindex="-1", role="dialog")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4.modal-title #{__('Domain')}: {{::$ctrl.domain.name}}
+      .modal-body
+        p {{ ::$ctrl.error | esnI18n }} #{__('You can either try auto fixing or change the James settings.')}
+      .modal-footer.flex
+        .flex-grow.flex-start
+          button.btn.btn-primary(ng-click="$hide()", ui-sref="admin.domain.james")
+            | #{__('Settings')}
+        .flex-grow.flex-end
+          button.btn.btn-link(ng-click="$hide()")
+            | #{__('Cancel')}
+          button.btn.btn-primary(ng-click="$ctrl.onFixBtnClick($ctrl.domain); $hide()")
+            | #{__('Auto fix')}
