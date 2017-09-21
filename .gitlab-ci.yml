@@ -9,6 +9,7 @@ test:
   stage: test
   tags:
     - shell
+    - online.net
   script:
     - npm i
     - npm update
