@@ -2,6 +2,7 @@
 
 const LdapAuth = require('ldapauth-fork');
 const q = require('q');
+const NOOP = () => {};
 
 function testAccessLdap(ldapConfig) {
   const deferred = q.defer();
@@ -16,6 +17,8 @@ function testAccessLdap(ldapConfig) {
   }
 
   ldapauth.on('error', (err) => {
+    ldapauth.close(NOOP);
+
     if (!called) {
       called = true;
 
@@ -24,6 +27,8 @@ function testAccessLdap(ldapConfig) {
   });
 
   ldapauth._adminBind((err) => {
+    ldapauth.close(NOOP);
+
     if (!called) {
       called = true;
 
