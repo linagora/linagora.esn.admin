@@ -2,6 +2,7 @@
 
 const expect = require('chai').expect;
 const mockery = require('mockery');
+const sinon = require('sinon');
 
 describe('The ldap module', function() {
   let getModule;
@@ -30,13 +31,13 @@ describe('The ldap module', function() {
       });
     });
 
-    it('should reject an error if there is error while LDAP server down', function(done) {
+    it('should reject an error and close connection if there is error while LDAP server down', function(done) {
+      const closeMock = sinon.spy();
       const ldapAuthMock = function() {
         return {
-          _adminBind: function(cb) {
-            return cb();
-          },
-          on: (evt, listener) => listener(new Error('Something error'))
+          _adminBind(cb) { return cb(); },
+          on: (evt, listener) => listener(new Error('Something error')),
+          close: closeMock
         };
       };
 
@@ -44,6 +45,7 @@ describe('The ldap module', function() {
 
       getModule().testAccessLdap(ldapConfigMock).catch((err) => {
         expect(err.message).to.equal('Something error');
+        expect(closeMock).to.have.been.calledWith();
 
         done();
       });
@@ -55,7 +57,8 @@ describe('The ldap module', function() {
           _adminBind: function(cb) {
             return cb(new Error('Something error'));
           },
-          on: function() {}
+          on: () => {},
+          close: () => {}
         };
       };
 
@@ -68,13 +71,30 @@ describe('The ldap module', function() {
       });
     });
 
+    it('should eventually close connection upon successful completion', function(done) {
+      const ldapAuthMock = {
+        _adminBind(cb) { return cb(null); },
+        on: () => {},
+        close: sinon.spy()
+      };
+
+      mockery.registerMock('ldapauth-fork', function() {
+        return ldapAuthMock;
+      });
+
+      getModule().testAccessLdap(ldapConfigMock).then(() => {
+        expect(ldapAuthMock.close).to.have.been.calledWith();
+        done();
+      })
+      .catch(err => done(err || 'should resolve'));
+    });
+
     it('should resolve without error when access successfuly to LDAP server', function(done) {
       const ldapAuthMock = function() {
         return {
-          _adminBind: function(cb) {
-            return cb(null);
-          },
-          on: function() {}
+          _adminBind(cb) { return cb(null); },
+          on: function() {},
+          close: () => {}
         };
       };
 
