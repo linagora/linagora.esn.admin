@@ -49,7 +49,7 @@ angular.module('esn.scroll', [])
     return {};
   });
 angular.module('esn.attendee', [])
-  .constant('DEFAULT_TEMPLATE_URL', '');
+  .constant('ESN_ATTENDEE_DEFAULT_TEMPLATE_URL', '');
 angular.module('esn.user', [])
   .factory('userUtils', function() {
     return {

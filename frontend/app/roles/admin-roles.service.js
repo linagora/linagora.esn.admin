@@ -4,7 +4,7 @@ angular.module('linagora.esn.admin')
 
 .constant('ADMIN_SEARCH_LIMIT', 20)
 
-.factory('adminRolesService', function($q, domainAPI, domainSearchMembersProvider, ADMIN_SEARCH_LIMIT, DEFAULT_TEMPLATE_URL, _) {
+.factory('adminRolesService', function($q, domainAPI, domainSearchMembersProvider, ADMIN_SEARCH_LIMIT, ESN_ATTENDEE_DEFAULT_TEMPLATE_URL, _) {
   var domainId;
   var administrators;
 
@@ -51,7 +51,7 @@ angular.module('linagora.esn.admin')
     return domainSearchMembersProvider.get(domainId).searchAttendee(query, ADMIN_SEARCH_LIMIT)
       .then(function(attendees) {
         return attendees.map(function(attendee) {
-          return angular.extend(attendee, { templateUrl: DEFAULT_TEMPLATE_URL });
+          return angular.extend(attendee, { templateUrl: ESN_ATTENDEE_DEFAULT_TEMPLATE_URL });
         });
       }, _.constant([]))
       .then(function(users) {
