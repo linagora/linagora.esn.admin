@@ -26,7 +26,7 @@ describe('The lib/maintenance/elasticsearch module', function() {
     coreUserMock = {
       listByCursor: function() {},
       denormalize: {
-        denormalize: function() {},
+        denormalizeForSearchIndexing: function() {},
         getId: function() {}
       }
     };
@@ -85,7 +85,7 @@ describe('The lib/maintenance/elasticsearch module', function() {
           type: 'users',
           index: 'users.idx',
           name: 'users.idx',
-          denormalize: coreUserMock.denormalize.denormalize,
+          denormalize: coreUserMock.denormalize.denormalizeForSearchIndexing,
           getId: coreUserMock.denormalize.getId
         });
 

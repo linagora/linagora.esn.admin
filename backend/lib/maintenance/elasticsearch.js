@@ -29,7 +29,7 @@ module.exports = function(dependencies) {
       index: 'users.idx',
       name: 'users.idx',
       next() { return userCursor.next(); },
-      denormalize: coreUser.denormalize.denormalize,
+      denormalize: coreUser.denormalize.denormalizeForSearchIndexing,
       getId: coreUser.denormalize.getId
     };
 
