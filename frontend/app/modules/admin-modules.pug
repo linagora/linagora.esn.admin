@@ -1,4 +1,5 @@
 sub-header
   admin-modules-subheader
 
-admin-modules-displayer(ng-repeat="module in $ctrl.modules | orderBy:'name'", ng-if="module", module="module", current-homepage="$ctrl.homePage")
+admin-loading-status
+  admin-modules-displayer(ng-repeat="module in $ctrl.modules | orderBy:'name'", ng-if="module", module="module", current-homepage="$ctrl.homePage")
