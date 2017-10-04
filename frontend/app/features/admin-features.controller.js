@@ -9,7 +9,8 @@
     asyncAction,
     adminFeaturesService,
     adminDomainConfigService,
-    ADMIN_DEFAULT_NOTIFICATION_MESSAGES
+    ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
+    ADMIN_LOADING_STATUS
   ) {
     var self = this;
     var domainId = $stateParams.domainId;
@@ -17,11 +18,16 @@
 
     self.$onInit = $onInit;
     self.save = save;
+    self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
       adminDomainConfigService.get(domainId, CONFIG_NAME)
         .then(function(config) {
           self.features = adminFeaturesService.includeFeaturesMetadata(config);
+          self.status = ADMIN_LOADING_STATUS.loaded;
+        })
+        .catch(function() {
+          self.status = ADMIN_LOADING_STATUS.error;
         });
     }
 
