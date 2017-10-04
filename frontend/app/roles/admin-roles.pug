@@ -1,5 +1,6 @@
 sub-header
   admin-roles-subheader
 
-admin-roles-list(data-title=__('Administrators'), users="$ctrl.administrators", template="admin-roles-administrator-list-item")
-fab(icon="plus", ng-click="$ctrl.openAddForm()")
+admin-loading-status
+  admin-roles-list(data-title=__('Administrators'), users="$ctrl.administrators", template="admin-roles-administrator-list-item")
+  fab(icon="plus", ng-click="$ctrl.openAddForm()")
