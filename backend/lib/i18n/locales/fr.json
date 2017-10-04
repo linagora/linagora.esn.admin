@@ -194,5 +194,6 @@
   "Correct the index configuration (quick)": "Corriger la configuration de l'index (rapide)",
   "Submitting reindexing users request...": "Soumettre la requête pour réindexer les utilisateurs...",
   "Request submitted": "La requête est soumise",
-  "Failed to submit request": "Impossible de soumettre la requête"
+  "Failed to submit request": "Impossible de soumettre la requête",
+  "A problem occurred while getting data, try refreshing this page!": "Un problème s'est produit lors du chargement de certaines données, essayez de recharger la page."
 }
