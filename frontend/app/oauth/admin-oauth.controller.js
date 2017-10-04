@@ -3,23 +3,28 @@
 
   angular.module('linagora.esn.admin')
 
-  .controller('adminOauthController', function($stateParams, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
+  .controller('adminOauthController', function($stateParams, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_LOADING_STATUS) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAME = 'oauth';
 
     self.$onInit = $onInit;
     self.save = save;
+    self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
       self.enabledOauths = {};
       adminDomainConfigService.get(domainId, CONFIG_NAME)
         .then(function(config) {
           self.config = config;
+          self.status = ADMIN_LOADING_STATUS.loaded;
 
           _.forEach(self.config, function(value, key) {
             self.enabledOauths[key] = !_.isEmpty(value);
           });
+        })
+        .catch(function() {
+          self.status = ADMIN_LOADING_STATUS.error;
         });
     }
 
