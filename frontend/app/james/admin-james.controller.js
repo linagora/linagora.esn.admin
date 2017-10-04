@@ -11,7 +11,8 @@
     adminJamesService,
     asyncAction,
     adminJamesClientProvider,
-    ADMIN_DEFAULT_NOTIFICATION_MESSAGES
+    ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
+    ADMIN_LOADING_STATUS
   ) {
     var self = this;
     var domainId = $stateParams.domainId;
@@ -22,6 +23,7 @@
     self.save = save;
     self.connect = connect;
     self.onServerUrlChange = onServerUrlChange;
+    self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
       self.connectionStatus = 'connecting';
@@ -29,6 +31,12 @@
       adminJamesService.getServerUrl()
         .then(function(serverUrl) {
           self.serverUrl = serverUrl;
+          self.status = ADMIN_LOADING_STATUS.loaded;
+        })
+        .catch(function() {
+          self.status = ADMIN_LOADING_STATUS.error;
+
+          return Promise.reject('cannot get serverUrl');
         })
         .then(getJamesConfigurations)
         .then(function() {
