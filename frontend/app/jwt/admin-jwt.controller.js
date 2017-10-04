@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
+.controller('adminJwtController', function($stateParams, adminConfigApi, adminDomainConfigService, asyncAction, esnFileSaver, ADMIN_JWT_AVAILABLE_ALGORITHMS, ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_LOADING_STATUS) {
   var self = this;
   var domainId = $stateParams.domainId;
   var CONFIG_NAME = 'jwt';
@@ -12,9 +12,14 @@ angular.module('linagora.esn.admin')
     failure: 'Failed to generate keys'
   };
 
+  self.status = ADMIN_LOADING_STATUS.loading;
+
   adminDomainConfigService.get(domainId, CONFIG_NAME)
     .then(function(data) {
       self.config = data || {};
+      self.status = ADMIN_LOADING_STATUS.loaded;
+    }, function() {
+      self.status = ADMIN_LOADING_STATUS.error;
     });
 
   self.availableAlgorithms = ADMIN_JWT_AVAILABLE_ALGORITHMS;
