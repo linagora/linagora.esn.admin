@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminUsersListController', function($scope, memberSearchConfiguration, domainAPI, usSpinnerService, ADMIN_USERS_EVENTS) {
+.controller('adminUsersListController', function($scope, memberSearchConfiguration, domainAPI, usSpinnerService, ADMIN_USERS_EVENTS, ADMIN_LOADING_STATUS) {
   var self = this;
 
   self.spinnerKey = 'memberSpinner';
@@ -18,6 +18,7 @@ angular.module('linagora.esn.admin')
   self.members = [];
   self.restActive = false;
   self.error = false;
+  self.status = ADMIN_LOADING_STATUS.loading;
 
   function _updateMembersList() {
     self.error = false;
@@ -35,13 +36,15 @@ angular.module('linagora.esn.admin')
       .then(function(data) {
         self.search.count = parseInt(data.headers('X-ESN-Items-Count'), 10);
         self.members = self.members.concat(data.data);
+        self.status = ADMIN_LOADING_STATUS.loaded;
       }, function() {
         self.error = true;
+        self.status = ADMIN_LOADING_STATUS.error;
       }).finally(function() {
         self.search.running = false;
         self.restActive = false;
         usSpinnerService.stop('memberSpinner');
-      });
+    });
   }
 
   self.init = function() {

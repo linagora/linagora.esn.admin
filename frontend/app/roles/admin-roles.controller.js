@@ -2,9 +2,11 @@
 
 angular.module('linagora.esn.admin')
 
-.controller('adminRolesController', function($scope, $stateParams, $modal, adminRolesService) {
+.controller('adminRolesController', function($scope, $stateParams, $modal, adminRolesService, ADMIN_LOADING_STATUS) {
   var self = this;
   var domainId = $stateParams.domainId;
+
+  self.status = ADMIN_LOADING_STATUS.loading;
 
   init();
 
@@ -13,6 +15,10 @@ angular.module('linagora.esn.admin')
 
     adminRolesService.getAdministrators().then(function(administrators) {
       self.administrators = administrators;
+      self.status = ADMIN_LOADING_STATUS.loaded;
+    })
+    .catch(function() {
+      self.status = ADMIN_LOADING_STATUS.error;
     });
   }
 

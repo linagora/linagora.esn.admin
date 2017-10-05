@@ -13,6 +13,12 @@ angular.module('linagora.esn.admin')
   failure: 'Failed to save configuration'
 })
 
+.constant('ADMIN_LOADING_STATUS', {
+  loading: 'loading',
+  loaded: 'loaded',
+  error: 'error'
+})
+
 .constant('ADMIN_PAGES', [{
   id: 'general',
   name: 'General',

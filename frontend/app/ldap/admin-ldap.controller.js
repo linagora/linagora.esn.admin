@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
 
-  .controller('adminLdapController', function($stateParams, $element, $timeout, elementScrollService, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES) {
+  .controller('adminLdapController', function($stateParams, $element, $timeout, elementScrollService, adminDomainConfigService, asyncAction, _, ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_LOADING_STATUS) {
     var self = this;
     var domainId = $stateParams.domainId;
     var CONFIG_NAME = 'ldap';
@@ -12,6 +12,7 @@
     self.save = save;
     self.addForm = addForm;
     self.showEmptyMessage = showEmptyMessage;
+    self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
       adminDomainConfigService.get(domainId, CONFIG_NAME)
@@ -23,6 +24,10 @@
           } else {
             self.configs = data;
           }
+          self.status = ADMIN_LOADING_STATUS.loaded;
+        })
+        .catch(function() {
+          self.status = ADMIN_LOADING_STATUS.error;
         });
     }
 

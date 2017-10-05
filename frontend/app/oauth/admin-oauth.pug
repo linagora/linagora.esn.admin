@@ -1,7 +1,7 @@
 sub-header
   admin-oauth-subheader(on-form-submit="$ctrl.save()", form="form")
 
-form(name="form")
+form(name="form", admin-loading-status)
   admin-oauth-google(config="$ctrl.config.google", is-enabled="$ctrl.enabledOauths.google")
   admin-oauth-facebook(config="$ctrl.config.facebook", is-enabled="$ctrl.enabledOauths.facebook")
   admin-oauth-twitter(config="$ctrl.config.twitter", is-enabled="$ctrl.enabledOauths.twitter")

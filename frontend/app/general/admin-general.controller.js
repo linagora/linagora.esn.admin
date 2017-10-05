@@ -11,7 +11,8 @@
     adminModeService,
     _,
     ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
-    ADMIN_GENERAL_CONFIG
+    ADMIN_GENERAL_CONFIG,
+    ADMIN_LOADING_STATUS
   ) {
     var self = this;
     var domainId = $stateParams.domainId;
@@ -20,12 +21,17 @@
     self.$onInit = $onInit;
     self.save = save;
     self.hasConfig = hasConfig;
+    self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
       configNames = _determineConfigNames();
       adminDomainConfigService.getMultiple(domainId, configNames)
         .then(function(data) {
           self.configs = data;
+          self.status = ADMIN_LOADING_STATUS.loaded;
+        })
+        .catch(function() {
+          self.status = ADMIN_LOADING_STATUS.error;
         });
     }
 
