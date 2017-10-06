@@ -1,5 +1,5 @@
 .row(ui-sref="profile({user_id: $ctrl.isMe ? '' : $ctrl.user._id})")
-  esn-avatar.members-avatar(user-id="$ctrl.user._id")
+  esn-avatar(user-id="$ctrl.user._id")
   .col-md-6.col-xs-4
     h4.flex-vertical-centered(title=" {{::$ctrl.displayName}}")
       span {{::$ctrl.displayName}}
