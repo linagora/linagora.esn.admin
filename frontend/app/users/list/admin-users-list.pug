@@ -4,7 +4,7 @@ admin-loading-status
       .media
         .clickable(ui-sref="profile({user_id: member._id})")
           .pull-left
-            esn-avatar.members-avatar(user-id="member._id")
+            esn-avatar(user-id="member._id")
           .media-body
             .lv-title {{::member.firstname}} {{::member.lastname}}
             small.lv-small
