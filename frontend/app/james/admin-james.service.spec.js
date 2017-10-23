@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The adminJamesService', function() {
 
-  var adminJamesService, adminJamesClientProvider, adminDomainConfigService;
+  var adminJamesService, jamesClientProvider, adminDomainConfigService;
   var $windowMock, $rootScope, jamesClientInstanceMock;
   var domain, serverUrl;
 
@@ -34,16 +34,16 @@ describe('The adminJamesService', function() {
     inject(function(
       _$rootScope_,
       _adminJamesService_,
-      _adminJamesClientProvider_,
+      _jamesClientProvider_,
       _adminDomainConfigService_
     ) {
       $rootScope = _$rootScope_;
       adminJamesService = _adminJamesService_;
-      adminJamesClientProvider = _adminJamesClientProvider_;
+      jamesClientProvider = _jamesClientProvider_;
       adminDomainConfigService = _adminDomainConfigService_;
 
       jamesClientInstanceMock.createDomain = sinon.stub().returns($q.when());
-      adminJamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
+      jamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
       adminDomainConfigService.get = sinon.stub().returns($q.when({ url: serverUrl }));
     });
   });

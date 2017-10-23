@@ -10,7 +10,7 @@
     adminDomainConfigService,
     adminJamesService,
     asyncAction,
-    adminJamesClientProvider,
+    jamesClientProvider,
     ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
     ADMIN_LOADING_STATUS
   ) {
@@ -108,7 +108,7 @@
     }
 
     function _getJamesClient() {
-      return adminJamesClientProvider.get(self.serverUrl);
+      return jamesClientProvider.get(self.serverUrl);
     }
 
     function _qualifyJamesConfig(config, defaultValue) {
