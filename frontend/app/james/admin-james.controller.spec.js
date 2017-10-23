@@ -8,7 +8,7 @@ var expect = chai.expect;
 describe('The adminJamesController', function() {
 
   var $controller, $rootScope, $stateParams, $scope;
-  var adminDomainConfigService, adminJamesService, adminJamesClientProvider;
+  var adminDomainConfigService, adminJamesService, jamesClientProvider;
   var CONFIG_NAME = 'james';
   var $windowMock, jamesClientInstanceMock;
 
@@ -37,18 +37,18 @@ describe('The adminJamesController', function() {
       _$rootScope_,
       _$stateParams_,
       _adminDomainConfigService_,
-      _adminJamesClientProvider_,
+      _jamesClientProvider_,
       _adminJamesService_
     ) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
-      adminJamesClientProvider = _adminJamesClientProvider_;
+      jamesClientProvider = _jamesClientProvider_;
       adminJamesService = _adminJamesService_;
 
       $stateParams.domainId = 'domain123';
-      adminJamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
+      jamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
 
       adminDomainConfigService.get = function() {
         return $q.when({});
@@ -78,7 +78,7 @@ describe('The adminJamesController', function() {
     expect(controller.serverUrl).to.deep.equal(serverUrl);
     expect(controller.config).to.deep.equal({quota: { size: null, count: null }});
     expect(adminJamesService.getServerUrl).to.have.been.calledOnce;
-    expect(adminJamesClientProvider.get).to.have.been.calledWith(serverUrl);
+    expect(jamesClientProvider.get).to.have.been.calledWith(serverUrl);
   });
 
   describe('The save fn', function() {
@@ -170,7 +170,7 @@ describe('The adminJamesController', function() {
       var controller = initController();
 
       controller.serverUrl = 'url';
-      adminJamesClientProvider.get = function() {
+      jamesClientProvider.get = function() {
         return $q.reject({});
       };
 

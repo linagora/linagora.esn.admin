@@ -6,7 +6,7 @@
 
   function adminJamesService(
     adminDomainConfigService,
-    adminJamesClientProvider,
+    jamesClientProvider,
     ADMIN_MODE
   ) {
     var CONFIG_NAME = 'james';
@@ -40,7 +40,7 @@
 
     function _getJamesClient() {
       return getServerUrl()
-        .then(adminJamesClientProvider.get);
+        .then(jamesClientProvider.get);
     }
   }
 })(angular);

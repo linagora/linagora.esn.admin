@@ -9,11 +9,6 @@ module.exports = function(dependencies) {
 
   const router = express.Router();
 
-  router.post('/generateJwtToken',
-    authorizationMW.requiresAPILogin,
-    platformadminsMW.requirePlatformAdmin,
-    controller.generateJwtToken);
-
   router.post('/generateJwtKeyPair',
     authorizationMW.requiresAPILogin,
     platformadminsMW.requirePlatformAdmin,

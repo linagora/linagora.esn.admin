@@ -21,5 +21,6 @@ angular.module('linagora.esn.admin', [
   'esn.feature-registry',
   'esn.i18n',
   'esn.datetime',
-  'esn.configuration'
+  'esn.configuration',
+  'linagora.esn.james'
 ]);

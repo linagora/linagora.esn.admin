@@ -9,7 +9,7 @@
     $q,
     asyncAction,
     adminDomainConfigService,
-    adminJamesClientProvider,
+    jamesClientProvider,
     domainAPI,
     ADMIN_DOMAINS_EVENTS,
     ADMIN_MODE
@@ -84,7 +84,7 @@
     }
 
     function _getJamesClient(serverUrl) {
-      return adminJamesClientProvider
+      return jamesClientProvider
         .get(serverUrl);
     }
   }

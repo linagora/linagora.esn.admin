@@ -10,7 +10,7 @@ describe('The adminDomainsService', function() {
 
   var $rootScope;
   var domainAPI, ADMIN_DOMAINS_EVENTS;
-  var adminDomainsService, adminJamesClientProvider, adminDomainConfigService;
+  var adminDomainsService, jamesClientProvider, adminDomainConfigService;
   var $windowMock, jamesClientInstanceMock;
 
   beforeEach(function() {
@@ -34,19 +34,19 @@ describe('The adminDomainsService', function() {
       _$rootScope_,
       _adminDomainsService_,
       _domainAPI_,
-      _adminJamesClientProvider_,
+      _jamesClientProvider_,
       _adminDomainConfigService_,
       _ADMIN_DOMAINS_EVENTS_
     ) {
       $rootScope = _$rootScope_;
       adminDomainsService = _adminDomainsService_;
       domainAPI = _domainAPI_;
-      adminJamesClientProvider = _adminJamesClientProvider_;
+      jamesClientProvider = _jamesClientProvider_;
       adminDomainConfigService = _adminDomainConfigService_;
       ADMIN_DOMAINS_EVENTS = _ADMIN_DOMAINS_EVENTS_;
 
       jamesClientInstanceMock.createDomain = sinon.stub().returns($q.when());
-      adminJamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
+      jamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
       adminDomainConfigService.get = function() {
         return $q.when({});
       };
