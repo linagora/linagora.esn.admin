@@ -1,15 +1,14 @@
 sub-header
   admin-ldap-subheader(on-form-submit="$ctrl.save()", form="form")
 
-admin-loading-status
-  form(name="form")
-    .ldap-empty-container-message(ng-if="$ctrl.showEmptyMessage($ctrl.configs)")
-      .message
-        .ldap-empty-icon.mdi.mdi-book
-        div
-          | #{__('No LDAP configuration, click')}
-          span.mdi.mdi-plus
-          | #{__('to add a new one!')}
-    .card(ng-repeat="config in $ctrl.configs")
-      admin-ldap-form(ldap-config="config")
-  fab(icon="plus", ng-click="$ctrl.addForm()")
+form(name="form", admin-loading-status)
+  .ldap-empty-container-message(ng-if="$ctrl.showEmptyMessage($ctrl.configs)")
+    .message
+      .ldap-empty-icon.mdi.mdi-book
+      div
+        | #{__('No LDAP configuration, click')}
+        span.mdi.mdi-plus
+        | #{__('to add a new one!')}
+  .card(ng-repeat="config in $ctrl.configs")
+    admin-ldap-form(ldap-config="config")
+fab(icon="plus", ng-click="$ctrl.addForm()")
