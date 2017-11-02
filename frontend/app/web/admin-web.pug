@@ -1,10 +1,10 @@
 sub-header
   admin-web-subheader(on-form-submit="$ctrl.save()", form="form")
-admin-loading-status
+
+form(name="form", admin-loading-status)
   .card
     .card-body.card-padding
-      form(name="form")
-        .row
-          .col-xs-12.col-md-6
-            esn-form-group(label=__('Base URL'), helper=__('The address where your website is served'))
-              input.form-control(type="url", ng-model="$ctrl.config.base_url", name="base_url", required)
+      .row
+        .col-xs-12.col-md-6
+          esn-form-group(label=__('Base URL'), helper=__('The address where your website is served'))
+            input.form-control(type="url", ng-model="$ctrl.config.base_url", name="base_url", required)
