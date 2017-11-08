@@ -195,8 +195,13 @@
   "Submitting reindexing users request...": "Đang gửi yêu cầu tạo lại chỉ mục người dùng...",
   "Request submitted": "Yêu cầu đã được gửi",
   "Failed to submit request": "Không thể gửi yêu cầu",
-  "A problem occurred while getting data, try refreshing this page!": "Có lỗi xảy ra, hãy thử tải lại trình duyệt!",
   "Used for:": "Sử dụng cho:",
   "Link account": "Liên kết tài khoản",
-  "Log in": "Đăng nhập"
+  "Log in": "Đăng nhập",
+  "A problem occurred while getting data, try refreshing this page!": "Có lỗi xảy ra, hãy thử tải lại trình duyệt!",
+  "Hostnames": "Tên máy chủ",
+  "Hostname": "Tên máy chủ",
+  "Hostname is invalid": "Tên máy chủ không hợp lệ",
+  "Hostname is already in use. Try another.": "Tên máy chủ đã được sử dụng. Hãy thử tên khác.",
+  "Add a new hostname": "Thêm tên máy chủ mới"
 }

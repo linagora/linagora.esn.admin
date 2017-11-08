@@ -198,5 +198,11 @@
   "A problem occurred while getting data, try refreshing this page!": "Un problème s'est produit lors du chargement de certaines données, essayez de recharger la page.",
   "Used for:": "Utilisé par:",
   "Link account": "Lier son compte",
-  "Log in": "Se connecter"
+  "Log in": "Se connecter",
+  "Hostnames": "Noms d'hôtes",
+  "Hostname": "Nom d'hôte",
+  "Hostname is invalid": "Le nom est invalide",
+  "Hostname is already in use. Try another.": "Ce nom est déjà utilisé. Essayez un autre nom",
+  "Add a new hostname": "Ajouter un nouveau nom d'hôte"
+
 }
