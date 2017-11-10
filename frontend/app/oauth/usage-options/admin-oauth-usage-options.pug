@@ -1,0 +1,12 @@
+span #{__('Used for:')}
+.oauth-usage-options
+  .option
+    label.checkbox.checkbox-inline
+      input(type="checkbox", ng-model="$ctrl.options.account")
+      i.input-helper
+      | #{__('Link account')}
+  .option
+    label.checkbox.checkbox-inline
+      input(type="checkbox", ng-model="$ctrl.options.login")
+      i.input-helper
+      | #{__('Log in')}

@@ -195,5 +195,8 @@
   "Submitting reindexing users request...": "Submitting reindexing users request...",
   "Request submitted": "Request submitted",
   "Failed to submit request": "Failed to submit request",
-  "A problem occurred while getting data, try refreshing this page!": "A problem occurred while getting data, try refreshing this page!"
+  "A problem occurred while getting data, try refreshing this page!": "A problem occurred while getting data, try refreshing this page!",
+  "Used for:": "Used for:",
+  "Link account": "Link account",
+  "Log in": "Log in"
 }
