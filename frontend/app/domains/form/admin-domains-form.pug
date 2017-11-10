@@ -8,6 +8,7 @@ ng-form(name="form", esn-autocomplete-off)
     .col-md-6
       esn-form-group(label=__('Company name'))
         input.form-control(type="text", ng-model="$ctrl.domain.company_name", name="companyName", required)
+  admin-domains-form-hostnames(domain="$ctrl.domain", form="form")
   div(ng-if="!$ctrl.updateMode")
     .row
       .col-xs-6

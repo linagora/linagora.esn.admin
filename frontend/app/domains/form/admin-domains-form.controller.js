@@ -7,7 +7,14 @@
   function adminDomainsFormController($q, domainAPI) {
     var self = this;
 
+    self.$onInit = $onInit;
     self.uniqueDomainName = uniqueDomainName;
+
+    function $onInit() {
+      if (!self.domain) {
+        self.domain = {};
+      }
+    }
 
     function uniqueDomainName(domainName) {
       if (!domainName) {
