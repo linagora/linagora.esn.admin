@@ -17,3 +17,4 @@ ng-form(name='form')
         .col-xs-12.col-md-8
           esn-form-group(label=__('API Secret'))
             input.form-control(type="text", ng-model="$ctrl.config.consumer_secret", autocomplete="off", name="consumer_secret", required)
+      admin-oauth-usage-options(options="$ctrl.config.usage")
