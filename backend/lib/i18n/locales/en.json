@@ -203,5 +203,6 @@
   "Hostname": "Hostname",
   "Hostname is invalid": "Hostname is invalid",
   "Hostname is already in use. Try another.": "Hostname is already in use. Try another.",
-  "Add a new hostname": "Add a new hostname"
+  "Add a new hostname": "Add a new hostname",
+  "This module has no home page": "This module has no home page"
 }

@@ -18,9 +18,11 @@ admin-modules {
         padding: 15px;
         border-bottom: 1px solid @adminModuleBorderColor;
 
-        h2 {
+        .module-name {
           .flex-grow;
+          .ellipsis;
 
+          width: 40%;
           color: @secondaryTextColor;
 
           img {
@@ -37,26 +39,38 @@ admin-modules {
           }
         }
 
-        .toolbar {
-          width: 50%;
+        .module-toolbar {
+          width: 60%;
 
           .flex-vertical-centered;
           .flex-space-between;
 
           .admin-modules-set-homepage {
-            width: 40%;
+            .ellipsis;
+
+            padding: 0 15px;
+
+            i {
+              padding-right: 5px;
+            }
           }
 
           .admin-modules-features {
-            width: 60%;
+            .ellipsis;
+
+            padding: 0 20px;
           }
 
           .mdi-menu-up, .mdi-menu-down {
             font-size: 1.5em;
           }
 
-          .homeActivated {
+          .home-activated {
             color: @primaryColor;
+          }
+
+          .no-homepage {
+            color: @m-gray;
           }
         }
       }

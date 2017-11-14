@@ -203,6 +203,6 @@
   "Hostname": "Nom d'hôte",
   "Hostname is invalid": "Le nom est invalide",
   "Hostname is already in use. Try another.": "Ce nom est déjà utilisé. Essayez un autre nom",
-  "Add a new hostname": "Ajouter un nouveau nom d'hôte"
-
+  "Add a new hostname": "Ajouter un nouveau nom d'hôte",
+  "This module has no home page": "Ce module n'a pas de page d'accueil"
 }
