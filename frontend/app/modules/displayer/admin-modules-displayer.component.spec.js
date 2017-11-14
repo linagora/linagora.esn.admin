@@ -124,7 +124,7 @@ describe('The adminModulesDisplayer component', function() {
     it('should inactive when current module is not home page', function() {
       var element = initComponent();
 
-      expect(element.find('.toolbar > span.clickable').hasClass('homeActivated')).to.be.false;
+      expect(element.find('.module-toolbar > span.clickable').hasClass('home-activated')).to.be.false;
     });
 
     it('should active when current module is home page', function() {
@@ -132,7 +132,7 @@ describe('The adminModulesDisplayer component', function() {
 
       var element = initComponent();
 
-      expect(element.find('.toolbar > .admin-modules-set-homepage > span.clickable').hasClass('homeActivated')).to.be.true;
+      expect(element.find('.module-toolbar > .admin-modules-set-homepage > span.clickable').hasClass('home-activated')).to.be.true;
     });
 
     it('should set home page on click', function() {
@@ -141,7 +141,7 @@ describe('The adminModulesDisplayer component', function() {
 
       var element = initComponent();
 
-      element.find('.toolbar > .admin-modules-set-homepage > span.clickable').click();
+      element.find('.module-toolbar > .admin-modules-set-homepage > span.clickable').click();
 
       expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, 'homePage', testModule.homePage);
     });
