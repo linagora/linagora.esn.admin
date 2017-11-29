@@ -1,5 +1,0 @@
-label.title #{__('Resolvers')}
-.row
-  .col-xs-12.col-md-12
-    .config-content(ng-repeat="resolve in $ctrl.ADMIN_MAIL_AVAILABLE_RESOLVERS")
-      admin-mail-resolver(meta-data="resolve", resolver="$ctrl.resolvers[resolve.key]")

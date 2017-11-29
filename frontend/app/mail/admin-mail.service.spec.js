@@ -75,15 +75,6 @@ describe('The adminMailService', function() {
             },
             service: 'gmail'
           }
-        },
-        resolvers: {
-          whatsup: {
-            active: false,
-            options: {}
-          },
-          all: {
-            active: false
-          }
         }
       };
     });
@@ -91,8 +82,7 @@ describe('The adminMailService', function() {
     it('should return config object for Local transport type if transport type is Local and saving successfully', function() {
       var expectedConfig = {
         mail: { noreply: 'noreply@open-paas.org', feedback: 'feedback@open-paas.org' },
-        transport: { module: 'value', config: { dir: 'value', browser: true } },
-        resolvers: { whatsup: { active: false, options: {} }, all: { active: false } }
+        transport: { module: 'value', config: { dir: 'value', browser: true } }
       };
       var transportType = ADMIN_MAIL_TRANSPORT_TYPES.local;
       var config = adminMailService.qualifyTransportConfig(transportType, configMock);
@@ -113,15 +103,6 @@ describe('The adminMailService', function() {
             tls: { rejectUnauthorized: false },
             port: 25,
             auth: { user: 'username', pass: 'password' }
-          }
-        },
-        resolvers: {
-          whatsup: {
-            active: false,
-            options: {}
-          },
-          all: {
-            active: false
           }
         }
       };
@@ -182,8 +163,7 @@ describe('The adminMailService', function() {
         mail: { noreply: 'noreply@open-paas.org', feedback: 'feedback@open-paas.org' },
         transport: {
           config: { service: 'gmail', auth: { user: 'username', pass: 'password' } }
-        },
-        resolvers: { whatsup: { active: false, options: {} }, all: { active: false } }
+        }
       };
       var transportType = ADMIN_MAIL_TRANSPORT_TYPES.gmail;
       var config = adminMailService.qualifyTransportConfig(transportType, configMock);

@@ -5,25 +5,17 @@ form(name="form", admin-loading-status)
   .card
     .card-body.card-padding
       .row
-        .col-md-6
-          .config-content
-            esn-form-group(label=__('Noreply email'))
-              input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", autofocus=true, required)
-            esn-form-group(label=__('Feedback email'))
-              input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.feedback", name="feedback", required)
-            esn-form-group(label=__('Transport type'))
-              .select
-                select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for (key, transportType) in $ctrl.transportTypes", required)
-            div(ng-switch="$ctrl.transportType")
-              div(ng-switch-when="Local")
-                admin-mail-local(transport="$ctrl.config.transport")
-
-              div(ng-switch-when="SMTP")
-                admin-mail-smtp(transport-config="$ctrl.config.transport.config")
-
-              div(ng-switch-when="Gmail")
-                admin-mail-gmail(transport-config="$ctrl.config.transport.config")
-        .col-md-6
-          admin-mail-resolvers(ng-if="$ctrl.config.resolvers", resolvers="$ctrl.config.resolvers")
+        .config-content
+          esn-form-group(label=__('Noreply email'))
+            input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.noreply", name="noreply", autofocus=true, required)
+          esn-form-group(label=__('Feedback email'))
+            input.form-control.fg-input(type="email", ng-model="$ctrl.config.mail.feedback", name="feedback", required)
+          esn-form-group(label=__('Transport type'))
+            .select
+              select.form-control(ng-model="$ctrl.transportType", name="transportType", ng-options="transportType for (key, transportType) in $ctrl.transportTypes", required)
+          div(ng-switch="$ctrl.transportType")
+            admin-mail-local(ng-switch-when="Local" transport="$ctrl.config.transport")
+            admin-mail-smtp(ng-switch-when="SMTP", transport-config="$ctrl.config.transport.config")
+            admin-mail-gmail(ng-switch-when="Gmail", transport-config="$ctrl.config.transport.config")
 
 admin-mail-test(ng-if="$ctrl.config", is-mail-config-valid="form.$valid", config="$ctrl.config", transport-type="$ctrl.transportType")

@@ -15,7 +15,6 @@ angular.module('linagora.esn.admin')
   adminDomainConfigService.get(domainId, CONFIG_NAME)
     .then(function(data) {
       self.config = data || {};
-      self.config.resolvers = self.config.resolvers || {};
       self.transportType = adminMailService.getTransportType(self.config);
       self.status = ADMIN_LOADING_STATUS.loaded;
     })
