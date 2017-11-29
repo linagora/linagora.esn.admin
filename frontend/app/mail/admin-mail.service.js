@@ -29,8 +29,7 @@ angular.module('linagora.esn.admin')
       mail: {
         noreply: mailConfig.mail.noreply,
         feedback: mailConfig.mail.feedback
-      },
-      resolvers: mailConfig.resolvers
+      }
     };
     var transportConfig = mailConfig.transport.config;
 
