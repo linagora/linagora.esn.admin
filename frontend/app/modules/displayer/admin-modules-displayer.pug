@@ -13,11 +13,8 @@ form(name="form")
           span.clickable(ng-if="$ctrl.module.homePage", ng-click="$ctrl.setHome($event)", ng-class="{'home-activated': $ctrl.isHomePage()}")
             i.mdi(ng-class="$ctrl.isHomePage() ? 'mdi-star' : 'mdi-star-outline'")
             | #{__('Home')}
-        .admin-modules-features
-          span(ng-show="$ctrl.configurations", title=__('Features'))
-            | #{__('Features')}
-            i.mdi(ng-class="expanded ? 'mdi-menu-up' : 'mdi-menu-down'")
-        toggle-switch(ng-model="$ctrl.isEnabled")
+        .admin-modules-features(ng-show="$ctrl.configurations", title=__('Features'))
+          i.mdi(ng-class="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'")
     .card-body
       .form(ng-if="$ctrl.configurations", ng-show="expanded")
         admin-modules-form(template="$ctrl.module.config.template", configurations="$ctrl.configurations")
