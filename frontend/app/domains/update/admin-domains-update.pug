@@ -12,5 +12,5 @@
           .flex-vertical-centered.flex-end
             button.btn.btn-link(type="button", ng-click="$hide()")
               | #{__('Cancel')}
-            button.btn.btn-primary(type="submit", ng-disabled="form.$pristine || form.$invalid")
+            button.btn.btn-primary(type="submit", ng-disabled="form.$pristine || form.$invalid || form.$pending")
               | #{__('Save')}
