@@ -199,5 +199,6 @@
   "Hostname is invalid": "Le nom est invalide",
   "Hostname is already in use. Try another.": "Ce nom est déjà utilisé. Essayez un autre nom",
   "Add a new hostname": "Ajouter un nouveau nom d'hôte",
-  "This module has no home page": "Ce module n'a pas de page d'accueil"
+  "This module has no home page": "Ce module n'a pas de page d'accueil",
+  "The email is already used. Try another one.": "L'adresse e-mail est déjà utilisée. Essayez-en une autre."
 }

@@ -87,6 +87,12 @@ angular.module('esn.configuration', [])
   .factory('esnConfigApi', function() {
     return {};
   });
+
+angular.module('esn.availability', [])
+  .factory('esnAvailabilityService', function() {
+    return {};
+  });
+
 angular.module('linagora.esn.james', [])
   .factory('jamesClientProvider', function() {
     return {};

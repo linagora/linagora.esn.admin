@@ -1,8 +1,8 @@
 ng-form(name="form", esn-autocomplete-off)
   .row
     .col-md-6
-      esn-form-group(label=__('Email'))
-        input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", autocomplete="off", required, name="email")
+      esn-form-group(label=__('Email'), async-validator-error-message=__('The email is already used. Try another one.'), async-validator="$ctrl.emailAvailabilityChecker")
+        input.form-control(type="email", ng-model="$ctrl.user.accounts[0].emails[0]", autocomplete="off", required, name="email", ng-model-options="{ debounce: {'default': 300} }")
     .col-md-6
       esn-form-group(label=__('Password'))
         input.form-control(type="password", ng-model="$ctrl.user.password", autocomplete="new-password", required, name="password")

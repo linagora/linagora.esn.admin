@@ -199,5 +199,6 @@
   "Hostname is invalid": "Tên máy chủ không hợp lệ",
   "Hostname is already in use. Try another.": "Tên máy chủ đã được sử dụng. Hãy thử tên khác.",
   "Add a new hostname": "Thêm tên máy chủ mới",
-  "This module has no home page": "Mô-đun này không có trang chủ"
+  "This module has no home page": "Mô-đun này không có trang chủ",
+  "The email is already used. Try another one.": "Địa chỉ thư điện tử đã được sử dụng. Hãy thử địa chỉ khác."
 }
