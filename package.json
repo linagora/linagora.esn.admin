@@ -39,6 +39,7 @@
     "grunt-lint-pattern": "git+https://github.com/linagora/grunt-lint-pattern.git",
     "grunt-mocha-cli": "2.1.0",
     "grunt-puglint": "^1.0.0",
+    "grunt-release": "0.14.0",
     "i18n-checker": "linagora/i18n-checker#v2.0.0",
     "karma": "1.7.0",
     "karma-chrome-launcher": "2.0.0",
