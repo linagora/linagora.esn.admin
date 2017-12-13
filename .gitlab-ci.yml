@@ -45,5 +45,7 @@ release:
   only:
     - triggers
   script:
-    - if [ -z "${VERSION}" ]; then exit 0; fi
+    - if [ -z "${VERSION}" ]; then exit 1; fi
+    - npm i
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
     - grunt release:${VERSION} 
