@@ -3,9 +3,12 @@ image: linagora/node-test-base:8
 stages:
   - test
   - deploy_dev
+  - release
 
 test:
   stage: test
+  except:
+    - triggers
   tags:
     - docker
   script:
@@ -15,6 +18,8 @@ test:
 
 deploy_dev:
   stage: deploy_dev
+  except:
+    - triggers
   tags:
     - dev.open-paas.org
     - deployment
@@ -34,3 +39,11 @@ deploy_dev:
     - bower prune
     - git checkout -- .
     - sudo /etc/init.d/rse.dev restart
+
+release:
+  stage: release
+  only:
+    - triggers
+  script:
+    - if [ -z "${VERSION}" ]; then exit 0; fi
+    - grunt release:${VERSION} 
