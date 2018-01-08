@@ -28,6 +28,14 @@ angular.module('linagora.esn.admin')
     platform: true
   }
 }, {
+  id: 'login',
+  name: 'Login',
+  icon: 'mdi-login-variant',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
+}, {
   id: 'features',
   name: 'Features',
   icon: 'mdi-toggle-switch',
