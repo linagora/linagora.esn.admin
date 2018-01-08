@@ -3,6 +3,5 @@ sub-header
 
 form(name="form", admin-loading-status)
   .flex-column(ng-if="$ctrl.configs")
-    admin-general-login(ng-if="$ctrl.hasConfig('login')", login="$ctrl.configs.login")
-    esn-business-hours(ng-if="$ctrl.hasConfig('businessHours')", business-hours="$ctrl.configs.businessHours")
-    admin-general-datetime(ng-if="$ctrl.hasConfig('datetime')", datetime="$ctrl.configs.datetime")
+    esn-business-hours(business-hours="$ctrl.configs.businessHours")
+    admin-general-datetime(datetime="$ctrl.configs.datetime")

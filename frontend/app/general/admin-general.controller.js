@@ -11,21 +11,17 @@
     adminModeService,
     _,
     ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
-    ADMIN_GENERAL_CONFIG,
     ADMIN_LOADING_STATUS
   ) {
     var self = this;
     var domainId = $stateParams.domainId;
-    var configNames;
 
     self.$onInit = $onInit;
     self.save = save;
-    self.hasConfig = hasConfig;
     self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
-      configNames = _determineConfigNames();
-      adminDomainConfigService.getMultiple(domainId, configNames)
+      adminDomainConfigService.getMultiple(domainId, ['businessHours', 'datetime'])
         .then(function(data) {
           self.configs = data;
           self.status = ADMIN_LOADING_STATUS.loaded;
@@ -33,16 +29,6 @@
         .catch(function() {
           self.status = ADMIN_LOADING_STATUS.error;
         });
-    }
-
-    function _determineConfigNames() {
-      var configNames = adminModeService.isPlatformMode() ? ADMIN_GENERAL_CONFIG.platform : ADMIN_GENERAL_CONFIG.domain;
-
-      return configNames;
-    }
-
-    function hasConfig(configName) {
-      return configNames.indexOf(configName) > -1;
     }
 
     function save() {
