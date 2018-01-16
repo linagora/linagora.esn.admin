@@ -2,14 +2,12 @@
   'use strict';
 
   angular.module('linagora.esn.admin')
-    .controller('adminGeneralController', adminGeneralController);
+    .controller('adminLoginController', adminGeneralController);
 
   function adminGeneralController(
     $stateParams,
     adminDomainConfigService,
     asyncAction,
-    adminModeService,
-    _,
     ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
     ADMIN_LOADING_STATUS
   ) {
@@ -21,9 +19,9 @@
     self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
-      adminDomainConfigService.getMultiple(domainId, ['businessHours', 'datetime'])
+      adminDomainConfigService.get(domainId, 'login')
         .then(function(data) {
-          self.configs = data;
+          self.config = data;
           self.status = ADMIN_LOADING_STATUS.loaded;
         })
         .catch(function() {
@@ -36,19 +34,7 @@
     }
 
     function _saveConfiguration() {
-      var qualifiedConfigs = _qualifyConfigs(self.configs);
-
-      return adminDomainConfigService.setMultiple(domainId, qualifiedConfigs);
-    }
-
-    function _qualifyConfigs(configs) {
-      var qualifiedConfigs = [];
-
-      _.forEach(configs, function(value, key) {
-        qualifiedConfigs.push({ name: key, value: value });
-      });
-
-      return qualifiedConfigs;
+      return adminDomainConfigService.set(domainId, 'login', self.config);
     }
   }
 })(angular);

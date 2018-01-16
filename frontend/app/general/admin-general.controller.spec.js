@@ -9,24 +9,21 @@ describe('The adminGeneralController', function() {
 
   var $rootScope, $stateParams, $scope, $controller;
   var adminDomainConfigService;
-  var ADMIN_MODE, ADMIN_GENERAL_CONFIG;
   var configuraionsMock;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _ADMIN_MODE_, _ADMIN_GENERAL_CONFIG_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
-      ADMIN_MODE = _ADMIN_MODE_;
-      ADMIN_GENERAL_CONFIG = _ADMIN_GENERAL_CONFIG_;
 
       $stateParams.domainId = 'domain123';
     });
 
-    configuraionsMock = { login: 'value' };
+    configuraionsMock = { datetime: 'value' };
   });
 
   function initController(scope) {
@@ -46,16 +43,7 @@ describe('The adminGeneralController', function() {
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ADMIN_GENERAL_CONFIG.domain);
-    });
-
-    it('should get a list of configurations from server on init in platform mode', function() {
-      $stateParams.domainId = ADMIN_MODE.platform;
-      adminDomainConfigService.getMultiple = sinon.stub().returns($q.when(configuraionsMock));
-      var controller = initController();
-
-      expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ADMIN_GENERAL_CONFIG.platform);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime']);
     });
   });
 
@@ -68,8 +56,8 @@ describe('The adminGeneralController', function() {
 
       var controller = initController();
 
-      controller.configs.login = 'new value';
-      var expectConfigsToUpdate = [{ name: 'login', value: 'new value' }];
+      controller.configs.datetime = 'new value';
+      var expectConfigsToUpdate = [{ name: 'datetime', value: 'new value' }];
 
       controller.save();
       $scope.$digest();
