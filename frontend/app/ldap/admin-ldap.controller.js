@@ -43,11 +43,9 @@
     }
 
     function addForm() {
-      self.configs.push({
-        configuration: {
-          mapping: {}
-        }
-      });
+      var newLdapConfig = {};
+
+      self.configs.push(newLdapConfig);
       $timeout(function() {
         var lastAdminLdapForm = _.last($element.find('admin-ldap-form'));
 

@@ -182,5 +182,6 @@
   "The email is already used. Try another one.": "Địa chỉ thư điện tử đã được sử dụng. Hãy thử địa chỉ khác.",
   "Login configuration": "Cấu hình đăng nhập",
   "Allow reset password": "Cho phép đặt lại mật khẩu",
-  "Run": "Chạy"
+  "Run": "Chạy",
+  "Users auto-provisioning": "Tự động tạo người dùng"
 }
