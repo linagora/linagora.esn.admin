@@ -7,7 +7,8 @@ var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
   var $controller, $rootScope, $scope, $stateParams;
-  var adminDomainConfigService, asyncAction, adminModulesService, ADMIN_DEFAULT_NOTIFICATION_MESSAGES;
+  var adminDomainConfigService, asyncAction, adminModulesService;
+  var ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_FORM_EVENT;
 
   beforeEach(function() {
     module('linagora.esn.admin', function($provide) {
@@ -18,13 +19,14 @@ describe('The adminModulesDisplayerController', function() {
   });
 
   beforeEach(function() {
-    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesService_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_) {
+    angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesService_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_, _ADMIN_FORM_EVENT_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       adminDomainConfigService = _adminDomainConfigService_;
       adminModulesService = _adminModulesService_;
       $stateParams = _$stateParams_;
       ADMIN_DEFAULT_NOTIFICATION_MESSAGES = _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_;
+      ADMIN_FORM_EVENT = _ADMIN_FORM_EVENT_;
     });
   });
 
@@ -87,7 +89,7 @@ describe('The adminModulesDisplayerController', function() {
       $scope.$digest();
     });
 
-    it('should update original configuration', function() {
+    it('should make the form pristine and broadcast form submit event on success', function() {
       var module = {name: 'linagora.esn.unifiedinbox', configurations: [{ name: 'view' }, { name: 'api', value: 'some_value'}, { name: 'uploadUrl' }, { name: 'downloadUrl' }, { name: 'isJmapSendingEnabled' }, { name: 'isSaveDraftBeforeSendingEnabled' }, { name: 'composer.attachments' }, { name: 'maxSizeUpload' }, { name: 'swipeRightAction' }]};
       var ctrl = initController(module);
 
@@ -97,9 +99,34 @@ describe('The adminModulesDisplayerController', function() {
       };
       $scope.$broadcast = sinon.spy();
 
-      ctrl.save().then(function() {
-        expect($scope.$broadcast).to.have.been.calledWith('ADMIN_FORM_RESET');
-      });
+      ctrl.save();
+      $rootScope.$digest();
+
+      expect($scope.$broadcast).to.have.been.calledWith(ADMIN_FORM_EVENT.submit);
+      expect($scope.form.$setPristine).to.have.been.calledOnce;
+    });
+
+    it('should run through all post save handlers', function() {
+      var module = {
+        name: 'linagora.esn.unifiedinbox',
+        configurations: [{ name: 'view' }]};
+      var ctrl = initController(module);
+      var postSaveHandler1 = sinon.spy();
+      var postSaveHandler2 = sinon.spy();
+
+      ctrl.registerPostSaveHandler(postSaveHandler1);
+      ctrl.registerPostSaveHandler(postSaveHandler2);
+
+      adminModulesService.set = sinon.stub().returns($q.when());
+      $scope.form = {
+        $setPristine: angular.noop
+      };
+
+      ctrl.save();
+      $rootScope.$digest();
+
+      expect(postSaveHandler1).to.have.been.calledOnce;
+      expect(postSaveHandler2).to.have.been.calledOnce;
     });
   });
 
@@ -129,7 +156,7 @@ describe('The adminModulesDisplayerController', function() {
 
       ctrl.reset();
 
-      expect($scope.$broadcast).to.have.been.calledWith('admin:form:reset');
+      expect($scope.$broadcast).to.have.been.calledWith(ADMIN_FORM_EVENT.reset);
     });
   });
 });

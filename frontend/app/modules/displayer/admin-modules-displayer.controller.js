@@ -9,7 +9,7 @@
     $stateParams,
     $scope,
     $timeout,
-    _,
+    $q,
     asyncAction,
     adminDomainConfigService,
     adminModulesService,
@@ -20,11 +20,12 @@
     var domainId = $stateParams.domainId;
     var HOMEPAGE_KEY = 'homePage';
     var timeoutDuration = 500;
+    var postSaveHandlers = [];
 
     self.$onInit = $onInit();
+    self.registerPostSaveHandler = registerPostSaveHandler;
 
     function $onInit() {
-      self.isEnabled = true;
       self.configurations = buildConfigurations(self.module);
     }
 
@@ -70,10 +71,16 @@
 
     self.save = function() {
       return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, function() {
-        return adminModulesService.set(domainId, [self.module]).then(function() {
-          $scope.$broadcast(ADMIN_FORM_EVENT.submit);
-          $scope.form.$setPristine();
-        });
+        return adminModulesService.set(domainId, [self.module])
+          .then(function() {
+            return $q.all(postSaveHandlers.map(function(handler) {
+              return handler();
+            }));
+          })
+          .then(function() {
+            $scope.$broadcast(ADMIN_FORM_EVENT.submit);
+            $scope.form.$setPristine();
+          });
       });
     };
 
@@ -81,5 +88,9 @@
       $scope.$broadcast(ADMIN_FORM_EVENT.reset);
       $scope.form.$setPristine();
     };
+
+    function registerPostSaveHandler(handler) {
+      postSaveHandlers.push(handler);
+    }
   }
 })(angular);
