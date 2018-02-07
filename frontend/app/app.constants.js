@@ -100,14 +100,6 @@ angular.module('linagora.esn.admin')
     platform: true
   }
 }, {
-  id: 'james',
-  name: 'James',
-  icon: 'mdi-fire',
-  displayIn: {
-    domain: false,
-    platform: true
-  }
-}, {
   id: 'jwt',
   name: 'JWT',
   icon: 'mdi-shield',
