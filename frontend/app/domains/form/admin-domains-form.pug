@@ -15,8 +15,12 @@ ng-form(name="form", esn-autocomplete-off)
         h5 #{__('Administrator')}
     .row.m-t-15
       .col-md-6
-        esn-form-group(label=__('Email'))
-          input.form-control(type="email", ng-model="$ctrl.domain.administrator.email", autocomplete="off", required, name="email")
+        esn-email-input(
+          form="form",
+          email="$ctrl.domain.administrator.email",
+          domain-name="$ctrl.domain.name",
+          availability-checker="$ctrl.isEmailAvailable(email)"
+        )
       .col-md-6
         esn-form-group(label=__('Password'))
           input.form-control(type="password", ng-model="$ctrl.domain.administrator.password", autocomplete="new-password", required, name="password")
