@@ -94,6 +94,6 @@ angular.module('esn.availability', [])
   });
 
 angular.module('linagora.esn.james', [])
-  .factory('jamesClientProvider', function() {
+  .factory('jamesWebadminClient', function() {
     return {};
   });

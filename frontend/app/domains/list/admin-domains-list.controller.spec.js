@@ -8,7 +8,7 @@ var expect = chai.expect;
 describe('The adminDomainsListController', function() {
 
   var $rootScope, $scope, $controller, $modalMock;
-  var domainAPI, adminJamesService, ADMIN_DOMAINS_EVENTS;
+  var domainAPI, jamesWebadminClient, ADMIN_DOMAINS_EVENTS;
   var infiniteScrollHelperMock;
   var domain1, domain2;
 
@@ -32,19 +32,19 @@ describe('The adminDomainsListController', function() {
       _$rootScope_,
       _$controller_,
       _domainAPI_,
-      _adminJamesService_,
+      _jamesWebadminClient_,
       _ADMIN_DOMAINS_EVENTS_
     ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
       domainAPI = _domainAPI_;
-      adminJamesService = _adminJamesService_;
+      jamesWebadminClient = _jamesWebadminClient_;
       ADMIN_DOMAINS_EVENTS = _ADMIN_DOMAINS_EVENTS_;
 
-      adminJamesService.listDomains = function() {
+      jamesWebadminClient.listDomains = function() {
         return $q.when([]);
       };
-      adminJamesService.createDomain = function() {
+      jamesWebadminClient.createDomain = function() {
         return $q.when([]);
       };
     });
@@ -84,7 +84,7 @@ describe('The adminDomainsListController', function() {
     it('should check the availability of the domain in James', function() {
       var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
 
-      adminJamesService.listDomains = function() {
+      jamesWebadminClient.listDomains = function() {
         return $q.when([domain.name]);
       };
 
@@ -114,7 +114,7 @@ describe('The adminDomainsListController', function() {
     it('should check the availability of the domain in James', function() {
       var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
 
-      adminJamesService.listDomains = function() {
+      jamesWebadminClient.listDomains = function() {
         return $q.when([domain.name]);
       };
 
@@ -134,7 +134,7 @@ describe('The adminDomainsListController', function() {
     it('should check the availability of the given domain in James', function() {
       var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
 
-      adminJamesService.listDomains = function() {
+      jamesWebadminClient.listDomains = function() {
         return $q.when([domain.name]);
       };
 
@@ -151,10 +151,10 @@ describe('The adminDomainsListController', function() {
     it('should try creating James domain if it is unavailable', function() {
       var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
 
-      adminJamesService.listDomains = function() {
+      jamesWebadminClient.listDomains = function() {
         return $q.when([]);
       };
-      adminJamesService.createDomain = sinon.stub().returns($q.when());
+      jamesWebadminClient.createDomain = sinon.stub().returns($q.when());
 
       var controller = initController();
 
@@ -163,7 +163,7 @@ describe('The adminDomainsListController', function() {
       controller.onFixBtnClick(domain);
       $scope.$digest();
 
-      expect(adminJamesService.createDomain).to.have.been.calledWith(domain.name);
+      expect(jamesWebadminClient.createDomain).to.have.been.calledWith(domain.name);
       expect(controller.errors[domain.id]).to.be.undefined;
     });
   });

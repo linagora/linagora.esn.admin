@@ -15,7 +15,6 @@ module.exports = function(config) {
       'frontend/components/dynamic-directive/dist/dynamic-directive.min.js',
       'frontend/components/restangular/dist/restangular.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',
-      'frontend/components/james-admin-client/dist/james-admin-client.js',
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
       'node_modules/sinon/pkg/sinon.js',
       'test/unit-frontend/mocks/**/*.js',

@@ -7,7 +7,7 @@
         p {{ ::$ctrl.error | esnI18n }} #{__('You can either try auto fixing or change the James settings.')}
       .modal-footer.flex
         .flex-grow.flex-start
-          button.btn.btn-primary(ng-click="$hide()", ui-sref="admin.domain.james")
+          button.btn.btn-primary(ng-click="$hide()", ui-sref="admin.domain.modules")
             | #{__('Settings')}
         .flex-grow.flex-end
           button.btn.btn-link(ng-click="$hide()")

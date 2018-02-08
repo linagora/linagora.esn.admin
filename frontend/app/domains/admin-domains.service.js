@@ -8,13 +8,10 @@
     $rootScope,
     $q,
     asyncAction,
-    adminDomainConfigService,
-    jamesClientProvider,
     domainAPI,
-    ADMIN_DOMAINS_EVENTS,
-    ADMIN_MODE
+    jamesWebadminClient,
+    ADMIN_DOMAINS_EVENTS
   ) {
-    var CONFIG_NAME = 'james';
 
     return {
       create: create,
@@ -67,25 +64,7 @@
     }
 
     function _createDomainInJames(domainName) {
-      return _getJamesServerURL()
-        .then(function(serverUrl) {
-          return _getJamesClient(serverUrl)
-            .then(function(jamesClient) {
-              return jamesClient.createDomain(domainName);
-            });
-        });
-    }
-
-    function _getJamesServerURL() {
-      return adminDomainConfigService.get(ADMIN_MODE.platform, CONFIG_NAME)
-        .then(function(data) {
-          return data ? data.url : null;
-        });
-    }
-
-    function _getJamesClient(serverUrl) {
-      return jamesClientProvider
-        .get(serverUrl);
+      return jamesWebadminClient.createDomain(domainName);
     }
   }
 
