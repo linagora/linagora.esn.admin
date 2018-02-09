@@ -12,7 +12,7 @@
     infiniteScrollHelper,
     _,
     asyncAction,
-    adminJamesService,
+    jamesWebadminClient,
     ADMIN_DOMAINS_EVENTS
   ) {
     var self = this;
@@ -73,7 +73,7 @@
           })
           .catch(function() {
             // try to create domain
-            return adminJamesService.createDomain(domain.name);
+            return jamesWebadminClient.createDomain(domain.name);
           })
           .then(function() {
             delete self.errors[domain.id];
@@ -118,7 +118,7 @@
     }
 
     function _checkJamesDomainAvailabilities(domains) {
-      return adminJamesService
+      return jamesWebadminClient
         .listDomains()
         .catch(function() {
           return [];

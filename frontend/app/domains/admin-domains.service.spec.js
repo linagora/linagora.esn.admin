@@ -10,43 +10,27 @@ describe('The adminDomainsService', function() {
 
   var $rootScope;
   var domainAPI, ADMIN_DOMAINS_EVENTS;
-  var adminDomainsService, jamesClientProvider, adminDomainConfigService;
-  var $windowMock, jamesClientInstanceMock;
+  var adminDomainsService, jamesWebadminClient, adminDomainConfigService;
 
   beforeEach(function() {
     module('linagora.esn.admin');
-
-    jamesClientInstanceMock = {};
-
-    $windowMock = {
-      james: {
-        Client: function() {
-          return jamesClientInstanceMock;
-        }
-      }
-    };
-
-    angular.mock.module(function($provide) {
-      $provide.value('$window', $windowMock);
-    });
 
     inject(function(
       _$rootScope_,
       _adminDomainsService_,
       _domainAPI_,
-      _jamesClientProvider_,
+      _jamesWebadminClient_,
       _adminDomainConfigService_,
       _ADMIN_DOMAINS_EVENTS_
     ) {
       $rootScope = _$rootScope_;
       adminDomainsService = _adminDomainsService_;
       domainAPI = _domainAPI_;
-      jamesClientProvider = _jamesClientProvider_;
+      jamesWebadminClient = _jamesWebadminClient_;
       adminDomainConfigService = _adminDomainConfigService_;
       ADMIN_DOMAINS_EVENTS = _ADMIN_DOMAINS_EVENTS_;
 
-      jamesClientInstanceMock.createDomain = sinon.stub().returns($q.when());
-      jamesClientProvider.get = sinon.stub().returns($q.when(jamesClientInstanceMock));
+      jamesWebadminClient.createDomain = sinon.stub().returns($q.when());
       adminDomainConfigService.get = function() {
         return $q.when({});
       };
@@ -71,7 +55,7 @@ describe('The adminDomainsService', function() {
 
       adminDomainsService.create(domain).then(function() {
         expect(domainAPI.create).to.have.been.calledWith(domain);
-        expect(jamesClientInstanceMock.createDomain).to.have.been.calledWith(domain.name);
+        expect(jamesWebadminClient.createDomain).to.have.been.calledWith(domain.name);
         expect($rootScope.$broadcast).to.have.been.calledWith(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, domain);
 
         done();
@@ -82,7 +66,7 @@ describe('The adminDomainsService', function() {
 
     it('should not reject when James domain creation fails', function(done) {
       domainAPI.create = function() { return $q.when({}); };
-      jamesClientInstanceMock.createDomain = function() { return $q.reject(new Error('some error')); };
+      jamesWebadminClient.createDomain = function() { return $q.reject(new Error('some error')); };
 
       adminDomainsService.create({}).then(function() {
         done();

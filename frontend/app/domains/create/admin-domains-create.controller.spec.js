@@ -8,17 +8,6 @@ var expect = chai.expect;
 describe('The adminDomainsCreateController', function() {
   var $controller, $rootScope, $scope;
   var adminDomainsService;
-  var $windowMock;
-
-  beforeEach(function() {
-    $windowMock = {
-      james: {}
-    };
-
-    angular.mock.module(function($provide) {
-      $provide.value('$window', $windowMock);
-    });
-  });
 
   beforeEach(function() {
     module('linagora.esn.admin');

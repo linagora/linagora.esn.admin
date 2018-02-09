@@ -1,9 +1,0 @@
-extends ../subheader/subheader.layout.pug
-
-block left
-  admin-subheader-burger-button.hidden-md
-  span.title.ellipsis
-    |  #{__('James Configuration')}
-
-block right
-  esn-subheader-save-button(on-click="$ctrl.onFormSubmit()", form="$ctrl.form")
