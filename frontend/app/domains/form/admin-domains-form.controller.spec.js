@@ -9,14 +9,16 @@ describe('The adminDomainsCreateController', function() {
   var $controller, $rootScope, $scope;
   var domainAPI;
   var domainName;
+  var esnAvailabilityService;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _domainAPI_) {
+    inject(function(_$controller_, _$rootScope_, _domainAPI_, _esnAvailabilityService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       domainAPI = _domainAPI_;
+      esnAvailabilityService = _esnAvailabilityService_;
     });
 
     domainName = 'abc.com';
@@ -68,6 +70,24 @@ describe('The adminDomainsCreateController', function() {
       controller.uniqueDomainName(domainName)
         .then(function() {
           expect(domainAPI.getByName).to.have.been.calledWith(domainName);
+          done();
+        });
+
+      $scope.$digest();
+    });
+  });
+
+  describe('The isEmailAvailable method', function() {
+    it('should call esnAvailabilityService to get email availability', function(done) {
+      var controller = initController();
+
+      esnAvailabilityService.checkEmailAvailability = sinon.stub().returns($q.when({ available: true }));
+
+      controller.isEmailAvailable()
+        .then(function(availability) {
+          expect(esnAvailabilityService.checkEmailAvailability).to.have.been.called;
+          expect(availability).to.be.true;
+
           done();
         });
 

@@ -4,11 +4,12 @@
   angular.module('linagora.esn.admin')
     .controller('adminDomainsFormController', adminDomainsFormController);
 
-  function adminDomainsFormController($q, domainAPI) {
+  function adminDomainsFormController($q, domainAPI, esnAvailabilityService) {
     var self = this;
 
     self.$onInit = $onInit;
     self.uniqueDomainName = uniqueDomainName;
+    self.isEmailAvailable = isEmailAvailable;
 
     function $onInit() {
       if (!self.domain) {
@@ -26,6 +27,13 @@
           if (domain) {
             return $q.reject(new Error('Domain already exists'));
           }
+        });
+    }
+
+    function isEmailAvailable(email) {
+      return esnAvailabilityService.checkEmailAvailability(email)
+        .then(function(result) {
+          return result.available;
         });
     }
   }
