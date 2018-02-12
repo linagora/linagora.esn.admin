@@ -13,7 +13,7 @@
                 span #{__('Created')}
         .lv-body
           .lv-item.p-0(ng-repeat="item in $ctrl.elements track by item.id")
-            admin-domains-item(domain="item", on-edit-btn-click="$ctrl.showEditDomainForm(item)", error="$ctrl.errors[item.id]", on-fix-btn-click="$ctrl.onFixBtnClick(item)")
+            admin-domains-item(domain="item", on-edit-btn-click="$ctrl.showEditDomainForm(item)")
       div(ng-if="!$ctrl.elements.length && $ctrl.infiniteScrollCompleted")
         admin-empty-message(
           icon="mdi-view-list",

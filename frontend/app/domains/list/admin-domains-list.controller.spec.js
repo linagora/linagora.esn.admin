@@ -8,163 +8,114 @@ var expect = chai.expect;
 describe('The adminDomainsListController', function() {
 
   var $rootScope, $scope, $controller, $modalMock;
-  var domainAPI, jamesWebadminClient, ADMIN_DOMAINS_EVENTS;
+  var domainAPI;
   var infiniteScrollHelperMock;
-  var domain1, domain2;
+  var loadNextItemFn;
+  var ADMIN_DOMAINS_EVENTS;
 
   beforeEach(function() {
-    infiniteScrollHelperMock = sinon.spy();
-    domain1 = { id: 1, name: 'domain1.org', company_name: 'c1' };
-    domain2 = { id: 2, name: 'domain2.org', company_name: 'c2' };
-    $modalMock = sinon.spy();
+    infiniteScrollHelperMock = sinon.spy(function(ctrl, loadNextItem) {
+      loadNextItemFn = loadNextItem;
+    });
+    $modalMock = sinon.stub();
 
-    angular.mock.module(function($provide) {
+    angular.mock.module('linagora.esn.admin', function($provide) {
       $provide.value('infiniteScrollHelper', infiniteScrollHelperMock);
       $provide.value('$modal', $modalMock);
     });
   });
 
-  beforeEach(function() {
-    module('jadeTemplates');
-    module('linagora.esn.admin');
-
-    inject(function(
-      _$rootScope_,
-      _$controller_,
-      _domainAPI_,
-      _jamesWebadminClient_,
-      _ADMIN_DOMAINS_EVENTS_
-    ) {
-      $rootScope = _$rootScope_;
-      $controller = _$controller_;
-      domainAPI = _domainAPI_;
-      jamesWebadminClient = _jamesWebadminClient_;
-      ADMIN_DOMAINS_EVENTS = _ADMIN_DOMAINS_EVENTS_;
-
-      jamesWebadminClient.listDomains = function() {
-        return $q.when([]);
-      };
-      jamesWebadminClient.createDomain = function() {
-        return $q.when([]);
-      };
-    });
-
-  });
+  beforeEach(inject(function(
+    _$rootScope_,
+    _$controller_,
+    _domainAPI_,
+    _ADMIN_DOMAINS_EVENTS_
+  ) {
+    $rootScope = _$rootScope_;
+    $controller = _$controller_;
+    domainAPI = _domainAPI_;
+    ADMIN_DOMAINS_EVENTS = _ADMIN_DOMAINS_EVENTS_;
+  }));
 
   function initController(scope) {
     $scope = scope || $rootScope.$new();
-    $scope.$hide = angular.noop;
 
-    var controller = $controller('adminDomainsListController', { $scope: $scope }, { elements: [domain2, domain1] });
+    var controller = $controller('adminDomainsListController', { $scope: $scope }, { elements: [] });
 
-    controller.$onInit();
     $scope.$digest();
 
     return controller;
   }
 
-  it('should call infiniteScrollHelper to load elements', function() {
-    initController();
+  describe('The $onInit fn', function() {
+    it('should call infiniteScrollHelper to load elements', function() {
+      var controller = initController();
 
-    expect(infiniteScrollHelperMock).to.have.been.called;
+      controller.$onInit();
+
+      expect(infiniteScrollHelperMock).to.have.been.called;
+    });
+
+    it('should have load next items function to list domain', function() {
+      var controller = initController();
+      var response = { data: ['domain1', 'domain2'] };
+
+      domainAPI.list = sinon.stub().returns($q.when({ response: response }));
+
+      controller.$onInit();
+      loadNextItemFn();
+      $rootScope.$digest();
+
+      expect(domainAPI.list).to.have.been.calledWith({ limit: 20, offset: 0 });
+    });
   });
 
   describe('on DOMAIN_CREATED event', function() {
-    it('should add domain to the list', function() {
+    it('should add domain to the top of the element list', function() {
       domainAPI.list = sinon.stub().returns($q.when([]));
-      var controller = initController();
+
+      var domain1 = { id: 1, name: 'domain1.org', company_name: 'c1' };
+      var domain2 = { id: 2, name: 'domain2.org', company_name: 'c2' };
       var domain3 = { id: 3, name: 'domain3.org', company_name: 'c3' };
-      var expectResult = [domain3, domain2, domain1];
+      var controller = initController();
+      var expectResult = [domain3, domain1, domain2];
+
+      controller.elements = [domain1, domain2];
+      controller.$onInit();
 
       $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, domain3);
+      $rootScope.$digest();
 
       expect(controller.elements).to.deep.equal(expectResult);
-    });
-
-    it('should check the availability of the domain in James', function() {
-      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
-
-      jamesWebadminClient.listDomains = function() {
-        return $q.when([domain.name]);
-      };
-
-      var controller = initController();
-
-      controller.errors = {};
-      controller.errors[domain.id] = 'some error';
-
-      $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_CREATED, domain);
-      $scope.$digest();
-
-      expect(controller.errors[domain.id]).to.be.undefined;
     });
   });
 
   describe('on DOMAIN_UPDATED event', function() {
     it('should update the corresponding domain in the list', function() {
+      var domain1 = { id: 1, name: 'domain1.org', company_name: 'c1' };
+      var domain2 = { id: 2, name: 'domain2.org', company_name: 'c2' };
       var controller = initController();
       var updatedDomain = { id: 2, name: 'domain2.org', company_name: 'c22' };
-      var expectResult = [updatedDomain, domain1];
+      var expectResult = [domain1, updatedDomain];
+
+      controller.elements = [domain1, domain2];
+      controller.$onInit();
 
       $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, updatedDomain);
+      $rootScope.$digest();
 
       expect(controller.elements).to.deep.equal(expectResult);
     });
-
-    it('should check the availability of the domain in James', function() {
-      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
-
-      jamesWebadminClient.listDomains = function() {
-        return $q.when([domain.name]);
-      };
-
-      var controller = initController();
-
-      controller.errors = {};
-      controller.errors[domain.id] = 'some error';
-
-      $rootScope.$broadcast(ADMIN_DOMAINS_EVENTS.DOMAIN_UPDATED, domain);
-      $scope.$digest();
-
-      expect(controller.errors[domain.id]).to.be.undefined;
-    });
   });
 
-  describe('The onFixBtnClick fn', function() {
-    it('should check the availability of the given domain in James', function() {
-      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
-
-      jamesWebadminClient.listDomains = function() {
-        return $q.when([domain.name]);
-      };
-
+  describe('The showEditDomainForm fn', function() {
+    it('should open the edit modal', function() {
       var controller = initController();
 
-      controller.errors = {};
-      controller.errors[domain.id] = 'some error';
-      controller.onFixBtnClick(domain);
-      $scope.$digest();
+      $modalMock.returns({ $promise: $q.when() });
+      controller.showEditDomainForm();
 
-      expect(controller.errors[domain.id]).to.be.undefined;
-    });
-
-    it('should try creating James domain if it is unavailable', function() {
-      var domain = { id: 'domain_id', name: 'domain.com', company_name: 'My company' };
-
-      jamesWebadminClient.listDomains = function() {
-        return $q.when([]);
-      };
-      jamesWebadminClient.createDomain = sinon.stub().returns($q.when());
-
-      var controller = initController();
-
-      controller.errors = {};
-      controller.errors[domain.id] = 'some error';
-      controller.onFixBtnClick(domain);
-      $scope.$digest();
-
-      expect(jamesWebadminClient.createDomain).to.have.been.calledWith(domain.name);
-      expect(controller.errors[domain.id]).to.be.undefined;
+      expect($modalMock).to.have.been.calledOnce;
     });
   });
 });
