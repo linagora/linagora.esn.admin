@@ -172,8 +172,6 @@
   "Cannot fix, please check your James configuration": "Không thể sửa, vui lòng kiểm tra lại cấu hình James",
   "Maintenance": "Bảo trì",
   "User index": "Chỉ mục người dùng",
-  "Reindex": "Tạo lại chỉ mục",
-  "Reconfigure": "Cấu hình lại",
   "Correct the index configuration and reindex data (slow)": "Sửa lại cấu hình của chỉ mục và tạo lại chỉ mục cho dữ liệu (chậm)",
   "Correct the index configuration (quick)": "Sửa lại cấu hình của chỉ mục (nhanh)",
   "Submitting reindexing users request...": "Đang gửi yêu cầu tạo lại chỉ mục người dùng...",
@@ -190,5 +188,6 @@
   "This module has no home page": "Mô-đun này không có trang chủ",
   "The email is already used. Try another one.": "Địa chỉ thư điện tử đã được sử dụng. Hãy thử địa chỉ khác.",
   "Login configuration": "Cấu hình đăng nhập",
-  "Allow reset password": "Cho phép đặt lại mật khẩu"
+  "Allow reset password": "Cho phép đặt lại mật khẩu",
+  "Run": "Chạy"
 }
