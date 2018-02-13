@@ -12,5 +12,3 @@
   ul.dropdown-menu.dropdown-menu-right
     li
       a(href="", ng-click="$ctrl.onEditBtnClick()") #{__('Edit')}
-    li(ng-if="$ctrl.error")
-      a.c-red.ellipsis(href="", esn-modal-launcher="/admin/app/domains/item/fix-modal.html") {{ $ctrl.error | esnI18n }}

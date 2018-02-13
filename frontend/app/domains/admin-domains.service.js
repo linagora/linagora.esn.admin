@@ -9,7 +9,6 @@
     $q,
     asyncAction,
     domainAPI,
-    jamesWebadminClient,
     ADMIN_DOMAINS_EVENTS
   ) {
 
@@ -53,18 +52,8 @@
     function _createDomain(domain) {
       return domainAPI.create(domain)
         .then(function(response) {
-          return _createDomainInJames(domain.name)
-            .then(function() {
-              return response.data;
-            })
-            .catch(function() {
-              return response.data;
-            });
+          return response.data;
         });
-    }
-
-    function _createDomainInJames(domainName) {
-      return jamesWebadminClient.createDomain(domainName);
     }
   }
 
