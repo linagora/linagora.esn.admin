@@ -4,10 +4,10 @@
   .card-header
     h2 {{$ctrl.action.resourceType | esnI18n}}
   .card-body
-    .listview.lv-bordered.lv-lg
+    .listview.lv-bordered
       .lv-body
-        .lv-item.media(ng-repeat="action in $ctrl.action.items")
-          .media-body
-            .lv-title {{action.description | esnI18n}}
-            .lv-attrs
-              button.btn.btn-primary(ng-click="action.onClick()") {{action.buttonTitle | esnI18n}}
+        .lv-item(ng-repeat="action in $ctrl.action.items")
+          .flex-space-between
+            div {{action.description | esnI18n}}
+            div
+              button.btn.btn-primary(ng-click="action.onClick()") #{__('Run')}

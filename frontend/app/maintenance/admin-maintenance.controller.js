@@ -16,12 +16,10 @@
           items: [
             {
               description: 'Correct the index configuration and reindex data (slow)',
-              buttonTitle: 'Reindex',
               onClick: reindexUsers
             },
             {
               description: 'Correct the index configuration (quick)',
-              buttonTitle: 'Reconfigure',
               onClick: reconfigureUsersIndex
             }
           ]

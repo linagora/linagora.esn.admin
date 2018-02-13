@@ -172,8 +172,6 @@
   "Cannot fix, please check your James configuration": "Impossible de réparer, vérifiez votre configuration de James",
   "Maintenance": "Maintenance",
   "User index": "L'index d'utilisateur",
-  "Reindex": "Ré-indexer",
-  "Reconfigure": "Reconfigurer",
   "Correct the index configuration and reindex data (slow)": "Corriger la configuration de l'index et re-indexation des données (lent)",
   "Correct the index configuration (quick)": "Corriger la configuration de l'index (rapide)",
   "Submitting reindexing users request...": "Soumettre la requête pour réindexer les utilisateurs...",
@@ -190,5 +188,6 @@
   "This module has no home page": "Ce module n'a pas de page d'accueil",
   "The email is already used. Try another one.": "L'adresse e-mail est déjà utilisée. Essayez-en une autre.",
   "Login configuration": "Configuration de connexion",
-  "Allow reset password": "Autoriser le mot de passe"
+  "Allow reset password": "Autoriser le mot de passe",
+  "Run": "Courir"
 }
