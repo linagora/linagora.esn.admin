@@ -6,10 +6,31 @@ angular.module('linagora.esn.admin')
 .controller('adminLdapFormController', function($stateParams, ADMIN_LDAP_MAPPING) {
   var self = this;
 
+  self.$onInit = $onInit;
   self.domainId = $stateParams.domainId;
   self.AVAILABLE_KEYS = ADMIN_LDAP_MAPPING;
-  self.ldapConfig.configuration.mapping = self.ldapConfig.configuration.mapping || {};
   self.usernameField = usernameFieldGetter;
+
+  function $onInit() {
+    var defaultUsageConfig = {
+      auth: true,
+      search: true,
+      autoProvisioning: true
+    };
+
+    self.ldapConfig.configuration = self.ldapConfig.configuration || {};
+    self.ldapConfig.usage = self.ldapConfig.usage || defaultUsageConfig;
+
+    adaptUsageConfig(self.ldapConfig.usage);
+  }
+
+  function adaptUsageConfig(usageConfig) {
+    var verifiedUsageConfig = usageConfig;
+
+    if (verifiedUsageConfig.autoProvisioning === undefined) {
+      verifiedUsageConfig.autoProvisioning = true;
+    }
+  }
 
   self.delete = function(form) {
     self.ldapConfig.deleted = true;

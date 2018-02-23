@@ -23,12 +23,18 @@
               input.form-control(type="password", ng-model='$ctrl.ldapConfig.configuration.adminPassword', autocomplete="new-password", name="adminPassword")
         .col-xs-12
           .group-name #{__('Usage')}
-          .col-xs-12.col-md-6
-            .form-group
-              toggle-switch(ng-model='$ctrl.ldapConfig.usage.auth', form="form", label=__('Authentication'))
-          .col-xs-12.col-md-6
-            .form-group
-              toggle-switch(ng-model='$ctrl.ldapConfig.usage.search', form="form", label=__('Search provider'))
+          .form-group.col-md-6.option-field
+            .col-xs-10.field-name #{__('Authentication')}
+            .col-xs-2.flex-end
+              toggle-switch(ng-model="$ctrl.ldapConfig.usage.auth", form="form")
+          .form-group.col-md-6.option-field
+            .col-xs-10.field-name #{__('Search provider')}
+            .col-xs-2.flex-end
+              toggle-switch(ng-model="$ctrl.ldapConfig.usage.search", form="form")
+          .form-group.col-md-6.option-field
+            .col-xs-10.field-name #{__('Users auto-provisioning')}
+            .col-xs-2.flex-end
+              toggle-switch(ng-model="$ctrl.ldapConfig.usage.autoProvisioning", form="form")
         .col-xs-12
           .group-name #{__('Search')}
           .col-xs-12.col-md-6

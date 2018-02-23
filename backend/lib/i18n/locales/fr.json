@@ -182,5 +182,6 @@
   "The email is already used. Try another one.": "L'adresse e-mail est déjà utilisée. Essayez-en une autre.",
   "Login configuration": "Configuration de connexion",
   "Allow reset password": "Autoriser le mot de passe",
-  "Run": "Courir"
+  "Run": "Courir",
+  "Users auto-provisioning": "Création automatique des utilisateurs"
 }

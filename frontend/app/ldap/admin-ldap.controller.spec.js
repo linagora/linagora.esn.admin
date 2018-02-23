@@ -139,15 +139,12 @@ describe('The adminLdapController', function() {
 
     it('should add an empty object to configs', function() {
       var ctrl = initController();
+      var newLdapConfig = {};
 
       ctrl.configs = [];
       ctrl.addForm();
 
-      expect(ctrl.configs).to.deep.equal([{
-        configuration: {
-          mapping: {}
-        }
-      }]);
+      expect(ctrl.configs).to.deep.equal([newLdapConfig]);
 
       $timeout.flush();
 

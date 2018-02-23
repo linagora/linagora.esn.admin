@@ -182,5 +182,6 @@
   "The email is already used. Try another one.": "The email is already used. Try another one.",
   "Login configuration": "Login configuration",
   "Allow reset password": "Allow reset password",
-  "Run": "Run"
+  "Run": "Run",
+  "Users auto-provisioning": "Users auto-provisioning"
 }
