@@ -131,4 +131,25 @@ describe('The adminUsersListController', function() {
       $scope.$digest();
     });
   });
+
+  describe('The doSearch function', function() {
+    it('should call the domainAPI.getMembers function with the correct query', function(done) {
+      domainAPI.getMembers = function() {
+        return $q.when({
+          headers: function() {}
+        });
+      };
+      initController();
+
+      $scope.searchInput = 'testQuery';
+      domainAPI.getMembers = function(domain_id, opts) {
+        expect(domain_id).to.equal(domainId);
+        expect(opts.limit).to.equal(searchConfMock.searchLimit);
+        expect(opts.offset).to.equal(0);
+        expect(opts.search).to.equal($scope.searchInput);
+        done();
+      };
+      $scope.doSearch();
+    });
+  });
 });
