@@ -52,6 +52,13 @@ angular.module('linagora.esn.admin')
     _updateMembersList();
   };
 
+  $scope.doSearch = function() {
+    self.members = [];
+    opts.offset = 0;
+    opts.search = $scope.searchInput;
+    _updateMembersList();
+  };
+
   self.loadMoreElements = function() {
     if (self.members.length === 0 || self.members.length < self.search.count) {
       opts.offset = self.members.length;
