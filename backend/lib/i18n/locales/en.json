@@ -183,5 +183,6 @@
   "Login configuration": "Login configuration",
   "Allow reset password": "Allow reset password",
   "Run": "Run",
-  "Users auto-provisioning": "Users auto-provisioning"
+  "Users auto-provisioning": "Users auto-provisioning",
+  "View profile": "View profile"
 }

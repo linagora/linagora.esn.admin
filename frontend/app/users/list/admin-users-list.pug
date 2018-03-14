@@ -2,7 +2,7 @@
   search-form
 admin-loading-status
   infinite-list.lv-body(load-more-elements='$ctrl.loadMoreElements()')
-    .lv-item-cus-padding(ng-repeat="member in $ctrl.members")
+    .lv-item.lv-item-user(ng-repeat="member in $ctrl.members")
       .media
         .clickable(ui-sref="profile({user_id: member._id})")
           .pull-left
@@ -11,3 +11,10 @@ admin-loading-status
             .lv-title {{::member.firstname}} {{::member.lastname}}
             small.lv-small
               a(ng-href='mailto:{{::member.emails[0]}}' op-inbox-compose) {{::member.emails[0]}}
+      .lv-actions.actions
+        a(href="", data-toggle="dropdown", aria-expanded="false")
+          i.mdi.mdi-dots-vertical
+        ul.dropdown-menu.dropdown-menu-right
+          li
+            a(href="", ui-sref="profile({user_id: member._id})") #{__('View profile')}
+          li(dynamic-directive="admin-user-list-menu-items")
