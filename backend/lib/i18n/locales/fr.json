@@ -183,5 +183,6 @@
   "Login configuration": "Configuration de connexion",
   "Allow reset password": "Autoriser le mot de passe",
   "Run": "Courir",
-  "Users auto-provisioning": "Création automatique des utilisateurs"
+  "Users auto-provisioning": "Création automatique des utilisateurs",
+  "View profile": "Voir le profil"
 }

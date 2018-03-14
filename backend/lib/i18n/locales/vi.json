@@ -183,5 +183,6 @@
   "Login configuration": "Cấu hình đăng nhập",
   "Allow reset password": "Cho phép đặt lại mật khẩu",
   "Run": "Chạy",
-  "Users auto-provisioning": "Tự động tạo người dùng"
+  "Users auto-provisioning": "Tự động tạo người dùng",
+  "View profile": "Xem hồ sơ cá nhân"
 }
