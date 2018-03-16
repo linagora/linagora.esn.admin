@@ -17,7 +17,7 @@
     "express": "4.14.0",
     "glob-all": "3.1.0",
     "q": "1.4.1",
-    "ldapauth-fork": "2.5.5"
+    "ldapauth-fork": "3.0.0"
   },
   "devDependencies": {
     "async": "2.0.1",
