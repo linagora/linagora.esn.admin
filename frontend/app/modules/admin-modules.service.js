@@ -2,7 +2,7 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminModulesService', function(adminConfigApi, esnModuleRegistry, _, ADMIN_MODE) {
+.factory('adminModulesService', function($q, adminConfigApi, esnModuleRegistry, _, ADMIN_MODE) {
   return {
     get: get,
     set: set
@@ -57,7 +57,15 @@ angular.module('linagora.esn.admin')
       };
     });
 
-    return adminConfigApi.set(domainId, configsToSet);
+    var hasConfigToSet = configsToSet.some(function(config) {
+      return config.configurations.length > 0;
+    });
+
+    if (hasConfigToSet) {
+      return adminConfigApi.set(domainId, configsToSet);
+    }
+
+    return $q.when();
   }
 
   function cloneModulesMetadata() {
