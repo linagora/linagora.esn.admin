@@ -3,11 +3,16 @@
 
   function adminModeService($stateParams, $state, session, ADMIN_MODE) {
     return {
+      getCurrentMode: getCurrentMode,
       isDomainMode: isDomainMode,
       isPlatformMode: isPlatformMode,
       goToDomainMode: goToDomainMode,
       goToPlatformMode: goToPlatformMode
     };
+
+    function getCurrentMode() {
+      return isPlatformMode() ? ADMIN_MODE.platform : ADMIN_MODE.domain;
+    }
 
     function isDomainMode() {
       return !isPlatformMode();

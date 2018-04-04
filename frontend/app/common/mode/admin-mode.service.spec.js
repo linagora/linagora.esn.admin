@@ -18,6 +18,20 @@ describe('The adminModeService service', function() {
     ADMIN_MODE = _ADMIN_MODE_;
   }));
 
+  describe('The getCurrentMode function', function() {
+    it('should return "platform" when domainId in state is platform', function() {
+      $stateParams.domainId = ADMIN_MODE.platform;
+
+      expect(adminModeService.getCurrentMode()).to.equal('platform');
+    });
+
+    it('should return "domain" when domainId in state is not platform', function() {
+      $stateParams.domainId = 'a domain id';
+
+      expect(adminModeService.getCurrentMode()).to.equal('domain');
+    });
+  });
+
   describe('The isPlatformMode fn', function() {
     it('should return true when domainId in state is platform', function() {
       $stateParams.domainId = ADMIN_MODE.platform;

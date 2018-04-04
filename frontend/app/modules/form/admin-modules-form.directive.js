@@ -4,7 +4,7 @@ angular.module('linagora.esn.admin')
 
 .directive('adminModulesForm', function($compile, ADMIN_FORM_EVENT) {
   function link(scope, element) {
-    var template = '<' + scope.template + ' configurations="configurations" />';
+    var template = '<' + scope.template + ' configurations="configurations" mode="{{mode}}", available-modes="availableModes" />';
 
     element.append($compile(template)(scope));
 
@@ -24,6 +24,8 @@ angular.module('linagora.esn.admin')
     template: '',
     scope: {
       configurations: '=',
+      mode: '@',
+      availableModes: '=',
       template: '='
     },
     link: link

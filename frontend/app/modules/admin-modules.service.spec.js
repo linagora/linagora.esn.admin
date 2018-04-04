@@ -150,5 +150,31 @@ describe('The adminModulesService service', function() {
       }]);
     });
 
+    it('should not be called if there are not any writable configurations', function() {
+      adminConfigApi.set = sinon.spy();
+
+      var modulesToSet = [{
+        id: 'linagora.esn.test1',
+        config: {
+          configurations: [{
+            name: 'config_unwritable',
+            value: 'a value'
+          }]
+        }
+      },
+      {
+        id: 'linagora.esn.test2',
+        config: {
+          configurations: [{
+            name: 'config_unwritable',
+            value: 'a value'
+          }]
+        }
+      }];
+
+      adminModulesService.set(DOMAIN_ID, modulesToSet);
+
+      expect(adminConfigApi.set).to.not.have.been.called;
+    });
   });
 });

@@ -13,6 +13,8 @@
     asyncAction,
     adminDomainConfigService,
     adminModulesService,
+    adminModeService,
+    ADMIN_MODE,
     ADMIN_FORM_EVENT,
     ADMIN_DEFAULT_NOTIFICATION_MESSAGES
   ) {
@@ -26,6 +28,8 @@
     self.registerPostSaveHandler = registerPostSaveHandler;
 
     function $onInit() {
+      self.mode = adminModeService.getCurrentMode();
+      self.availableModes = ADMIN_MODE;
       self.configurations = buildConfigurations(self.module);
     }
 
