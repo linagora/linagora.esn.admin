@@ -48,6 +48,7 @@
     "karma-firefox-launcher": "1.0.0",
     "karma-mocha": "1.1.1",
     "@linagora/karma-ng-jade2module-preprocessor": "0.5.3",
+    "linagora.esn.resource": "linagora/linagora.esn.resource#master",
     "linagora-rse": "linagora/openpaas-esn#master",
     "karma-phantomjs-launcher": "1.0.2",
     "karma-spec-reporter": "0.0.26",

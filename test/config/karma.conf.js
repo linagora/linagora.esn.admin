@@ -12,15 +12,32 @@ module.exports = function(config) {
       'frontend/components/angular-mocks/angular-mocks.js',
       'frontend/components/angular-component/dist/angular-component.min.js',
       'frontend/components/angular-messages/angular-messages.min.js',
+      'frontend/components/angular-strap/dist/angular-strap.js',
+      'frontend/components/angular-strap/dist/angular-strap.tpl.js',
       'frontend/components/dynamic-directive/dist/dynamic-directive.min.js',
       'frontend/components/restangular/dist/restangular.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
       'node_modules/sinon/pkg/sinon.js',
+
+      'node_modules/linagora-rse/frontend/js/modules/**/*.module.js',
+      'node_modules/linagora-rse/frontend/js/modules/**/*.js',
+      'node_modules/linagora-rse/frontend/js/*.js',
+      'node_modules/linagora-rse/test/fixtures/**/*.js',
+      'node_modules/linagora-rse/frontend/views/modules/**/*.pug',
+      { pattern: 'node_modules/linagora-rse/frontend/js/modules/i18n/i18n.config.js', watched: false, included: false, served: true },
+
+      'node_modules/linagora.esn.resource/frontend/**/*.js',
+
       'test/unit-frontend/mocks/**/*.js',
       'frontend/app/**/*.module.js',
       'frontend/app/**/*.js',
       'frontend/app/**/*.pug'
+    ],
+    exclude: [
+      'node_modules/linagora-rse/frontend/js/**/*.spec.js',
+      'node_modules/linagora-rse/frontend/js/**/*.run.js',
+      'node_modules/linagora.esn.resource/frontend/**/*.spec.js'
     ],
     frameworks: ['mocha'],
     colors: true,
@@ -30,7 +47,7 @@ module.exports = function(config) {
     reporters: ['coverage', 'spec'],
     preprocessors: {
       'frontend/app/**/!(*spec).js': ['coverage'],
-      'frontend/app/**/*.pug': ['ng-jade2module']
+      '**/*.pug': ['ng-jade2module']
     },
 
     plugins: [

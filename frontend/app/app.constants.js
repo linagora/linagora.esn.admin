@@ -68,6 +68,14 @@ angular.module('linagora.esn.admin')
     platform: false
   }
 }, {
+  id: 'resources',
+  name: 'Resources',
+  icon: 'mdi-presentation',
+  displayIn: {
+    domain: true,
+    platform: true
+  }
+}, {
   id: 'dav',
   name: 'DAV',
   icon: 'mdi-calendar-blank',

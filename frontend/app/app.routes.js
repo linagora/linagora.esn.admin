@@ -103,6 +103,14 @@ angular.module('linagora.esn.admin')
         }
       }
     })
+    .state('admin.domain.resources', {
+      url: '/resources',
+      views: {
+        'root@admin': {
+          template: '<admin-resources />'
+        }
+      }
+    })
     .state('admin.domain.web', {
       url: '/web',
       views: {
