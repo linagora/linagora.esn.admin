@@ -48,8 +48,6 @@ angular.module('esn.scroll', [])
   .factory('elementScrollService', function() {
     return {};
   });
-angular.module('esn.attendee', [])
-  .constant('ESN_ATTENDEE_DEFAULT_TEMPLATE_URL', '');
 angular.module('esn.user', [])
   .factory('userUtils', function() {
     return {

@@ -22,5 +22,6 @@ angular.module('linagora.esn.admin', [
   'esn.i18n',
   'esn.datetime',
   'esn.configuration',
-  'esn.availability'
+  'esn.availability',
+  'linagora.esn.resource'
 ]);
