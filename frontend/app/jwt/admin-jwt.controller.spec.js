@@ -10,17 +10,19 @@ describe('The adminJwtController', function() {
   var $controller, $rootScope, $stateParams, $scope;
   var adminConfigApi, adminDomainConfigService, esnFileSaver;
   var CONFIG_NAME = 'jwt';
+  var ADMIN_JWT_DOWNLOAD_FILE_TYPE;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminConfigApi_, _adminDomainConfigService_, _esnFileSaver_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminConfigApi_, _adminDomainConfigService_, _esnFileSaver_, _ADMIN_JWT_DOWNLOAD_FILE_TYPE_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
       esnFileSaver = _esnFileSaver_;
       adminConfigApi = _adminConfigApi_;
+      ADMIN_JWT_DOWNLOAD_FILE_TYPE = _ADMIN_JWT_DOWNLOAD_FILE_TYPE_;
 
       $stateParams.domainId = 'domain123';
 
@@ -100,7 +102,7 @@ describe('The adminJwtController', function() {
       controller.downloadPublicKey();
 
       expect(esnFileSaver.saveText).to.have.been.calledOnce;
-      expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.publicKey, 'publicKey.txt');
+      expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.publicKey, 'publicKey.txt', ADMIN_JWT_DOWNLOAD_FILE_TYPE);
     });
 
     it('should have downloadPrivateKey fn to download private key', function() {
@@ -111,7 +113,7 @@ describe('The adminJwtController', function() {
       controller.downloadPrivateKey();
 
       expect(esnFileSaver.saveText).to.have.been.calledOnce;
-      expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.privateKey, 'privateKey.txt');
+      expect(esnFileSaver.saveText).to.have.been.calledWith(controller.config.privateKey, 'privateKey.txt', ADMIN_JWT_DOWNLOAD_FILE_TYPE);
     });
 
   });
