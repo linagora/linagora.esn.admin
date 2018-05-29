@@ -5,4 +5,4 @@ form(name="form", admin-loading-status)
   .card
     .listview.lv-bordered.lv-lg
       .lv-body
-        admin-features-item(ng-repeat="feature in $ctrl.features", feature="feature")
+        admin-features-item(ng-repeat="feature in $ctrl.features | orderBy: 'name'", feature="feature")
