@@ -6,7 +6,7 @@ angular.module('linagora.esn.admin')
   function link(scope) {
     var limit;
     var UNITS = {
-      BYTES: 0,
+      BYTE: 0,
       KB: 10,
       MB: 20,
       GB: 30,

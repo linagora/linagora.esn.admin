@@ -34,7 +34,7 @@ describe('The adminFormInputBytes directive', function() {
   it('should optimize avalable units when max value is less than 1024', function() {
     var max = '2MB';
     var template = initTemplate(null, null, null, max);
-    var expectAvailableUnits = ['BYTES', 'KB', 'MB'];
+    var expectAvailableUnits = ['BYTE', 'KB', 'MB'];
 
     var element = initDirective(null, template);
     var unitsElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'));
@@ -51,7 +51,7 @@ describe('The adminFormInputBytes directive', function() {
     var max = '1025MB';
     var template = initTemplate(null, null, null, max);
 
-    var expectAvailableUnits = ['BYTES', 'KB', 'MB', 'GB'];
+    var expectAvailableUnits = ['BYTE', 'KB', 'MB', 'GB'];
     var element = initDirective(null, template);
     var unitsElement = angular.element(element[0].querySelectorAll('.dropdown-menu a'));
     var availableUnits = [];
@@ -65,7 +65,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should return correct display value of unit if input value is odd of 1024', function() {
     var inputValue = 1025;
-    var inputUnit = 'BYTES';
+    var inputUnit = 'BYTE';
     var template = initTemplate(inputValue, inputUnit, null, null);
 
     var element = initDirective(null, template);
@@ -73,12 +73,12 @@ describe('The adminFormInputBytes directive', function() {
     var dropdownButtonElement = angular.element(element[0].querySelector('button.dropdown-toggle'));
 
     expect(unitInputElement.val()).to.equal('1025');
-    expect(dropdownButtonElement.text()).to.equal('BYTES');
+    expect(dropdownButtonElement.text()).to.equal('BYTE');
   });
 
   it('should return correct display value of unit if input value is even of 1024', function() {
     var inputValue = 1024;
-    var inputUnit = 'BYTES';
+    var inputUnit = 'BYTE';
     var template = initTemplate(inputValue, inputUnit, null, null);
 
     var element = initDirective(null, template);
@@ -91,7 +91,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should return correct min/max if min/max value is float', function() {
     var inputValue = 1025;
-    var inputUnit = 'BYTES';
+    var inputUnit = 'BYTE';
     var min = '1.5KB';
     var max = '50.5KB';
     var template = initTemplate(inputValue, inputUnit, min, max);
@@ -107,7 +107,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should change input value to undefined when input after trigger is invalid', function() {
     var inputValue = 1024;
-    var inputUnit = 'BYTES';
+    var inputUnit = 'BYTE';
     var max = '50KB';
     var template = initTemplate(inputValue, inputUnit, null, max);
 
@@ -121,7 +121,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should change input value when input after trigger is valid', function() {
     var inputValue = 1024;
-    var inputUnit = 'BYTES';
+    var inputUnit = 'BYTE';
     var max = '50KB';
     var template = initTemplate(inputValue, inputUnit, null, max);
 
@@ -149,7 +149,7 @@ describe('The adminFormInputBytes directive', function() {
 
   it('should change input value when change unit and form is valid', function() {
     var inputValue = 25;
-    var inputUnit = 'BYTES';
+    var inputUnit = 'BYTE';
     var min = '1KB';
     var template = initTemplate(inputValue, inputUnit, min, null);
 
