@@ -147,4 +147,12 @@ angular.module('linagora.esn.admin')
     domain: false,
     platform: true
   }
+}, {
+  id: 'quarantine',
+  name: 'Quarantine',
+  icon: 'mdi-format-list-checks',
+  displayIn: {
+    domain: true,
+    platform: false
+  }
 }]);

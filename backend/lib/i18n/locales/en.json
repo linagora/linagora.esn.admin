@@ -185,5 +185,7 @@
   "Allow reset password": "Allow reset password",
   "Run": "Run",
   "Users auto-provisioning": "Users auto-provisioning",
-  "View profile": "View profile"
+  "View profile": "View profile",
+  "Quarantine": "Quarantine",
+  "Quarantine Management": "Quarantine Management"
 }
