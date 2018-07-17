@@ -156,7 +156,8 @@ angular.module('linagora.esn.admin')
       min: '@',
       max: '@',
       required: '@',
-      label: '@'
+      label: '@',
+      disabled: '='
     },
     link: link
   };
