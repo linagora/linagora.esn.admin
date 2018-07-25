@@ -54,7 +54,7 @@
     "linagora-rse": "linagora/openpaas-esn#master",
     "linagora.esn.resource": "linagora/linagora.esn.resource#master",
     "load-grunt-tasks": "^3.5.0",
-    "mocha": "3.1.0",
+    "mocha": "5.2.0",
     "mockery": "1.7.0",
     "redis": "2.6.2",
     "rewire": "2.5.2",
