@@ -185,5 +185,7 @@
   "Allow reset password": "Cho phép đặt lại mật khẩu",
   "Run": "Chạy",
   "Users auto-provisioning": "Tự động tạo người dùng",
-  "View profile": "Xem hồ sơ cá nhân"
+  "View profile": "Xem hồ sơ cá nhân",
+  "Quarantine": "Vùng cách ly",
+  "Quarantine Management": "Quản lý vùng cách ly"
 }
