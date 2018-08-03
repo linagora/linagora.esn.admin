@@ -187,5 +187,13 @@
   "Users auto-provisioning": "Tự động tạo người dùng",
   "View profile": "Xem hồ sơ cá nhân",
   "Quarantine": "Vùng cách ly",
-  "Quarantine Management": "Quản lý vùng cách ly"
+  "Quarantine Management": "Quản lý vùng cách ly",
+  "Manage states of %s": "Quản lí tình trạng của %s",
+  "Actions": "Hoạt động",
+  "Disabled": "Tắt",
+  "Enabled": "Bật",
+  "Manage states": "Quản lí tình trạng",
+  "Updating user states...": "Đang cập nhật tình trạng của người dùng...",
+  "User states updated": "Đã cập nhật tình trạng của người dùng",
+  "Failed to update user states": "Cập nhật tình trạng của người dùng thất bại"
 }

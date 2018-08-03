@@ -187,5 +187,13 @@
   "Users auto-provisioning": "Users auto-provisioning",
   "View profile": "View profile",
   "Quarantine": "Quarantine",
-  "Quarantine Management": "Quarantine Management"
+  "Quarantine Management": "Quarantine Management",
+  "Manage states of %s": "Manage states of %s",
+  "Actions": "Actions",
+  "Disabled": "Disabled",
+  "Enabled": "Enabled",
+  "Manage states": "Manage states",
+  "Updating user states...": "Updating user states...",
+  "User states updated": "User states updated",
+  "Failed to update user states": "Failed to update user states"
 }
