@@ -187,5 +187,13 @@
   "Users auto-provisioning": "Création automatique des utilisateurs",
   "View profile": "Voir le profil",
   "Quarantine": "Quarantine",
-  "Quarantine Management": "Gestion de quarantaine"
+  "Quarantine Management": "Gestion de quarantaine",
+  "Manage states of %s": "Gérer l'état de %s",
+  "Actions": "Actions",
+  "Disabled": "Désactivé",
+  "Enabled": "Activé",
+  "Manage states": "Gérer les états",
+  "Updating user states...": "Mise à jour des états des utilisateurs",
+  "User states updated": "Les états des utilisateurs ont été mis à jour",
+  "Failed to update user states": "Échec lors de la mise à jour des états des utilisateurs"
 }

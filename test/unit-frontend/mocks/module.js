@@ -53,6 +53,9 @@ angular.module('esn.user', [])
     return {
       displayNameOf: angular.noop
     };
+  })
+  .factory('userApi', function() {
+    return {};
   });
 
 angular.module('esn.file-saver', [])
