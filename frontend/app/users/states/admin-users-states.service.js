@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('linagora.esn.admin')
-    .factory('adminUsersStateService', adminUsersStateService);
+    .factory('adminUsersStatesService', adminUsersStatesService);
 
-  function adminUsersStateService(
+  function adminUsersStatesService(
     _,
-    userApi,
+    userAPI,
     ADMIN_USER_ACTIONS,
     ADMIN_USER_ACTION_STATES
   ) {
@@ -17,7 +17,7 @@
 
     function getUserStates(user) {
       return Object.keys(ADMIN_USER_ACTIONS).map(function(action) {
-        var state = _.find(user.states, function(state) {
+        var state = _.find(user.states || [], function(state) {
           return state.name === ADMIN_USER_ACTIONS[action].name;
         });
 
@@ -32,7 +32,7 @@
     }
 
     function setUserStates(userId, states) {
-      return userApi.setUserStates(userId, states);
+      return userAPI.setUserStates(userId, states);
     }
   }
 })(angular);

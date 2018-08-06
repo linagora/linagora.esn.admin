@@ -54,7 +54,7 @@ angular.module('esn.user', [])
       displayNameOf: angular.noop
     };
   })
-  .factory('userApi', function() {
+  .factory('userAPI', function() {
     return {};
   });
 

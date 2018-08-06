@@ -4,8 +4,8 @@
 
 var expect = chai.expect;
 
-describe('The adminUsersStateService', function() {
-  var $rootScope, userApi, adminUsersStateService;
+describe('The adminUsersStatesService', function() {
+  var $rootScope, userAPI, adminUsersStatesService;
   var ADMIN_USER_ACTIONS_MOCK;
 
   beforeEach(function() {
@@ -32,12 +32,12 @@ describe('The adminUsersStateService', function() {
 
     inject(function(
       _$rootScope_,
-      _userApi_,
-      _adminUsersStateService_
+      _userAPI_,
+      _adminUsersStatesService_
     ) {
       $rootScope = _$rootScope_;
-      userApi = _userApi_;
-      adminUsersStateService = _adminUsersStateService_;
+      userAPI = _userAPI_;
+      adminUsersStatesService = _adminUsersStatesService_;
     });
   });
 
@@ -49,7 +49,7 @@ describe('The adminUsersStateService', function() {
           { name: 'action2', value: 'disabled' }
         ]
       };
-      var states = adminUsersStateService.getUserStates(user);
+      var states = adminUsersStatesService.getUserStates(user);
 
       expect(states).to.deep.equal([
         { name: 'action1', value: 'enabled', label: 'Action1' },
@@ -64,11 +64,11 @@ describe('The adminUsersStateService', function() {
       var userId = '123';
       var states = [{ name: 'foo', value: 'enabled' }];
 
-      userApi.setUserStates = sinon.stub().returns($q.reject());
+      userAPI.setUserStates = sinon.stub().returns($q.reject());
 
-      adminUsersStateService.setUserStates(userId, states)
+      adminUsersStatesService.setUserStates(userId, states)
         .catch(function() {
-          expect(userApi.setUserStates).to.have.been.calledWith(userId, states);
+          expect(userAPI.setUserStates).to.have.been.calledWith(userId, states);
         });
 
       $rootScope.$digest();
@@ -78,13 +78,13 @@ describe('The adminUsersStateService', function() {
       var userId = '123';
       var states = [{ name: 'foo', value: 'enabled' }];
 
-      userApi.setUserStates = sinon.stub().returns($q.when());
+      userAPI.setUserStates = sinon.stub().returns($q.when());
 
-      adminUsersStateService.setUserStates(userId, states);
+      adminUsersStatesService.setUserStates(userId, states);
 
       $rootScope.$digest();
 
-      expect(userApi.setUserStates).to.have.been.calledWith(userId, states);
+      expect(userAPI.setUserStates).to.have.been.calledWith(userId, states);
     });
   });
 });
