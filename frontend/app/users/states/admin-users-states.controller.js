@@ -2,13 +2,12 @@
   'use strict';
 
   angular.module('linagora.esn.admin')
-    .controller('AdminUsersStateEditController', AdminUsersStateEditController);
+    .controller('AdminUsersStatesController', AdminUsersStatesController);
 
-  function AdminUsersStateEditController(
+  function AdminUsersStatesController(
     asyncAction,
     userUtils,
-    adminUsersStateService,
-    user,
+    adminUsersStatesService,
     ADMIN_USER_ACTION_STATES
   ) {
     var self = this;
@@ -17,9 +16,8 @@
     self.updateUserStates = updateUserStates;
 
     function init() {
-      user.states = user.states || [];
-      self.username = userUtils.displayNameOf(user);
-      self.states = _qualifyStatesToView(adminUsersStateService.getUserStates(user));
+      self.username = userUtils.displayNameOf(self.user);
+      self.states = _qualifyStatesToView(adminUsersStatesService.getUserStates(self.user));
     }
 
     function updateUserStates() {
@@ -30,17 +28,21 @@
       };
 
       return asyncAction(notificationMessages, function() {
-        return adminUsersStateService.setUserStates(user._id, _qualifyStatesToUpdate(self.states));
+        var statesToUpdate = _qualifyStatesToUpdate(self.states);
+
+        return adminUsersStatesService.setUserStates(self.user._id, statesToUpdate)
+          .then(function() {
+            self.user.states = statesToUpdate;
+          });
       });
     }
 
     function _qualifyStatesToUpdate(states) {
-      var statesToUpdate = angular.copy(states);
-
-      return statesToUpdate.map(function(state) {
-        state.value = state.value ? ADMIN_USER_ACTION_STATES.enabled : ADMIN_USER_ACTION_STATES.disabled;
-
-        return state;
+      return states.map(function(state) {
+        return {
+          name: state.name,
+          value: state.value ? ADMIN_USER_ACTION_STATES.enabled : ADMIN_USER_ACTION_STATES.disabled
+        };
       });
     }
 

@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
     .run(function(dynamicDirectiveService) {
-      var usersStateDirective = new dynamicDirectiveService.DynamicDirective(true, 'admin-users-state', {
+      var usersStateDirective = new dynamicDirectiveService.DynamicDirective(true, 'admin-users-states', {
         attributes: [
           { name: 'user', value: 'member' }
         ]

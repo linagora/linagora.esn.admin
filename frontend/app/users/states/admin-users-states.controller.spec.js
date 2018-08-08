@@ -4,9 +4,9 @@
 
 var expect = chai.expect;
 
-describe('The AdminUsersStateEditController', function() {
+describe('The AdminUsersStatesController', function() {
   var $rootScope, $controller;
-  var adminUsersStateService;
+  var adminUsersStatesService;
   var userUtilsMock;
 
   beforeEach(function() {
@@ -23,19 +23,21 @@ describe('The AdminUsersStateEditController', function() {
     inject(function(
       _$rootScope_,
       _$controller_,
-      _adminUsersStateService_
+      _adminUsersStatesService_
     ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
-      adminUsersStateService = _adminUsersStateService_;
+      adminUsersStatesService = _adminUsersStatesService_;
     });
   });
 
   function initController(user) {
     var $scope = $rootScope.$new();
-    var controller = $controller('AdminUsersStateEditController', { $scope: $scope, user: user || {} });
+    var controller = $controller('AdminUsersStatesController', { $scope: $scope });
 
     $scope.$digest();
+
+    controller.user = user;
 
     return controller;
   }
@@ -63,12 +65,12 @@ describe('The AdminUsersStateEditController', function() {
       ];
       var user = { states: states };
 
-      adminUsersStateService.getUserStates = sinon.stub().returns(states);
+      adminUsersStatesService.getUserStates = sinon.stub().returns(states);
       var controller = initController(user);
 
       controller.init();
 
-      expect(adminUsersStateService.getUserStates).to.have.been.calledWith(user);
+      expect(adminUsersStatesService.getUserStates).to.have.been.calledWith(user);
       expect(controller.states).to.deep.equal([
         { name: 'action1', value: true, label: 'Action1' },
         { name: 'action2', value: false, label: 'Action2' }
@@ -86,16 +88,38 @@ describe('The AdminUsersStateEditController', function() {
         { name: 'action2', value: false, label: 'Action2' }
       ];
 
-      adminUsersStateService.setUserStates = sinon.stub().returns($q.when());
+      adminUsersStatesService.setUserStates = sinon.stub().returns($q.when());
       controller.updateUserStates();
       $rootScope.$digest();
 
-      expect(adminUsersStateService.setUserStates).to.have.been.calledWith(
+      expect(adminUsersStatesService.setUserStates).to.have.been.calledWith(
         user._id,
         [
-          { name: 'action1', value: 'enabled', label: 'Action1' },
-          { name: 'action2', value: 'disabled', label: 'Action2' }
+          { name: 'action1', value: 'enabled' },
+          { name: 'action2', value: 'disabled' }
         ]);
+    });
+
+    it('should apply new states to the user after update states successfully', function() {
+      var user = { _id: '123' };
+      var controller = initController(user);
+      var newStates = [
+        { name: 'action1', value: 'enabled' },
+        { name: 'action2', value: 'disabled' }
+      ];
+
+      controller.states = [
+        { name: 'action1', value: true, label: 'Action1' },
+        { name: 'action2', value: false, label: 'Action2' }
+      ];
+
+      adminUsersStatesService.setUserStates = sinon.stub().returns($q.when());
+      controller.updateUserStates();
+      $rootScope.$digest();
+
+      expect(adminUsersStatesService.setUserStates).to.have.been.calledWith(user._id, newStates);
+
+      expect(controller.user.states).to.deep.equal(newStates);
     });
   });
 });
