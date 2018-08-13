@@ -33,7 +33,7 @@ describe('The adminMaintenance component', function() {
     adminMaintenanceService.reindexUsers = sinon.spy();
     var element = initComponent();
 
-    element.find('button')[0].click();
+    element.find('button')[1].click();
 
     $rootScope.$digest();
 
@@ -44,7 +44,7 @@ describe('The adminMaintenance component', function() {
     adminMaintenanceService.reconfigureUsersIndex = sinon.spy();
     var element = initComponent();
 
-    element.find('button')[1].click();
+    element.find('button')[2].click();
 
     $rootScope.$digest();
 
