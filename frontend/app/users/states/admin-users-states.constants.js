@@ -7,6 +7,10 @@
     login: {
       name: 'login',
       label: 'Login'
+    },
+    searchable: {
+      name: 'searchable',
+      label: 'Can be searched'
     }
   })
 
