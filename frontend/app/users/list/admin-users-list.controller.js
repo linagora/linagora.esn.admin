@@ -9,6 +9,7 @@ angular.module('linagora.esn.admin')
   var opts = {
     offset: 0,
     limit: memberSearchConfiguration.searchLimit,
+    includesDisabledSearchable: true,
     search: ''
   };
 

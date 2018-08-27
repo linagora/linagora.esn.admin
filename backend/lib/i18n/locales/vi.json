@@ -195,5 +195,6 @@
   "Manage states": "Quản lí tình trạng",
   "Updating user states...": "Đang cập nhật tình trạng của người dùng...",
   "User states updated": "Đã cập nhật tình trạng của người dùng",
-  "Failed to update user states": "Cập nhật tình trạng của người dùng thất bại"
+  "Failed to update user states": "Cập nhật tình trạng của người dùng thất bại",
+  "Can be searched": "Có thể được tìm kiếm"
 }
