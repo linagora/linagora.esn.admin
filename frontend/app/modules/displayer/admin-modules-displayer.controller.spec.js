@@ -159,4 +159,47 @@ describe('The adminModulesDisplayerController', function() {
       expect($scope.$broadcast).to.have.been.calledWith(ADMIN_FORM_EVENT.reset);
     });
   });
+
+  describe('The switchEnabledState function', function() {
+    it('should not call onModuleEnabledStateChange when module enabled state did not changed', function() {
+      var module = { name: 'linagora.esn.test', homePage: 'test', configurations: [], enabled: false };
+      var ctrl = initController(module);
+
+      ctrl.onModuleEnabledStateChange = sinon.stub().returns($q.when());
+      ctrl.currentEnabledState = false;
+      ctrl.switchEnabledState();
+
+      $rootScope.$digest();
+
+      expect(ctrl.onModuleEnabledStateChange).to.not.have.been.called;
+    });
+
+    it('should call onModuleEnabledStateChange when module enabled state changed', function() {
+      var module = { name: 'linagora.esn.test', homePage: 'test', configurations: [], enabled: false };
+      var ctrl = initController(module);
+
+      ctrl.onModuleEnabledStateChange = sinon.stub().returns($q.when());
+      ctrl.currentEnabledState = true;
+      ctrl.switchEnabledState();
+
+      $rootScope.$digest();
+
+      expect(ctrl.onModuleEnabledStateChange).to.have.been.calledWith({ module: ctrl.module, enabled: ctrl.module.enabled });
+      expect(ctrl.currentEnabledState).to.be.false;
+    });
+
+    it('should restore local state when onModuleEnabledStateChange rejects', function() {
+      var module = { name: 'linagora.esn.test', homePage: 'test', configurations: [], enabled: false };
+      var ctrl = initController(module);
+
+      ctrl.onModuleEnabledStateChange = sinon.stub().returns($q.reject(new Error()));
+      ctrl.currentEnabledState = true;
+      ctrl.switchEnabledState();
+
+      $rootScope.$digest();
+
+      expect(ctrl.onModuleEnabledStateChange).to.have.been.calledWith({ module: ctrl.module, enabled: ctrl.module.enabled });
+      expect(ctrl.currentEnabledState).to.be.true;
+    });
+  });
 });
