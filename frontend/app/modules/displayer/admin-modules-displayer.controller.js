@@ -24,13 +24,15 @@
     var timeoutDuration = 500;
     var postSaveHandlers = [];
 
-    self.$onInit = $onInit();
+    self.$onInit = $onInit;
     self.registerPostSaveHandler = registerPostSaveHandler;
+    self.switchEnabledState = switchEnabledState;
 
     function $onInit() {
       self.mode = adminModeService.getCurrentMode();
       self.availableModes = ADMIN_MODE;
       self.configurations = buildConfigurations(self.module);
+      self.currentEnabledState = !!self.module.enabled;
     }
 
     function buildConfigurations(module) {
@@ -95,6 +97,19 @@
 
     function registerPostSaveHandler(handler) {
       postSaveHandlers.push(handler);
+    }
+
+    function switchEnabledState() {
+      if (self.module.enabled !== self.currentEnabledState) {
+        var currentEnabledState = self.currentEnabledState;
+
+        self.currentEnabledState = self.module.enabled;
+
+        return self.onModuleEnabledStateChange({ module: self.module, enabled: self.module.enabled })
+          .catch(function() {
+            self.currentEnabledState = currentEnabledState;
+          });
+      }
     }
   }
 })(angular);

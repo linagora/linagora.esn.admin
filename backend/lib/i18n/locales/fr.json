@@ -196,5 +196,6 @@
   "Updating user states...": "Mise à jour des états des utilisateurs",
   "User states updated": "Les états des utilisateurs ont été mis à jour",
   "Failed to update user states": "Échec lors de la mise à jour des états des utilisateurs",
-  "Can be searched": "Peut être recherché"
+  "Can be searched": "Peut être recherché",
+  "Enable the module": "Activer le module"
 }

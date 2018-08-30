@@ -6,7 +6,8 @@ angular.module('linagora.esn.admin')
   templateUrl: '/admin/app/modules/displayer/admin-modules-displayer.html',
   bindings: {
     module: '=',
-    currentHomepage: '='
+    currentHomepage: '=',
+    onModuleEnabledStateChange: '&'
   },
   controller: 'adminModulesDisplayerController'
 });
