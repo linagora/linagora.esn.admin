@@ -182,13 +182,5 @@ angular.module('linagora.esn.admin')
           template: '<admin-login />'
         }
       }
-    })
-    .state('admin.domain.quarantine', {
-      url: '/quarantine',
-      views: {
-        'root@admin': {
-          template: '<admin-quarantine />'
-        }
-      }
     });
 });
