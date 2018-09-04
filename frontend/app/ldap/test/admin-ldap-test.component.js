@@ -7,6 +7,7 @@ angular.module('linagora.esn.admin')
   controller: 'adminLdapTestController',
   bindings: {
     domainId: '=',
-    config: '<'
+    config: '<',
+    disabled: '<'
   }
 });
