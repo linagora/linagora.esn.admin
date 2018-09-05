@@ -195,5 +195,6 @@
   "User states updated": "User states updated",
   "Failed to update user states": "Failed to update user states",
   "Can be searched": "Can be searched",
-  "Enable the module": "Enable the module"
+  "Enable the module": "Enable the module",
+  "Port must be greater than 0 and less than 65536": "Port must be greater than 0 and less than 65536"
 }

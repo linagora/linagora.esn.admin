@@ -195,5 +195,6 @@
   "User states updated": "Đã cập nhật tình trạng của người dùng",
   "Failed to update user states": "Cập nhật tình trạng của người dùng thất bại",
   "Can be searched": "Có thể được tìm kiếm",
-  "Enable the module": "Bật mô-đun"
+  "Enable the module": "Bật mô-đun",
+  "Port must be greater than 0 and less than 65536": "Cổng phải lớn hơn 0 và nhỏ hơn 65536"
 }
