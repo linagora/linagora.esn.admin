@@ -1,0 +1,14 @@
+sub-header
+  admin-web-subheader(on-form-submit="$ctrl.save()", form="form")
+
+form(name="form", admin-loading-status)
+  .card
+    .card-header
+      h2 #{__('Proxy settings')}
+    .card-body.card-padding
+      .row
+        .col-xs-12.col-md-6
+          label.checkbox.checkbox-inline
+            input(type="checkbox", ng-model="$ctrl.config.proxy.trust")
+            i.input-helper
+            span #{__('Trust proxy')}

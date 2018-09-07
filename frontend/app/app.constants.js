@@ -100,6 +100,14 @@ angular.module('linagora.esn.admin')
     platform: false
   }
 }, {
+  id: 'webserver',
+  name: 'Web server',
+  icon: 'mdi-server-network',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
+}, {
   id: 'modules',
   name: 'Modules',
   icon: 'mdi-view-module',
