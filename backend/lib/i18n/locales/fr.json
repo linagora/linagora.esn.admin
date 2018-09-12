@@ -196,5 +196,9 @@
   "Failed to update user states": "Échec lors de la mise à jour des états des utilisateurs",
   "Can be searched": "Peut être recherché",
   "Enable the module": "Activer le module",
-  "Port must be greater than 0 and less than 65536": "Le port doit être supérieur à 0 et inférieur à 65536"
+  "Port must be greater than 0 and less than 65536": "Le port doit être supérieur à 0 et inférieur à 65536",
+  "Web server": "Serveur Web",
+  "Web server configuration": "Configuration du serveur Web",
+  "Proxy settings": "Paramètres de proxy",
+  "Trust proxy": "Trust proxy"
 }

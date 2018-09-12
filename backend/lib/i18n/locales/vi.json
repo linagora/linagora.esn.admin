@@ -196,5 +196,9 @@
   "Failed to update user states": "Cập nhật tình trạng của người dùng thất bại",
   "Can be searched": "Có thể được tìm kiếm",
   "Enable the module": "Bật mô-đun",
-  "Port must be greater than 0 and less than 65536": "Cổng phải lớn hơn 0 và nhỏ hơn 65536"
+  "Port must be greater than 0 and less than 65536": "Cổng phải lớn hơn 0 và nhỏ hơn 65536",
+  "Web server": "Máy chủ web",
+  "Web server configuration": "Cấu hình máy chủ web",
+  "Proxy settings": "Cài đặt proxy",
+  "Trust proxy": "Proxy ủy thác"
 }

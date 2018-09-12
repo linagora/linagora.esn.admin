@@ -119,6 +119,14 @@ angular.module('linagora.esn.admin')
         }
       }
     })
+    .state('admin.domain.webserver', {
+      url: '/webserver',
+      views: {
+        'root@admin': {
+          template: '<admin-webserver />'
+        }
+      }
+    })
     .state('admin.domain.jwt', {
       url: '/jwt',
       views: {
