@@ -43,7 +43,7 @@ describe('The adminGeneralController', function() {
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime']);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime', 'language']);
     });
   });
 
