@@ -21,7 +21,7 @@
     self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
-      adminDomainConfigService.getMultiple(domainId, ['businessHours', 'datetime'])
+      adminDomainConfigService.getMultiple(domainId, ['businessHours', 'datetime', 'language'])
         .then(function(data) {
           self.configs = data;
           self.status = ADMIN_LOADING_STATUS.loaded;
