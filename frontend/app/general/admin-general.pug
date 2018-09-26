@@ -3,6 +3,6 @@ sub-header
 
 form(name="form", admin-loading-status)
   .flex-column(ng-if="$ctrl.configs")
-    esn-i18n-language-selector(language="$ctrl.configs.language")
+    esn-i18n-language-selector(ng-if='$ctrl.mode === "domain"', language="$ctrl.configs.language", mode='{{::$ctrl.mode}}')
     esn-business-hours(business-hours="$ctrl.configs.businessHours")
     admin-general-datetime(datetime="$ctrl.configs.datetime")

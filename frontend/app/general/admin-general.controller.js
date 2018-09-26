@@ -14,15 +14,22 @@
     ADMIN_LOADING_STATUS
   ) {
     var self = this;
-    var domainId = $stateParams.domainId;
+    var CONFIGURATIONS_LIST = {
+      domain: ['businessHours', 'datetime', 'language'],
+      platform: ['businessHours', 'datetime']
+    };
 
     self.$onInit = $onInit;
     self.save = save;
     self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
-      adminDomainConfigService.getMultiple(domainId, ['businessHours', 'datetime', 'language'])
+      adminDomainConfigService.getMultiple(
+        $stateParams.domainId,
+        adminModeService.isPlatformMode() ? CONFIGURATIONS_LIST.platform : CONFIGURATIONS_LIST.domain
+      )
         .then(function(data) {
+          self.mode = adminModeService.getCurrentMode();
           self.configs = data;
           self.status = ADMIN_LOADING_STATUS.loaded;
         })
@@ -38,7 +45,7 @@
     function _saveConfiguration() {
       var qualifiedConfigs = _qualifyConfigs(self.configs);
 
-      return adminDomainConfigService.setMultiple(domainId, qualifiedConfigs);
+      return adminDomainConfigService.setMultiple($stateParams.domainId, qualifiedConfigs);
     }
 
     function _qualifyConfigs(configs) {
