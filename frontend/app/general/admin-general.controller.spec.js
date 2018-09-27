@@ -38,12 +38,21 @@ describe('The adminGeneralController', function() {
   }
 
   describe('The $onInit fn', function() {
-    it('should get a list of configurations from server on init', function() {
+    it('should get a list of domain configurations if in domain mode', function() {
       adminDomainConfigService.getMultiple = sinon.stub().returns($q.when(configuraionsMock));
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
       expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime', 'language']);
+    });
+
+    it('should get a list of platform configurations if in platform mode', function() {
+      adminDomainConfigService.getMultiple = sinon.stub().returns($q.when(configuraionsMock));
+      $stateParams.domainId = 'platform';
+      var controller = initController();
+
+      expect(controller.configs).to.deep.equal(configuraionsMock);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime']);
     });
   });
 
