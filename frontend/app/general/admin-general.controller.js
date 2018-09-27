@@ -25,6 +25,7 @@
         .then(function(data) {
           self.configs = data;
           self.status = ADMIN_LOADING_STATUS.loaded;
+          self.mode = adminModeService.getCurrentMode();
         })
         .catch(function() {
           self.status = ADMIN_LOADING_STATUS.error;
