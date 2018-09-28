@@ -3,6 +3,12 @@ sub-header
 
 .card
   .card-header
+    h2.lvh-label #{__('Users configuration')}
+  .card-body.card-padding
+    admin-users-configuration
+
+.card
+  .card-header
     h2.lvh-label #{__('Quick user creation')}
   .card-body.card-padding
     admin-users-quick-form(domain-id="$ctrl.domainId")

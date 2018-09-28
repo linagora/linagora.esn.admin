@@ -1,0 +1,11 @@
+ng-form(name="form", admin-loading-status)
+  .row
+    .col-md-6
+      .row
+        .col-xs-8
+          span
+            | #{__('Can be searched')}
+          small.help-block
+            | #{__('Users can be searched by each other')}
+        .col-xs-4.flex-end
+          toggle-switch(ng-model='$ctrl.configs.membersCanBeSearched', form="form", onchange="$ctrl.save()")

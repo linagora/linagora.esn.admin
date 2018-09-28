@@ -10,6 +10,7 @@ angular.module('linagora.esn.admin')
     offset: 0,
     limit: memberSearchConfiguration.searchLimit,
     includesDisabledSearchable: true,
+    ignoreMembersCanBeSearchedConfiguration: true,
     search: ''
   };
 

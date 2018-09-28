@@ -200,5 +200,7 @@
   "Web server": "Máy chủ web",
   "Web server configuration": "Cấu hình máy chủ web",
   "Proxy settings": "Cài đặt proxy",
-  "Trust proxy": "Proxy ủy thác"
+  "Trust proxy": "Proxy ủy thác",
+  "Users configuration": "Cấu hình người dùng",
+  "Users can be searched by each other": "Người dùng có thể tìm kiếm nhau"
 }

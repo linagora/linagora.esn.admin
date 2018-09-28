@@ -200,5 +200,7 @@
   "Web server": "Web server",
   "Web server configuration": "Web server configuration",
   "Proxy settings": "Proxy settings",
-  "Trust proxy": "Trust proxy"
+  "Trust proxy": "Trust proxy",
+  "Users configuration": "Users configuration",
+  "Users can be searched by each other": "Users can be searched by each other"
 }
