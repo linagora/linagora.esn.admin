@@ -2,7 +2,6 @@
 
 > Administration module for the ESN
 
-[![Build Status](https://travis-ci.org/linagora/linagora.esn.admin.svg?branch=master)](https://travis-ci.org/linagora/linagora.esn.admin)
 [![build status](https://ci.linagora.com/linagora/lgs/openpaas/linagora.esn.admin/badges/master/build.svg)](https://ci.linagora.com/linagora/lgs/openpaas/linagora.esn.admin/commits/master)
 
 Check the documentation in [./doc](./doc).
