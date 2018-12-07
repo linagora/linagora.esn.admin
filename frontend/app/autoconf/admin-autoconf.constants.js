@@ -10,18 +10,34 @@
         versions: [{
           version: '4.7',
           minAppVersion: '45',
+          maxAppVersion: '59',
           platforms: [{
             platform: 'Linux',
               url: 'https://addons.mozilla.org/thunderbird/downloads/file/430153/lightning-4.7-sm+tb-linux.xpi'
           }]
-        }]
+        }
+      ]
       }, {
         id: 'cardbook@vigneau.philippe',
         name: 'CardBook',
-        versions: [{
-          version: '16.7',
-          url: 'https://addons.mozilla.org/thunderbird/downloads/file/579999/cardbook-16.7-tb.xpi'
-        }]
+        versions: [
+          {
+            version: '16.7',
+            maxAppVersion: '59',
+            platforms: [{
+              platform: 'Linux',
+              url: 'https://addons.mozilla.org/thunderbird/downloads/file/579999/cardbook-16.7-tb.xpi'
+            }]
+          },
+          {
+            version: '33.2',
+            minAppVersion: '60',
+            platforms: [{
+              platform: 'Linux',
+              url: 'https://addons.thunderbird.net/thunderbird/downloads/file/1012114/cardbook-33.2-tb.xpi'
+            }]
+          }
+        ]
       }],
       preferences: [{
         name: 'app.update.enabled',
@@ -40,11 +56,6 @@
       }, {
         name: 'extensions.cardbook.firstRun',
         value: false
-      }],
-      directories: [{
-        dirName: 'OpenPaas',
-        uri: 'ldapUrl',
-        maxHits: 50
       }]
     })
 
