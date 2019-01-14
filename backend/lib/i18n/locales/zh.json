@@ -187,5 +187,7 @@
   "Users auto-provisioning": "用户自动部署",
   "View profile": "查看档案",
   "Users configuration": "用户配置",
-  "Users can be searched by each other": "用户可以互相搜索"
+  "Users can be searched by each other": "用户可以互相搜索",
+  "Max size upload": "最大尺寸上传",
+  "This max size upload will be used for  attachments collaborative": "此最大尺寸上传将用于附件协作"
 }

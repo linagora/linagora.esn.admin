@@ -8,7 +8,7 @@ var expect = chai.expect;
 describe('The adminWebserverController controller', function() {
 
   var $controller, $rootScope, $scope, adminDomainConfigService, ADMIN_MODE;
-  var CONFIG_NAME = 'webserver';
+  var CONFIG_NAME = ['webserver', 'maxSizeUpload'];
 
   beforeEach(function() {
     module('linagora.esn.admin');
@@ -34,7 +34,7 @@ describe('The adminWebserverController controller', function() {
   it('should get Web configuration from server on init', function() {
     var config = { key: 'value' };
 
-    adminDomainConfigService.get = sinon.stub().returns($q.when(config));
+    adminDomainConfigService.getMultiple = sinon.stub().returns($q.when(config));
 
     var controller = initController();
 
@@ -42,7 +42,7 @@ describe('The adminWebserverController controller', function() {
     $rootScope.$digest();
 
     expect(controller.config).to.deep.equal(config);
-    expect(adminDomainConfigService.get).to.have.been.calledWith(ADMIN_MODE.platform, CONFIG_NAME);
+    expect(adminDomainConfigService.getMultiple).to.have.been.calledWith(ADMIN_MODE.platform, CONFIG_NAME);
   });
 
   describe('The save fn', function() {
@@ -50,19 +50,19 @@ describe('The adminWebserverController controller', function() {
 
     beforeEach(function() {
       configMock = { key: 'value' };
-      adminDomainConfigService.get = sinon.stub().returns($q.when(configMock));
+      adminDomainConfigService.getMultiple = sinon.stub().returns($q.when(configMock));
     });
 
     it('should call adminDomainConfigService.set to save configuration', function(done) {
+      sinon.stub(adminDomainConfigService, 'setMultiple').returns($q.when());
       var controller = initController();
 
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
       controller.$onInit();
       $rootScope.$digest();
 
       controller.config.key = 'new value';
       controller.save().then(function() {
-        expect(adminDomainConfigService.set).to.have.been.calledWith(ADMIN_MODE.platform, CONFIG_NAME, controller.config);
+        expect(adminDomainConfigService.setMultiple).to.have.been.calledWith(ADMIN_MODE.platform, [{ name: CONFIG_NAME[0], value: undefined }, { name: CONFIG_NAME[1], value: undefined }]);
         done();
       });
 
