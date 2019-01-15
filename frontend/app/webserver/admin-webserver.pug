@@ -9,6 +9,13 @@ form(name="form", admin-loading-status)
       .row
         .col-xs-12.col-md-6
           label.checkbox.checkbox-inline
-            input(type="checkbox", ng-model="$ctrl.config.proxy.trust")
+            input(type="checkbox", ng-model="$ctrl.config.webserver.proxy.trust")
             i.input-helper
             span #{__('Trust proxy')}
+    .card-header
+      h2 #{__('Max size upload')}
+      small #{__('This max size upload will be used for  attachments collaborative')}
+    .card-body.card-padding
+      .row
+        .col-xs-12.col-md-6
+          admin-form-input-bytes(input-value="$ctrl.config.maxSizeUpload", min="1KB", max="50TB", label=__('Max size upload'), required="true")

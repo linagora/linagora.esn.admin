@@ -202,5 +202,7 @@
   "Proxy settings": "Paramètres de proxy",
   "Trust proxy": "Trust proxy",
   "Users configuration": "Configuration des utilisateurs",
-  "Users can be searched by each other": "Les utilisateurs peuvent rechercher d'autres utilisateurs"
+  "Users can be searched by each other": "Les utilisateurs peuvent rechercher d'autres utilisateurs",
+  "Max size upload": "Taille maximum des envois",
+  "This max size upload will be used for  attachments collaborative": "La taille maximum des envois sera utilisé pour les pièces jointes collaborative"
 }
