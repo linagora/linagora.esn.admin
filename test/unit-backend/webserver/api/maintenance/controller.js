@@ -5,18 +5,25 @@ const mockery = require('mockery');
 const sinon = require('sinon');
 
 describe('The maintenance API getController()', function() {
-  let getController, maintainEsMock;
+  let getController;
 
   beforeEach(function() {
-    maintainEsMock = {};
-    mockery.registerMock('../../../lib/maintenance/elasticsearch', () => maintainEsMock);
     getController = () => require(this.moduleHelpers.modulesPath + '/backend/webserver/api/maintenance/controller')(this.moduleHelpers.dependencies);
   });
 
   describe('The maintainElasticsearch fn', function() {
+    let constantsMock;
+
+    beforeEach(function() {
+      constantsMock = {};
+    });
+
     it('should respond 202 on success', function(done) {
-      maintainEsMock.reindexUsers = sinon.spy();
-      maintainEsMock.reconfigUsers = sinon.spy();
+      constantsMock.ACTIONS = {
+        reindex: sinon.stub().returns(Promise.resolve()),
+        reconfigure: sinon.spy()
+      };
+      mockery.registerMock('./constants', () => constantsMock);
 
       const req = {
         query: {
@@ -30,8 +37,8 @@ describe('The maintenance API getController()', function() {
 
           return {
             end() {
-              expect(maintainEsMock.reindexUsers).to.have.been.calledWith();
-              expect(maintainEsMock.reconfigUsers).to.not.have.been.calledWith();
+              expect(constantsMock.ACTIONS.reindex).to.have.been.calledOnce;
+              expect(constantsMock.ACTIONS.reconfigure).to.not.have.been.called;
               done();
             }
           };
@@ -42,8 +49,11 @@ describe('The maintenance API getController()', function() {
     });
 
     it('should respond 202 on success (reconfigure)', function(done) {
-      maintainEsMock.reindexUsers = sinon.spy();
-      maintainEsMock.reconfigUsers = sinon.spy();
+      constantsMock.ACTIONS = {
+        reindex: sinon.spy(),
+        reconfigure: sinon.stub().returns(Promise.resolve())
+      };
+      mockery.registerMock('./constants', () => constantsMock);
 
       const req = {
         query: {
@@ -57,8 +67,8 @@ describe('The maintenance API getController()', function() {
 
           return {
             end() {
-              expect(maintainEsMock.reindexUsers).to.not.have.been.calledWith();
-              expect(maintainEsMock.reconfigUsers).to.have.been.calledWith();
+              expect(constantsMock.ACTIONS.reindex).to.not.have.been.called;
+              expect(constantsMock.ACTIONS.reconfigure).to.have.been.calledOnce;
               done();
             }
           };
@@ -67,63 +77,36 @@ describe('The maintenance API getController()', function() {
 
       getController().maintainElasticsearch(req, res);
     });
+  });
 
-    it('should respond 400 if the resource type is not supported', function(done) {
-      const req = {
-        query: {
-          action: 'foo',
-          resource_type: 'bar'
-        }
-      };
-      const res = {
-        status(code) {
-          expect(code).to.equal(400);
+  describe('The getRegisteredTypes function', function() {
+    let maintainEsMock;
 
-          return {
-            json(json) {
-              expect(json).to.deep.equal({
-                error: {
-                  code: 400,
-                  message: 'Bad Request',
-                  details: 'Unsupported action foo and resource_type bar'
-                }
-              });
-              done();
-            }
-          };
-        }
-      };
-
-      getController().maintainElasticsearch(req, res);
+    beforeEach(function() {
+      maintainEsMock = {};
+      mockery.registerMock('../../../lib/maintenance/elasticsearch', () => maintainEsMock);
     });
 
-    it('should respond 400 if the action is not supported', function(done) {
-      const req = {
-        query: {
-          action: 'foo',
-          resource_type: 'users'
-        }
-      };
+    it('should respond 200 with the list of registered resource types', function(done) {
+      const types = ['foo', 'bar'];
+
+      maintainEsMock.getRegisteredResourceTypes = sinon.stub().returns(types);
+
       const res = {
         status(code) {
-          expect(code).to.equal(400);
+          expect(code).to.equal(200);
 
           return {
-            json(json) {
-              expect(json).to.deep.equal({
-                error: {
-                  code: 400,
-                  message: 'Bad Request',
-                  details: 'Unsupported action foo and resource_type users'
-                }
-              });
+            json: (result) => {
+              expect(result).to.deep.equal(types);
+              expect(maintainEsMock.getRegisteredResourceTypes).to.have.been.calledOnce;
               done();
             }
           };
         }
       };
 
-      getController().maintainElasticsearch(req, res);
+      getController().getRegisteredTypes({}, res);
     });
   });
 });

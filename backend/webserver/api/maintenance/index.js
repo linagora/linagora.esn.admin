@@ -7,8 +7,32 @@ module.exports = function(dependencies) {
   const platformadminsMW = dependencies('platformadminsMW');
   const helperMW = dependencies('helperMW');
   const controller = require('./controller')(dependencies);
+  const { validateMaintenanceAction, validateMaintenanceResourceType } = require('./middleware')(dependencies);
 
   const router = express.Router();
+
+  /**
+   * @swagger
+   * /elasticsearch:
+   *   get:
+   *     tags:
+   *       - Maintenance
+   *     description: Get the registered resource types
+   *     responses:
+   *      200:
+   *        $ref: "#/responses/cm_202"
+   *      401:
+   *        $ref: "#/responses/cm_401"
+   *      403:
+   *        $ref: "#/responses/cm_403"
+   *      500:
+   *        $ref: "#/responses/cm_500"
+   */
+  router.get('/elasticsearch',
+    authorizationMW.requiresAPILogin,
+    platformadminsMW.requirePlatformAdmin,
+    controller.getRegisteredTypes
+  );
 
   /**
    * @swagger
@@ -36,6 +60,8 @@ module.exports = function(dependencies) {
     authorizationMW.requiresAPILogin,
     platformadminsMW.requirePlatformAdmin,
     helperMW.requireInQuery(['action', 'resource_type']),
+    validateMaintenanceAction,
+    validateMaintenanceResourceType,
     controller.maintainElasticsearch);
 
   return router;
