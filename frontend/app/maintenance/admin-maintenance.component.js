@@ -4,7 +4,6 @@
   angular.module('linagora.esn.admin')
 
   .component('adminMaintenance', {
-    templateUrl: '/admin/app/maintenance/admin-maintenance.html',
-    controller: 'adminMaintenanceController'
+    templateUrl: '/admin/app/maintenance/admin-maintenance.html'
   });
 })(angular);

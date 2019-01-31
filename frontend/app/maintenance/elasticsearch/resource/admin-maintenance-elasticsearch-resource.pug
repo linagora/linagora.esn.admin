@@ -1,0 +1,16 @@
+.card
+  .card-header
+    h2 #{__('Index')}: {{$ctrl.resource.type}}
+  .card-body
+    .listview.lv-bordered
+      .lv-body
+        .lv-item
+          .flex-space-between
+            div #{__('Correct the index configuration (quick)')}
+            div
+              button.btn.btn-primary(ng-click="$ctrl.resource.onReconfigureBtnClick()") #{__('Run')}
+        .lv-item
+          .flex-space-between
+            div #{__('Correct the index configuration and reindex data (slow)')}
+            div
+              button.btn.btn-primary(ng-click="$ctrl.resource.onReindexBtnClick()") #{__('Run')}

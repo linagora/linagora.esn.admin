@@ -165,7 +165,7 @@
   "That domain is already used. Try another.": "域名已被占用。请更换",
   "Domain": "域名",
   "Maintenance": "系统维护",
-  "User index": "用户目录",
+  "Index": "目录",
   "Correct the index configuration and reindex data (slow)": "更正目录设置并将数据套至新目录（慢）",
   "Correct the index configuration (quick)": "更正目录设置（快）",
   "Submitting reindexing users request...": "重新设置用户目录请求提交中...",
@@ -189,5 +189,6 @@
   "Users configuration": "用户配置",
   "Users can be searched by each other": "用户可以互相搜索",
   "Max size upload": "最大尺寸上传",
-  "This max size upload will be used for  attachments collaborative": "此最大尺寸上传将用于附件协作"
+  "This max size upload will be used for  attachments collaborative": "此最大尺寸上传将用于附件协作",
+  "Elasticsearch": "Elasticsearch"
 }
