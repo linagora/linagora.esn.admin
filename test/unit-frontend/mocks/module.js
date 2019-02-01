@@ -30,7 +30,11 @@ angular.module('esn.async-action', [])
     };
   });
 angular.module('esn.core', [])
-  .constant('_', _);
+.constant('_', _);
+angular.module('esn.people', [])
+  .factory('esnPeopleAPI', function() {
+    return {};
+  });
 angular.module('esn.http', [])
   .factory('httpErrorHandler', function() {
     return {
