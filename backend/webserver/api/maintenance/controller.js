@@ -1,34 +1,34 @@
-'use strict';
-
-module.exports = function(dependencies) {
+module.exports = (dependencies) => {
+  const logger = dependencies('logger');
   const maintainEs = require('../../../lib/maintenance/elasticsearch')(dependencies);
-  const ELASTICSEARCH_ACTIONS = {
-    users: {
-      reconfigure: maintainEs.reconfigUsers,
-      reindex: maintainEs.reindexUsers
-    }
-  };
+  const { ACTIONS } = require('./constants')(dependencies);
 
   return {
+    getRegisteredTypes,
     maintainElasticsearch
   };
 
+  function getRegisteredTypes(req, res) {
+    return res.status(200).json(maintainEs.getRegisteredResourceTypes());
+  }
+
   function maintainElasticsearch(req, res) {
-    const action = req.query.action;
-    const resourceType = req.query.resource_type;
+    const { action, resource_type } = req.query;
 
-    if (ELASTICSEARCH_ACTIONS[resourceType] && ELASTICSEARCH_ACTIONS[resourceType][action]) {
-      ELASTICSEARCH_ACTIONS[resourceType][action]();
+    ACTIONS[action](resource_type)
+      .then(() => res.status(202).end())
+      .catch((err) => {
+        const details = `Error while submiting ${action} job for resource type ${resource_type}`;
 
-      return res.status(202).end();
-    }
+        logger.error(details, err);
 
-    return res.status(400).json({
-      error: {
-        code: 400,
-        message: 'Bad Request',
-        details: `Unsupported action ${action} and resource_type ${resourceType}`
-      }
-    });
+        return res.status(500).json({
+          error: {
+            code: 500,
+            message: 'Server Error',
+            details
+          }
+        });
+      });
   }
 };

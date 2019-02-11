@@ -3,25 +3,23 @@
 
   angular.module('linagora.esn.admin')
 
-  .factory('adminMaintenanceService', adminMaintenanceService);
+  .factory('adminMaintenanceElasticsearchService', adminMaintenanceElasticsearchService);
 
-  function adminMaintenanceService(asyncAction, adminRestangular) {
+  function adminMaintenanceElasticsearchService(asyncAction, adminRestangular) {
     var ACTIONS = {
       reindex: 'reindex',
       reconfigure: 'reconfigure'
     };
-    var RESOURCE_TYPES = {
-      users: 'users'
-    };
 
     return {
-      reindexUsers: reindexUsers,
-      reconfigureUsersIndex: reconfigureUsersIndex
+      getRegisteredResourceTypes: getRegisteredResourceTypes,
+      reindex: reindex,
+      reconfigure: reconfigure
     };
 
-    function reindexUsers() {
+    function reindex(type) {
       var notificationMessages = {
-        progressing: 'Submitting reindexing users request...',
+        progressing: 'Submitting reindexing ' + type + ' request...',
         success: 'Request submitted',
         failure: 'Failed to submit request'
       };
@@ -29,16 +27,16 @@
       return asyncAction(notificationMessages, function() {
         var queryParams = {
           action: ACTIONS.reindex,
-          resource_type: RESOURCE_TYPES.users
+          resource_type: type
         };
 
-        return _callElasticsearchIndexAPI(queryParams);
+        return _maintainElasticsearch(queryParams);
       });
     }
 
-    function reconfigureUsersIndex() {
+    function reconfigure(type) {
       var notificationMessages = {
-        progressing: 'Submitting reconfiguration user index request...',
+        progressing: 'Submitting reconfiguration ' + type + ' index request...',
         success: 'Request submitted',
         failure: 'Failed to submit request'
       };
@@ -46,14 +44,21 @@
       return asyncAction(notificationMessages, function() {
         var queryParams = {
           action: ACTIONS.reconfigure,
-          resource_type: RESOURCE_TYPES.users
+          resource_type: type
         };
 
-        return _callElasticsearchIndexAPI(queryParams);
+        return _maintainElasticsearch(queryParams);
       });
     }
 
-    function _callElasticsearchIndexAPI(queryParams) {
+    function getRegisteredResourceTypes() {
+      return adminRestangular
+        .all('maintenance')
+        .one('elasticsearch')
+        .get();
+    }
+
+    function _maintainElasticsearch(queryParams) {
       return adminRestangular
         .all('maintenance')
         .one('elasticsearch')

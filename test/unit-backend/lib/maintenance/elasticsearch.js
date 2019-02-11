@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 describe('The lib/maintenance/elasticsearch module', function() {
-  let deps, jobQueueMock, elasticsearchMock, coreUserMock;
+  let deps, jobQueueMock, elasticsearchMock;
 
   const dependencies = name => deps[name];
   const getModule = () => require('../../../../backend/lib/maintenance/elasticsearch')(dependencies);
@@ -20,14 +20,9 @@ describe('The lib/maintenance/elasticsearch module', function() {
 
     elasticsearchMock = {
       reindex: function() {},
-      reconfig: function() {}
-    };
-
-    coreUserMock = {
-      listByCursor: function() {},
-      denormalize: {
-        denormalizeForSearchIndexing: function() {},
-        getId: function() {}
+      reconfig: function() {},
+      reindexRegistry: {
+        getAll: () => ({})
       }
     };
 
@@ -38,23 +33,13 @@ describe('The lib/maintenance/elasticsearch module', function() {
         error: function() {}
       },
       jobqueue: jobQueueMock,
-      elasticsearch: elasticsearchMock,
-      user: coreUserMock
+      elasticsearch: elasticsearchMock
     };
   });
 
-  describe('The init fn', function() {
+  describe('The init function', function() {
     it('should register reindex worker and reconfigure worker', function() {
-      const workerData = {
-        type: 'users',
-        name: 'users.idx'
-      };
-
-      elasticsearchMock.reindex = sinon.spy();
-      elasticsearchMock.reconfig = sinon.spy();
-      jobQueueMock.lib.workers.add = sinon.spy(function(worker) {
-        worker.getWorkerFunction()(workerData);
-      });
+      jobQueueMock.lib.workers.add = sinon.spy();
 
       getModule().init();
 
@@ -68,44 +53,96 @@ describe('The lib/maintenance/elasticsearch module', function() {
         name: 'elasticsearch-reconfig',
         getWorkerFunction: sinon.match.func
       }));
-
-      expect(elasticsearchMock.reindex).to.have.been.calledOnce;
-      expect(elasticsearchMock.reindex).to.have.been.calledWith(workerData);
-
-      expect(elasticsearchMock.reconfig).to.have.been.calledOnce;
-      expect(elasticsearchMock.reconfig).to.have.been.calledWith(workerData.name, workerData.type);
     });
   });
 
-  describe('The reindexUsers fn', function() {
-    it('should submit a reindex job on users index', function(done) {
-      jobQueueMock.lib.submitJob = function(workerName, jobName, options) {
-        expect(workerName).to.equal('elasticsearch-reindex');
-        expect(options).to.shallowDeepEqual({
-          type: 'users',
-          index: 'users.idx',
-          name: 'users.idx',
-          denormalize: coreUserMock.denormalize.denormalizeForSearchIndexing,
-          getId: coreUserMock.denormalize.getId
+  describe('The reindex function', function() {
+    it('should reject if there is a unsupported type', function(done) {
+      const type = 'foo';
+
+      elasticsearchMock.reindexRegistry.getAll = sinon.stub().returns([]);
+
+      getModule().reindex(type)
+        .catch((err) => {
+          expect(err.message).to.equal(`There is no corresponding index for: ${type}`);
+          expect(elasticsearchMock.reindexRegistry.getAll).to.have.been.calledOnce;
+          done();
         });
+    });
 
-        done();
+    it('should submit a reindex job', function(done) {
+      const reindexOptions = {
+        type: 'foo',
+        index: 'foo.idx',
+        name: 'foo.idx',
+        denormalize: () => {},
+        getId: () => {}
       };
+      const buildReindexOptionsFunctionMock = sinon.stub().returns(Promise.resolve(reindexOptions));
 
-      getModule().reindexUsers();
+      elasticsearchMock.reindexRegistry.getAll = sinon.stub().returns({
+        [reindexOptions.type]: {
+          name: reindexOptions.name,
+          buildReindexOptionsFunction: buildReindexOptionsFunctionMock
+        }
+      });
+
+      jobQueueMock.lib.submitJob = sinon.spy((workerName, jobName, options) => {
+        expect(workerName).to.equal('elasticsearch-reindex');
+        expect(options).to.shallowDeepEqual(reindexOptions);
+      });
+
+      getModule().reindex(reindexOptions.type)
+        .then(() => {
+          expect(elasticsearchMock.reindexRegistry.getAll).to.have.been.calledOnce;
+          expect(buildReindexOptionsFunctionMock).to.have.been.calledOnce;
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledOnce;
+          done();
+        })
+        .catch(err => done(err || 'should resolve'));
     });
   });
 
-  describe('The reconfigUsers fn', function() {
-    it('should submit a reconfig job on users index', function(done) {
-      jobQueueMock.lib.submitJob = function(workerName, jobName, data) {
-        expect(workerName).to.equal('elasticsearch-reconfig');
-        expect(data).to.deep.equal({ name: 'users.idx', type: 'users' });
+  describe('The reconfigUsers function', function() {
+    it('should reject if there is a unsupported type', function(done) {
+      const type = 'foo';
 
-        done();
+      elasticsearchMock.reindexRegistry.getAll = sinon.stub().returns([]);
+
+      getModule().reconfigure(type)
+        .catch((err) => {
+          expect(err.message).to.equal(`There is no corresponding index for: ${type}`);
+          expect(elasticsearchMock.reindexRegistry.getAll).to.have.been.calledOnce;
+          done();
+        });
+    });
+
+    it('should submit a reconfig job on users index', function(done) {
+      const options = {
+        type: 'foo',
+        name: 'foo.idx'
       };
 
-      getModule().reconfigUsers();
+      elasticsearchMock.reindexRegistry.getAll = sinon.stub().returns({
+        [options.type]: {
+          name: options.name
+        }
+      });
+
+      jobQueueMock.lib.submitJob = sinon.spy((workerName, jobName, data) => {
+        expect(workerName).to.equal('elasticsearch-reconfig');
+        expect(data).to.to.deep.equal({ name: options.name, type: options.type });
+
+        return Promise.resolve();
+      });
+
+      getModule().reconfigure(options.type)
+        .then(() => {
+          expect(elasticsearchMock.reindexRegistry.getAll).to.have.been.calledOnce;
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledOnce;
+          done();
+        })
+        .catch(err => done(err || 'should resolve'));
     });
   });
 });

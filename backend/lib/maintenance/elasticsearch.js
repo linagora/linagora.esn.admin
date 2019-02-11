@@ -1,20 +1,15 @@
-'use strict';
-
 module.exports = function(dependencies) {
   const jobQueue = dependencies('jobqueue');
   const logger = dependencies('logger');
   const elasticsearch = dependencies('elasticsearch');
-  const coreUser = dependencies('user');
   const ES_REINDEX_WORKER_NAME = 'elasticsearch-reindex';
   const ES_RECONFIG_WORKER_NAME = 'elasticsearch-reconfig';
-  const INDEX_MAPPING = {
-    users: 'users.idx'
-  };
 
   return {
     init,
-    reindexUsers,
-    reconfigUsers
+    getRegisteredResourceTypes,
+    reindex,
+    reconfigure
   };
 
   function init() {
@@ -22,22 +17,31 @@ module.exports = function(dependencies) {
     registerReconfigWorker();
   }
 
-  function reindexUsers() {
-    const userCursor = coreUser.listByCursor();
-    const options = {
-      type: 'users',
-      index: 'users.idx',
-      name: 'users.idx',
-      next() { return userCursor.next(); },
-      denormalize: coreUser.denormalize.denormalizeForSearchIndexing,
-      getId: coreUser.denormalize.getId
-    };
+  function getRegisteredResourceTypes() {
+    const registeredResources = elasticsearch.reindexRegistry.getAll();
 
-    return submitReindexJob(options);
+    return Object.keys(registeredResources);
   }
 
-  function reconfigUsers() {
-    return submitReconfigJob('users');
+  function reindex(resourceType) {
+    const registeredResources = elasticsearch.reindexRegistry.getAll();
+
+    if (!registeredResources[resourceType]) {
+      return Promise.reject(new Error(`There is no corresponding index for: ${resourceType}`));
+    }
+
+    return registeredResources[resourceType].buildReindexOptionsFunction()
+      .then(options => submitReindexJob(options));
+  }
+
+  function reconfigure(resourceType) {
+    const registeredResources = elasticsearch.reindexRegistry.getAll();
+
+    if (!registeredResources[resourceType]) {
+      return Promise.reject(new Error(`There is no corresponding index for: ${resourceType}`));
+    }
+
+    return submitReconfigureJob(resourceType, registeredResources[resourceType].name);
   }
 
   function submitReindexJob(options) {
@@ -49,17 +53,13 @@ module.exports = function(dependencies) {
     return jobQueue.lib.submitJob(workerName, jobName, options);
   }
 
-  function submitReconfigJob(type) {
-    if (!INDEX_MAPPING[type]) {
-      return Promise.reject(new Error(`There is no corresponding index for: ${type}`));
-    }
-
+  function submitReconfigureJob(type, name) {
     const workerName = ES_RECONFIG_WORKER_NAME;
     const jobName = getJobName(workerName, type);
 
     logger.debug(`Submitting ElasticSearch index-reconfigure job: ${jobName}`);
 
-    return jobQueue.lib.submitJob(workerName, jobName, { name: INDEX_MAPPING[type], type: type });
+    return jobQueue.lib.submitJob(workerName, jobName, { name, type });
   }
 
   function registerReindexWorker() {

@@ -165,7 +165,7 @@
   "That domain is already used. Try another.": "That domain is already used. Try another.",
   "Domain": "Domain",
   "Maintenance": "Maintenance",
-  "User index": "User index",
+  "Index": "Index",
   "Correct the index configuration and reindex data (slow)": "Correct the index configuration and reindex data (slow)",
   "Correct the index configuration (quick)": "Correct the index configuration (quick)",
   "Submitting reindexing users request...": "Submitting reindexing users request...",
@@ -204,5 +204,6 @@
   "Users configuration": "Users configuration",
   "Users can be searched by each other": "Users can be searched by each other",
   "Max size upload": "Max size upload",
-  "This max size upload will be used for  attachments collaborative": "This max size upload will be used for  attachments collaborative"
+  "This max size upload will be used for  attachments collaborative": "This max size upload will be used for  attachments collaborative",
+  "Elasticsearch": "Elasticsearch"
 }
