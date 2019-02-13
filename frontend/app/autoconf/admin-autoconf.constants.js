@@ -62,14 +62,14 @@
     .constant('ADMIN_AUTOCONF_ACCOUNT_TEMPLATE', {
       imap: {
         prettyName: 'OpenPaas (<%= user.preferredEmail %>)',
-        hostName: 'openpaas.linagora.com',
+        hostName: '',
         username: '<%= user.preferredEmail %>',
         port: 143,
         socketType: '2'
       },
       smtp: {
         description: 'OpenPaas SMTP (<%= user.preferredEmail %>)',
-        hostname: 'smtp.linagora.com',
+        hostname: '',
         username: '<%= user.preferredEmail %>',
         port: 587,
         socketType: '2'
