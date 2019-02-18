@@ -6,7 +6,7 @@ angular.module('linagora.esn.admin')
   var self = this;
 
   self.isMe = session.user._id === self.user._id;
-  self.displayName = userUtils.displayNameOf(self.user);
+  self.displayName = self.user.displayName || userUtils.displayNameOf(self.user);
 
   var notificationMessages = _getNotificationMessages(self.displayName);
 
