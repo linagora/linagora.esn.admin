@@ -7,18 +7,18 @@ var expect = chai.expect;
 
 describe('The adminRolesService', function() {
   var $rootScope;
-  var adminRolesService, domainAPI, domainSearchMembersProvider;
+  var adminRolesService, domainAPI, attendeeService;
   var ADMIN_SEARCH_LIMIT;
   var DOMAIN_ID = '123456';
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$rootScope_, _adminRolesService_, _domainAPI_, _domainSearchMembersProvider_, _ADMIN_SEARCH_LIMIT_) {
+    inject(function(_$rootScope_, _adminRolesService_, _domainAPI_, _attendeeService_, _ADMIN_SEARCH_LIMIT_) {
       $rootScope = _$rootScope_;
       adminRolesService = _adminRolesService_;
       domainAPI = _domainAPI_;
-      domainSearchMembersProvider = _domainSearchMembersProvider_;
+      attendeeService = _attendeeService_;
       ADMIN_SEARCH_LIMIT = _ADMIN_SEARCH_LIMIT_;
     });
   });
@@ -41,7 +41,7 @@ describe('The adminRolesService', function() {
 
   describe('The addAdministrators fn', function() {
     it('should call domainAPI.addAdministrators', function(done) {
-      var _administrators = [{_id: 'user1'}, {_id: 'user2'}];
+      var _administrators = [{ id: 'user1' }, { id: 'user2' }];
 
       adminRolesService.init(DOMAIN_ID);
 
@@ -94,20 +94,16 @@ describe('The adminRolesService', function() {
   });
 
   describe('The searchAdministratorCandidates fn', function() {
-    it('should call domainSearchMembersProvider', function(done) {
-      var serchProvider = {
-        searchAttendee: sinon.stub().returns($q.when([]))
-      };
+    it('should call attendeeService', function(done) {
       var query = 'abc';
 
       adminRolesService.init(DOMAIN_ID);
 
-      domainSearchMembersProvider.get = sinon.stub().returns(serchProvider);
+      attendeeService.getAttendeeCandidates = sinon.stub().returns($q.when([]));
 
       adminRolesService.searchAdministratorCandidates(query)
         .then(function() {
-          expect(domainSearchMembersProvider.get).to.have.been.calledWith(DOMAIN_ID);
-          expect(serchProvider.searchAttendee).to.have.been.calledWith(query, ADMIN_SEARCH_LIMIT);
+          expect(attendeeService.getAttendeeCandidates).to.have.been.calledWith(query, ADMIN_SEARCH_LIMIT, ['user']);
           done();
         });
 
