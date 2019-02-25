@@ -21,8 +21,7 @@ test:
 swagger:
   stage: swagger
   tags:
-    - master
-    - shell
+    - docker
   script:
    - npm i
    - npm prune
@@ -41,7 +40,7 @@ deploy-swagger:
     name: api
     url: https://api.open-paas.org
   only:
-    - master
+    - master@linagora/lgs/openpaas/linagora.esn.admin
   script:
     - perl -i -pe's/"host":"localhost:8080"/"schemes":["https"],"host":"demo.open-paas.org"/' ./doc/REST_API/swagger/admin-swagger.json
     - cp ./doc/REST_API/swagger/admin-swagger.json /var/www/html
@@ -57,7 +56,7 @@ deploy_dev:
     name: dev
     url: https://dev.open-paas.org
   only:
-    - master
+    - master@linagora/lgs/openpaas/linagora.esn.admin
   script:
     - cd /srv/${CI_PROJECT_NAME}
     - git fetch --all
