@@ -190,5 +190,6 @@
   "Users can be searched by each other": "用户可以互相搜索",
   "Max size upload": "最大尺寸上传",
   "This max size upload will be used for  attachments collaborative": "此最大尺寸上传将用于附件协作",
-  "Elasticsearch": "Elasticsearch"
+  "Elasticsearch": "Elasticsearch",
+  "Mail server settings": "邮件服务器设置"
 }

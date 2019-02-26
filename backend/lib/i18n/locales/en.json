@@ -205,5 +205,6 @@
   "Users can be searched by each other": "Users can be searched by each other",
   "Max size upload": "Max size upload",
   "This max size upload will be used for  attachments collaborative": "This max size upload will be used for  attachments collaborative",
-  "Elasticsearch": "Elasticsearch"
+  "Elasticsearch": "Elasticsearch",
+  "Mail server settings": "Mail server settings"
 }

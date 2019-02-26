@@ -205,5 +205,6 @@
   "Users can be searched by each other": "Người dùng có thể tìm kiếm nhau",
   "Max size upload": "Dung lượng tải lên tối đa",
   "This max size upload will be used for  attachments collaborative": "Tải lên kích thước tối đa này sẽ được sử dụng cho các tệp đính kèm cộng tác",
-  "Elasticsearch": "Elasticsearch"
+  "Elasticsearch": "Elasticsearch",
+  "Mail server settings": "Cài đặt máy chủ thư"
 }
