@@ -109,5 +109,22 @@ describe('The adminRolesService', function() {
 
       $rootScope.$digest();
     });
+
+    it('should return an empty array in case of attendeeService.getAttendeeCandidates fails', function(done) {
+      var query = 'abc';
+
+      adminRolesService.init(DOMAIN_ID);
+
+      attendeeService.getAttendeeCandidates = sinon.stub().returns($q.reject());
+
+      adminRolesService.searchAdministratorCandidates(query)
+        .then(function(res) {
+          expect(res).to.be.empty;
+          done();
+        })
+        .catch(done);
+
+      $rootScope.$digest();
+    });
   });
 });

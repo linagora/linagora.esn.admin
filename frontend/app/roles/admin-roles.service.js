@@ -4,7 +4,7 @@ angular.module('linagora.esn.admin')
 
 .constant('ADMIN_SEARCH_LIMIT', 20)
 
-.factory('adminRolesService', function($q, domainAPI, attendeeService, ADMIN_SEARCH_LIMIT, ESN_ATTENDEE_DEFAULT_TEMPLATE_URL, _) {
+.factory('adminRolesService', function($q, $log, domainAPI, attendeeService, ADMIN_SEARCH_LIMIT, ESN_ATTENDEE_DEFAULT_TEMPLATE_URL, _) {
   var domainId;
   var administrators;
 
@@ -47,21 +47,12 @@ angular.module('linagora.esn.admin')
       });
   }
 
-  function searchAdministratorCandidates(query) {
-    return attendeeService.getAttendeeCandidates(query, ADMIN_SEARCH_LIMIT, ['user'])
-      .then(function(attendees) {
-        return attendees.map(function(attendee) {
-          return angular.extend(attendee, { templateUrl: ESN_ATTENDEE_DEFAULT_TEMPLATE_URL });
-        });
-      }, _.constant([]))
-      .then(function(users) {
-        return users.map(function(user) {
-            if (!_.find(administrators, {_id: user.id})) {
-              user.name = user.name || user.displayName || user.email;
+  function searchAdministratorCandidates(query, excludes) {
+    return attendeeService.getAttendeeCandidates(query, ADMIN_SEARCH_LIMIT, ['user'], excludes)
+      .catch(function(error) {
+        $log.error('Error while searching for administrator candidates', error);
 
-              return user;
-            }
-          }).filter(Boolean);
+        return [];
       });
   }
 
