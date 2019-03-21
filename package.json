@@ -1,6 +1,6 @@
 {
   "name": "linagora.esn.admin",
-  "version": "1.4.6-dev",
+  "version": "1.4.6",
   "description": "Administration module for the ESN",
   "main": "index.js",
   "scripts": {
