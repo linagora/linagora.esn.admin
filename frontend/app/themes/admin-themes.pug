@@ -1,0 +1,15 @@
+sub-header
+  admin-themes-subheader(on-form-submit="$ctrl.save()", form="form")
+
+form(name="form", admin-loading-status)
+  .card
+    .card-body.card-padding
+      .row.button-row(ng-repeat='subgroup in $ctrl.adminThemesColorVariablesGroups.groups')
+        div(class="col-md-{{12 / $ctrl.adminThemesColorVariablesGroups.groupLength}}" ng-repeat='item in subgroup')
+          button.admin-themes-color-picker.btn.btn-primary.btn-block(
+            color-picker
+            color-picker-position="{{$index >= $ctrl.adminThemesColorVariablesGroups.groupLength - 1 ? 'left' : 'right'}}"
+            color-picker-model='$ctrl.model.colors[item.apiVariable]'
+            ng-style='{background: $ctrl.model.colors[item.apiVariable], color: $ctrl.computeTextColor($ctrl.model.colors[item.apiVariable])}'
+          )
+            | {{::item.displayText}}

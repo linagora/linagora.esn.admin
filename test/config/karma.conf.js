@@ -17,6 +17,7 @@ module.exports = function(config) {
       'frontend/components/dynamic-directive/dist/dynamic-directive.min.js',
       'frontend/components/restangular/dist/restangular.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',
+      'frontend/components/angular-colorpicker-directive/js/color-picker.js',
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
       'node_modules/sinon/pkg/sinon.js',
 

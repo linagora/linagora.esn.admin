@@ -1,0 +1,22 @@
+admin-themes {
+  .admin-themes-color-picker {
+    display: inline-flex;
+    align-items: center;
+
+    .admin-themes-color-display {
+      display: inline-block;
+      height: ceil(@font-size-small*@line-height-base);
+      width: ceil(@font-size-small*@line-height-base);
+      margin-right: 1rem;
+    }
+  }
+
+  .show-more-button, .show-more-button * {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-row:not(:empty):not(:last-child) button {
+    .m-b-10;
+  }
+}

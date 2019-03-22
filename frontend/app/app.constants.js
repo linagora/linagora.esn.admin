@@ -155,4 +155,12 @@ angular.module('linagora.esn.admin')
     domain: false,
     platform: true
   }
+}, {
+  id: 'theme',
+  name: 'Theme',
+  icon: 'mdi-brush',
+  displayIn: {
+    domain: true,
+    platform: false
+  }
 }]);
