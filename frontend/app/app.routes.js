@@ -69,6 +69,15 @@ angular.module('linagora.esn.admin')
           template: '<admin-users-create />'
         }
       },
+      resolve: {
+        isEnabled: function($location, $stateParams, adminUsersService) {
+          return adminUsersService.isUserCreationEnabled($stateParams.domainId).then(function(enabled) {
+            if (!enabled) {
+              $location.path('/admin');
+            }
+          });
+        }
+      },
       params: { user: null }
     })
     .state('admin.domain.dav', {
