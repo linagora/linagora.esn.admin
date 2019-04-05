@@ -24,7 +24,8 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.i18n', 'i18n'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.jobqueue', 'jobqueue'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.elasticsearch', 'elasticsearch'),
-    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.user', 'user')
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.user', 'user'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.esn-config', 'esn-config')
   ],
 
   states: {
@@ -33,12 +34,14 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       const configuration = require('./backend/webserver/api/configuration')(dependencies);
       const test = require('./backend/webserver/api/test')(dependencies);
       const maintenance = require('./backend/webserver/api/maintenance')(dependencies);
+      const autoconf = require('./backend/webserver/api/autoconf')(dependencies);
 
       const lib = {
         api: {
           configuration,
           test,
-          maintenance
+          maintenance,
+          autoconf
         },
         lib: libModule
       };
@@ -52,6 +55,7 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       app.use('/api/configuration', this.api.configuration);
       app.use('/api/test', this.api.test);
       app.use('/api/maintenance', this.api.maintenance);
+      app.use('/api/autoconf', this.api.autoconf);
 
       const webserverWrapper = dependencies('webserver-wrapper');
       const frontendJsFilesFullPath = glob.sync([
