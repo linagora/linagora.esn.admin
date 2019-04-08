@@ -4,19 +4,19 @@
   angular.module('linagora.esn.admin')
     .controller('adminAutoconfController', adminAutoconfController);
 
-  function adminAutoconfController($stateParams, adminDomainConfigService, asyncAction, _, ADMIN_AUTOCONF_TEMPLATE, ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_LOADING_STATUS) {
+  function adminAutoconfController(_, $stateParams, adminDomainConfigService, adminAutoconfService, asyncAction, ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_LOADING_STATUS, ADMIN_AUTOCONF_SOCKET_TYPES) {
     var self = this;
     var domainId = $stateParams.domainId;
-    var CONFIG_NAME = 'autoconf';
 
     self.$onInit = $onInit;
     self.save = save;
     self.status = ADMIN_LOADING_STATUS.loading;
 
     function $onInit() {
-      adminDomainConfigService.get(domainId, CONFIG_NAME)
+      adminDomainConfigService.get(domainId, 'autoconf')
         .then(function(data) {
-          self.config = data || angular.copy(ADMIN_AUTOCONF_TEMPLATE);
+          self.account = data && data.accounts && data.accounts.length && data.accounts[0];
+          self.ADMIN_AUTOCONF_SOCKET_TYPES = ADMIN_AUTOCONF_SOCKET_TYPES;
           self.status = ADMIN_LOADING_STATUS.loaded;
         })
         .catch(function() {
@@ -29,7 +29,7 @@
     }
 
     function _saveConfiguration() {
-      return adminDomainConfigService.set(domainId, CONFIG_NAME, self.config);
+      return adminAutoconfService.save(domainId, self.account);
     }
   }
 })(angular);

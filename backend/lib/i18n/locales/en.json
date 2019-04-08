@@ -206,5 +206,6 @@
   "Max size upload": "Max size upload",
   "This max size upload will be used for  attachments collaborative": "This max size upload will be used for  attachments collaborative",
   "Elasticsearch": "Elasticsearch",
-  "Mail server settings": "Mail server settings"
+  "Mail server settings": "Mail server settings",
+  "This is required": "This is required"
 }
