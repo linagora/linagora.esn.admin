@@ -7,7 +7,7 @@ sub-header
   .card-body.card-padding
     admin-users-configuration
 
-.card
+.card(ng-if="$ctrl.displayUserCreation")
   .card-header
     h2.lvh-label #{__('Quick user creation')}
   .card-body.card-padding

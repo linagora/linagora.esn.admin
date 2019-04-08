@@ -2,7 +2,12 @@
 
 angular.module('linagora.esn.admin')
 
-.factory('adminUsersService', function($rootScope, domainAPI, asyncAction, ADMIN_USERS_EVENTS) {
+.factory('adminUsersService', function(_, $rootScope, domainAPI, asyncAction, adminDomainConfigService, ADMIN_USERS_EVENTS) {
+
+  return {
+    createMember: createMember,
+    isUserCreationEnabled: isUserCreationEnabled
+  };
 
   function createMember(domainId, user) {
     var notificationMessages = {
@@ -18,7 +23,20 @@ angular.module('linagora.esn.admin')
     });
   }
 
-  return {
-    createMember: createMember
-  };
+  function isUserCreationEnabled(domainId) {
+    return _isLDAPAuthenticationEnabled(domainId);
+  }
+
+  function _isLDAPAuthenticationEnabled(domainId) {
+    return adminDomainConfigService.get(domainId, 'ldap')
+      .then(function(data) {
+        return data ? _isEnabledInConfiguration(_.isArray(data) ? data : [data]) : true;
+      });
+
+    function _isEnabledInConfiguration(configuration) {
+      return !_.some(configuration, function(element) {
+        return element && element.usage && element.usage.auth;
+      });
+    }
+  }
 });
