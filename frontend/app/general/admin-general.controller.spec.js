@@ -8,22 +8,25 @@ var expect = chai.expect;
 describe('The adminGeneralController', function() {
 
   var $rootScope, $stateParams, $scope, $controller;
-  var adminDomainConfigService;
+  var adminDomainConfigService, homePageService;
   var configuraionsMock;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _homePageService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
+      homePageService = _homePageService_;
 
       $stateParams.domainId = 'domain123';
     });
 
     configuraionsMock = { datetime: 'value' };
+    var homePages = { a: 'a', f: 'f', b: 'b'};
+    homePageService.getHomePageCandidates = sinon.stub().returns(homePages);
   });
 
   function initController(scope) {
@@ -43,7 +46,8 @@ describe('The adminGeneralController', function() {
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime', 'language']);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['homePage', 'businessHours', 'datetime', 'language']);
+      expect(homePageService.getHomePageCandidates).to.have.been.calledOnce;
     });
 
     it('should get a list of platform configurations if in platform mode', function() {
@@ -52,7 +56,8 @@ describe('The adminGeneralController', function() {
       var controller = initController();
 
       expect(controller.configs).to.deep.equal(configuraionsMock);
-      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['businessHours', 'datetime']);
+      expect(adminDomainConfigService.getMultiple).to.have.been.calledWith($stateParams.domainId, ['homePage', 'businessHours', 'datetime']);
+      expect(homePageService.getHomePageCandidates).to.have.been.calledOnce;
     });
   });
 
