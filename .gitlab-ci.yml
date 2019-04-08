@@ -1,4 +1,4 @@
-image: linagora/node-test-base:8
+image: node:8.15.0
 
 stages:
   - test
@@ -15,8 +15,23 @@ test:
     - docker
   script:
     - npm i
-    - bower i --allow-root
-    - grunt --chunk=1 --ci
+    - ./node_modules/.bin/bower i --allow-root
+    - ./node_modules/.bin/grunt --chunk=1 --ci
+
+test_midway_backend:
+  stage: test
+  tags:
+    - docker
+  services:
+    - mongo:3.4
+    - elasticsearch:2.4
+    - redis:3
+    - rabbitmq:3.6
+  script:
+    - npm i
+    - ./node_modules/.bin/bower i --allow-root
+    - ./node_modules/.bin/grunt test-midway-backend
+
 
 swagger:
   stage: swagger
@@ -25,7 +40,7 @@ swagger:
   script:
    - npm i
    - npm prune
-   - grunt swagger-generate
+   - ./node_modules/.bin/grunt swagger-generate
   artifacts:
     paths:
      - ./doc/REST_API/swagger/admin-swagger.json
@@ -64,8 +79,8 @@ deploy_dev:
     - npm install --ignore-scripts --production
     - npm update --production
     - npm prune
-    - bower install --production
-    - bower prune
+    - ./node_modules/.bin/bower install --production
+    - ./node_modules/.bin/bower prune
     - git checkout -- .
     - sudo /etc/init.d/rse.dev restart
 
@@ -77,4 +92,4 @@ release:
     - if [ -z "${VERSION}" ]; then exit 1; fi
     - npm i
     - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
-    - grunt release:${VERSION} 
+    - ./node_modules/.bin/grunt release:${VERSION}
