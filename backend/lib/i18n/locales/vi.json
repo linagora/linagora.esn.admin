@@ -107,7 +107,6 @@
   "Client Secret": "Client Secret",
   "Applicattion ID": "Applicattion ID",
   "Application Secret": "Application Secret",
-  "You are in platform administration mode. Any change you make will affect the whole platform.": "Bạn đang ở chế độ hệ thống, bất cứ thay đổi nào sẽ ảnh hưởng đến toàn bộ hệ thống.",
   "Platform administration": "Quản trị nền tảng",
   "%s administration": "Quản trị %s",
   "Domain %s administration": "Quản trị miền %s",
