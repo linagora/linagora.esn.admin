@@ -6,6 +6,5 @@ admin-loading-status
     ng-if="module",
     ng-repeat="module in $ctrl.modules | orderBy:'name'",
     module="module",
-    current-homepage="$ctrl.homePage",
     on-module-enabled-state-change="$ctrl.saveModuleEnabledState(module, enabled)"
   )

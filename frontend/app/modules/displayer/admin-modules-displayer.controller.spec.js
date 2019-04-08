@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The adminModulesDisplayerController', function() {
   var $controller, $rootScope, $scope, $stateParams;
-  var adminDomainConfigService, asyncAction, adminModulesService;
+  var asyncAction, adminModulesService;
   var ADMIN_DEFAULT_NOTIFICATION_MESSAGES, ADMIN_FORM_EVENT;
 
   beforeEach(function() {
@@ -22,7 +22,6 @@ describe('The adminModulesDisplayerController', function() {
     angular.mock.inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminModulesService_, _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_, _ADMIN_FORM_EVENT_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
-      adminDomainConfigService = _adminDomainConfigService_;
       adminModulesService = _adminModulesService_;
       $stateParams = _$stateParams_;
       ADMIN_DEFAULT_NOTIFICATION_MESSAGES = _ADMIN_DEFAULT_NOTIFICATION_MESSAGES_;
@@ -39,31 +38,6 @@ describe('The adminModulesDisplayerController', function() {
 
     return controller;
   }
-
-  describe('The setHome fn', function() {
-    it('should call adminDomainConfigService.setHomePage to save configuration', function(done) {
-      var module = {
-        name: 'linagora.esn.test',
-        homePage: 'test',
-        configurations: []
-      };
-      var ctrl = initController(module);
-      var HOMEPAGE_KEY = 'homePage';
-      var event = {
-        stopPropagation: angular.noop
-      };
-
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      ctrl.setHome(event).then(function() {
-        expect(asyncAction).to.have.been.calledWith(ADMIN_DEFAULT_NOTIFICATION_MESSAGES);
-        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, HOMEPAGE_KEY, module.homePage);
-        expect(ctrl.currentHomepage).to.equal(module.homePage);
-        done();
-      });
-
-      $scope.$digest();
-    });
-  });
 
   describe('The save fn', function() {
     it('should call adminConfigApi.set to save configuration', function(done) {
@@ -162,7 +136,7 @@ describe('The adminModulesDisplayerController', function() {
 
   describe('The switchEnabledState function', function() {
     it('should not call onModuleEnabledStateChange when module enabled state did not changed', function() {
-      var module = { name: 'linagora.esn.test', homePage: 'test', configurations: [], enabled: false };
+      var module = { name: 'linagora.esn.test', configurations: [], enabled: false };
       var ctrl = initController(module);
 
       ctrl.onModuleEnabledStateChange = sinon.stub().returns($q.when());
@@ -175,7 +149,7 @@ describe('The adminModulesDisplayerController', function() {
     });
 
     it('should call onModuleEnabledStateChange when module enabled state changed', function() {
-      var module = { name: 'linagora.esn.test', homePage: 'test', configurations: [], enabled: false };
+      var module = { name: 'linagora.esn.test', configurations: [], enabled: false };
       var ctrl = initController(module);
 
       ctrl.onModuleEnabledStateChange = sinon.stub().returns($q.when());
@@ -189,7 +163,7 @@ describe('The adminModulesDisplayerController', function() {
     });
 
     it('should restore local state when onModuleEnabledStateChange rejects', function() {
-      var module = { name: 'linagora.esn.test', homePage: 'test', configurations: [], enabled: false };
+      var module = { name: 'linagora.esn.test', configurations: [], enabled: false };
       var ctrl = initController(module);
 
       ctrl.onModuleEnabledStateChange = sinon.stub().returns($q.reject(new Error()));
