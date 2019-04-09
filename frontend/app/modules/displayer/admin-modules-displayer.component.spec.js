@@ -1,12 +1,12 @@
 'use strict';
 
-/* global chai, sinon: false */
+/* global chai: false */
 
 var expect = chai.expect;
 
 describe('The adminModulesDisplayer component', function() {
   var $rootScope, $compile;
-  var testModule, testConfig, testHomePage;
+  var testModule, testConfig;
 
   beforeEach(function() {
     module('jadeTemplates');
@@ -32,7 +32,6 @@ describe('The adminModulesDisplayer component', function() {
   }));
 
   beforeEach(function() {
-    testHomePage = 'testHomePage';
     testConfig = {
       name: 'test_config',
       value: 'test_value'
@@ -41,7 +40,6 @@ describe('The adminModulesDisplayer component', function() {
       id: 'linagora.esn.test',
       title: 'Test module',
       icon: '/test/images/test-icon.svg',
-      homePage: 'test',
       config: {
         template: 'test-config',
         displayIn: {
@@ -56,11 +54,10 @@ describe('The adminModulesDisplayer component', function() {
   function initComponent(data) {
     var scope = $rootScope.$new();
 
-    data = data || { module: testModule, homePage: testHomePage };
+    data = data || { module: testModule};
     scope.module = data.module;
-    scope.homePage = data.homePage;
 
-    var element = $compile('<admin-modules-displayer module="module" current-homepage="homePage" />')(scope);
+    var element = $compile('<admin-modules-displayer module="module" />')(scope);
 
     scope.$digest();
 
@@ -111,52 +108,6 @@ describe('The adminModulesDisplayer component', function() {
     var element = initComponent();
 
     expect(element.find('input[name="test"]')).to.have.length(1);
-  });
-
-  describe('The home page button', function() {
-    var $stateParams, adminDomainConfigService;
-
-    beforeEach(inject(function(_$stateParams_, _adminDomainConfigService_) {
-      $stateParams = _$stateParams_;
-      adminDomainConfigService = _adminDomainConfigService_;
-    }));
-
-    it('should inactive when current module is not home page', function() {
-      var element = initComponent();
-
-      expect(element.find('.module-toolbar > span.clickable').hasClass('home-activated')).to.be.false;
-    });
-
-    it('should active when current module is home page', function() {
-      testHomePage = testModule.homePage;
-
-      var element = initComponent();
-
-      expect(element.find('.module-toolbar > .admin-modules-set-homepage > span.clickable').hasClass('home-activated')).to.be.true;
-    });
-
-    it('should set home page on click', function() {
-      $stateParams.domainId = 'domainId';
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-
-      var element = initComponent();
-
-      element.find('.module-toolbar > .admin-modules-set-homepage > span.clickable').click();
-
-      expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, 'homePage', testModule.homePage);
-    });
-
-    it('should not issue set home page when current module is already home page', function() {
-      adminDomainConfigService.set = sinon.spy();
-      testHomePage = testModule.homePage;
-
-      var element = initComponent();
-
-      element.find('.toolbar > span.clickable').click();
-
-      expect(adminDomainConfigService.set).to.not.have.been.called;
-    });
-
   });
 
   describe('The save button', function() {

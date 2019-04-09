@@ -9,14 +9,15 @@
     adminDomainConfigService,
     asyncAction,
     adminModeService,
+    homePageService,
     _,
     ADMIN_DEFAULT_NOTIFICATION_MESSAGES,
     ADMIN_LOADING_STATUS
   ) {
     var self = this;
     var CONFIGURATIONS_LIST = {
-      domain: ['businessHours', 'datetime', 'language'],
-      platform: ['businessHours', 'datetime']
+      domain: ['homePage', 'businessHours', 'datetime', 'language'],
+      platform: ['homePage', 'businessHours', 'datetime']
     };
 
     self.$onInit = $onInit;
@@ -37,6 +38,8 @@
         .catch(function() {
           self.status = ADMIN_LOADING_STATUS.error;
         });
+
+      self.homePages = homePageService.getHomePageCandidates();
     }
 
     function save() {

@@ -13,8 +13,6 @@ angular.module('linagora.esn.admin')
 ) {
   var self = this;
   var domainId = $stateParams.domainId;
-  var HOMEPAGE_VALUE = 'unifiedinbox';
-  var HOMEPAGE_KEY = 'homePage';
   var MODULES_KEY = 'modules';
 
   self.$onInit = $onInit;
@@ -22,10 +20,6 @@ angular.module('linagora.esn.admin')
 
   function $onInit() {
     self.status = ADMIN_LOADING_STATUS.loading;
-
-    adminDomainConfigService.get(domainId, HOMEPAGE_KEY).then(function(data) {
-      self.homePage = data || HOMEPAGE_VALUE;
-    });
 
     adminModulesService.get(domainId)
       .then(setModuleEnabledState)
