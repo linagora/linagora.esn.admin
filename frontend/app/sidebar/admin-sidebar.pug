@@ -5,8 +5,6 @@
     .listview
       .lv-body
         .lv-item.clickable.menu-heading
-          i.mdi.mdi-server
-          .menu-title #{__('Administration Center')}
           admin-mode-switch
         admin-sidebar-items(ng-if="$ctrl.displayIn === 'platform'", items="$ctrl.platformPages")
         admin-sidebar-items(ng-if="$ctrl.displayIn === 'domain'", items="$ctrl.domainPages")

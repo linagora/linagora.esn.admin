@@ -14,6 +14,7 @@
     self.goToDomainMode = goToDomainMode;
     self.goToPlatformMode = goToPlatformMode;
     self.isPlatformMode = isPlatformMode;
+    self.currentDomain = session.domain;
 
     function $onInit() {
       self.hasTwoAdminRoles = session.user.isPlatformAdmin && session.userIsDomainAdministrator();
