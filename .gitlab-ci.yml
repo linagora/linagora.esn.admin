@@ -1,14 +1,15 @@
 image: node:8.15.0
 
 stages:
+  - linter
   - test
   - swagger
   - deploy-swagger
   - deploy_dev
   - release
 
-test:
-  stage: test
+linter:
+  stage: linter
   except:
     - triggers
   tags:
@@ -16,7 +17,20 @@ test:
   script:
     - npm i
     - ./node_modules/.bin/bower i --allow-root
-    - ./node_modules/.bin/grunt --chunk=1 --ci
+    - ./node_modules/.bin/grunt linters
+
+test_unit_frontend:
+  stage: test
+  except:
+    - triggers
+  tags:
+    - docker
+  image: docker-registry.linagora.com:5000/public-snapshots/openpaas-esn-test-helper:latest
+  before_script:
+    - npm i
+    - ./node_modules/.bin/bower i --allow-root
+  script:
+    - ./node_modules/.bin/grunt test-unit-frontend
 
 test_midway_backend:
   stage: test
@@ -38,12 +52,12 @@ swagger:
   tags:
     - docker
   script:
-   - npm i
-   - npm prune
-   - ./node_modules/.bin/grunt swagger-generate
+    - npm i
+    - npm prune
+    - ./node_modules/.bin/grunt swagger-generate
   artifacts:
     paths:
-     - ./doc/REST_API/swagger/admin-swagger.json
+      - ./doc/REST_API/swagger/admin-swagger.json
 
 deploy-swagger:
   stage: deploy-swagger

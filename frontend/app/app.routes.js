@@ -199,5 +199,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-login />'
         }
       }
+    })
+    .state('admin.domain.theme', {
+      url: '/theme',
+      views: {
+        'root@admin': {
+          template: '<admin-themes />'
+        }
+      }
     });
 });

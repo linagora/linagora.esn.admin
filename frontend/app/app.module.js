@@ -2,6 +2,7 @@
 
 angular.module('linagora.esn.admin', [
   'restangular',
+  'colorpicker',
   'esn.http',
   'esn.router',
   'esn.core',
@@ -24,5 +25,6 @@ angular.module('linagora.esn.admin', [
   'esn.home-page',
   'esn.configuration',
   'esn.availability',
+  'esn.themes',
   'linagora.esn.resource'
 ]);

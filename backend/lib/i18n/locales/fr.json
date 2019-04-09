@@ -207,5 +207,14 @@
   "This max size upload will be used for  attachments collaborative": "La taille maximum des envois sera utilisé pour les pièces jointes collaborative",
   "Elasticsearch": "Elasticsearch",
   "Mail server settings": "Paramètres du serveur de messagerie",
-  "This is required": "Ceci est requis"
+  "This is required": "Ceci est requis",
+  "Themes Configuration": "Configuration des thèmes",
+  "Primary color": "Couleur principale",
+  "Secondary color": "Couleur secondaire",
+  "Background color": "Color de fond",
+  "Text color": "Couleur primaire de texte",
+  "Logo": "Logo",
+  "Mobile logo": "Logo sur mobile",
+  "Sorry, we couldn't upload the image. Try again later": "Désolé, nous n'avons pas pu télécharger l'image. Veuillez réessayer plus tard.",
+  "Sorry, the image is too heavy. The max image size is %s": "Désolé, l'image est trop lourde. La taille maximum est de %s"
 }

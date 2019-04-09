@@ -17,6 +17,8 @@ module.exports = function(config) {
       'frontend/components/dynamic-directive/dist/dynamic-directive.min.js',
       'frontend/components/restangular/dist/restangular.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',
+      'frontend/components/angular-colorpicker-directive/js/color-picker.js',
+      'frontend/components/restangular/dist/restangular.js',
       'node_modules/chai-shallow-deep-equal/chai-shallow-deep-equal.js',
       'node_modules/sinon/pkg/sinon.js',
 
@@ -43,7 +45,18 @@ module.exports = function(config) {
     colors: true,
     singleRun: true,
     autoWatch: true,
-    browsers: ['PhantomJS', 'Chrome', 'Firefox'],
+    // Disable ChromeHeadless causing problems for now
+    // https://github.com/GoogleChrome/puppeteer/issues/1925
+    browsers: ['FirefoxHeadless'/*,'ChromeHeadless'*/],
+    customLaunchers: {
+      FirefoxHeadless: {base: 'Firefox', flags: ['--headless']},
+      ChromeHeadless: {base: 'Chrome', flags: ['--headless', '--disable-gpu']},
+      Chrome_with_debugging: {
+        base: 'Chrome',
+        flags: ['--remote-debugging-port=9222'],
+        debug: true
+      }
+    },
     reporters: ['coverage', 'spec'],
     preprocessors: {
       'frontend/app/**/!(*spec).js': ['coverage'],
@@ -51,7 +64,6 @@ module.exports = function(config) {
     },
 
     plugins: [
-      'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-mocha',

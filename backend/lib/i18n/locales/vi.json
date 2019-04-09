@@ -207,5 +207,14 @@
   "This max size upload will be used for  attachments collaborative": "Tải lên kích thước tối đa này sẽ được sử dụng cho các tệp đính kèm cộng tác",
   "Elasticsearch": "Elasticsearch",
   "Mail server settings": "Cài đặt máy chủ thư",
-  "This is required": "Bắt buộc"
+  "This is required": "Bắt buộc",
+  "Themes Configuration": "Thiết lập chủ đề",
+  "Primary color": "Màu chính",
+  "Secondary color": "Màu phụ",
+  "Background color": "Màu nền",
+  "Text color": "Màu chữ",
+  "Mobile logo": "Biểu tượng điện thoại",
+  "Logo": "Logo",
+  "Sorry, we couldn't upload the image. Try again later": "Xin lỗi, chúng tôi không thể tải ảnh lên lúc này. Hãy thử lại sau",
+  "Sorry, the image is too heavy. The max image size is %s": "Xin lỗi, ảnh quá lớn. Kích thước tối đa là %s"
 }
