@@ -8,21 +8,28 @@ var expect = chai.expect;
 describe('The adminAutoconfController', function() {
 
   var $controller, $rootScope, $stateParams, $scope;
-  var ADMIN_AUTOCONF_TEMPLATE;
-  var adminDomainConfigService;
-  var CONFIG_NAME = 'autoconf';
+  var adminDomainConfigService, adminAutoconfService;
+  var config;
 
   beforeEach(function() {
     module('linagora.esn.admin');
 
-    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _ADMIN_AUTOCONF_TEMPLATE_) {
+    inject(function(_$controller_, _$rootScope_, _$stateParams_, _adminDomainConfigService_, _adminAutoconfService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $stateParams = _$stateParams_;
       adminDomainConfigService = _adminDomainConfigService_;
-      ADMIN_AUTOCONF_TEMPLATE = _ADMIN_AUTOCONF_TEMPLATE_;
+      adminAutoconfService = _adminAutoconfService_;
 
       $stateParams.domainId = 'domain123';
+      config = {
+        addons: [],
+        accounts: [
+          {
+            foo: 'bar'
+          }
+        ]
+      };
     });
 
   });
@@ -38,47 +45,27 @@ describe('The adminAutoconfController', function() {
     return controller;
   }
 
-  it('should get Autoconf configuration from server on init', function() {
-    var config = { key: 'value' };
+  describe('The $onInit function', function() {
+    it('should get the first account from the full configuration', function() {
+      adminDomainConfigService.get = sinon.stub().returns($q.when(config));
 
-    adminDomainConfigService.get = sinon.stub().returns($q.when(config));
+      var controller = initController();
 
-    var controller = initController();
-
-    expect(controller.config).to.deep.equal(config);
-    expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
-  });
-
-  it('should get Autoconf configuration template on init if there is no configuration from server', function() {
-    adminDomainConfigService.get = sinon.stub().returns($q.when());
-
-    var controller = initController();
-
-    expect(controller.config).to.deep.equal(ADMIN_AUTOCONF_TEMPLATE);
-    expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME);
+      expect(controller.account).to.deep.equal(config.accounts[0]);
+    });
   });
 
   describe('The save function', function() {
+    it('should call adminAutoconfService.save to save configuration', function(done) {
+      adminAutoconfService.save = sinon.stub().returns($q.when());
+      adminDomainConfigService.get = function() { return $q.when(config); };
 
-    var configMock;
-
-    beforeEach(function() {
-      configMock = { key: 'value' };
-
-      adminDomainConfigService.get = function() {
-        return $q.when(configMock);
-      };
-    });
-
-    it('should call adminDomainConfigService.set to save configuration', function(done) {
       var controller = initController();
 
-      adminDomainConfigService.set = sinon.stub().returns($q.when());
-      controller.config.key = 'new value';
       controller.save().then(function() {
-        expect(adminDomainConfigService.set).to.have.been.calledWith($stateParams.domainId, CONFIG_NAME, controller.config);
+        expect(adminAutoconfService.save).to.have.been.calledWith($stateParams.domainId, controller.account);
         done();
-      });
+      }).catch(done);
 
       $scope.$digest();
     });

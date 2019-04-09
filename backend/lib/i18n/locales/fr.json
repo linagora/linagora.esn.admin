@@ -206,5 +206,6 @@
   "Max size upload": "Taille maximum des envois",
   "This max size upload will be used for  attachments collaborative": "La taille maximum des envois sera utilisé pour les pièces jointes collaborative",
   "Elasticsearch": "Elasticsearch",
-  "Mail server settings": "Paramètres du serveur de messagerie"
+  "Mail server settings": "Paramètres du serveur de messagerie",
+  "This is required": "Ceci est requis"
 }

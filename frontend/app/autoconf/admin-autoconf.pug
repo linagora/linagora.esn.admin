@@ -2,4 +2,59 @@ sub-header
   admin-autoconf-subheader(on-form-submit="$ctrl.save()", form="form")
 
 form(name="form", admin-loading-status)
-  admin-autoconf-accounts(accounts="$ctrl.config.accounts")
+  ng-form(name="form")
+    .card
+      .card-header
+        h2 #{__('IMAP')}
+      .card-body.card-padding
+        .row
+          .col-xs-6
+            esn-form-group(label=__('Display name'))
+              input.form-control(type="text", ng-model="$ctrl.account.imap.prettyName", disabled)
+          .col-xs-6
+            esn-form-group(label=__('Username'))
+              input.form-control(type="text", ng-model="$ctrl.account.imap.username", disabled)
+        .row
+          .col-xs-6
+            esn-form-group(label=__('Server hostname'))
+              input.form-control(type="text", ng-model="$ctrl.account.imap.hostName", name="imapHostName", required)
+          .col-xs-6
+            esn-form-group(label=__('Port'))
+              input.form-control(type="number", ng-model="$ctrl.account.imap.port", name="imapPort", required)
+        .row
+          .col-xs-6
+            md-input-container
+              label #{__('Connection security')}
+              md-select(name="imapSocket", ng-model="$ctrl.account.imap.socketType",  md-no-asterisk, required)
+                md-option(ng-value="socket.key" ng-repeat="socket in $ctrl.ADMIN_AUTOCONF_SOCKET_TYPES")
+                  | {{ ::socket.label | esnI18n }}
+              .has-error(ng-messages="form.imapSocket.$error")
+                .help-block(ng-message="required") #{__('This is required')}
+
+    .card
+      .card-header
+        h2 #{__('SMTP')}
+      .card-body.card-padding
+        .row
+          .col-xs-6
+            esn-form-group(label=__('Description'))
+              input.form-control(type="text", ng-model="$ctrl.account.smtp.description", disabled)
+          .col-xs-6
+            esn-form-group(label=__('Username'))
+              input.form-control(type="text", ng-model="$ctrl.account.smtp.username", disabled)
+        .row
+          .col-xs-6
+            esn-form-group(label=__('Server hostname'))
+              input.form-control(type="text", ng-model="$ctrl.account.smtp.hostname", name="smtpHostName", required)
+          .col-xs-6
+            esn-form-group(label=__('Port'))
+              input.form-control(type="number", ng-model="$ctrl.account.smtp.port", name="smtpPort", required)
+        .row
+          .col-xs-6
+            md-input-container
+              label #{__('Connection security')}
+              md-select(name="smtpSocket", ng-model="$ctrl.account.smtp.socketType", md-no-asterisk, required)
+                md-option(ng-value="socket.key" ng-repeat="socket in $ctrl.ADMIN_AUTOCONF_SOCKET_TYPES")
+                  | {{ ::socket.label | esnI18n }}
+              .has-error(ng-messages="form.smtpSocket.$error")
+                .help-block(ng-message="required") #{__('This is required')}

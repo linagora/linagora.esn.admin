@@ -191,5 +191,6 @@
   "Max size upload": "最大尺寸上传",
   "This max size upload will be used for  attachments collaborative": "此最大尺寸上传将用于附件协作",
   "Elasticsearch": "Elasticsearch",
-  "Mail server settings": "邮件服务器设置"
+  "Mail server settings": "邮件服务器设置",
+  "This is required": "必填项"
 }
