@@ -84,10 +84,10 @@
     function onFileSelect(files, destination) {
       var uploadService = fileUploadService.get();
 
-      return esnConfig('core.maxSizeUpload', MAX_SIZE_UPLOAD_DEFAULT).then(function(maxSizeUpload) {
+      return esnConfig('core.maxSizeUpload', MAX_SIZE_UPLOAD_DEFAULT).then(function(config) {
         var file = files[0];
 
-        if (file.size < maxSizeUpload) {
+        if (file.size < config.maxSizeUpload) {
           self.uploadLock[destination] = true;
           _mutatePristine();
           uploadService.addFile(file, true);
@@ -96,7 +96,7 @@
         } else {
           rejectWithErrorNotification(
             esnI18nService.translate(
-              'Sorry, the image is too heavy. The max image size is %s', [$filter('bytes')(maxSizeUpload)]
+              'Sorry, the image is too heavy. The max image size is %s', [$filter('bytes')(config.maxSizeUpload)]
             ).toString(), {});
         }
       });
