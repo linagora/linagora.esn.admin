@@ -24,7 +24,7 @@ describe('The adminThemes component', function() {
       });
 
       $provide.value('esnConfig', function(key, defaultValue) {
-        return $q.when(defaultValue);
+        return $q.when({maxSizeUpload: defaultValue});
       });
 
       $provide.value('fileUploadService', {get: function() { return fileUploadService; }});
