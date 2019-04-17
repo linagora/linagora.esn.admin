@@ -221,5 +221,7 @@
   "will become normal user after this action.": "在该操作后将会成为普通用户",
   "you": "您",
   "You are about to remove the LDAP configuration \"%s\"": "您即将移除LDAP设置 \"%s",
-  "Application colors": "应用颜色"
+  "Application colors": "应用颜色",
+  "Elasticsearch URL to be used in backend": "要在后端使用的Elasticsearch网址",
+  "Elasticsearch Configuration": "Elasticsearch配置"
 }
