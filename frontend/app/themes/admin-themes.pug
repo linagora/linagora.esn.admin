@@ -13,7 +13,7 @@ form(name="form", admin-loading-status)
             ng-style='{background: $ctrl.model.colors[item.apiVariable], color: $ctrl.computeTextColor($ctrl.model.colors[item.apiVariable])}'
           )
             | {{::item.displayText}}
-  .card
+  .card(ng-if="false")
     .card-body.card-padding
       div(ng-repeat='subgroup in $ctrl.adminThemesLogoVariablesGroups.groups')
         .row
