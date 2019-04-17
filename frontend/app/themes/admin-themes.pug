@@ -3,6 +3,8 @@ sub-header
 
 form(name="form", admin-loading-status)
   .card
+    .card-header
+      h2 #{__('Application colors')}
     .card-body.card-padding
       .row.button-row(ng-repeat='subgroup in $ctrl.adminThemesColorVariablesGroups.groups')
         div(class="col-md-{{12 / $ctrl.adminThemesColorVariablesGroups.groupLength}}" ng-repeat='item in subgroup')

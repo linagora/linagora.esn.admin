@@ -220,5 +220,6 @@
   "Web server configuration": "网页服务器设置",
   "will become normal user after this action.": "在该操作后将会成为普通用户",
   "you": "您",
-  "You are about to remove the LDAP configuration \"%s\"": "您即将移除LDAP设置 \"%s"
+  "You are about to remove the LDAP configuration \"%s\"": "您即将移除LDAP设置 \"%s",
+  "Application colors": "应用颜色"
 }

@@ -220,5 +220,6 @@
   "Logo": "Logo",
   "Mobile logo": "Mobile logo",
   "Sorry, we couldn't upload the image. Try again later": "Sorry, we couldn't upload the image. Try again later",
-  "Sorry, the image is too heavy. The max image size is %s": "Sorry, the image is too heavy. The max image size is %s"
+  "Sorry, the image is too heavy. The max image size is %s": "Sorry, the image is too heavy. The max image size is %s",
+  "Application colors": "Application colors"
 }
