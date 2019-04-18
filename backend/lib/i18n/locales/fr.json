@@ -220,5 +220,6 @@
   "Logo": "Logo",
   "Mobile logo": "Logo sur mobile",
   "Sorry, we couldn't upload the image. Try again later": "Désolé, nous n'avons pas pu télécharger l'image. Veuillez réessayer plus tard.",
-  "Sorry, the image is too heavy. The max image size is %s": "Désolé, l'image est trop lourde. La taille maximum est de %s"
+  "Sorry, the image is too heavy. The max image size is %s": "Désolé, l'image est trop lourde. La taille maximum est de %s",
+  "Application colors": "Couleurs de l'application"
 }
