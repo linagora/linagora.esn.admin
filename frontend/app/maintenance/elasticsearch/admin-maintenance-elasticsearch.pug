@@ -1,4 +1,8 @@
-.block-header
-  h2 #{__('Elasticsearch')}
+.lv-body
+  .lv-item(toggled="true", esn-toggle)
+    .md-button.clickable.flex-start.flex-vertical-centered.block-header
+      h2 #{__('Elasticsearch')}
+      i.mdi.mdi-chevron-up
 
-admin-maintenance-elasticsearch-resource(ng-repeat="resource in $ctrl.resources", resource="resource")
+  ul
+    admin-maintenance-elasticsearch-resource(ng-repeat="resource in $ctrl.resources", resource="resource")
