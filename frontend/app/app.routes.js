@@ -207,5 +207,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-themes />'
         }
       }
+    })
+    .state('admin.domain.elasticsearch', {
+      url: '/elasticsearch',
+      views: {
+        'root@admin': {
+          template: '<admin-elasticsearch />'
+        }
+      }
     });
 });

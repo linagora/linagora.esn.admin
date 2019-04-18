@@ -163,4 +163,12 @@ angular.module('linagora.esn.admin')
     domain: true,
     platform: false
   }
+}, {
+  id: 'elasticsearch',
+  name: 'Elasticsearch',
+  icon: 'mdi-search-web',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
 }]);
