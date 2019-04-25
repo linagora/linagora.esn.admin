@@ -171,4 +171,12 @@ angular.module('linagora.esn.admin')
     domain: false,
     platform: true
   }
+}, {
+  id: 'session',
+  name: 'Session',
+  icon: 'mdi-update',
+  displayIn: {
+    domain: false,
+    platform: true
+  }
 }]);
