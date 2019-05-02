@@ -223,5 +223,10 @@
   "Sorry, the image is too heavy. The max image size is %s": "Sorry, the image is too heavy. The max image size is %s",
   "Application colors": "Application colors",
   "Elasticsearch URL to be used in backend": "Elasticsearch URL to be used in backend",
-  "Elasticsearch Configuration": "Elasticsearch Configuration"
+  "Elasticsearch Configuration": "Elasticsearch Configuration",
+  "Session Configuration": "Session Configuration",
+  "Secret": "Secret",
+  "Time to live": "Time to live",
+  "The secret used to sign the session ID cookie, change this will log all users out": "The secret used to sign the session ID cookie, change this will log all users out",
+  "The number of milliseconds until the session ID cookie becomes invalid": "The number of milliseconds until the session ID cookie becomes invalid"
 }

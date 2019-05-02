@@ -215,5 +215,13 @@ angular.module('linagora.esn.admin')
           template: '<admin-elasticsearch />'
         }
       }
+    })
+    .state('admin.domain.session', {
+      url: '/session',
+      views: {
+        'root@admin': {
+          template: '<admin-session />'
+        }
+      }
     });
 });

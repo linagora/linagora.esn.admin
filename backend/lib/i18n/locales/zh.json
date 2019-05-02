@@ -223,5 +223,10 @@
   "You are about to remove the LDAP configuration \"%s\"": "您即将移除LDAP设置 \"%s",
   "Application colors": "应用颜色",
   "Elasticsearch URL to be used in backend": "要在后端使用的Elasticsearch网址",
-  "Elasticsearch Configuration": "Elasticsearch配置"
+  "Elasticsearch Configuration": "Elasticsearch配置",
+  "Session Configuration": "会话配置",
+  "Secret": "Secret",
+  "Time to live": "Time to live",
+  "The secret used to sign the session ID cookie, change this will log all users out": "用于签署会话ID cookie的秘密，更改此密码将记录所有用户",
+  "The number of milliseconds until the session ID cookie becomes invalid": "会话ID cookie变为无效之前的毫秒数"
 }
