@@ -7,7 +7,8 @@
       templateUrl: '/admin/app/themes/admin-themes-subheader.html',
       bindings: {
         onFormSubmit: '&',
-        form: '<'
+        form: '<',
+        reset: '&'
       }
     });
 })(angular);
