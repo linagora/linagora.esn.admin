@@ -8,7 +8,9 @@
     $scope,
     $q,
     $filter,
+    $window,
     _,
+    asyncAction,
     esnI18nService,
     themesService,
     esnConfig,
@@ -65,6 +67,27 @@
     }
 
     function save() {
+      var messages = {
+        progressing: 'Saving configuration...',
+        success: 'Configuration saved. Click on \'Reload\' to apply changes',
+        failure: 'Failed to save configuration'
+      };
+
+      var reloadOption = {
+        onSuccess: {
+          linkText: 'Reload',
+          action: function() { $window.location.reload(); }
+        }
+      };
+
+      return asyncAction(
+        messages,
+        saveConfiguration,
+        reloadOption
+      );
+    }
+
+    function saveConfiguration() {
       var newColors = ADMIN_THEMES_COLOR_VARIABLES.map(function(item) {
         return {key: item.apiVariable, value: self.model.colors[item.apiVariable]};
       });
@@ -75,10 +98,11 @@
         newLogos[item.apiVariable] = self.model.logos[item.apiVariable];
       });
 
-      return self.themesServiceForDomain.saveTheme({colors: newColors, logos: newLogos}).then(function() {
-        _.assign(self.model.colors.originalValues, self.model.colors.newValues);
-        _.assign(self.model.logos.originalValues, self.model.logos.newValues);
-      }).finally(_mutatePristine);
+      return self.themesServiceForDomain.saveTheme({colors: newColors, logos: newLogos})
+        .then(function() {
+          _.assign(self.model.colors.originalValues, self.model.colors.newValues);
+          _.assign(self.model.logos.originalValues, self.model.logos.newValues);
+        }).finally(_mutatePristine);
     }
 
     function onFileSelect(files, destination) {
