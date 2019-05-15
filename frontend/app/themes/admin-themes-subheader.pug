@@ -6,4 +6,11 @@ block left
     |  #{__('Themes Configuration')}
 
 block right
+  md-menu-bar
+    md-menu
+      button.btn.btn-link.btn-icon(type="button", ng-click="$mdMenu.open()", title=__('More'))
+        i.mdi.mdi-dots-vertical
+      md-menu-content.dm-icon
+        md-button(ng-click="$ctrl.reset()")
+          | #{__('Reset default theme')}
   esn-subheader-save-button(on-click="$ctrl.onFormSubmit()", form="$ctrl.form")

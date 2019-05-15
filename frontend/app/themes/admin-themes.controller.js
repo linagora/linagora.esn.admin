@@ -47,6 +47,7 @@
     self.save = save;
     self.onFileSelect = onFileSelect;
     self.computeTextColor = colorContrastService.computeTextColor;
+    self.reset = reset;
 
     function $onInit() {
       self.status = ADMIN_LOADING_STATUS.loading;
@@ -188,6 +189,14 @@
           self.model[modeldestination].newValues[backingField] = value;
           _mutatePristine();
         }
+      });
+    }
+
+    function reset() {
+      ADMIN_THEMES_COLOR_VARIABLES.forEach(function(item) {
+
+        self.model.colors[item.apiVariable] = item.default;
+        self.model.logos[item.apiVariable] = item.default;
       });
     }
   }
