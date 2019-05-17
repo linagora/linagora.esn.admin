@@ -18,24 +18,34 @@ admin-modules {
         padding: 15px;
         border-bottom: 1px solid @adminModuleBorderColor;
 
-        .module-name {
-          .flex-grow;
-          .ellipsis;
+        .card-header-container {
+          .flex-vertical-centered;
 
-          width: 40%;
-          color: @secondaryTextColor;
-
-          img {
-            height: 2.5em;
+          .icon {
+            width: 2.5em;
             margin-right: 10px;
           }
-        }
 
-        .unsaved-changes {
-          font-weight: 500;
-          color: @m-black;
-          span:after {
-            content: '\0020\002A';
+          .module-name {
+            .flex-grow;
+            .ellipsis;
+  
+            width: 40%;
+            color: @secondaryTextColor;
+  
+            img {
+              height: 2.5em;
+              margin-right: 10px;
+            }
+            
+            &.unsaved-changes {
+              font-weight: 500;
+              color: @m-black;
+
+              span:after {
+                content: '\0020\002A';
+              }
+            }
           }
         }
 
