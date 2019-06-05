@@ -39,7 +39,6 @@ describe('The adminModulesDisplayer component', function() {
     testModule = {
       id: 'linagora.esn.test',
       title: 'Test module',
-      icon: '/test/images/test-icon.svg',
       config: {
         template: 'test-config',
         displayIn: {

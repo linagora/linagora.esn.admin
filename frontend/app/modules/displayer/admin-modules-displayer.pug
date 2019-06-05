@@ -1,9 +1,10 @@
 form(name="form")
   .card(ng-init="expanded=false", ng-class="{clickable: $ctrl.configurations}")
     .card-header(ng-click="expanded=!expanded")
-      h2.module-name(ng-class="form.$pristine ? '': 'unsaved-changes'", title="{{::$ctrl.module.title | esnI18n}}")
-        img(ng-src="{{$ctrl.module.icon}}")
-        span {{::$ctrl.module.title | esnI18n}}
+      .card-header-container
+        .icon(ng-include="$ctrl.module.icon")
+        h2.module-name(ng-class="form.$pristine ? '': 'unsaved-changes'", title="{{::$ctrl.module.title | esnI18n}}")
+          span {{::$ctrl.module.title | esnI18n}}
 
       .module-toolbar
         .admin-modules-features(ng-show="$ctrl.configurations", title=__('Features'))
