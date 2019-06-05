@@ -230,5 +230,6 @@
   "The secret used to sign the session ID cookie, change this will log all users out": "The secret used to sign the session ID cookie, change this will log all users out",
   "The number of milliseconds until the session ID cookie becomes invalid": "The number of milliseconds until the session ID cookie becomes invalid",
   "More": "More",
-  "Reset default theme": "Reset default theme"
+  "Reset default theme": "Reset default theme",
+  "Not available for this module": "Not available for this module"
 }

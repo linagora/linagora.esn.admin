@@ -230,5 +230,6 @@
   "Secret": "Secret",
   "Time to live": "Time to live",
   "The secret used to sign the session ID cookie, change this will log all users out": "用于签署会话ID cookie的秘密，更改此密码将记录所有用户",
-  "The number of milliseconds until the session ID cookie becomes invalid": "会话ID cookie变为无效之前的毫秒数"
+  "The number of milliseconds until the session ID cookie becomes invalid": "会话ID cookie变为无效之前的毫秒数",
+  "Not available for this module": "不适用于此模块"
 }
