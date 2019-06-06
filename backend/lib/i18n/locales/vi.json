@@ -230,5 +230,6 @@
   "The secret used to sign the session ID cookie, change this will log all users out": "Secret dùng để mã hóa cookie phiên làm việc, thay đổi sẽ đăng xuất toàn bộ người dùng",
   "The number of milliseconds until the session ID cookie becomes invalid": "Số mili giây cho đến khi hết phiên làm việc",
   "More": "Thêm",
-  "Reset default theme": "Đặt lại chủ đề mặc định"
+  "Reset default theme": "Đặt lại chủ đề mặc định",
+  "Not available for this module": "không có sẵn cho mô-đun này"
 }

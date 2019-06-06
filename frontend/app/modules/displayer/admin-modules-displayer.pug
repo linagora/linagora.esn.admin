@@ -12,7 +12,7 @@ form(name="form")
         .admin-modules-disable(ng-if="$ctrl.module.disableable")
           toggle-switch(ng-model="$ctrl.module.enabled", onchange="$ctrl.switchEnabledState()", title=__('Enable the module'))
         .admin-modules-disable(ng-if="!$ctrl.module.disableable")
-          toggle-switch(ng-disabled="!$ctrl.module.disableable", title=__('Enable the module'))
+          toggle-switch(ng-disabled="!$ctrl.module.disableable", title=__('Not available for this module'))
     .card-body
       .form(ng-if="$ctrl.configurations", ng-show="expanded")
         admin-modules-form(template="$ctrl.module.config.template", configurations="$ctrl.configurations", mode="{{$ctrl.mode}}", available-modes="$ctrl.availableModes")

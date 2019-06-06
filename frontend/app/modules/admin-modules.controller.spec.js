@@ -64,7 +64,7 @@ describe('The adminModulesController', function() {
       expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, 'modules');
     });
 
-    it('should set the enabled flag to true if module is not defined in configuration', function() {
+    it('should set the enabled flag to undefined if module is not defined in configuration', function() {
       modulesConfig.push({
         id: 'I am not defined'
       });
@@ -77,7 +77,7 @@ describe('The adminModulesController', function() {
       controller.$onInit();
       $rootScope.$digest();
 
-      expect(controller.modules[0].enabled).to.be.true;
+      expect(controller.modules[0].enabled).to.be.undefined;
    });
 
     it('should set the enabled flag to false if module.enabled is false in configuration', function() {
@@ -97,7 +97,7 @@ describe('The adminModulesController', function() {
       expect(controller.modules[0].enabled).to.be.false;
     });
 
-    it('should set the enabled flag to true if module.enabled is undefined in configuration', function() {
+    it('should set the enabled flag to undefined if module.enabled is undefined in configuration', function() {
       modulesConfig.push({
         id: moduleId
       });
@@ -110,7 +110,7 @@ describe('The adminModulesController', function() {
       controller.$onInit();
       $rootScope.$digest();
 
-      expect(controller.modules[0].enabled).to.be.true;
+      expect(controller.modules[0].enabled).to.be.undefined;
     });
 
     it('should set the enabled flag to true if module.enabled is true in configuration', function() {
