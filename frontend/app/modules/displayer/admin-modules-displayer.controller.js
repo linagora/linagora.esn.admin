@@ -29,6 +29,8 @@
       self.availableModes = ADMIN_MODE;
       self.configurations = buildConfigurations(self.module);
       self.currentEnabledState = !!self.module.enabled;
+      self.module.isSVG = (self.module.icon.match('(.*/)*.+.(svg)$'));
+
     }
 
     function buildConfigurations(module) {
