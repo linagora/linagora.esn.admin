@@ -2,7 +2,8 @@ form(name="form")
   .card(ng-init="expanded=false", ng-class="{clickable: $ctrl.configurations}")
     .card-header(ng-click="expanded=!expanded")
       .card-header-container
-        .icon(ng-include="$ctrl.module.icon")
+        .icon(ng-if="$ctrl.module.isSVG" , ng-include="$ctrl.module.icon")
+        img(ng-if="!$ctrl.module.isSVG" , ng-src="{{$ctrl.module.icon}}")
         h2.module-name(ng-class="form.$pristine ? '': 'unsaved-changes'", title="{{::$ctrl.module.title | esnI18n}}")
           span {{::$ctrl.module.title | esnI18n}}
 

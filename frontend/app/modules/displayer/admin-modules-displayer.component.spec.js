@@ -7,6 +7,7 @@ var expect = chai.expect;
 describe('The adminModulesDisplayer component', function() {
   var $rootScope, $compile;
   var testModule, testConfig;
+  var $httpBackend;
 
   beforeEach(function() {
     module('jadeTemplates');
@@ -26,9 +27,10 @@ describe('The adminModulesDisplayer component', function() {
     module('linagora.esn.test');
   });
 
-  beforeEach(inject(function(_$rootScope_, _$compile_) {
+  beforeEach(inject(function(_$rootScope_, _$compile_, _$httpBackend_) {
     $rootScope = _$rootScope_;
     $compile = _$compile_;
+    $httpBackend = _$httpBackend_;
   }));
 
   beforeEach(function() {
@@ -39,6 +41,7 @@ describe('The adminModulesDisplayer component', function() {
     testModule = {
       id: 'linagora.esn.test',
       title: 'Test module',
+      icon: '/test/images/test-icon.svg',
       config: {
         template: 'test-config',
         displayIn: {
@@ -52,6 +55,8 @@ describe('The adminModulesDisplayer component', function() {
 
   function initComponent(data) {
     var scope = $rootScope.$new();
+
+    $httpBackend.expectGET(testModule.icon).respond();
 
     data = data || { module: testModule};
     scope.module = data.module;
@@ -72,7 +77,7 @@ describe('The adminModulesDisplayer component', function() {
   it('should display the module icon', function() {
     var element = initComponent();
 
-    expect(element.find('h2 > img').attr('ng-src')).to.equal(testModule.icon);
+    expect(element.find('.icon')).to.exist;
   });
 
   it('should make the card clickable when module has configurations', function() {
