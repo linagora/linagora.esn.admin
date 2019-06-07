@@ -37,7 +37,14 @@ angular.module('linagora.esn.admin')
           var predicate = { id: module.id };
           var moduleConfig = _.find(modulesConfig, predicate) || {};
 
-          module.enabled = _.has(moduleConfig, 'enabled') ? moduleConfig.enabled : undefined;
+          if (_.has(moduleConfig, 'enabled')) {
+            module.enabled = moduleConfig.enabled;
+          } else if (_.has(module, 'isDisplayedByDefault')) {
+            module.enabled = module.isDisplayedByDefault;
+          } else {
+            module.enabled = undefined;
+          }
+
         });
 
         return modules;
