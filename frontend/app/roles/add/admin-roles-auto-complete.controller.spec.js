@@ -33,12 +33,13 @@ describe('The adminRolesAutoCompleteController', function() {
 
     var controller = $controller('adminRolesAutoCompleteController', { $scope: $scope });
 
+    controller.$onInit();
     $scope.$digest();
 
     return controller;
   }
 
-  describe('The init function', function() {
+  describe('The $onInit function', function() {
     it('should add the current administrators to the excludes list', function() {
       adminRolesService.getAdministrators = function() {
         return $q.when([{ id: 'admin1' }, { id: 'admin2' }]);
@@ -76,6 +77,22 @@ describe('The adminRolesAutoCompleteController', function() {
       controller.onTagAdded({});
 
       expect(elementScrollService.autoScrollDown).to.have.been.calledOnce;
+    });
+  });
+
+  describe('The onTagRemoved method', function() {
+    beforeEach(function() {
+      adminRolesService.getAdministrators = function() { return $q.when([]); };
+    });
+
+    it('should remove the removed tag in excludes list', function() {
+      var controller = initController();
+      var tag = { id: '123', objectType: 'bar' };
+
+      controller.excludes = [tag];
+      controller.onTagRemoved(tag);
+
+      expect(controller.excludes).to.not.include(tag);
     });
   });
 });
