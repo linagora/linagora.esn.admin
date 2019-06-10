@@ -9,13 +9,6 @@ form(name="form", admin-loading-status)
       .card-body.card-padding
         .row
           .col-xs-6
-            esn-form-group(label=__('Display name'))
-              input.form-control(type="text", ng-model="$ctrl.account.imap.prettyName", disabled)
-          .col-xs-6
-            esn-form-group(label=__('Username'))
-              input.form-control(type="text", ng-model="$ctrl.account.imap.username", disabled)
-        .row
-          .col-xs-6
             esn-form-group(label=__('Server hostname'))
               input.form-control(type="text", ng-model="$ctrl.account.imap.hostName", name="imapHostName", required)
           .col-xs-6
@@ -38,10 +31,7 @@ form(name="form", admin-loading-status)
         .row
           .col-xs-6
             esn-form-group(label=__('Description'))
-              input.form-control(type="text", ng-model="$ctrl.account.smtp.description", disabled)
-          .col-xs-6
-            esn-form-group(label=__('Username'))
-              input.form-control(type="text", ng-model="$ctrl.account.smtp.username", disabled)
+              input.form-control(type="text", ng-model="$ctrl.account.smtp.description")
         .row
           .col-xs-6
             esn-form-group(label=__('Server hostname'))
