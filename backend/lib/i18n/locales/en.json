@@ -231,5 +231,6 @@
   "The number of milliseconds until the session ID cookie becomes invalid": "The number of milliseconds until the session ID cookie becomes invalid",
   "More": "More",
   "Reset default theme": "Reset default theme",
-  "Not available for this module": "Not available for this module"
+  "Not available for this module": "Not available for this module",
+  "Switch mode between platform and domain administration": "Switch mode between platform and domain administration"
 }

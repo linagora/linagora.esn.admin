@@ -33,7 +33,7 @@ describe('The adminModeSwitch component', function() {
   it('should display when current user has two admin roles', function() {
     var element = initComponent();
 
-    expect(element.find('.actions')).to.have.length(1);
+    expect(element.find('md-select:not([disabled])')).to.have.length(1);
   });
 
   it('should not display when current user is only domain admin', function() {
@@ -41,7 +41,7 @@ describe('The adminModeSwitch component', function() {
 
     var element = initComponent();
 
-    expect(element.find('.actions')).to.have.length(0);
+    expect(element.find('md-select[disabled]')).to.have.length(1);
   });
 
   it('should not display when current user is only platform admin', function() {
@@ -49,6 +49,6 @@ describe('The adminModeSwitch component', function() {
 
     var element = initComponent();
 
-    expect(element.find('.actions')).to.have.length(0);
+    expect(element.find('md-select[disabled]')).to.have.length(1);
   });
 });
