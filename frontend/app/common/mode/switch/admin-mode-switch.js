@@ -14,6 +14,7 @@
     self.goToDomainMode = goToDomainMode;
     self.goToPlatformMode = goToPlatformMode;
     self.isPlatformMode = isPlatformMode;
+    self.selectedChanged = selectedChanged;
     self.currentDomain = session.domain;
 
     function $onInit() {
@@ -30,6 +31,10 @@
 
     function isPlatformMode() {
       return adminModeService.isPlatformMode();
+    }
+
+    function selectedChanged() {
+      return self.selectedMode === 'platform' ? goToPlatformMode() : goToDomainMode();
     }
   }
 })(angular);

@@ -231,5 +231,6 @@
   "The number of milliseconds until the session ID cookie becomes invalid": "Số mili giây cho đến khi hết phiên làm việc",
   "More": "Thêm",
   "Reset default theme": "Đặt lại chủ đề mặc định",
-  "Not available for this module": "không có sẵn cho mô-đun này"
+  "Not available for this module": "không có sẵn cho mô-đun này",
+  "Switch mode between platform and domain administration": "Chuyển đổi chế độ giữa nền tảng và quản trị miền"
 }

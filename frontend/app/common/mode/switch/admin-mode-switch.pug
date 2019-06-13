@@ -1,22 +1,9 @@
 .admin-mode-switch
-  .title(ng-if="$ctrl.isPlatformMode()")
-    md-tooltip(md-direction="top") #{__('Platform administration')}
-    span #{__('Platform administration')}
-  .title(ng-if="!$ctrl.isPlatformMode()")
-    md-tooltip(md-direction="top") #{__('%s administration', '{{::$ctrl.currentDomain.name}}')}
-    span #{__('%s administration', '{{::$ctrl.currentDomain.name}}')}
-  .actions(ng-if="$ctrl.hasTwoAdminRoles")
-    li.dropdown
-      a(href='', data-toggle='dropdown', aria-expanded='true')
-        i.mdi.mdi-chevron-down
-      ul.dropdown-menu
-        li
-          a(ng-click="$ctrl.goToPlatformMode()")
-            .admin-mode-switch-item
-              span #{__('Platform administration')}
-              .description #{__('Any change you make will affect the whole platform')}
-        li
-          a(ng-click="$ctrl.goToDomainMode()")
-            .admin-mode-switch-item
-              span #{__('Domain %s administration', '{{::$ctrl.currentDomain.name}}')}
-              .description #{__('Any change you make will affect the whole domain')}
+  md-select.md-no-underline(ng-model="$ctrl.selectedMode", ng-change="$ctrl.selectedChanged()", ng-disabled="!$ctrl.hasTwoAdminRoles", md-container-class="admin-mode-switch-select")
+    md-tooltip(md-direction="top", ng-if="$ctrl.hasTwoAdminRoles") #{__('Switch mode between platform and domain administration')}
+    md-option.admin-mode-switch-item(ng-value="'platform'", ng-if="$ctrl.hasTwoAdminRoles", ng-selected="$ctrl.isPlatformMode()")
+      span #{__('Platform administration')}
+      .description #{__('Any change you make will affect the whole platform')}
+    md-option.admin-mode-switch-item(ng-value="'domain'", ng-if="$ctrl.hasTwoAdminRoles", ng-selected="!$ctrl.isPlatformMode()")
+      span #{__('%s administration', '{{::$ctrl.currentDomain.name}}')}
+      .description #{__('Any change you make will affect the whole domain')}
