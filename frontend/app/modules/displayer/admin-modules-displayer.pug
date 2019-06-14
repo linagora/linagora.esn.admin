@@ -6,17 +6,12 @@ form(name="form")
         span {{::$ctrl.module.title | esnI18n}}
 
       .module-toolbar
-        .admin-modules-set-homepage
-          span.no-homepage(ng-if="!$ctrl.module.homePage", title=__('This module has no home page'))
-            i.mdi.mdi-star-off
-            | #{__('Home')}
-          span.clickable(ng-if="$ctrl.module.homePage", ng-click="$ctrl.setHome($event)", ng-class="{'home-activated': $ctrl.isHomePage()}")
-            i.mdi(ng-class="$ctrl.isHomePage() ? 'mdi-star' : 'mdi-star-outline'")
-            | #{__('Home')}
-        .admin-modules-disable(ng-if="$ctrl.module.disableable")
-          toggle-switch(ng-model="$ctrl.module.enabled", onchange="$ctrl.switchEnabledState()", label=__('Enable the module'))
         .admin-modules-features(ng-show="$ctrl.configurations", title=__('Features'))
           i.mdi(ng-class="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'")
+        .admin-modules-disable(ng-if="$ctrl.module.disableable")
+          toggle-switch(ng-model="$ctrl.module.enabled", onchange="$ctrl.switchEnabledState()", title=__('Enable the module'))
+        .admin-modules-disable(ng-if="!$ctrl.module.disableable")
+          toggle-switch(ng-disabled="!$ctrl.module.disableable", title=__('Enable the module'))
     .card-body
       .form(ng-if="$ctrl.configurations", ng-show="expanded")
         admin-modules-form(template="$ctrl.module.config.template", configurations="$ctrl.configurations", mode="{{$ctrl.mode}}", available-modes="$ctrl.availableModes")
