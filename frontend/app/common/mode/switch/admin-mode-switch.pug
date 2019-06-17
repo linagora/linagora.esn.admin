@@ -4,6 +4,6 @@
     md-option.admin-mode-switch-item(ng-value="'platform'", ng-if="$ctrl.hasTwoAdminRoles", ng-selected="$ctrl.isPlatformMode()")
       span #{__('Platform administration')}
       .description #{__('Any change you make will affect the whole platform')}
-    md-option.admin-mode-switch-item(ng-value="'domain'", ng-if="$ctrl.hasTwoAdminRoles", ng-selected="!$ctrl.isPlatformMode()")
+    md-option.admin-mode-switch-item(ng-value="'domain'", ng-selected="!$ctrl.isPlatformMode()")
       span #{__('%s administration', '{{::$ctrl.currentDomain.name}}')}
       .description #{__('Any change you make will affect the whole domain')}
