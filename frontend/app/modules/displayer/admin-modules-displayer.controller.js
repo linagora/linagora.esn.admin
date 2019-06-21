@@ -8,8 +8,10 @@
   function adminModulesDisplayerController(
     $stateParams,
     $scope,
+    $timeout,
     $q,
     asyncAction,
+    adminDomainConfigService,
     adminModulesService,
     adminModeService,
     ADMIN_MODE,
@@ -18,6 +20,8 @@
   ) {
     var self = this;
     var domainId = $stateParams.domainId;
+    var HOMEPAGE_KEY = 'homePage';
+    var timeoutDuration = 500;
     var postSaveHandlers = [];
 
     self.$onInit = $onInit;
@@ -48,6 +52,28 @@
     function moduleHasConfigurations(module) {
       return module.config && module.config.configurations && module.config.configurations.length > 0;
     }
+
+    self.setHome = function(event) {
+      event.stopPropagation();
+
+      if (self.module.homePage !== self.currentHomepage) {
+        var currentHomePage = self.currentHomepage;
+
+        self.currentHomepage = self.module.homePage;
+
+        return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, function() {
+          return adminDomainConfigService.set(domainId, HOMEPAGE_KEY, self.module.homePage);
+        }).catch(function() {
+          $timeout(function() {
+            self.currentHomepage = currentHomePage;
+          }, timeoutDuration);
+        });
+      }
+    };
+
+    self.isHomePage = function() {
+      return self.currentHomepage === self.module.homePage;
+    };
 
     self.save = function() {
       return asyncAction(ADMIN_DEFAULT_NOTIFICATION_MESSAGES, function() {
