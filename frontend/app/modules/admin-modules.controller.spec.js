@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The adminModulesController', function() {
   var $controller, $rootScope, $stateParams, $scope;
-  var adminDomainConfigService, adminModulesService, modules, modulesConfig, moduleId;
+  var adminDomainConfigService, adminModulesService, modules, modulesConfig, homePage, moduleId;
 
   beforeEach(function() {
     moduleId = 'linagora.esn.community';
@@ -20,6 +20,7 @@ describe('The adminModulesController', function() {
     adminModulesService = {
       get: sinon.stub()
     };
+    homePage = 'state123';
   });
 
   beforeEach(function() {
@@ -52,6 +53,7 @@ describe('The adminModulesController', function() {
   describe('The $onInit function', function() {
     it('should get Modules configurations from server', function() {
       adminModulesService.get.returns($q.when(modules));
+      adminDomainConfigService.get.withArgs($stateParams.domainId, 'homePage').returns($q.when(homePage));
       adminDomainConfigService.get.withArgs($stateParams.domainId, 'modules').returns($q.when(modulesConfig));
 
       var controller = initController();
@@ -61,6 +63,7 @@ describe('The adminModulesController', function() {
 
       expect(controller.modules).to.shallowDeepEqual(modules);
       expect(adminModulesService.get).to.have.been.calledWith($stateParams.domainId);
+      expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, 'homePage');
       expect(adminDomainConfigService.get).to.have.been.calledWith($stateParams.domainId, 'modules');
     });
 
@@ -70,6 +73,7 @@ describe('The adminModulesController', function() {
       });
 
       adminModulesService.get.returns($q.when(modules));
+      adminDomainConfigService.get.withArgs($stateParams.domainId, 'homePage').returns($q.when(homePage));
       adminDomainConfigService.get.withArgs($stateParams.domainId, 'modules').returns($q.when(modulesConfig));
 
       var controller = initController();
@@ -87,6 +91,7 @@ describe('The adminModulesController', function() {
       });
 
       adminModulesService.get.returns($q.when(modules));
+      adminDomainConfigService.get.withArgs($stateParams.domainId, 'homePage').returns($q.when(homePage));
       adminDomainConfigService.get.withArgs($stateParams.domainId, 'modules').returns($q.when(modulesConfig));
 
       var controller = initController();
@@ -103,6 +108,7 @@ describe('The adminModulesController', function() {
       });
 
       adminModulesService.get.returns($q.when(modules));
+      adminDomainConfigService.get.withArgs($stateParams.domainId, 'homePage').returns($q.when(homePage));
       adminDomainConfigService.get.withArgs($stateParams.domainId, 'modules').returns($q.when(modulesConfig));
 
       var controller = initController();
@@ -120,6 +126,7 @@ describe('The adminModulesController', function() {
       });
 
       adminModulesService.get.returns($q.when(modules));
+      adminDomainConfigService.get.withArgs($stateParams.domainId, 'homePage').returns($q.when(homePage));
       adminDomainConfigService.get.withArgs($stateParams.domainId, 'modules').returns($q.when(modulesConfig));
 
       var controller = initController();
