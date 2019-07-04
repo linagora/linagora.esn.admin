@@ -1,6 +1,6 @@
 const express = require('express');
 
-module.exports = (dependencies) => {
+module.exports = dependencies => {
   const authorizationMW = dependencies('authorizationMW');
   const domainMiddleware = dependencies('domainMiddleware');
   const helperMW = dependencies('helperMW');

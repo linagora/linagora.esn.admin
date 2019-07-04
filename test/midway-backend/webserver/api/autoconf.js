@@ -8,7 +8,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
   const password = 'secret';
 
   beforeEach(function(done) {
-    this.helpers.modules.initMidway(MODULE_NAME, (err) => {
+    this.helpers.modules.initMidway(MODULE_NAME, err => {
       if (err) return done(err);
 
       const adminApp = require(this.testEnv.backendPath + '/webserver/application')(this.helpers.modules.current.deps);
@@ -37,7 +37,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
   });
 
   afterEach(function(done) {
-    this.helpers.mongo.dropDatabase((err) => {
+    this.helpers.mongo.dropDatabase(err => {
       if (err) return done(err);
       this.testEnv.core.db.mongo.mongoose.connection.close(done);
     });
@@ -88,7 +88,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
 
       req.send({});
       req.expect(403);
-      req.end((err) => {
+      req.end(err => {
         expect(err).to.not.exist;
 
         done();
@@ -134,7 +134,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
 
       req.send(validConfig);
       req.expect(204);
-      req.end((err) => {
+      req.end(err => {
         expect(err).to.not.exist;
 
         done();

@@ -31,11 +31,11 @@ describe('The maintenance middleware', function() {
         }
       };
       const res = {
-        status: (code) => {
+        status: code => {
           expect(code).to.equal(400);
 
           return {
-            json: (response) => {
+            json: response => {
               expect(response).to.deep.equal({
                 error: {
                   code: 400,
@@ -93,11 +93,11 @@ describe('The maintenance middleware', function() {
         }
       };
       const res = {
-        status: (code) => {
+        status: code => {
           expect(code).to.equal(400);
 
           return {
-            json: (response) => {
+            json: response => {
               expect(response).to.deep.equal({
                 error: {
                   code: 400,

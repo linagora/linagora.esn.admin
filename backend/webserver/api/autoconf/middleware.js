@@ -1,6 +1,6 @@
 const { AUTOCONF_TEMPLATE, AUTOCONF_ACCOUNT_TEMPLATE } = require('./constants');
 
-module.exports = (dependencies) => {
+module.exports = dependencies => {
   const { validator } = dependencies('esn-config');
   const logger = dependencies('logger');
 
@@ -14,7 +14,7 @@ module.exports = (dependencies) => {
 
     validator
       .validate('core', 'autoconf', config)
-      .then((result) => {
+      .then(result => {
         if (result.ok) {
           req.body = config;
 
@@ -29,7 +29,7 @@ module.exports = (dependencies) => {
           }
         });
       })
-      .catch((error) => {
+      .catch(error => {
         logger.error('Error while validating autoconf data', error);
 
         res.status(500).json({

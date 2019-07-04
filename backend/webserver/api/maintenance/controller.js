@@ -1,4 +1,4 @@
-module.exports = (dependencies) => {
+module.exports = dependencies => {
   const logger = dependencies('logger');
   const maintainEs = require('../../../lib/maintenance/elasticsearch')(dependencies);
   const { ACTIONS } = require('./constants')(dependencies);
@@ -17,7 +17,7 @@ module.exports = (dependencies) => {
 
     ACTIONS[action](resource_type)
       .then(() => res.status(202).end())
-      .catch((err) => {
+      .catch(err => {
         const details = `Error while submiting ${action} job for resource type ${resource_type}`;
 
         logger.error(details, err);

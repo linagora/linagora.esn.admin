@@ -93,7 +93,7 @@ describe('The maintenance API getController()', function() {
           expect(code).to.equal(200);
 
           return {
-            json: (result) => {
+            json: result => {
               expect(result).to.deep.equal(types);
               expect(maintainEsMock.getRegisteredResourceTypes).to.have.been.calledOnce;
               done();
