@@ -7,6 +7,7 @@ describe('The maintenance middleware', function() {
 
   beforeEach(function() {
     getModule = () => require(`${this.moduleHelpers.modulesPath}/backend/webserver/api/maintenance/middleware`)(this.moduleHelpers.dependencies);
+    mockery.registerMock('../../../lib/maintenance/elasticsearch', () => ({ getRegisteredResourceTypes: () => {} }));
   });
 
   describe('The validateMaintenanceAction function', function() {
