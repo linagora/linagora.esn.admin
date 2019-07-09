@@ -1,4 +1,4 @@
-module.exports = (dependencies) => {
+module.exports = dependencies => {
   const { ACTIONS } = require('./constants')(dependencies);
   const { getRegisteredResourceTypes } = require('../../../lib/maintenance/elasticsearch')(dependencies);
 

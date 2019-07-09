@@ -6,8 +6,11 @@ const sinon = require('sinon');
 
 describe('The maintenance API getController()', function() {
   let getController;
+  let maintainEsMock;
 
   beforeEach(function() {
+    maintainEsMock = {};
+    mockery.registerMock('../../../lib/maintenance/elasticsearch', () => maintainEsMock);
     getController = () => require(this.moduleHelpers.modulesPath + '/backend/webserver/api/maintenance/controller')(this.moduleHelpers.dependencies);
   });
 
@@ -80,13 +83,6 @@ describe('The maintenance API getController()', function() {
   });
 
   describe('The getRegisteredTypes function', function() {
-    let maintainEsMock;
-
-    beforeEach(function() {
-      maintainEsMock = {};
-      mockery.registerMock('../../../lib/maintenance/elasticsearch', () => maintainEsMock);
-    });
-
     it('should respond 200 with the list of registered resource types', function(done) {
       const types = ['foo', 'bar'];
 
@@ -97,7 +93,7 @@ describe('The maintenance API getController()', function() {
           expect(code).to.equal(200);
 
           return {
-            json: (result) => {
+            json: result => {
               expect(result).to.deep.equal(types);
               expect(maintainEsMock.getRegisteredResourceTypes).to.have.been.calledOnce;
               done();

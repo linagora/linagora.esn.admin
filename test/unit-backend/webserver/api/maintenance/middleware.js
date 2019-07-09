@@ -7,6 +7,7 @@ describe('The maintenance middleware', function() {
 
   beforeEach(function() {
     getModule = () => require(`${this.moduleHelpers.modulesPath}/backend/webserver/api/maintenance/middleware`)(this.moduleHelpers.dependencies);
+    mockery.registerMock('../../../lib/maintenance/elasticsearch', () => ({ getRegisteredResourceTypes: () => {} }));
   });
 
   describe('The validateMaintenanceAction function', function() {
@@ -30,11 +31,11 @@ describe('The maintenance middleware', function() {
         }
       };
       const res = {
-        status: (code) => {
+        status: code => {
           expect(code).to.equal(400);
 
           return {
-            json: (response) => {
+            json: response => {
               expect(response).to.deep.equal({
                 error: {
                   code: 400,
@@ -92,11 +93,11 @@ describe('The maintenance middleware', function() {
         }
       };
       const res = {
-        status: (code) => {
+        status: code => {
           expect(code).to.equal(400);
 
           return {
-            json: (response) => {
+            json: response => {
               expect(response).to.deep.equal({
                 error: {
                   code: 400,

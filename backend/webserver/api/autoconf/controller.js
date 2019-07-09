@@ -1,4 +1,4 @@
-module.exports = (dependencies) => {
+module.exports = dependencies => {
   const logger = dependencies('logger');
   const { EsnConfig } = dependencies('esn-config');
 
@@ -14,7 +14,7 @@ module.exports = (dependencies) => {
 
     return new EsnConfig('core', req.domain.id).set(config)
       .then(() => res.status(204).send())
-      .catch((error) => {
+      .catch(error => {
         logger.error('Unable to save autoconf configuration', error);
 
         res.status(500).json({

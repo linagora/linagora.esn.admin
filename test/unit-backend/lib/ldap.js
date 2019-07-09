@@ -24,7 +24,7 @@ describe('The ldap module', function() {
 
       mockery.registerMock('ldapauth-fork', ldapAuthMock);
 
-      getModule().testAccessLdap(ldapConfigMock).catch((err) => {
+      getModule().testAccessLdap(ldapConfigMock).catch(err => {
         expect(err.message).to.equal('Something error');
 
         done();
@@ -43,7 +43,7 @@ describe('The ldap module', function() {
 
       mockery.registerMock('ldapauth-fork', ldapAuthMock);
 
-      getModule().testAccessLdap(ldapConfigMock).catch((err) => {
+      getModule().testAccessLdap(ldapConfigMock).catch(err => {
         expect(err.message).to.equal('Something error');
         expect(closeMock).to.have.been.calledWith();
 
@@ -64,7 +64,7 @@ describe('The ldap module', function() {
 
       mockery.registerMock('ldapauth-fork', ldapAuthMock);
 
-      getModule().testAccessLdap(ldapConfigMock).catch((err) => {
+      getModule().testAccessLdap(ldapConfigMock).catch(err => {
         expect(err.message).to.equal('Something error');
 
         done();

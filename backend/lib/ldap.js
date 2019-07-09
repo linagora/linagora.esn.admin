@@ -16,7 +16,7 @@ function testAccessLdap(ldapConfig) {
     return q.reject(err);
   }
 
-  ldapauth.on('error', (err) => {
+  ldapauth.on('error', err => {
     ldapauth.close(NOOP);
 
     if (!called) {
@@ -26,7 +26,7 @@ function testAccessLdap(ldapConfig) {
     }
   });
 
-  ldapauth._adminBind((err) => {
+  ldapauth._adminBind(err => {
     ldapauth.close(NOOP);
 
     if (!called) {
