@@ -234,5 +234,12 @@
   "Not available for this module": "không có sẵn cho mô-đun này",
   "Switch mode between platform and domain administration": "Chuyển đổi chế độ giữa nền tảng và quản trị miền",
   "Application logos": "Logo ứng dụng",
-  "Upload": "Tải lên"
+  "Upload": "Tải lên",
+  "Desktop Preview": "Xem trước trên máy tính để bàn",
+  "Mobile Preview": "Xem trước trên thiết bị di động",
+  "Desktop Title": "Tiêu đề máy tính để bàn",
+  "Mobile Title": "Tiêu đề di động",
+  "Item one": "Mục một",
+  "Item two": "Mục hai",
+  "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna."
 }

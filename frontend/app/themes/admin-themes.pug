@@ -2,6 +2,7 @@ sub-header
   admin-themes-subheader(on-form-submit="$ctrl.save()", form="form", reset="$ctrl.reset()")
 
 form(name="form", admin-loading-status)
+  admin-themes-preview(colors="$ctrl.model.colors", logos="$ctrl.model.logos")
 
   .admin-themes-form
     .card
@@ -26,7 +27,7 @@ form(name="form", admin-loading-status)
         div(ng-repeat='subgroup in $ctrl.adminThemesLogoVariablesGroups.groups')
           .row
             div(class="col-md-{{12 / $ctrl.adminThemesLogoVariablesGroups.groupLength}}" ng-repeat='item in subgroup')
-              img.openpaas-logo(ng-src="{{'/api/files/' + $ctrl.model.logos[item.apiVariable]}}", fallback-src='{{item.default}}', ng-class="'admin-themes-logos-' + item.apiVariable")
+              img.openpaas-logo(ng-src="{{'/api/files/' + $ctrl.model.logos[item.apiVariable]}}", fallback-src='{{item.default}}', ng-class="'admin-themes-logos-' + item.apiVariable", ng-style='{background: $ctrl.model.colors.primaryColor}')
           .row.button-row
             div(class="col-md-{{12 / $ctrl.adminThemesLogoVariablesGroups.groupLength}}" ng-repeat='item in subgroup')
               button.admin-themes-color-picker.btn.btn-primary.btn-block(ng-disabled="$ctrl.uploadLock[item.apiVariable]" ng-file-select="$ctrl.onFileSelect($files, item.apiVariable)" accept="image/*"  data-multiple="false")

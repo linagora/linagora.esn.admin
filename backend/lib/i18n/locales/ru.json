@@ -234,5 +234,12 @@
   "Not available for this module": "Недоступно для этого модуля",
   "Switch mode between platform and domain administration": "Переключение режима между платформой и администрированием домена",
   "Application logos": "Логотипы приложений",
-  "Upload": "Загрузить"
+  "Upload": "Загрузить",
+  "Desktop Preview": "Предварительный просмотр рабочего стола",
+  "Mobile Preview": "Предварительный просмотр для мобильных устройств",
+  "Desktop Title": "Название рабочего стола",
+  "Mobile Title": "Название мобильного",
+  "Item one": "Элемент первый",
+  "Item two": "Пункт два",
+  "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna."
 }
