@@ -218,7 +218,7 @@
   "Background color": "Color de fond",
   "Text color": "Couleur primaire de texte",
   "Logo": "Logo",
-  "Mobile logo": "Logo sur mobile",
+  "Favicon": "Favicon",
   "Sorry, we couldn't upload the image. Try again later": "Désolé, nous n'avons pas pu télécharger l'image. Veuillez réessayer plus tard.",
   "Sorry, the image is too heavy. The max image size is %s": "Désolé, l'image est trop lourde. La taille maximum est de %s",
   "Application colors": "Couleurs de l'application",
@@ -232,5 +232,7 @@
   "More": "Plus", 
   "Reset default theme": "Réinitialiser le thème par défaut",
   "Not available for this module": "Non disponilble pour ce module",
-  "Switch mode between platform and domain administration": "Basculez entre les modes d'administration de la plate-forme et du domaine"
+  "Switch mode between platform and domain administration": "Basculez entre les modes d'administration de la plate-forme et du domaine",
+  "Application logos": "Application logos",
+  "Upload": "Téléverser"
 }

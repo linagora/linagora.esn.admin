@@ -217,7 +217,7 @@
   "Secondary color": "Màu phụ",
   "Background color": "Màu nền",
   "Text color": "Màu chữ",
-  "Mobile logo": "Biểu tượng điện thoại",
+  "Favicon": "Favicon",
   "Logo": "Logo",
   "Sorry, we couldn't upload the image. Try again later": "Xin lỗi, chúng tôi không thể tải ảnh lên lúc này. Hãy thử lại sau",
   "Sorry, the image is too heavy. The max image size is %s": "Xin lỗi, ảnh quá lớn. Kích thước tối đa là %s",
@@ -232,5 +232,7 @@
   "More": "Thêm",
   "Reset default theme": "Đặt lại chủ đề mặc định",
   "Not available for this module": "không có sẵn cho mô-đun này",
-  "Switch mode between platform and domain administration": "Chuyển đổi chế độ giữa nền tảng và quản trị miền"
+  "Switch mode between platform and domain administration": "Chuyển đổi chế độ giữa nền tảng và quản trị miền",
+  "Application logos": "Logo ứng dụng",
+  "Upload": "Tải lên"
 }

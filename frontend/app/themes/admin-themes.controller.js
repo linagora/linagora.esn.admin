@@ -96,7 +96,7 @@
       var newLogos = {};
 
       ADMIN_THEMES_LOGO_VARIABLES.forEach(function(item) {
-        newLogos[item.apiVariable] = self.model.logos[item.apiVariable];
+        newLogos[item.apiVariable] = self.model.logos[item.apiVariable] === undefined || self.model.logos[item.apiVariable] === item.default ? '' : self.model.logos[item.apiVariable];
       });
 
       return self.themesServiceForDomain.saveTheme({colors: newColors, logos: newLogos})
@@ -129,7 +129,7 @@
 
     function uploadComplete(result, destination) {
       self.uploadLock[destination] = false;
-      self.model.logos[destination] = '/api/files/' + result[0].response.data._id;
+      self.model.logos[destination] = result[0].response.data._id;
     }
 
     function uploadError(error, destination) {
@@ -194,8 +194,10 @@
 
     function reset() {
       ADMIN_THEMES_COLOR_VARIABLES.forEach(function(item) {
-
         self.model.colors[item.apiVariable] = item.default;
+      });
+
+      ADMIN_THEMES_LOGO_VARIABLES.forEach(function(item) {
         self.model.logos[item.apiVariable] = item.default;
       });
     }
