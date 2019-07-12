@@ -234,5 +234,12 @@
   "Not available for this module": "不适用于此模块",
   "Switch mode between platform and domain administration": "平台和域管理之间的切换模式",
   "Application logos": "应用程序徽标",
-  "Upload": "上传"
+  "Upload": "上传",
+  "Desktop Preview": "桌面预览",
+  "Mobile Preview": "桌面预览",
+  "Desktop Title": "桌面标题",
+  "Mobile Title": "手机标题",
+  "Item one": "第一项",
+  "Item two": "第二项",
+  "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna."
 }

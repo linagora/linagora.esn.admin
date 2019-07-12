@@ -234,5 +234,12 @@
   "Not available for this module": "Non disponilble pour ce module",
   "Switch mode between platform and domain administration": "Basculez entre les modes d'administration de la plate-forme et du domaine",
   "Application logos": "Application logos",
-  "Upload": "Téléverser"
+  "Upload": "Téléverser",
+  "Desktop Preview": "Aperçu Bureau",
+  "Mobile Preview": "Aperçu Mobile",
+  "Desktop Title": "Titre Bureau",
+  "Mobile Title": "Titre Mobile",
+  "Item one": "Point un",
+  "Item two": "Point deux",
+  "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna."
 }
