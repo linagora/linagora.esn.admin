@@ -41,8 +41,8 @@ describe('The adminThemes component', function() {
       ]);
 
       $provide.constant('ADMIN_THEMES_LOGO_VARIABLES', [
-        {apiVariable: 'desktop', displayText: 'Logo', default: '/images/white-logo.svg'},
-        {apiVariable: 'mobile', displayText: 'Mobile logo', default: '/images/white-logo.svg'}
+        {apiVariable: 'logo', displayText: 'Logo', default: '/images/white-logo.svg'},
+        {apiVariable: 'favicon', displayText: 'Favicon', default: '/images/white-logo.svg'}
       ]);
     });
   });
@@ -66,7 +66,7 @@ describe('The adminThemes component', function() {
         bodyBgColor: '#000', primaryColor: '#FB1',
         secondaryColor: '#9FD397', textColor: '#68036B'
       },
-      logos: {desktop: '/images/indeed.png', mobile: '/images/halp.png'}
+      logos: {logo: '/images/indeed.png', favicon: '/images/halp.png'}
     }));
 
     fileUploadService = {
@@ -117,8 +117,8 @@ describe('The adminThemes component', function() {
         });
 
         expect(target.model.logos).to.eql({
-          newValues: {_desktop: '/images/white-logo.svg', _mobile: '/images/white-logo.svg'},
-          originalValues: {_desktop: '/images/white-logo.svg', _mobile: '/images/white-logo.svg'}
+          newValues: {_logo: '/images/white-logo.svg', _favicon: '/images/white-logo.svg'},
+          originalValues: {_logo: '/images/white-logo.svg', _favicon: '/images/white-logo.svg'}
         });
 
         done();
@@ -135,7 +135,7 @@ describe('The adminThemes component', function() {
           bodyBgColor: '#000', primaryColor: '#FB1',
           secondaryColor: '#9FD397', textColor: '#68036B'
         },
-        logos: {desktop: '/images/indeed.png', mobile: '/images/halp.png'}
+        logos: {logo: '/images/indeed.png', favicon: '/images/halp.png'}
       }));
 
       target.$onInit().then(function() {
@@ -151,8 +151,8 @@ describe('The adminThemes component', function() {
         });
 
         expect(target.model.logos).to.eql({
-          newValues: {_desktop: '/images/indeed.png', _mobile: '/images/halp.png'},
-          originalValues: {_desktop: '/images/indeed.png', _mobile: '/images/halp.png'}
+          newValues: {_logo: '/images/indeed.png', _favicon: '/images/halp.png'},
+          originalValues: {_logo: '/images/indeed.png', _favicon: '/images/halp.png'}
         });
 
         done();
@@ -197,8 +197,8 @@ describe('The adminThemes component', function() {
         target.model.colors.secondaryColor = '#50079F';
         target.model.colors.bodyBgColor = '#9EBDB7';
         target.model.colors.textColor = '#000';
-        target.model.logos.desktop = '/images/indeed.png';
-        target.model.logos.mobile = '/images/halp.png';
+        target.model.logos.logo = '/images/indeed.png';
+        target.model.logos.favicon = '/images/halp.png';
 
         target.save().then(function() {
           expect(themeService.saveTheme).to.have.been.calledWith({
@@ -208,7 +208,7 @@ describe('The adminThemes component', function() {
               {key: 'bodyBgColor', value: '#9EBDB7'},
               {key: 'textColor', value: '#000'}
             ],
-            logos: {desktop: '/images/indeed.png', mobile: '/images/halp.png'}
+            logos: {logo: '/images/indeed.png', favicon: '/images/halp.png'}
           });
           done();
         });
@@ -225,8 +225,8 @@ describe('The adminThemes component', function() {
         target.model.colors.secondaryColor = '#50079F';
         target.model.colors.bodyBgColor = '#9EBDB7';
         target.model.colors.textColor = '#000';
-        target.model.logos.desktop = '/images/indeed.png';
-        target.model.logos.mobile = '/images/halp.png';
+        target.model.logos.logo = '/images/indeed.png';
+        target.model.logos.favicon = '/images/halp.png';
 
         $scope.form.$pristine = false;
         target.save().then(function() {
@@ -248,8 +248,8 @@ describe('The adminThemes component', function() {
         target.model.colors.secondaryColor = '#50079F';
         target.model.colors.bodyBgColor = '#9EBDB7';
         target.model.colors.textColor = '#000';
-        target.model.logos.desktop = '/images/indeed.png';
-        target.model.logos.mobile = '/images/halp.png';
+        target.model.logos.logo = '/images/indeed.png';
+        target.model.logos.favicon = '/images/halp.png';
 
         $scope.form.$pristine = false;
         target.save().finally(function() {
@@ -279,13 +279,13 @@ describe('The adminThemes component', function() {
       var target = initController();
       var file = {size: 12};
 
-      target.uploadLock.desktop = false;
+      target.uploadLock.logo = false;
 
-      target.onFileSelect([file], 'desktop').then(function() {
+      target.onFileSelect([file], 'logo').then(function() {
         expect(fileUploadService.addFile).to.have.been.calledWith(file, true);
         expect(fileUploadService.start).to.have.been.called;
         expect(fileUploadService.await).to.have.been.calledWith(sinon.match.func, sinon.match.func);
-        expect(target.uploadLock.desktop).to.be.true;
+        expect(target.uploadLock.logo).to.be.true;
         done();
       });
 
@@ -295,12 +295,12 @@ describe('The adminThemes component', function() {
     it('should display an error when file uploading has failed', function(done) {
       var target = initController();
 
-      target.uploadLock.desktop = true;
-      target.onFileSelect([{size: 12}], 'desktop').then(function() {
-        expect(target.uploadLock.desktop).to.be.true;
+      target.uploadLock.logo = true;
+      target.onFileSelect([{size: 12}], 'logo').then(function() {
+        expect(target.uploadLock.logo).to.be.true;
         // Calls `onFileSelect`'s `uploadError` callback
         fileUploadService.await.args[0][1]('error');
-        expect(target.uploadLock.desktop).to.be.false;
+        expect(target.uploadLock.logo).to.be.false;
         expect(rejectWithErrorNotification).to.have.been
           .calledWith('Sorry, we couldn\'t upload the image. Try again later', sinon.match.object);
         done();
@@ -312,13 +312,13 @@ describe('The adminThemes component', function() {
     it('should update the logo file when uploading has succeeded', function(done) {
       var target = initController();
 
-      target.uploadLock.desktop = true;
-      target.onFileSelect([{size: 12}], 'desktop').then(function() {
-        expect(target.uploadLock.desktop).to.be.true;
+      target.uploadLock.logo = true;
+      target.onFileSelect([{size: 12}], 'logo').then(function() {
+        expect(target.uploadLock.logo).to.be.true;
         // Calls `onFileSelect`'s `uploadError` callback
         fileUploadService.await.args[0][0]([{response: {data: {_id: 'cf41352a-600c-40c2-9510-1035d6e34b2d'}}}]);
-        expect(target.uploadLock.desktop).to.be.false;
-        expect(target.model.logos.desktop).to.eq('/api/files/cf41352a-600c-40c2-9510-1035d6e34b2d');
+        expect(target.uploadLock.logo).to.be.false;
+        expect(target.model.logos.logo).to.eq('cf41352a-600c-40c2-9510-1035d6e34b2d');
         done();
       });
 

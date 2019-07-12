@@ -218,7 +218,7 @@
   "Background color": "Фоновый цвет",
   "Text color": "Цвет текста",
   "Logo": "Логотип",
-  "Mobile logo": "Мобильный логотип",
+  "Favicon": "Favicon",
   "Sorry, we couldn't upload the image. Try again later": "К сожалению, мы не смогли загрузить изображение. Попробуйте позже",
   "Sorry, the image is too heavy. The max image size is %s": "Извините, изображение слишком тяжелое. Максимальный размер изображения %s",
   "Application colors": "Цвета приложения",
@@ -232,5 +232,7 @@
   "More": "Больше",
   "Reset default theme": "Сбросить тему по умолчанию",
   "Not available for this module": "Недоступно для этого модуля",
-  "Switch mode between platform and domain administration": "Переключение режима между платформой и администрированием домена"
+  "Switch mode between platform and domain administration": "Переключение режима между платформой и администрированием домена",
+  "Application logos": "Логотипы приложений",
+  "Upload": "Загрузить"
 }

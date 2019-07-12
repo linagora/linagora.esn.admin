@@ -132,7 +132,7 @@
   "Mapping": "映射",
   "Max login retries": "最大登录尝试次数",
   "Max size upload": "最大尺寸上传",
-  "Mobile logo": "移动版logo",
+  "Favicon": "Favicon",
   "Module": "模块",
   "Modules Management": "模块管理",
   "More": "更多",
@@ -232,5 +232,7 @@
   "The secret used to sign the session ID cookie, change this will log all users out": "用于签署会话ID cookie的秘密，更改此密码将记录所有用户",
   "The number of milliseconds until the session ID cookie becomes invalid": "会话ID cookie变为无效之前的毫秒数",
   "Not available for this module": "不适用于此模块",
-  "Switch mode between platform and domain administration": "平台和域管理之间的切换模式"
+  "Switch mode between platform and domain administration": "平台和域管理之间的切换模式",
+  "Application logos": "应用程序徽标",
+  "Upload": "上传"
 }

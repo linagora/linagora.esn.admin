@@ -218,7 +218,7 @@
   "Background color": "Background color",
   "Text color": "Text color",
   "Logo": "Logo",
-  "Mobile logo": "Mobile logo",
+  "Favicon": "Favicon",
   "Sorry, we couldn't upload the image. Try again later": "Sorry, we couldn't upload the image. Try again later",
   "Sorry, the image is too heavy. The max image size is %s": "Sorry, the image is too heavy. The max image size is %s",
   "Application colors": "Application colors",
@@ -232,5 +232,7 @@
   "More": "More",
   "Reset default theme": "Reset default theme",
   "Not available for this module": "Not available for this module",
-  "Switch mode between platform and domain administration": "Switch mode between platform and domain administration"
+  "Switch mode between platform and domain administration": "Switch mode between platform and domain administration",
+  "Application logos": "Application logos",
+  "Upload": "Upload"
 }
