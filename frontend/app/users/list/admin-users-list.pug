@@ -10,7 +10,7 @@ admin-loading-status
           .media-body
             .lv-title {{::member.firstname}} {{::member.lastname}}
             small.lv-small
-              a(ng-href='mailto:{{::member.emails[0]}}' op-inbox-compose) {{::member.emails[0]}}
+              a(ng-href='mailto:{{::member.emails[0]}}' op-inbox-compose, op-inbox-compose-users='[member]') {{::member.emails[0]}}
       .lv-actions.actions
         a(href="", data-toggle="dropdown", aria-expanded="false")
           i.mdi.mdi-dots-vertical
