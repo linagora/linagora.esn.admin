@@ -3,19 +3,19 @@ sub-header
 
 .card
   .card-header
-    h2.lvh-label #{__('Users configuration')}
+    h2 #{__('Users configuration')}
   .card-body.card-padding
     admin-users-configuration
 
 .card(ng-if="$ctrl.displayUserCreation")
   .card-header
-    h2.lvh-label #{__('Quick user creation')}
+    h2 #{__('Quick user creation')}
   .card-body.card-padding
     admin-users-quick-form(domain-id="$ctrl.domainId")
 
 .card
   .card-header
-    h2.lvh-label #{__('List of users')}
+    h2 #{__('List of users')}
   .card-body
     .listview.lv-bordered.lv-lg
       .lv-body
