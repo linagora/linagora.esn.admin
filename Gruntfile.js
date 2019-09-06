@@ -33,7 +33,7 @@ module.exports = function(grunt) {
       css: {
         options: {
           rules: [
-            { pattern: /important;(\s*$|(?=\s+[^\/]))/, message: 'CSS important rules only allowed with explanatory comment' }
+            { pattern: /important;(\s*$|(?=\s+[^/]))/, message: 'CSS important rules only allowed with explanatory comment' }
           ]
         },
         src: [
@@ -108,7 +108,8 @@ module.exports = function(grunt) {
       options: {
         require: ['chai', 'mockery'],
         reporter: 'spec',
-        timeout: process.env.TEST_TIMEOUT || 5000
+        timeout: process.env.TEST_TIMEOUT || 5000,
+        exit: true
       },
       backend: {
         options: {
