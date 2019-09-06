@@ -4,8 +4,7 @@ stages:
   - linter
   - test
   - swagger
-  - deploy-swagger
-  - deploy_dev
+  - deploy
   - release
 
 linter:
@@ -60,7 +59,7 @@ swagger:
       - ./doc/REST_API/swagger/admin-swagger.json
 
 deploy-swagger:
-  stage: deploy-swagger
+  stage: deploy
   tags:
     - deployment
     - api.open-paas.org
@@ -75,7 +74,7 @@ deploy-swagger:
     - cp ./doc/REST_API/swagger/admin-swagger.json /var/www/html
 
 deploy_dev:
-  stage: deploy_dev
+  stage: deploy
   except:
     - triggers
   tags:
@@ -107,3 +106,13 @@ release:
     - npm i
     - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
     - ./node_modules/.bin/grunt release:${VERSION}
+
+trigger_esn_docker_build:
+  stage: deploy
+  script:
+    - curl -s -X POST
+      -F "token=${TRIGGER_ESN_BUILD_TOKEN}"
+      -F "ref=master"
+      https://ci.linagora.com/api/v4/projects/375/trigger/pipeline | jq .
+  only:
+    - master@linagora/lgs/openpaas/linagora.esn.admin
