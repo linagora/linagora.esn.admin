@@ -152,7 +152,7 @@ angular.module('linagora.esn.admin')
   name: 'Maintenance',
   icon: 'mdi-library-books',
   displayIn: {
-    domain: false,
+    domain: true,
     platform: true
   }
 }, {
