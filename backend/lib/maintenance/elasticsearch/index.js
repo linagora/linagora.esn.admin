@@ -1,4 +1,7 @@
-const { REINDEX, RECONFIG } = require('./constants').JOBQUEUE_WORKER_NAMES;
+const {
+  JOBQUEUE_WORKER_NAMES: { REINDEX, RECONFIG },
+  TYPE_FOR_ALL_RESOURCES
+} = require('./constants');
 
 module.exports = dependencies => {
   const jobQueue = dependencies('jobqueue');
@@ -25,10 +28,18 @@ module.exports = dependencies => {
   }
 
   function reindex(resourceType) {
-    return jobQueue.lib.submitJob(REINDEX, { type: resourceType });
+    if (resourceType !== TYPE_FOR_ALL_RESOURCES) {
+      return jobQueue.lib.submitJob(REINDEX, { type: resourceType });
+    }
+
+    return Promise.all(getRegisteredResourceTypes().map(type => jobQueue.lib.submitJob(REINDEX, { type })));
   }
 
   function reconfigure(resourceType) {
-    return jobQueue.lib.submitJob(RECONFIG, { type: resourceType });
+    if (resourceType !== TYPE_FOR_ALL_RESOURCES) {
+      return jobQueue.lib.submitJob(RECONFIG, { type: resourceType });
+    }
+
+    return Promise.all(getRegisteredResourceTypes().map(type => jobQueue.lib.submitJob(RECONFIG, { type })));
   }
 };

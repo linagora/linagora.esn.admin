@@ -17,7 +17,8 @@ module.exports = function(dependencies) {
    *   get:
    *     tags:
    *       - Maintenance
-   *     description: Get the registered resource types
+   *       - Elasticsearch
+   *     description: Get supported resource types in Elasticsearch
    *     responses:
    *      200:
    *        $ref: "#/responses/cm_202"
@@ -40,10 +41,14 @@ module.exports = function(dependencies) {
    *   post:
    *     tags:
    *       - Maintenance
-   *     description: Correct the index, reindex and reconfigure data.
+   *       - Elasticsearch
+   *     description: Maintain Elasticsearch <br>
+   *       - Initialize Elasticsearch indices <br>
+   *       - Update settings and mappings for indices <br>
+   *       - Reindex data from Database to indices
    *     parameters:
-   *       - $ref: "#/parameters/maintenance_action"
-   *       - $ref: "#/parameters/maintenance_resource_type"
+   *       - $ref: "#/parameters/maintenance_elasticsearch_action"
+   *       - $ref: "#/parameters/maintenance_elasticsearch_resource_type"
    *     responses:
    *      202:
    *        $ref: "#/responses/cm_202"

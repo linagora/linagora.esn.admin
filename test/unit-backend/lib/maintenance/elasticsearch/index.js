@@ -44,30 +44,88 @@ describe('The The lib/maintenance/elasticsearch module', function() {
   });
 
   describe('The reindex method', function() {
-    it('should submit reindex job with the correct params', function() {
+    it('should submit reindex job with the correct params', function(done) {
       const type = 'foo';
 
       jobQueueMock.lib = {
-        submitJob: sinon.spy()
+        submitJob: sinon.stub().returns(Promise.resolve())
       };
 
-      getModule().reindex(type);
+      getModule().reindex(type)
+        .then(() => {
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.REINDEX, { type });
+          done();
+        })
+        .catch(err => done(err || new Error('Should resolve')));
+    });
 
-      expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.REINDEX, { type });
+    it('should submit reindex jobs for all registered resource types if the requested type is "all"', function(done) {
+      const registeredTypes = { foo: {}, bar: {} };
+      const getAllMock = sinon.stub().returns(registeredTypes);
+
+      deps.elasticsearch = {
+        reindexRegistry: {
+          getAll: getAllMock
+        }
+      };
+
+      jobQueueMock.lib = {
+        submitJob: sinon.stub().returns(Promise.resolve())
+      };
+
+      getModule().reindex(constants.TYPE_FOR_ALL_RESOURCES)
+        .then(() => {
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledTwice;
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.REINDEX, { type: 'foo' });
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.REINDEX, { type: 'bar' });
+
+          expect(getAllMock).to.have.been.calledOnce;
+          done();
+        })
+        .catch(err => done(err || new Error('Should resolve')));
     });
   });
 
   describe('The reconfigure method', function() {
-    it('should submit reindex job with the correct params', function() {
+    it('should submit reconfigure job with the correct params', function(done) {
       const type = 'foo';
 
       jobQueueMock.lib = {
-        submitJob: sinon.spy()
+        submitJob: sinon.stub().returns(Promise.resolve())
       };
 
-      getModule().reconfigure(type);
+      getModule().reconfigure(type)
+        .then(() => {
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.RECONFIG, { type });
+          done();
+        })
+        .catch(err => done(err || new Error('Should resolve')));
+    });
 
-      expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.RECONFIG, { type });
+    it('should submit reconfigure jobs for all registered resource types if the requested type is "all"', function(done) {
+      const registeredTypes = { foo: {}, bar: {} };
+      const getAllMock = sinon.stub().returns(registeredTypes);
+
+      deps.elasticsearch = {
+        reindexRegistry: {
+          getAll: getAllMock
+        }
+      };
+
+      jobQueueMock.lib = {
+        submitJob: sinon.stub().returns(Promise.resolve())
+      };
+
+      getModule().reconfigure(constants.TYPE_FOR_ALL_RESOURCES)
+        .then(() => {
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledTwice;
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.RECONFIG, { type: 'foo' });
+          expect(jobQueueMock.lib.submitJob).to.have.been.calledWith(constants.JOBQUEUE_WORKER_NAMES.RECONFIG, { type: 'bar' });
+
+          expect(getAllMock).to.have.been.calledOnce;
+          done();
+        })
+        .catch(err => done(err || new Error('Should resolve')));
     });
   });
 

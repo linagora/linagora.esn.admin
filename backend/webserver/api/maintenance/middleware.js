@@ -1,5 +1,6 @@
 module.exports = dependencies => {
   const { ACTIONS } = require('./constants')(dependencies);
+  const { TYPE_FOR_ALL_RESOURCES } = require('../../../lib/maintenance/elasticsearch/constants');
   const { getRegisteredResourceTypes } = require('../../../lib/maintenance/elasticsearch')(dependencies);
 
   return {
@@ -37,9 +38,9 @@ module.exports = dependencies => {
    */
   function validateMaintenanceResourceType(req, res, next) {
     const resourceType = req.query.resource_type;
-    const registeredResourceTypes = getRegisteredResourceTypes();
+    const supportTypes = [...getRegisteredResourceTypes(), TYPE_FOR_ALL_RESOURCES];
 
-    if (registeredResourceTypes.indexOf(resourceType) !== -1) {
+    if (supportTypes.indexOf(resourceType) !== -1) {
       return next();
     }
 

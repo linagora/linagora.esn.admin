@@ -17,7 +17,7 @@ describe('The maintenance middleware', function() {
       constantsMock = {};
     });
 
-    it('should respond 400 if there is a unsupported resource type', function(done) {
+    it('should respond 400 if there is a unsupported action', function(done) {
       const action = 'bar';
 
       constantsMock.ACTIONS = {
@@ -53,7 +53,7 @@ describe('The maintenance middleware', function() {
       getModule().validateMaintenanceAction(req, res, next);
     });
 
-    it('should call #next() function if there is a unsupported resource type', function(done) {
+    it('should call #next() function if there is a supported action', function(done) {
       constantsMock.ACTIONS = {
         foo: () => {}
       };
@@ -115,7 +115,24 @@ describe('The maintenance middleware', function() {
       getModule().validateMaintenanceResourceType(req, res, next);
     });
 
-    it('should call #next() function if there is a unsupported resource type', function(done) {
+    it('should call #next() function if requested type is "all"', function(done) {
+      maintainEsMock = {
+        getRegisteredResourceTypes: sinon.stub().returns([])
+      };
+      mockery.registerMock('../../../lib/maintenance/elasticsearch', () => maintainEsMock);
+
+      const req = {
+        query: {
+          resource_type: 'all'
+        }
+      };
+      const res = {};
+      const next = () => done();
+
+      getModule().validateMaintenanceResourceType(req, res, next);
+    });
+
+    it('should call #next() function if there is a supported resource type', function(done) {
       const resource_type = 'bar';
 
       maintainEsMock = {
