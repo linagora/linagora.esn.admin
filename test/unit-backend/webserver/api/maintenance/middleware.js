@@ -115,6 +115,23 @@ describe('The maintenance middleware', function() {
       getModule().validateMaintenanceResourceType(req, res, next);
     });
 
+    it('should call #next() function if requested type is "all"', function(done) {
+      maintainEsMock = {
+        getRegisteredResourceTypes: sinon.stub().returns([])
+      };
+      mockery.registerMock('../../../lib/maintenance/elasticsearch', () => maintainEsMock);
+
+      const req = {
+        query: {
+          resource_type: 'all'
+        }
+      };
+      const res = {};
+      const next = () => done();
+
+      getModule().validateMaintenanceResourceType(req, res, next);
+    });
+
     it('should call #next() function if there is a supported resource type', function(done) {
       const resource_type = 'bar';
 
