@@ -36,16 +36,34 @@ module.exports = {
     addons: [{
       id: '{e2fda1a4-762b-4020-b5ad-a41df1933103}',
       name: 'Lightning',
-      versions: [{
-        version: '4.7',
-        minAppVersion: '45',
-        maxAppVersion: '59',
-        platforms: [{
-          platform: 'Linux',
-            url: 'https://addons.mozilla.org/thunderbird/downloads/file/430153/lightning-4.7-sm+tb-linux.xpi'
-        }]
-      }
-    ]
+      versions: [
+        {
+          version: '4.7',
+          minAppVersion: '45',
+          maxAppVersion: '50',
+          platforms: [{
+            platform: 'Linux',
+              url: 'https://addons.mozilla.org/thunderbird/downloads/file/430153/lightning-4.7-sm+tb-linux.xpi'
+          }]
+        },
+        {
+          version: '6.2',
+          minAppVersion: '50',
+          maxAppVersion: '60',
+          platforms: [{
+            platform: 'Linux',
+            url: 'https://addons.thunderbird.net/thunderbird/downloads/file/1012344/lightning-6.2.5-sm+tb.xpi'
+          }]
+        },
+        {
+          version: '68',
+          minAppVersion: '68',
+          platforms: [{
+            platform: 'Linux',
+            url: 'https://addons.thunderbird.net/thunderbird/downloads/file/1015258/lightning-68.0-tb.xpi'
+          }]
+        }
+      ]
     }, {
       id: 'cardbook@vigneau.philippe',
       name: 'CardBook',
@@ -64,6 +82,14 @@ module.exports = {
           platforms: [{
             platform: 'Linux',
             url: 'https://addons.thunderbird.net/thunderbird/downloads/file/1012114/cardbook-33.2-tb.xpi'
+          }]
+        },
+        {
+          version: '42.9',
+          minAppVersion: '68',
+          platforms: [{
+            platform: 'Linux',
+            url: 'https://addons.thunderbird.net/thunderbird/downloads/latest/cardbook/addon-634298-latest.xpi'
           }]
         }
       ]
