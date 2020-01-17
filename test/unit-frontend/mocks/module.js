@@ -97,3 +97,10 @@ angular.module('esn.availability', [])
   .factory('esnAvailabilityService', function() {
     return {};
   });
+
+angular.module('esn.technicaluser', [])
+  .factory('esnTechnicalUserAPIClient', function() {
+    return {};
+  });
+
+angular.module('esn.infinite-list', []);
