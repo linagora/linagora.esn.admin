@@ -5,7 +5,8 @@ const path = require('path');
 const testConfig = require('../config/servers-conf');
 const basePath = path.resolve(__dirname + '/../../node_modules/linagora-rse');
 const backendPath = path.normalize(__dirname + '/../../backend');
-const MODULE_NAME = 'linagora.esn.admin';
+const MODULE_NAME = 'admin';
+const AWESOME_MODULE_NAME = `linagora.esn.${MODULE_NAME}`;
 let rse;
 
 before(function(done) {
@@ -50,5 +51,27 @@ before(function(done) {
   manager.appendLoader(loader);
   manager.appendLoader(nodeModulesLoader);
 
-  loader.load(MODULE_NAME, done);
+  loader.load(AWESOME_MODULE_NAME, done);
+});
+
+before(function(done) {
+  const self = this;
+
+  self.helpers.modules.initMidway(AWESOME_MODULE_NAME, err => {
+    if (err) return done(err);
+
+    const adminApp = require(`${self.testEnv.backendPath}/webserver/application`)(self.helpers.modules.current.deps);
+    const api = require(`${self.testEnv.backendPath}/webserver/api`)(self.helpers.modules.current.deps);
+
+    adminApp.use(require('body-parser').json());
+    adminApp.use(`/${MODULE_NAME}/api`, api);
+
+    self.app = self.helpers.modules.getWebServer(adminApp);
+    self.helpers.modules.current.lib.lib.init();
+    done();
+  });
+});
+
+afterEach(function(done) {
+  this.helpers.mongo.dropDatabase(done);
 });
