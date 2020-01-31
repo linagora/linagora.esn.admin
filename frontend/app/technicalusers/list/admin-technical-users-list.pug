@@ -1,0 +1,17 @@
+.row
+  .col-md-4.col-xs-4.block-header
+    h2 #{__('Name')}
+  .col-md-2.col-xs-2.block-header.flex-horizontal-centered
+    h2 #{__('Type')}
+  .col-md-6.col-xs-6.block-header
+    h2 #{__('Description')}
+
+infinite-list(load-more-elements='$ctrl.loadMoreElements()')
+  .list-group
+    .row.list-group-item(ng-repeat="technicaluser in $ctrl.elements")
+      .col-md-4.col-xs-4
+        h4.flex-vertical-centered.m-t-5 {{ ::technicaluser.name }}
+      .col-md-2.col-xs-2.flex-horizontal-centered.m-t-5
+        span {{ ::technicaluser.type }}
+      .col-md-6.col-xs-6.flex-vertical-centered.m-t-5
+        span {{ ::technicaluser.description }}

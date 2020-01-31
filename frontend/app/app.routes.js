@@ -62,6 +62,14 @@ angular.module('linagora.esn.admin')
         }
       }
     })
+    .state('admin.domain.technicalusers', {
+      url: '/technicalusers',
+      views: {
+        'root@admin': {
+          template: '<admin-technical-users />'
+        }
+      }
+    })
     .state('admin.domain.users.create', {
       url: '/create',
       views: {
