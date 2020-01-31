@@ -1,56 +1,38 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 const path = require('path');
-const MODULE_NAME = 'linagora.esn.admin';
 
-describe('The update autoconf API: PUT /autoconf', () => {
+describe('The update autoconf API: PUT /admin/api/autoconf', () => {
   let app, deployOptions, domain, admin, user;
   const password = 'secret';
 
   beforeEach(function(done) {
-    this.helpers.modules.initMidway(MODULE_NAME, err => {
-      if (err) return done(err);
+    app = this.app;
+    deployOptions = {
+      fixtures: path.normalize(`${__dirname}/../../fixtures/deployments`)
+    };
 
-      const adminApp = require(this.testEnv.backendPath + '/webserver/application')(this.helpers.modules.current.deps);
-      const api = require(this.testEnv.backendPath + '/webserver/api/autoconf')(this.helpers.modules.current.deps);
+    this.helpers.api.applyDomainDeployment('admin_module_deployment', deployOptions, (err, models) => {
+      if (err) {
+        return done(err);
+      }
 
-      adminApp.use(require('body-parser').json());
-      adminApp.use('/api/autoconf', api);
+      domain = models.domain;
+      admin = models.users[0];
+      user = models.users[1];
 
-      app = this.helpers.modules.getWebServer(adminApp);
-      deployOptions = {
-        fixtures: path.normalize(`${__dirname}/../../fixtures/deployments`)
-      };
-
-      this.helpers.api.applyDomainDeployment('admin_module_deployment', deployOptions, (err, models) => {
-        if (err) {
-          return done(err);
-        }
-
-        domain = models.domain;
-        admin = models.users[0];
-        user = models.users[1];
-
-        done();
-      });
-    });
-  });
-
-  afterEach(function(done) {
-    this.helpers.mongo.dropDatabase(err => {
-      if (err) return done(err);
-      this.testEnv.core.db.mongo.mongoose.connection.close(done);
+      done();
     });
   });
 
   it('should return 401 if not logged in', function(done) {
-    this.helpers.api.requireLogin(app, 'put', '/api/autoconf', done);
+    this.helpers.api.requireLogin(app, 'put', '/admin/api/autoconf', done);
   });
 
   it('should return 400 if there is no domain_id query', function(done) {
     this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsUser) => {
       expect(err).to.not.exist;
-      const req = requestAsUser(request(app).put('/api/autoconf'));
+      const req = requestAsUser(request(app).put('/admin/api/autoconf'));
 
       req.send({});
       req.expect(400);
@@ -68,7 +50,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
 
     this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsUser) => {
       expect(err).to.not.exist;
-      const req = requestAsUser(request(app).put(`/api/autoconf?domain_id=${invalidDomain}`));
+      const req = requestAsUser(request(app).put(`/admin/api/autoconf?domain_id=${invalidDomain}`));
 
       req.send({});
       req.expect(404);
@@ -84,7 +66,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
   it('should return 403 if user is not a domain admin', function(done) {
     this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsUser) => {
       expect(err).to.not.exist;
-      const req = requestAsUser(request(app).put(`/api/autoconf?domain_id=${domain.id}`));
+      const req = requestAsUser(request(app).put(`/admin/api/autoconf?domain_id=${domain.id}`));
 
       req.send({});
       req.expect(403);
@@ -99,7 +81,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
   it('should return 400 if configuration is invalid', function(done) {
     this.helpers.api.loginAsUser(app, admin.emails[0], password, (err, requestAsAdmin) => {
       expect(err).to.not.exist;
-      const req = requestAsAdmin(request(app).put(`/api/autoconf?domain_id=${domain.id}`));
+      const req = requestAsAdmin(request(app).put(`/admin/api/autoconf?domain_id=${domain.id}`));
 
       req.send({});
       req.expect(400);
@@ -130,7 +112,7 @@ describe('The update autoconf API: PUT /autoconf', () => {
 
     this.helpers.api.loginAsUser(app, admin.emails[0], password, (err, requestAsAdmin) => {
       expect(err).to.not.exist;
-      const req = requestAsAdmin(request(app).put(`/api/autoconf?domain_id=${domain.id}`));
+      const req = requestAsAdmin(request(app).put(`/admin/api/autoconf?domain_id=${domain.id}`));
 
       req.send(validConfig);
       req.expect(204);
