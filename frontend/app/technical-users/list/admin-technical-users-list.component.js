@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminTechnicalUsersList', {
-    templateUrl: '/admin/app/technicalusers/list/admin-technical-users-list.html',
+    templateUrl: '/admin/app/technical-users/list/admin-technical-users-list.html',
     controller: 'adminTechnicalUsersListController'
   });
 

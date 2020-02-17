@@ -4,7 +4,7 @@
   angular.module('linagora.esn.admin')
 
   .component('adminTechnicalUsersSubheader', {
-    templateUrl: '/admin/app/technicalusers/admin-technical-users-subheader.html'
+    templateUrl: '/admin/app/technical-users/admin-technical-users-subheader.html'
   });
 
 })(angular);
