@@ -243,5 +243,11 @@
   "Item two": "Item two",
   "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.",
   "Technical Users Management": "Technical Users Management",
-  "Type": "Type"
+  "Type": "Type",
+  "Add a technical user": "Add a technical user",
+  "Data": "Data",
+  "Add a new data field": "Add a new data field",
+  "Creating a technical user...": "Creating a technical user...",
+  "A technical user has been created": "A technical user has been created",
+  "Failed to create a technical user": "Failed to create a technical user"
 }

@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.admin')
 
-  .controller('adminTechnicalUsersListController', function($rootScope, $stateParams, esnTechnicalUserAPIClient, infiniteScrollHelper, ELEMENTS_PER_REQUEST) {
+  .controller('adminTechnicalUsersListController', function($rootScope, $stateParams, esnTechnicalUserAPIClient, infiniteScrollHelper, ELEMENTS_PER_REQUEST, ADMIN_TECHNICAL_USERS_EVENTS) {
     var self = this;
     var DEFAULT_LIMIT = ELEMENTS_PER_REQUEST || 20;
     var options = {
@@ -17,7 +17,7 @@
 
     function $onInit() {
       self.loadMoreElements = infiniteScrollHelper(self, _loadNextItems, null, DEFAULT_LIMIT);
-      $rootScope.$on('onAddedTechnicalUser', _onAddedTechnicalUser);
+      $rootScope.$on(ADMIN_TECHNICAL_USERS_EVENTS.ADDED, _onAddedTechnicalUser);
     }
 
     function _loadNextItems() {

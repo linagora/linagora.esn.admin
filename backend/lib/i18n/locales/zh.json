@@ -243,5 +243,11 @@
   "Item two": "第二项",
   "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.",
   "Technical Users Management": "技术用户管理",
-  "Type": "类型"
+  "Type": "类型",
+  "Add a technical user": "添加技术用户",
+  "Data": "数据",
+  "Add a new data field": "添加一个新的数据字段",
+  "Creating a technical user...": "创建技术用户...",
+  "A technical user has been created": "已创建技术用户",
+  "Failed to create a technical user": "创建技术用户失败"
 }
