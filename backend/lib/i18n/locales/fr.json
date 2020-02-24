@@ -243,5 +243,11 @@
   "Item two": "Point deux",
   "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.",
   "Technical Users Management": "Gestion des utilisateurs techniques",
-  "Type": "Type"
+  "Type": "Type",
+  "Add a technical user": "Ajouter un utilisateur technique",
+  "Data": "Les données",
+  "Add a new data field": "Ajouter un nouveau champ de données",
+  "Creating a technical user...": "Création d'un utilisateur technique...",
+  "A technical user has been created": "Un utilisateur technique a été créé",
+  "Failed to create a technical user": "Impossible de créer un utilisateur technique"
 }

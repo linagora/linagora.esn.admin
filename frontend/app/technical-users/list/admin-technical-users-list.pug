@@ -8,10 +8,10 @@
 
 infinite-list(load-more-elements='$ctrl.loadMoreElements()')
   .list-group
-    .row.list-group-item(ng-repeat="technicaluser in $ctrl.elements")
+    .row.list-group-item(ng-repeat="technicalUser in $ctrl.elements")
       .col-md-4.col-xs-4
-        h4.flex-vertical-centered.m-t-5 {{ ::technicaluser.name }}
+        h4.flex-vertical-centered.m-t-5 {{ ::technicalUser.name }}
       .col-md-2.col-xs-2.flex-horizontal-centered.m-t-5
-        span {{ ::technicaluser.type }}
+        span {{ ::technicalUser.type }}
       .col-md-6.col-xs-6.flex-vertical-centered.m-t-5
-        span {{ ::technicaluser.description }}
+        span {{ ::technicalUser.description }}

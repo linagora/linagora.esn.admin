@@ -11,16 +11,14 @@ describe('The adminTechnicalUsersListController', function() {
   var ELEMENTS_PER_REQUEST_MOCK;
 
   beforeEach(function() {
+    module('linagora.esn.admin');
+
     infiniteScrollHelperMock = sinon.stub().returns();
 
-    angular.mock.module(function($provide) {
+    module(function($provide) {
       $provide.constant('ELEMENTS_PER_REQUEST', ELEMENTS_PER_REQUEST_MOCK);
       $provide.value('infiniteScrollHelper', infiniteScrollHelperMock);
     });
-  });
-
-  beforeEach(function() {
-    module('linagora.esn.admin');
 
     inject(function(_$controller_, _$rootScope_) {
       $controller = _$controller_;
@@ -39,7 +37,7 @@ describe('The adminTechnicalUsersListController', function() {
     return controller;
   }
 
-  describe('$onInit fn', function() {
+  describe('$onInit function', function() {
     it('should call infiniteScrollHelper with correct arguments when ELEMENTS_PER_REQUEST constant is defined', function() {
       ELEMENTS_PER_REQUEST_MOCK = 20;
       initController();

@@ -243,5 +243,11 @@
   "Item two": "Пункт два",
   "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.",
   "Technical Users Management": "Управление техническими пользователями",
-  "Type": "Тип"
+  "Type": "Тип",
+  "Add a technical user": "Добавить технического пользователя",
+  "Data": "Данные",
+  "Add a new data field": "Добавить новое поле данных",
+  "Creating a technical user...": "Создание технического пользователя ...",
+  "A technical user has been created": "Технический пользователь создан",
+  "Failed to create a technical user": "Не удалось создать технического пользователя"
 }
