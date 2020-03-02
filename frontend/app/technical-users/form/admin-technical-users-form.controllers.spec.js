@@ -45,7 +45,11 @@ describe('The adminTechnicalUsersFormController', function() {
       var bindings = {
         technicalUser: {
           name: 'James',
-          type: 'dav'
+          type: 'dav',
+          data: {
+            a: 'a',
+            b: 'b'
+          }
         }
       };
 
@@ -85,11 +89,11 @@ describe('The adminTechnicalUsersFormController', function() {
     it('should remove an object of coresponding index from technicalUser.data', function() {
       var bindings = {
         technicalUser: {
-          data: [
-            { pair1: 'abc' },
-            { pair2: 'def' },
-            { pair3: 'xyz' }
-          ]
+          data: {
+            key1: 'value1',
+            key2: 'value2',
+            key3: 'value3'
+          }
         }
       };
 
@@ -98,8 +102,8 @@ describe('The adminTechnicalUsersFormController', function() {
     controller.onRemoveBtnClick(1);
 
     expect(controller.technicalUser.data).to.deep.equal([
-        { pair1: 'abc' },
-        { pair3: 'xyz' }
+        { key: 'key1', value: 'value1' },
+        { key: 'key3', value: 'value3' }
       ]);
     });
   });

@@ -12,16 +12,16 @@
               .col-md-6.col-xs-6.lv-title
                 span #{__('Description')}
         .lv-body
-          .lv-item.p-0(ng-repeat="technicalUser in $ctrl.elements")
+          .lv-item.p-0(ng-repeat="technicalUser in $ctrl.elements track by technicalUser._id")
             .row
               .col-md-4.col-xs-4.lv-title
-                span {{ ::technicalUser.name }}
+                span {{ technicalUser.name }}
               .col-md-2.col-xs-2.lv-title
-                span {{ ::technicalUser.type }}
+                span {{ technicalUser.type }}
               .col-md-6.col-xs-6.lv-title
-                span {{ ::technicalUser.description }}
+                span {{ technicalUser.description }}
             .lv-actions.actions
-              a(href="", data-toggle="dropdown", aria-expended="false")
+              a(href="", data-toggle="dropdown", aria-expanded="false")
                 i.mdi.mdi-dots-vertical
               ul.dropdown-menu.dropdown-menu-right
                 li
