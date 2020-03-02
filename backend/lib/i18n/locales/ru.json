@@ -249,5 +249,14 @@
   "Add a new data field": "Добавить новое поле данных",
   "Creating a technical user...": "Создание технического пользователя ...",
   "A technical user has been created": "Технический пользователь создан",
-  "Failed to create a technical user": "Не удалось создать технического пользователя"
+  "Failed to create a technical user": "Не удалось создать технического пользователя",
+  "Remove": "удалять",
+  "Remove technical user": "Удалить технического пользователя",
+  "Edit a technical user": "Редактировать технического пользователя",
+  "Removing a technical user...": "Удаление технического пользователя ...",
+  "A technical user has been removed": "Технический пользователь был удален",
+  "Failed to remove a technical user": "Не удалось удалить технического пользователя»",
+  "Editing a technical user...": "Редактирование технического пользователя ...",
+  "A technical user has been edited": "Технический пользователь был отредактирован",
+  "Failed to edit a technical user": "Не удалось отредактировать технического пользователя"
 }

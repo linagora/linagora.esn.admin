@@ -249,5 +249,14 @@
   "Add a new data field": "Add a new data field",
   "Creating a technical user...": "Creating a technical user...",
   "A technical user has been created": "A technical user has been created",
-  "Failed to create a technical user": "Failed to create a technical user"
+  "Failed to create a technical user": "Failed to create a technical user",
+  "Remove": "Remove",
+  "Remove technical user": "Remove technical user",
+  "Edit a technical user": "Edit a technical user",
+  "Removing a technical user...": "Removing a technical user...",
+  "A technical user has been removed": "A technical user has been removed",
+  "Failed to remove a technical user": "Failed to remove a technical user",
+  "Editing a technical user...": "Editing a technical user...",
+  "A technical user has been edited": "A technical user has been edited",
+  "Failed to edit a technical user": "Failed to edit a technical user"
 }

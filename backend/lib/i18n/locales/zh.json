@@ -249,5 +249,14 @@
   "Add a new data field": "添加一个新的数据字段",
   "Creating a technical user...": "创建技术用户...",
   "A technical user has been created": "已创建技术用户",
-  "Failed to create a technical user": "创建技术用户失败"
+  "Failed to create a technical user": "创建技术用户失败",
+  "Remove": "删除",
+  "Remove technical user": "删除技术用户",
+  "Edit a technical user": "编辑技术用户",
+  "Removing a technical user...": "正在删除技术用户...",
+  "A technical user has been removed": "技术用户已被删除",
+  "Failed to remove a technical user": "无法删除技术用户",
+  "Editing a technical user...": "正在编辑技术用户...",
+  "A technical user has been edited": "一个技术用户已被编辑",
+  "Failed to edit a technical user": "无法编辑技术用户"
 }
