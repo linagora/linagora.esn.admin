@@ -1,17 +1,30 @@
-.row
-  .col-md-4.col-xs-4.block-header
-    h2 #{__('Name')}
-  .col-md-2.col-xs-2.block-header.flex-horizontal-centered
-    h2 #{__('Type')}
-  .col-md-6.col-xs-6.block-header
-    h2 #{__('Description')}
-
-infinite-list(load-more-elements='$ctrl.loadMoreElements()')
-  .list-group
-    .row.list-group-item(ng-repeat="technicalUser in $ctrl.elements")
-      .col-md-4.col-xs-4
-        h4.flex-vertical-centered.m-t-5 {{ ::technicalUser.name }}
-      .col-md-2.col-xs-2.flex-horizontal-centered.m-t-5
-        span {{ ::technicalUser.type }}
-      .col-md-6.col-xs-6.flex-vertical-centered.m-t-5
-        span {{ ::technicalUser.description }}
+.card
+  .card-body
+    infinite-list(load-more-elements='$ctrl.loadMoreElements()')
+      .listview.lv-bordered.lv-lg
+        .lv-header
+          .lv-item.p-0
+            .row
+              .col-md-4.col-xs-4.lv-title
+                span #{__('Name')}
+              .col-md-2.col-xs-2.lv-title
+                span #{__('Type')}
+              .col-md-6.col-xs-6.lv-title
+                span #{__('Description')}
+        .lv-body
+          .lv-item.p-0(ng-repeat="technicalUser in $ctrl.elements track by technicalUser._id")
+            .row
+              .col-md-4.col-xs-4.lv-title
+                span {{ technicalUser.name }}
+              .col-md-2.col-xs-2.lv-title
+                span {{ technicalUser.type }}
+              .col-md-6.col-xs-6.lv-title
+                span {{ technicalUser.description }}
+            .lv-actions.actions
+              a(href="", data-toggle="dropdown", aria-expanded="false")
+                i.mdi.mdi-dots-vertical
+              ul.dropdown-menu.dropdown-menu-right
+                li
+                  a(href="", ng-click="$ctrl.showUpdateModal(technicalUser)") #{__('Edit')}
+                li
+                  a(href="", ng-click="$ctrl.showRemoveModal(technicalUser)") #{__('Remove')}

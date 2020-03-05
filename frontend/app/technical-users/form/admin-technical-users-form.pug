@@ -2,7 +2,7 @@ ng-form(name="form")
   .row.first-row
     .col-xs-12
       esn-form-group(label=__('Name'))
-        input.form-control(type="text", name="technicalUserName", ng-model="$ctrl.technicalUser.name", ng-change="$ctrl.showName()", required)
+        input.form-control(type="text", name="technicalUserName", ng-model="$ctrl.technicalUser.name", ng-change="$ctrl.showName()", auto-focus, required)
   .row
     .col-xs-12
       esn-form-group(label=__('Description'))

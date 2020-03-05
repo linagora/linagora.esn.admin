@@ -12,7 +12,8 @@
     self.onRemoveBtnClick = onRemoveBtnClick;
 
     function $onInit() {
-      self.technicalUser = self.technicalUser || {
+      self.ADMIN_TECHNICAL_USER_TYPES = ADMIN_TECHNICAL_USER_TYPES;
+      self.technicalUser = _denormalizeTechnicalUser(self.technicalUser) || {
         name: '',
         type: '',
         description: '',
@@ -36,6 +37,20 @@
 
     function onRemoveBtnClick(index) {
       self.technicalUser.data.splice(index, 1);
+    }
+
+    function _denormalizeTechnicalUser(technicalUser) {
+      if (!technicalUser) {
+        return false;
+      }
+
+      var demormalizedData = Object.keys(technicalUser.data).map(function(key) {
+        return { key: key, value: technicalUser.data[key] };
+      });
+
+      technicalUser.data = demormalizedData;
+
+      return technicalUser;
     }
   }
 })(angular);

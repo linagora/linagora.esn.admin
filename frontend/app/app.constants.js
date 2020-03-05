@@ -65,7 +65,7 @@ angular.module('linagora.esn.admin')
   icon: 'mdi-account-settings-variant',
   displayIn: {
     domain: true,
-    platform: true
+    platform: false
   }
 }, {
   id: 'roles',

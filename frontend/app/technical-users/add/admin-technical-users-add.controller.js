@@ -8,6 +8,7 @@
     $rootScope,
     $stateParams,
     esnTechnicalUserAPIClient,
+    adminTechnicalUsersService,
     asyncAction,
     ADMIN_TECHNICAL_USERS_EVENTS
   ) {
@@ -27,22 +28,10 @@
     }
 
     function _addTechnicalUser() {
-      return esnTechnicalUserAPIClient.add(self.domainId, _qualifyTechnicalUser(self.technicalUser))
+      return esnTechnicalUserAPIClient.add(self.domainId, adminTechnicalUsersService.qualifyTechnicalUser(self.technicalUser))
         .then(function(createdTechnicalUser) {
           $rootScope.$emit(ADMIN_TECHNICAL_USERS_EVENTS.ADDED, createdTechnicalUser);
         });
-    }
-
-    function _qualifyTechnicalUser(technicalUser) {
-      var qualifiedData = {};
-
-      technicalUser.data.forEach(function(pair) {
-        qualifiedData[pair.key] = pair.value;
-      });
-
-      technicalUser.data = qualifiedData;
-
-      return technicalUser;
     }
   }
 })(angular);
