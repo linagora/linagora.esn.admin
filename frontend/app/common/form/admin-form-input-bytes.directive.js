@@ -20,6 +20,7 @@ angular.module('linagora.esn.admin')
       scope.display = {};
       scope.AVAILABLE_UNITS = Object.keys(UNITS);
       scope.inputUnit = UNITS[scope.inputUnit] ? scope.inputUnit : scope.AVAILABLE_UNITS[0];
+
       limit = {
         min: _determineLimit(scope.min),
         max: _determineLimit(scope.max)
@@ -34,9 +35,7 @@ angular.module('linagora.esn.admin')
     }
 
     scope.onChange = function() {
-      var converted = _convertUnit(scope.display.value, scope.display.unit, scope.inputUnit);
-
-      scope.inputValue = converted && Math.round(converted);
+      scope.inputValue = _convertUnit(scope.display.value, scope.display.unit, scope.inputUnit);
     };
 
     scope.onSelect = function(unit) {
@@ -106,7 +105,7 @@ angular.module('linagora.esn.admin')
 
     function _updateLimit() {
       if (limit.min) {
-        scope.minValue = _convertUnit(limit.min.value, limit.min.key, scope.display.unit);
+        scope.minValue = Math.ceil(_convertUnit(limit.min.value, limit.min.key, scope.display.unit));
       }
 
       if (limit.max) {

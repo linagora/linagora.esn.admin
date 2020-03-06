@@ -105,19 +105,6 @@ describe('The adminFormInputBytes directive', function() {
     expect(unitInputElement.attr('max')).to.equal(expectMax.toString());
   });
 
-  it('should return exactly min value when choose larger type than default type', function() {
-    var inputValue = 1;
-    var inputUnit = 'MB';
-    var min = '1KB';
-    var template = initTemplate(inputValue, inputUnit, min, null);
-
-    var element = initDirective(null, template);
-    var unitInputElement = angular.element(element[0].querySelector('input[name=dataSizeInput]'));
-    var expectMin = 1 / Math.pow(2, 10);
-
-    expect(Number(unitInputElement.attr('min'))).to.be.closeTo(expectMin, 0.0001);
-  });
-
   it('should change input value to undefined when input after trigger is invalid', function() {
     var inputValue = 1024;
     var inputUnit = 'BYTE';
@@ -172,22 +159,5 @@ describe('The adminFormInputBytes directive', function() {
     unitsElement[1].click();
 
     expect(element.isolateScope().inputValue).to.equal(25 * Math.pow(2, 10));
-  });
-
-  describe('onChange function', function() {
-    it('should round value of input if there is a valid data from user', function() {
-      var template = initTemplate();
-      var element = initDirective(null, template);
-      var scope = element.isolateScope();
-
-      scope.display.value = 0.4;
-      scope.display.unit = 'MB';
-      scope.inputUnit = 'BYTE';
-      scope.onChange();
-
-      var expectedInputValue = Math.round(scope.display.value * Math.pow(1024, 2));
-
-      expect(scope.inputValue).to.equal(expectedInputValue);
-    });
   });
 });
