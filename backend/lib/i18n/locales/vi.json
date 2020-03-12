@@ -241,5 +241,22 @@
   "Mobile Title": "Tiêu đề di động",
   "Item one": "Mục một",
   "Item two": "Mục hai",
-  "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna."
+  "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.": "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna.",
+  "Technical Users Management": "Quản lí người dùng kĩ thuật",
+  "Type": "Loại",
+  "Add a technical user": "Thêm nguời dùng kĩ thuật",
+  "Data": "Dữ liệu",
+  "Add a new data field": "Thêm trường dữ liệu mới",
+  "Creating a technical user...": "Đang tạo một nguời dùng kĩ thuật...",
+  "A technical user has been created": "Đã tạo một nguời dùng kĩ thuật",
+  "Failed to create a technical user": "Tạo nguời dùng kĩ thuật thất bại",
+  "Remove": "Xóa bỏ",
+  "Remove technical user": "Xóa người dùng kỹ thuật",
+  "Edit a technical user": "Chỉnh sửa người dùng kỹ thuật",
+  "Removing a technical user...": "Đang xóa một người dùng kĩ thuât...",
+  "A technical user has been removed": "Đã xóa một người dùng kĩ thuật",
+  "Failed to remove a technical user": "Xóa người dùng kĩ thuật thất bại",
+  "Editing a technical user...": "Đang chỉnh sửa một người dùng kĩ thuật",
+  "A technical user has been edited": "Đã chỉnh sửa một người dùng kĩ thuật",
+  "Failed to edit a technical user": "Chỉnh sửa người dùng kĩ thuật thất bại"
 }

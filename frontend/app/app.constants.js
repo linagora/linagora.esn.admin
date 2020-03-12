@@ -60,6 +60,14 @@ angular.module('linagora.esn.admin')
     platform: false
   }
 }, {
+  id: 'technicalusers',
+  name: 'Technical Users',
+  icon: 'mdi-account-settings-variant',
+  displayIn: {
+    domain: true,
+    platform: false
+  }
+}, {
   id: 'roles',
   name: 'Roles',
   icon: 'mdi-clipboard-account',

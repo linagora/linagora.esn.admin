@@ -26,5 +26,6 @@ angular.module('linagora.esn.admin', [
   'esn.configuration',
   'esn.availability',
   'esn.themes',
+  'esn.technicaluser',
   'linagora.esn.resource'
 ]);
