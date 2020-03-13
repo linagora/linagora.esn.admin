@@ -10,7 +10,6 @@ angular.module('linagora.esn.admin')
   self.domainId = $stateParams.domainId;
   self.AVAILABLE_KEYS = ADMIN_LDAP_MAPPING;
   self.usernameField = usernameFieldGetter;
-  self.validatePort = validatePort;
 
   function $onInit() {
     var defaultUsageConfig = {
@@ -58,11 +57,5 @@ angular.module('linagora.esn.admin')
     var matches = ldapSearchFilter && ldapSearchFilter.match(/\((.*)=\{\{username\}\}\)/);
 
     return matches ? matches[1] : null;
-  }
-
-  function validatePort(url) {
-    var port = url && +url.split(':').pop();
-
-    return port > 0 && port < 65536;
   }
 });

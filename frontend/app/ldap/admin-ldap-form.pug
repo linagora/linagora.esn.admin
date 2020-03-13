@@ -13,12 +13,8 @@
           div
             esn-form-group(label=__('Name'))
               input.form-control(type="text", ng-model='$ctrl.ldapConfig.name', required, name="name")
-            esn-form-group(
-              label=__('URL'),
-              validator='$ctrl.validatePort',
-              validator-error-message=__('Port must be greater than 0 and less than 65536')
-            )
-              input.ldap-url-input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url', required, name="url")
+            esn-form-group(label=__('URL'))
+              input.form-control(type="text", ng-model='$ctrl.ldapConfig.configuration.url', required, name="url")
         .col-xs-12.col-md-6
           div
             esn-form-group(label=__('Admin distinguished name'))
