@@ -124,27 +124,4 @@ describe('The adminLdapFormController', function() {
       expect(controller.ldapConfig.configuration.searchFilter).to.equal('(cn={{username}})');
     });
   });
-
-  describe('The validatePort function', function() {
-    var controller;
-
-    beforeEach(function() {
-      var bindings = {
-        ldapConfig: {
-          configuration: {}
-        }
-      };
-
-      controller = initController(null, bindings);
-    });
-
-    it('should return false if the port config is invalid', function() {
-      expect(controller.validatePort('ldap://172.18.0.8:9999999')).to.be.false;
-    });
-
-    it('should return true if the port config is valid', function() {
-      expect(controller.validatePort('ldap://172.18.0.8:386')).to.be.true;
-    });
-  });
-
 });
