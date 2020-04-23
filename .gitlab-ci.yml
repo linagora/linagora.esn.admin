@@ -54,6 +54,7 @@ swagger:
     - npm i
     - npm prune
     - ./node_modules/.bin/grunt swagger-generate
+    - ./node_modules/.bin/grunt swagger-validate
   artifacts:
     paths:
       - ./doc/REST_API/swagger/admin-swagger.json

@@ -24,6 +24,7 @@
     "@linagora/grunt-i18n-checker": "2.0.5",
     "@linagora/grunt-lint-pattern": "0.1.4",
     "@linagora/i18n-checker": "2.0.3",
+    "grunt-swagger-checker": "linagora/grunt-swagger-checker",
     "@linagora/karma-ng-jade2module-preprocessor": "0.5.3",
     "async": "3.1.0",
     "chai": "3.5.0",
