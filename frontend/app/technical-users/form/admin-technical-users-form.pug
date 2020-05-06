@@ -16,7 +16,7 @@ ng-form(name="form")
   .row
     .col-xs-12
       ng-form(name="dataForm")
-        esn-form-group(label=__('Data'))
+        label.m-b-20 #{__('Data')}
         .row(ng-repeat="pair in $ctrl.technicalUser.data track by $index")
           .col-xs-5
             esn-form-group(label=__('Key'))
