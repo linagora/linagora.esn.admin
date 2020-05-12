@@ -4,3 +4,4 @@ frontend/components
 tmp/
 package-lock.json
 doc/REST_API/swagger/admin-swagger.json
+dist/

@@ -5,11 +5,11 @@ const Dependency = AwesomeModule.AwesomeModuleDependency;
 const path = require('path');
 const glob = require('glob-all');
 const FRONTEND_JS_PATH = __dirname + '/frontend/app/';
-
+const FRONTEND_JS_PATH_BUILD = __dirname + '/dist/';
 const MODULE_NAME = 'admin';
 const AWESOME_MODULE_NAME = 'linagora.esn.' + MODULE_NAME;
 
-const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
+const adminModule = new AwesomeModule(MODULE_NAME, {
   dependencies: [
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.wrapper', 'webserver-wrapper'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.esn-config', 'esn-config'),
@@ -42,23 +42,27 @@ const adminModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     },
 
     deploy: function(dependencies, callback) {
+      // Register the webapp
       const app = require('./backend/webserver/application')(dependencies);
 
+      // Register every exposed endpoints
       app.use('/api', this.api);
 
       const webserverWrapper = dependencies('webserver-wrapper');
-      const frontendJsFilesFullPath = glob.sync([
-        FRONTEND_JS_PATH + '**/*.module.js',
-        FRONTEND_JS_PATH + '**/!(*spec).js'
-      ]);
 
+      // Register every exposed frontend scripts
+      const frontendJsFilesFullPath = glob.sync([
+        FRONTEND_JS_PATH_BUILD + '**/*.js',
+        FRONTEND_JS_PATH_BUILD + '**/!(*spec).js'
+      ]);
       const frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
-        return filepath.replace(FRONTEND_JS_PATH, '');
+        return filepath.replace(FRONTEND_JS_PATH_BUILD, '');
       });
 
       webserverWrapper.injectAngularAppModules(MODULE_NAME, frontendJsFilesUri, [AWESOME_MODULE_NAME], ['esn'], {
         localJsFiles: frontendJsFilesFullPath
       });
+
       const lessFile = path.join(FRONTEND_JS_PATH, 'app.less');
 
       webserverWrapper.injectLess(MODULE_NAME, [lessFile], 'esn');
