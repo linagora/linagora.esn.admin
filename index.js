@@ -51,13 +51,26 @@ const adminModule = new AwesomeModule(MODULE_NAME, {
       const webserverWrapper = dependencies('webserver-wrapper');
 
       // Register every exposed frontend scripts
-      const frontendJsFilesFullPath = glob.sync([
-        FRONTEND_JS_PATH_BUILD + '**/*.js',
-        FRONTEND_JS_PATH_BUILD + '**/!(*spec).js'
-      ]);
-      const frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
-        return filepath.replace(FRONTEND_JS_PATH_BUILD, '');
-      });
+      let frontendJsFilesFullPath, frontendJsFilesUri;
+
+      if (process.env.NODE_ENV !== 'production') {
+        frontendJsFilesFullPath = glob.sync([
+          FRONTEND_JS_PATH + '**/*.module.js',
+          FRONTEND_JS_PATH + '**/!(*spec).js'
+        ]);
+        frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
+          return filepath.replace(FRONTEND_JS_PATH, '');
+        });
+
+      } else {
+        frontendJsFilesFullPath = glob.sync([
+          FRONTEND_JS_PATH_BUILD + '**/*.js',
+          FRONTEND_JS_PATH_BUILD + '**/!(*spec).js'
+        ]);
+        frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
+          return filepath.replace(FRONTEND_JS_PATH_BUILD, '');
+        });
+      }
 
       webserverWrapper.injectAngularAppModules(MODULE_NAME, frontendJsFilesUri, [AWESOME_MODULE_NAME], ['esn'], {
         localJsFiles: frontendJsFilesFullPath
