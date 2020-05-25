@@ -47,7 +47,9 @@
         }
 
         function _onRemovedTechnicalUser(event, removedTechnicalUserId) {
-          self.elements = self.elements.filter(element => element._id !== removedTechnicalUserId);
+          self.elements = self.elements.filter(function(element) {
+            return element._id !== removedTechnicalUserId;
+          });
         }
 
         function showUpdateModal(technicalUser) {
