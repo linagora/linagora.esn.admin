@@ -58,18 +58,14 @@ const adminModule = new AwesomeModule(MODULE_NAME, {
           FRONTEND_JS_PATH + '**/*.module.js',
           FRONTEND_JS_PATH + '**/!(*spec).js'
         ]);
-        frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
-          return filepath.replace(FRONTEND_JS_PATH, '');
-        });
 
+        frontendJsFilesUri = frontendJsFilesFullPath.map(filepath => filepath.replace(FRONTEND_JS_PATH, ''));
       } else {
         frontendJsFilesFullPath = glob.sync([
-          FRONTEND_JS_PATH_BUILD + '**/*.js',
-          FRONTEND_JS_PATH_BUILD + '**/!(*spec).js'
+          FRONTEND_JS_PATH_BUILD + '*.js'
         ]);
-        frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
-          return filepath.replace(FRONTEND_JS_PATH_BUILD, '');
-        });
+
+        frontendJsFilesUri = frontendJsFilesFullPath.map(filepath => filepath.replace(FRONTEND_JS_PATH_BUILD, ''));
       }
 
       webserverWrapper.injectAngularAppModules(MODULE_NAME, frontendJsFilesUri, [AWESOME_MODULE_NAME], ['esn'], {
