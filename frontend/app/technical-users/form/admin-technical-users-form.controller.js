@@ -44,15 +44,13 @@
         return false;
       }
 
-      if (!technicalUser.data) {
-        technicalUser.data = [];
-      } else {
-        var demormalizedData = Object.keys(technicalUser.data).map(function(key) {
-          return { key: key, value: technicalUser.data[key] };
-        });
+      technicalUser.data = technicalUser.data || [];
 
-        technicalUser.data = demormalizedData;
-      }
+      var demormalizedData = Object.keys(technicalUser.data).map(function(key) {
+        return { key: key, value: technicalUser.data[key] };
+      });
+
+      technicalUser.data = demormalizedData;
 
       return technicalUser;
     }
