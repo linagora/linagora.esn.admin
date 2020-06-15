@@ -1,21 +1,21 @@
 'use strict';
 
 const expect = require('chai').expect;
-const mockery = require('mockery');
-const q = require('q');
 
 describe('The test API controller', function() {
 
-  var deps;
-  var emailModuleMock;
+  let deps;
+  let emailModuleMock;
+  let ldapModuleMock;
 
   beforeEach(function() {
-    var self = this;
+    const self = this;
 
     emailModuleMock = {};
 
     deps = {
-      email: emailModuleMock
+      email: emailModuleMock,
+      ldap: ldapModuleMock
     };
 
     self.requireController = function() {
@@ -30,14 +30,20 @@ describe('The test API controller', function() {
 
   describe('The testSendEmail fn', function() {
 
+    before(function() {
+      ldapModuleMock = {
+        testAccessLdap: () => Promise.reject(new Error('Something error'))
+      };
+    });
+
     it('should send test email with mail config provided in req.body and respond 200 on successful', function(done) {
-      var req = {
+      const req = {
         body: {
           to: 'to@email',
           config: { key: 'value' }
         }
       };
-      var res = {
+      const res = {
         status: function(code) {
           expect(code).to.equal(200);
 
@@ -66,13 +72,13 @@ describe('The test API controller', function() {
     });
 
     it('should respond 500 if server fails to send test email', function(done) {
-      var req = {
+      const req = {
         body: {
           to: 'to@email',
           config: { key: 'value' }
         }
       };
-      var res = {
+      const res = {
         status: function(code) {
           expect(code).to.equal(500);
 
@@ -99,85 +105,92 @@ describe('The test API controller', function() {
   });
 
   describe('The testAccessLdap fn', function() {
-    it('should respond 400 if ldapConfig is missing in request', function(done) {
-      var req = {
-        body: {}
-      };
+    context('respond 400 if ldapConfig is missing', function() {
+      before(function() {
+        ldapModuleMock = {
+          testAccessLdap: () => Promise.reject(new Error('Something error'))
+        };
+      });
 
-      var res = {
-        status: function(code) {
-          expect(code).to.equal(400);
+      it('should respond 400 if ldapConfig is missing in request', function(done) {
+        const req = {
+          body: {}
+        };
 
-          return {
-            json: function(json) {
-              expect(json).to.deep.equal({error: {code: 400, message: 'Bad Request', details: 'The ldap\'s configuration is missing'}});
-              done();
-            }
-          };
-        }
-      };
+        const res = {
+          status: function(code) {
+            expect(code).to.equal(400);
 
-      this.requireController().testAccessLdap(req, res);
+            return {
+              json: function(json) {
+                expect(json).to.deep.equal({error: {code: 400, message: 'Bad Request', details: 'The ldap\'s configuration is missing'}});
+                done();
+              }
+            };
+          }
+        };
+
+        this.requireController().testAccessLdap(req, res);
+      });
     });
 
-    it('should respond 500 if there is error while connecting to LDAP server', function(done) {
-      const ldapModuleMock = {
-        testAccessLdap: function() {
-          return q.reject(new Error('Something error'));
-        }
-      };
+    context('respond 500 if error while connecting to LDAP', function() {
+      before(function() {
+        ldapModuleMock = {
+          testAccessLdap: () => Promise.reject(new Error('Something error'))
+        };
+      });
 
-      mockery.registerMock('../../../lib/ldap', ldapModuleMock);
+      it('should respond 500 if there is error while connecting to LDAP server', function(done) {
+        const req = {
+          body: {
+            config: { key: 'value' }
+          }
+        };
 
-      const req = {
-        body: {
-          config: { key: 'value' }
-        }
-      };
+        const res = {
+          status: function(code) {
+            expect(code).to.equal(500);
 
-      const res = {
-        status: function(code) {
-          expect(code).to.equal(500);
+            return {
+              json: function(json) {
+                expect(json).to.deep.equal({error: {code: 500, message: 'Server Error', details: 'Something error'}});
+                done();
+              }
+            };
+          }
+        };
 
-          return {
-            json: function(json) {
-              expect(json).to.deep.equal({error: {code: 500, message: 'Server Error', details: 'Something error'}});
-              done();
-            }
-          };
-        }
-      };
-
-      this.requireController().testAccessLdap(req, res);
+        this.requireController().testAccessLdap(req, res);
+      });
     });
 
-    it('should respond 200 when access successfuly to ldap server', function(done) {
-      const ldapModuleMock = {
-        testAccessLdap: function() {
-          return q.when();
-        }
-      };
+    context('respond 200 if connect successfully to ldap server', function() {
+      before(function() {
+        ldapModuleMock = {
+          testAccessLdap: () => Promise.resolve(true)
+        };
+      });
 
-      mockery.registerMock('../../../lib/ldap', ldapModuleMock);
+      it('should respond 200 when access successfuly to ldap server', function(done) {
+        const req = {
+          body: {
+            config: { key: 'value' }
+          }
+        };
 
-      const req = {
-        body: {
-          config: { key: 'value' }
-        }
-      };
+        const res = {
+          status: function(code) {
+            expect(code).to.equal(200);
 
-      const res = {
-        status: function(code) {
-          expect(code).to.equal(200);
+            return {
+              end: done
+            };
+          }
+        };
 
-          return {
-            end: done
-          };
-        }
-      };
-
-      this.requireController().testAccessLdap(req, res);
+        this.requireController().testAccessLdap(req, res);
+      });
     });
   });
-
 });
