@@ -44,6 +44,8 @@
         return false;
       }
 
+      technicalUser.data = technicalUser.data || [];
+
       var demormalizedData = Object.keys(technicalUser.data).map(function(key) {
         return { key: key, value: technicalUser.data[key] };
       });
