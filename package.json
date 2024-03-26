@@ -15,7 +15,7 @@
   "dependencies": {
     "awesome-module": "1.1.0",
     "bower": "1.8.8",
-    "express": "4.17.1",
+    "express": "4.19.2",
     "glob-all": "3.1.0",
     "ldapauth-fork": "3.0.0",
     "q": "1.4.1"
